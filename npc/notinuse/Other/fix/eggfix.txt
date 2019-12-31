@@ -1,0 +1,33 @@
+ayothaya.gat,141,169,5	script	Egg Fixer	97,{
+
+set $npcname$,"[Egg Fixer]";
+
+mes $npcname$;
+mes "Hey, would you like me to repair an Egg for you?";
+menu "Yes",y_ex,"No",n_ex;
+
+y_ex:
+mes "Input the pet ID. @ii the egg to get it";
+input @petid;
+next;
+mes "Egg is fixed!";
+next;
+mes $npcname$;
+mes "No fixing needed.";
+close;
+
+L_fix:
+delitem @petid,1;
+getitem @petid,1;
+close;
+
+L_error:
+mes "Invalid Input";
+close;
+
+n_ex:
+mes $npcname$;
+mes "If you need your egg fixed just talk to me.";
+close;
+
+}

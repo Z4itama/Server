@@ -1,0 +1,168 @@
+// Mushroom Farm	(job_thief1)
+job_thief1.gat,0,0,0,0	monster	Apocalypse	1365,65,0,0,0
+job_thief1.gat,0,0,0,0	monster	Undoer	1446,65,0,0,0
+job_thief1.gat,0,0,0,0	monster	Enchanter	1447,65,0,0,0
+job_thief1.gat,0,0,0,0	monster	Raydric DeadEye	1453,65,0,0,0
+job_thief1.gat,0,0,0,0	monster	Civil Servant	1513,65,0,0,0
+job_thief1.gat,0,0,0,0	monster	Leaf Cat	1586,65,0,0,0
+job_thief1.gat,0,0,0,0	monster	Garm	1252,1,360000,720000,0
+job_thief1.gat,0,0,0,0	monster	Monkey Fist	1214,4,120000,50000,0
+
+gef_dun03.gat,0,0,0,0	monster	Succubus	1370,10,0,0,0
+gef_dun03.gat,0,0,0,0	monster	Fake Angel	1371,8,0,0,0
+gef_dun03.gat,0,0,0,0	monster	Lord of Death	1373,1,7200000,7200000,1
+gef_dun03.gat,0,0,0,0	monster	Incubus	1374,10,0,0,0
+gef_dun03.gat,0,0,0,0	monster	Nightmare Terror	1379,3,0,0,0
+gef_dun03.gat,0,0,0,0	monster	Violy	1390,10,0,0,0
+gef_dun03.gat,0,0,0,0	monster	Wind Ghost	1263,5,0,0,0
+gef_dun03.gat,0,0,0,0	monster	Wraith	1192,5,0,0,0
+gef_dun03.gat,0,0,0,0	monster	Wraith Dead	1291,5,0,0,0
+gl_in01.gat,0,0,0,0	monster	Owl Duke	1320,1,0,0,0
+gl_prison.gat,0,0,0,0	monster	Skeleton Prisoner	1196,20,0,0,0
+gl_prison.gat,0,0,0,0	monster	Brilight	1211,15,0,0,0
+gl_prison.gat,0,0,0,0	monster	Whisper	1179,7,0,0,0
+gl_prison1.gat,0,0,0,0	monster	Arclouse	1194,10,0,0,0
+glast_01.gat,0,0,0,0	monster	Poison Spore	1077,10,0,0,0
+glast_01.gat,0,0,0,0	monster	Myst	1151,5,0,0,0
+glast_01.gat,0,0,0,0	monster	Jakk	1130,5,0,0,0
+glast_01.gat,0,0,0,0	monster	Bathory	1102,5,0,0,0
+gl_church.gat,0,0,0,0	monster	Whisper	1179,10,0,0,0
+gl_church.gat,0,0,0,0	monster	Brilight	1211,10,0,0,0
+gl_church.gat,0,0,0,0	monster	Nightmare	1061,10,0,0,0
+gl_church.gat,0,0,0,0	monster	Joker	1131,1,0,0,0
+gl_chyard.gat,0,0,0,0	monster	Skeleton Prisoner	1196,10,0,0,0
+gl_chyard.gat,0,0,0,0	monster	Zombie Prisoner	1197,10,0,0,0
+gl_sew01.gat,0,0,0,0	monster	Drainliar	1111,15,0,0,0
+gl_sew01.gat,0,0,0,0	monster	Cramp	1209,15,0,0,0
+gl_sew01.gat,0,0,0,0	monster	Wind Ghost	1263,10,0,0,0
+gl_sew02.gat,0,0,0,0	monster	Drainliar	1111,20,0,0,0
+gl_sew02.gat,0,0,0,0	monster	Anolian	1206,15,0,0,0
+gl_sew02.gat,0,0,0,0	monster	Wind Ghost	1263,10,0,0,0
+gl_sew03.gat,0,0,0,0	monster	Cramp	1209,25,0,0,0
+gl_sew03.gat,0,0,0,0	monster	Wind Ghost	1263,20,0,0,0
+gl_sew04.gat,0,0,0,0	monster	Wind Ghost	1263,20,0,0,0
+gl_sew04.gat,0,0,0,0	monster	Sting	1207,20,0,0,0
+gl_step.gat,0,0,0,0	monster	Wraith	1192,15,0,0,0
+gl_knt01.gat,21,278,0,0	monster	Giant Whisper	1186,1,1800000,900000,1
+gl_knt01.gat,272,263,25,25	monster	Brilight	1211,10,600000,300000,1
+gl_knt01.gat,117,271,0,0	monster	Evil Druid	1117,1,600000,300000,1
+gl_knt01.gat,118,266,0,0	monster	Evil Druid	1117,1,600000,300000,1
+gl_knt01.gat,121,274,0,0	monster	Evil Druid	1117,1,600000,300000,1
+gl_knt01.gat,124,266,0,0	monster	Evil Druid	1117,1,600000,300000,1
+gl_knt01.gat,126,271,0,0	monster	Evil Druid	1117,1,600000,300000,1
+gl_knt01.gat,235,238,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,235,239,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,235,240,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,235,241,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,235,242,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,235,243,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,235,244,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,235,245,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,243,233,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,243,254,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,243,263,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,244,258,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,259,239,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,264,239,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,269,239,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,278,239,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,283,239,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,288,239,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,292,233,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,48,13,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,56,206,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,93,224,0,0	monster	Mandragora	1020,1,600000,300000,1
+gl_knt01.gat,265,155,0,0	monster	Flora	1118,1,600000,300000,1
+gl_knt02.gat,0,0,0,0	monster	Whisper	1179,10,0,0,0
+gl_knt02.gat,0,0,0,0	monster	Joker	1131,1,0,0,0
+gl_dun01.gat,0,0,0,0	monster	Minorous	1149,20,0,0,0
+gl_dun01.gat,0,0,0,0	monster	Stalactic Golem	1278,20,0,0,0
+gl_dun02.gat,0,0,0,0	monster	Arclouse	1194,15,0,0,0
+gl_dun02.gat,0,0,0,0	monster	Stalactic Golem	1278,10,0,0,0
+lou_dun03.gat,0,0,0,0	monster	Gajomart	1309,1,300000,150000,0
+lou_dun03.gat,0,0,0,0	monster	Chung E	1519,1,0,0,0
+lou_dun03.gat,0,0,0,0	monster	Bacsojin	1518,1,3600000,1800000,1
+moc_pryd01.gat,0,0,0,0	monster	Spore	1014,20,0,0,0
+moc_pryd05.gat,0,0,0,0	monster	Ghoul	1036,15,0,0,0
+moc_pryd06.gat,0,0,0,0	monster	Ghoul	1036,10,0,0,0
+moc_pryd06.gat,0,0,0,0	monster	Mummy	1041,10,0,0,0
+moc_pryd06.gat,0,0,0,0	monster	Isis	1029,10,0,0,0
+in_sphinx1.gat,0,0,0,0	monster	Snake	1025,15,0,0,0
+in_sphinx1.gat,0,0,0,0	monster	Anacondaq	1030,15,0,0,0
+in_sphinx2.gat,0,0,0,0	monster	Whisper	1179,10,0,0,0
+in_sphinx3.gat,0,0,0,0	monster	Drainliar	1111,10,0,0,0
+in_sphinx3.gat,0,0,0,0	monster	Whisper	1179,10,0,0,0
+in_sphinx3.gat,0,0,0,0	monster	Requiem	1164,22,0,0,0
+in_sphinx4.gat,0,0,0,0	monster	Whisper	1179,10,0,0,0
+in_sphinx4.gat,0,0,0,0	monster	Side Winder	1037,10,0,0,0
+in_sphinx4.gat,0,0,0,0	monster	Medusa	1148,1,600000,300000,1
+in_sphinx4.gat,0,0,0,0	monster	Marduk	1140,15,0,0,0
+in_sphinx5.gat,0,0,0,0	monster	Whisper	1179,10,0,0,0
+in_sphinx5.gat,0,0,0,0	monster	Requiem	1164,10,0,0,0
+in_sphinx5.gat,0,0,0,0	monster	Medusa	1148,3,600000,300000,0
+pay_dun04.gat,0,0,0,0	monster	Sohee	1170,20,0,0,0
+treasure02.gat,0,0,0,0	monster	Penomena	1216,1,900000,450000,1
+treasure02.gat,0,0,0,0	monster	Wanderer	1208,1,1800000,900000,1
+tha_t12.gat,0,0,0,0	monster	Ancient Mimic	1699,10,0,0,0
+cmd_fild08.gat,190,115,100,80	monster	Gargoyle	1253,10,600000,300000,0
+cmd_fild08.gat,130,192,110,150	monster	Gargoyle	1253,7,600000,300000,0
+cmd_fild08.gat,72,131,40,100	monster	Gargoyle	1253,8,600000,300000,0
+cmd_fild08.gat,319,177,0,0	monster	Gargoyle	1253,1,600000,300000,0
+cmd_fild08.gat,319,172,0,0	monster	Gargoyle	1253,1,600000,300000,0
+cmd_fild08.gat,139,71,0,0	monster	Gargoyle	1253,1,600000,300000,0
+cmd_fild08.gat,136,64,0,0	monster	Gargoyle	1253,1,600000,300000,0
+cmd_fild08.gat,67,80,0,0	monster	Gargoyle	1253,1,600000,300000,0
+cmd_fild08.gat,132,149,0,0	monster	Gargoyle	1253,1,600000,300000,0
+cmd_fild08.gat,97,144,0,0	monster	Gargoyle	1253,1,600000,300000,0
+cmd_fild08.gat,79,140,0,0	monster	Gargoyle	1253,1,600000,300000,0
+cmd_fild08.gat,28,102,0,0	monster	Gargoyle	1253,1,600000,300000,0
+gon_fild01.gat,0,0,0,0	monster	Hyegun	1512,20,0,0,0
+gon_fild01.gat,0,0,0,0	monster	Bacsojin	1518,3,50000,50000,0
+//gon_fild01.gat,0,0,0,0	monster	Valaris	1900,1,0,0,0
+gon_fild01.gat,0,0,0,0	monster	Boiled Rice	1520,20,0,0,0
+prt_fild03.gat,0,0,0,0	monster	Monkey Fist	1214,3,1800000,200000,1
+gon_fild01.gat,0,0,0,0	monster	Monkey Fist	1214,4,120000,50000,0
+hu_fild02.gat,0,0,0,0	monster	Metaling	1613,21,0,0,0
+hu_fild02.gat,0,0,0,0	monster	Savage Babe	1167,21,0,0,0
+hu_fild02.gat,0,0,0,0	monster	Rafflesia	1162,35,0,0,0
+hu_fild03.gat,0,0,0,0	monster	Metaling	1613,80,0,0,0
+hu_fild06.gat,0,0,0,0	monster	Female Thief Bug	1053,3,0,0,0
+mjolnir_03.gat,0,0,0,0	monster	Petite	1155,25,0,0,0
+moc_fild05.gat,0,0,0,0	monster	Deniro	1105,10,0,0,0
+moc_fild05.gat,0,0,0,0	monster	Piere	1160,10,0,0,0
+moc_fild05.gat,0,0,0,0	monster	Andre	1095,10,0,0,0
+moc_fild06.gat,0,0,0,0	monster	Deniro	1105,5,0,0,0
+moc_fild06.gat,0,0,0,0	monster	Piere	1160,5,0,0,0
+moc_fild06.gat,0,0,0,0	monster	Andre	1095,5,0,0,0
+moc_fild17.gat,0,0,0,0	monster	Andre	1095,10,0,0,0
+moc_fild17.gat,0,0,0,0	monster	Sandman	1165,5,0,0,0
+moc_fild17.gat,0,0,0,0	monster	Deniro	1105,20,0,0,0
+moc_fild17.gat,0,0,0,0	monster	Piere	1160,20,0,0,0
+moc_fild18.gat,0,0,0,0	monster	Deniro	1105,5,0,0,0
+moc_fild18.gat,0,0,0,0	monster	Piere	1160,5,0,0,0
+moc_fild18.gat,0,0,0,0	monster	Andre	1095,5,0,0,0
+moc_fild18.gat,0,0,0,0	monster	Magnolia	1138,25,0,0,0
+nif_fild01.gat,0,0,0,0	monster	Loli Ruri	1505,8,0,0,0
+nif_fild01.gat,0,0,0,0	monster	Bloody Murderer	1507,8,0,0,0
+nif_fild01.gat,0,0,0,0	monster	Isis Gladiator	1029,10,0,0,0
+nif_fild01.gat,0,0,0,0	monster	Blood Knight Champion	1268,2,0,0,0
+nif_fild02.gat,0,0,0,0	monster	Loli Ruri	1505,8,0,0,0
+nif_fild02.gat,0,0,0,0	monster	Isis Gladiator	1029,10,0,0,0
+um_fild03.gat,0,0,0,0	monster	Pest	1256,10,0,0,0
+um_fild03.gat,0,0,0,0	monster	Stainer	1174,10,0,0,0
+um_fild04.gat,0,0,0,0	monster	Wootan Shooter	1498,19,0,0,0
+um_fild04.gat,0,0,0,0	monster	Wootan Fighter	1499,20,0,0,0
+yuno_fild12.gat,0,0,0,0	monster	Punk	1199,20,0,0,0
+yuno_fild12.gat,0,0,0,0	monster	Poporing	1031,15,0,0,0
+yuno_fild12.gat,0,0,0,0	monster	Red Plant	1078,10,180000,90000,1
+yuno_fild12.gat,0,0,0,0	monster	Green Plant	1080,10,180000,90000,1
+yuno_fild12.gat,0,0,0,0	monster	Yellow Plant	1081,10,180000,90000,1
+um_dun01,0,0,0,0	monster	Wooden Golem	1497,25,0,0,0
+um_dun02,0,0,0,0	monster	Wootan Fighter	1499,15,0,0,0
+um_dun01,0,0,0,0	monster	Shinobi	1401,20,0,0,0
+um_dun02,0,0,0,0	monster	Shinobi	1401,10,0,0,0
+yggdrasil01,0,0,0,0	monster	Shinobi	1401,25,0,0,0
+yggdrasil01,0,0,0,0	monster	Stone Shooter	1495,35,0,0,0
+yggdrasil01,0,0,0,0	monster	Lude	1509,30,0,0,0
+yggdrasil01,0,0,0,0	monster	Quve	1508,30,0,0,0
+yggdrasil01,0,0,0,0	monster	Heirozoist	1510,30,0,0,0

@@ -1,0 +1,183 @@
+//===== eAthena Script =======================================
+//= Banker Script
+//===== By: ==================================================
+//= Syrus22 (1.0) and Kikuko
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= Any eAthena version with Account variables.
+//===== Description: =========================================
+//= An account wide Banker to store Zeny
+//===== Additional Comments: =================================
+//= Syrus22 - There's an optional transaction fee at the top of
+//= the script. To use it simply change the first set command
+//= to set the cost variable to whatever you want the fee to be.
+//============================================================
+
+prontera.gat,132,217,5	script	Banker	109,{
+set @cost,5000;
+set @depoamount, 1;
+mes "[Banker]";
+if (BaseLevel < 50) goto AntiNovice;
+mes "Welcome to the First Bank of Prontera. How can I help you today?";
+next;
+menu "I'd like to make a deposit.",Ldeposit,"I'd like to make a withdrawl.",Lwithdrawl,"What's my current balance?",Lbalance,"Cancel",Lcancel;
+
+Ldeposit:
+	mes "[Banker]";
+	mes "Very well... You have four options for deposit. You can deposit thousands, hundres, or  just normal.";
+	mes "If you picked millions and inputed 10, you would be depositing 10,000,000 zeny.";
+	mes "If you picked thousands and inputed 10, you would be depositing 10,000 zeny.";
+	mes "If you picked hundreds and inputed 5, you would be depositing 500 zeny.";
+	mes "If you picked normal and inputed 10,000 you would be depositing 10,000 zeny.";
+	mes "The most you can deposit at one time is 100 million.";
+	next;
+	if (@cost > 0) goto Ldepocost;
+	goto Ldepocont;
+
+	Ldepocost:
+		mes "[Banker]";
+		mes "Oh and don't forget there is a " + @cost + " Zeny charge on all transactions.";
+		next;
+		goto Ldepocont;
+
+Ldepocont:
+	menu "Deposite millions at a time.",Ldepomil,"Deposite thousands at a time.",Ldepothou,"Deposite hundreds at a time.",Ldepohun,"Deposite normal zeny.",Ldeponormal,"Cancel",Lcancel;
+	next;
+
+Ldepohun:
+	set @depoamount, 100;
+	goto Ldeponormal;
+
+Ldepothou:
+	set @depoamount, 1000;
+	goto Ldeponormal;
+	
+Ldepomil:
+	set @depoamount, 1000000;
+	
+Ldeponormal:
+	input @deposit;
+	if (@deposit < 1) goto Lrealamount;
+	if (@depoamount == 1000000 && @deposit > 100 ) goto Ltomuch;
+	if (@depoamount == 1000 && deposit > 100000 ) goto Ltomuch;
+	if (@depoamount == 100 && deposit > 1000000) goto Ltomuch;
+	if (@depoamount == 1 && deposit > 100000000) goto Ltomuch;
+	
+	set @total, @deposit*@depoamount;
+	set @totalb, @total+#bankstorage;
+	set @stotal, @total+@cost;
+	if (@total > Zeny) goto Lneedzeny;
+	if (@stotal > Zeny) goto Lneedzeny2;
+	if (@totalb > 2000000000 || @totalb < #bankstorage) goto Lmaxstore;//no way you can deposit money and end up with less >_>
+	set Zeny,Zeny - @stotal;
+	set #bankstorage,#bankstorage + @total;
+	mes "[Banker]";
+	mes "Thank you very much... Your zeny is in good hands.";
+	close;
+
+Lwithdrawl:
+	mes "[Banker]";
+	mes "Very well... You have four options for withdrawing, You can withdraw thousands, hundres, or  just normal.";
+	mes "If you picked millions and inputed 1, you could be withdrawing 1,000,000 zeny.";
+	mes "If you picked thousands and inputed 10, you would be withdrawing 10,000 zeny.";
+	mes "If you picked hundreds and inputed 5, you would be withdrawing 500 zeny.";
+	mes "If you picked normal and inputed 10,000 you would be withdrawing 10,000 zeny.";
+	mes "The most you can withdraw at once is 100 million.";
+	next;
+	if (@cost > 0) goto Lwithcost;
+	goto Lwithcont;
+
+	Lwithcost:
+		mes "[Banker]";
+		mes "Oh and don't forget there is a " + @cost + " Zeny charge on all transactions.";
+		next;
+		goto Lwithcont;
+
+Lwithcont:
+	menu "Withdraw millions at a time.",Lwithmil,"Withdraw thousands at a time.",Lwiththou,"Withdraw hundreds at a time.",Lwithhun,"Withdraw normal, max is 999,999 zeny.",Lwithnormal,"Cancel",Lcancel;
+	next;
+
+Lwithhun:
+	set @depoamount, 100;
+	goto Lwithnormal;
+
+Lwiththou:
+	set @depoamount, 1000;
+	goto Lwithnormal;
+	
+Lwithmil:
+	set @depoamount, 1000000;
+
+Lwithnormal:
+	input @withdrawl;
+	if (@withdrawl < 1) goto Lrealamount;	
+	if (@depoamount == 1000000 && @withdrawl > 100 ) goto Ltomuch;
+	if (@depoamount == 1000 && @withdrawl > 100000 ) goto Ltomuch;
+	if (@depoamount == 100 && @withdrawl > 1000000) goto Ltomuch;
+	if (@depoamount == 1 && @withdrawl > 100000000) goto Ltomuch;
+	
+	set @total, @withdrawl*@depoamount;
+	if (@cost > Zeny) goto Lneedzeny2;
+	if (@total > #bankstorage) goto Lneedzeny3;	
+	if ((@total + Zeny - @cost) > 1000000000) goto Lmaxzeny; 
+	set Zeny,Zeny - @cost;
+	set Zeny,Zeny + @total;
+	set #bankstorage,#bankstorage - @total;
+	mes "[Banker]";
+	mes "There's your Zeny. Have a good day.";
+	close;
+
+Lbalance:
+	mes "[Banker]";
+	mes "Hmmmm lemme check the paper work.";
+	next;
+	mes "[Banker]";
+	mes "You currently have " + #bankstorage + " Zeny in your account.";
+	close;
+
+Lrealamount:
+	mes "[Banker]";
+	mes "Don't play jokes with me please. Next time ask for a real amount.";
+	close;
+
+Lneedzeny:
+	mes "[Banker]";
+	mes "You don't have enough Zeny to make that deposit.";
+	close;
+
+Lneedzeny2:
+	mes "[Banker]";
+	mes "You don't have enough Zeny to cover the transaction fee.";
+	close;
+
+Lneedzeny3:
+	mes "[Banker]";
+	mes "You don't have enough Zeny in your account.";
+	close;
+
+Lmaxzeny:
+	mes "[Banker]";
+	mes "You can not hold more than 1,000,000,000 zeny at one time.";
+	close;
+
+Lmaxstore:
+	mes "[Banker]";
+	mes "You can not have more than 2,000,000,000 zeny in your bank at one time.";
+	close;
+
+Ltomuch:
+	mes "[Banker]";
+	mes "You can't deposit/withdraw that much in one session.";
+	close;
+	
+Lcancel:
+	mes "[Banker]";
+	mes "Very well... come again soon.";
+	close;
+
+AntiNovice:
+	mes "[Banker]";
+	mes "I'm sorry but you need at least level 50 to use this service.";
+	close;
+}

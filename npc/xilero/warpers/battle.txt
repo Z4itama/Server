@@ -1,0 +1,171 @@
+//==============================
+// Made By Hentai_Men & Kikuko
+//==============================
+//Simple PVP arena...
+//==============================
+// All rights Reserved
+//==============================
+//Version:1.2
+//==============================
+
+izlude,128,111,5	script	PVP Warper	779,{
+	mes "Do you want to test yourself in the art of battle?";
+	next;
+	menu "Yes",yes,"No",no;
+	close;
+	yes:	warp "arena_room.gat",100,72;
+close;
+	no:
+close;
+}
+
+arena_room,87,96,4	script	Battle Arena	736,{
+
+	switch(rand(4)) {
+
+		case 0:
+			warp "prt_are01",162,138;
+			end;
+		case 1:
+			warp "prt_are01",138,137;
+			end;
+		case 2:
+			warp "prt_are01",161,162;
+			end;
+		case 3:
+			warp "prt_are01",137,161;
+			end;
+}
+}
+
+//No pvp
+new_1-1	mapflag	pvp	off
+veins	mapflag	pvp	off
+
+// PvP Mapflags
+prt_are01	mapflag	nopenalty
+prt_are01	mapflag	pvp
+prt_are01	mapflag	pvp	noguild
+prt_are01	mapflag	nomemo
+prt_are01	mapflag	noteleport
+prt_are01	mapflag	nowarp
+
+
+arena_room.gat,93,81,4	script	Guild Arena	828,{
+	mes "[^0000FFGuild Arena^000000]";
+	mes "Don't you just love rivalry? Would you like to defend the honor of your guild? All you got to do, is claim the little castle in the center of the map. So, Come on in!";
+	next;
+	menu "Yes",yes,"No",no;
+	close;
+	yes:
+	  set @rndwrp, rand(0,3);
+	  if(@rndwrp==0) warp "pvp_y_1-5.gat",246,262;
+	  if(@rndwrp==1) warp "pvp_y_1-5.gat",65,259;
+	  if(@rndwrp==2) warp "pvp_y_1-5.gat",76,44;
+	  if(@rndwrp==3) warp "pvp_y_1-5.gat",248,59;
+close;
+	no:
+close;
+}
+
+// PvP Mapflags
+pvp_y_1-5.gat	mapflag	nopenalty
+pvp_y_1-5.gat	mapflag	nomemo
+pvp_y_1-5.gat	mapflag	noteleport
+pvp_y_1-5.gat	mapflag	nowarp
+pvp_y_1-5.gat	mapflag	nowarpto
+
+arena_room.gat,106,81,4	script	Duel Arena	868,{
+	mes "[^0000FFDuel Arena^000000]";
+	mes "Do you want to have a 1 on 1 fight? Or, just want to have a small duel? Then this is the arena for you. Do you wish to go?";
+	next;
+	menu "Yes",yes,"No",no;
+	close;
+	yes:
+	  set @rndwrp, rand(0,3);
+	  if(@rndwrp==0) warp "guild_vs3.gat",15,50;
+	  if(@rndwrp==1) warp "guild_vs3.gat",50,83;
+	  if(@rndwrp==2) warp "guild_vs3.gat",83,50;
+	  if(@rndwrp==3) warp "guild_vs3.gat",50,15;
+	close;
+	no:
+	close;
+}
+
+// PvP Mapflags
+guild_vs3.gat	mapflag	nopenalty
+guild_vs3.gat	mapflag	pvp	off
+guild_vs3.gat	mapflag	nomemo
+guild_vs3.gat	mapflag	noteleport
+guild_vs3.gat	mapflag	nowarp
+guild_vs3.gat	mapflag	nowarpto
+
+izlude.gat,122,118,4	script	DeadBranch Guide::db1	898,{
+	callfunc "branchcity";
+	end;		
+}
+
+prontera.gat,167,198,4	script	DeadBranch Guide::db2	898,{
+	callfunc "branchcity";
+	end;		
+}
+
+payon.gat,162,218,4	script	DeadBranch Guide::db3	898,{
+	callfunc "branchcity";
+	end;		
+}
+
+geffen.gat,124,66,4	script	DeadBranch Guide::db4	898,{
+	callfunc "branchcity";
+	end;		
+}
+
+pvp_y_1-1.gat,156,195,4	script	DeadBranch Guide	898,{
+	mes "[^0000FFBranch City Guide^000000]";
+	mes "Wish to leave the City and return to the normal world?";
+	next;
+	menu "Yes",-,"No",L_no;
+	warp "prontera.gat",156,191;
+L_no:
+	close;	
+	end;		
+}
+
+function	script	branchcity	{
+	mes "[^0000FFBranch City Guide^000000]";
+	set @cost, 5000;
+	mes "Do you wish to go the DeadBranch City? Where you can use deadbranches all you wish?";
+	next;
+	menu "Yes",yes,"No",no;
+	close;
+	yes:
+	next;
+	mes "[^0000FFBranch City Guide^000000]";
+	mes "I will not send you for free.";
+	mes "I need to make a living.";
+	mes "The cost of my service is " + @cost + " zeny";
+	mes "Still wish to enter?";
+	menu "Yes here is your fee.",-,"I wont pay that...",no;
+	if (Zeny < @cost) goto Lnomoney;
+	set Zeny, Zeny-@cost;	
+	set @rndwrp, rand(0,2);
+	if(@rndwrp==0) warp "pvp_y_1-1.gat",156,28;
+	if(@rndwrp==1) warp "pvp_y_1-1.gat",28,204;
+	if(@rndwrp==2) warp "pvp_y_1-1.gat",283,204;
+	close;
+	no:
+	close;
+Lnomoney:
+	next;
+	mes "[^0000FFBranch City Guide^000000]";
+	mes "You do not have enough money.";	
+	close;
+}
+
+// PvP Mapflags
+pvp_y_1-1.gat	mapflag	pvp	off
+pvp_y_1-1.gat	mapflag	nomemo
+pvp_y_1-1.gat	mapflag	noteleport
+pvp_y_1-1.gat	mapflag	nowarp
+pvp_y_1-1.gat	mapflag	nowarpto
+

@@ -1,0 +1,127 @@
+//===== Script: ===============================================================
+//= 2010 XileRO's Mystic Adventure Quest.
+//= By Honor/Lover Romeo
+//==============================================================================
+prt_fild06,26,228,5	script	Maya	906,{
+if(qpoints < 3) { mes "You need at least ^0000ff3 Qp^000000(s) to be able to do this Quest."; close; }
+set .mma$,"[^ff3300 Maya ^000000]";
+if(MMApart==4) { mes .mma$; mes "You already done this quest."; close; }
+
+if(MMApart==3) {
+	if(antmaya >= 2) {
+		mes .mma$;
+		mes "Great!";
+		mes "Awesome Good Job!!";
+		mes "Thanks Alot I really needed this";
+		mes "Here have this...";
+		getitem 3271,1;
+		set mysticadventure$,"^0000ffDone^000000";
+		set qpoints,qpoints+2;
+		set MMApart,4;
+		close;
+	} else {
+		mes .mma$;
+		mes "You haven't do what I asked for.";
+		mes "^ff0000Kill^000000:";
+		mes "2 Maya Purple";
+		close;
+	}
+}
+
+if(MMApart==2) {
+	if(antegg >= 30) {
+		mes .mma$;
+		mes "Great!";
+		mes "Now...I need you to kill 2 Maya Purple";
+		set MMApart,3;
+		close;
+	} else {
+		mes .mma$;
+		mes "You haven't do what I asked for.";
+		mes "^ff0000Kill^000000:";
+		mes "30 Ant Egg";
+		close;
+	}
+}	
+
+if(MMApart==1) {
+	if(antpiere >= 500 && antdeniro >= 400 && antandre >= 200 && antvitata >= 100) {
+		mes .mma$;
+		mes "Great!";
+		mes "Now...I need you to kill 30 Ant Eggs";
+		set MMApart,2;
+		close;
+	} else {
+		mes .mma$;
+		mes "You haven't do what I asked for.";
+		mes "^ff0000Kill^000000:";
+		mes "500 Piere";
+		mes "400 Deniro";
+		mes "200 Andre";
+		mes "100 Vitata";
+		close;
+	}
+}	
+
+if(MMApart==0) {
+		mes .mma$;
+		mes "O.O!!";
+		mes "Just what I needed '-'";
+		mes "Want to help me?";
+		menu "-Sure",-,"-Lol...",LCancel;
+		
+		next;
+		mes .mma$;
+		mes "Great I need you to Kill some monsters for me";
+		mes "^ff0000Kill^000000:";
+		mes "500 Piere";
+		mes "400 Deniro";
+		mes "200 Andre";
+		mes "100 Vitata";
+		next;
+		mes .mma$;
+		mes "Just come back to me when you're done ^_^!";
+		mes "You've Activated -"; 
+		mes "^ff0000Mystic Adventure^000000 ~Quest.";
+		set mysticadventure$,"^ff8800In Progress^000000";
+		set MMApart,1;
+		close;
+LCancel:
+	close;
+}
+
+OnNPCKillEvent:
+if(MMApart==3) {
+//=============== Maya Purple ==============================================
+if (killedrid == 1289) { if(antmaya==2) { end; } 
+set antmaya,antmaya+1; dispbottom "You had killed ("+antmaya+"/2) Maya Purple(s)!"; end;
+}
+}
+//-----------------------------------------------------------------------------------
+if(MMApart==2) {
+//=============== Ant Egg ==============================================
+if (killedrid == 1097) { if(antegg==30) { end; } 
+set antegg,antegg+1; dispbottom "You had killed ("+antegg+"/30) Ant Egg(s)!"; end;
+}
+}
+//-----------------------------------------------------------------------------------
+if(MMApart==1) {
+//=============== Piere ==============================================
+if (killedrid == 1160) { if(antpiere==500) { end; } 
+set antpiere,antpiere+1; dispbottom "You had killed ("+antpiere+"/500) Ant Piere!"; end;
+}
+//=============== Deniro ==============================================
+if (killedrid == 1105) { if(antdeniro==400) { end; } 
+set antdeniro,antdeniro+1; dispbottom "You had killed ("+antdeniro+"/400) Ant Deniro!"; end;
+}
+//=============== Andre ==============================================
+if (killedrid == 1095) { if(antandre==200) { end; } 
+set antandre,antandre+1; dispbottom "You had killed ("+antandre+"/200) Ant Andre!"; end;
+}
+//=============== Vitata ==============================================
+if (killedrid == 1176) { if(antvitata==100) { end; } 
+set antvitata,antvitata+1; dispbottom "You had killed ("+antvitata+"/100) Ant Vitata!"; end;
+}
+//---------------------------------------------------------------------------
+}
+}//END NPC

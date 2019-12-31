@@ -1,0 +1,30 @@
+//--------------------------------------------------------------
+// Rachel Sanctuary Dungeon Monster Spawns (Rachel Temple)
+//--------------------------------------------------------------
+
+//ra_san01.gat,0,0,0,0	monster	Gremlin	1632,20,0,0,0
+ra_san01.gat,0,0,0,0	monster	Beholder	1633,30,0,0,0
+ra_san01.gat,0,0,0,0	monster	Vanberk	1771,30,0,0,0
+ra_san01.gat,0,0,0,0	monster	Isilla	1772,20,0,0,0
+
+//ra_san02.gat,0,0,0,0	monster	Gremlin	1632,20,0,0,0
+ra_san02.gat,0,0,0,0	monster	Beholder	1633,30,0,0,0
+ra_san02.gat,0,0,0,0	monster	Vanberk	1771,45,0,0,0
+ra_san02.gat,0,0,0,0	monster	Isilla	1772,35,0,0,0
+
+//ra_san03.gat,0,0,0,0	monster	Gremlin	1632,20,0,0,0
+ra_san03.gat,0,0,0,0	monster	Beholder	1633,25,0,0,0
+ra_san03.gat,0,0,0,0	monster	Hodremlin	1773,35,0,0,0
+ra_san03.gat,0,0,0,0	monster	Seeker	1774,40,0,0,0
+
+ra_san04.gat,0,0,0,0	monster	Agav	1769,30,0,0,0
+ra_san04.gat,0,0,0,0	monster	Echio	1770,30,0,0,0
+ra_san04.gat,0,0,0,0	monster	Hodremlin	1773,25,0,0,0
+ra_san04.gat,0,0,0,0	monster	Seeker	1774,25,0,0,0
+
+ra_san05.gat,0,0,0,0	monster	Agav	1769,20,0,0,0
+ra_san05.gat,0,0,0,0	monster	Echio	1770,25,0,0,0
+ra_san05.gat,0,0,0,0	monster	Isilla	1772,25,0,0,0
+ra_san05.gat,0,0,0,0	monster	Hodremlin	1773,25,0,0,0
+ra_san05.gat,0,0,0,0	monster	Seeker	1774,20,0,0,0
+ra_san05.gat,0,0,0,0	monster	Gloom Under Night	1768,1,7200000,3600000,1

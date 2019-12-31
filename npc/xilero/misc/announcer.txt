@@ -1,0 +1,1114 @@
+
+-	script	announcer-script	-1,{
+
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+OnMinute00:
+switch(rand(1,7)){
+
+	case 1:
+	announce "ATTENTION! Change your password as soon as possible!",bc_blue;
+	break;
+
+	case 2:
+	announce "ATTENTION! Make sure your account has an EXISTING email!",bc_blue;
+	break;
+
+	case 3:
+	announce "Use a STRONG password!",bc_blue;
+	break;
+
+	case 4:
+	announce "Change your password for your own security, save yourself trouble!",bc_blue;
+	break;
+
+	case 5:
+	announce "Make sure to change your password today still if you didn't already!",bc_blue;
+	break;
+
+	case 6:
+	announce "Vote for XileRO and gain awesome stuff for that support!",bc_blue;
+	break;
+
+	case 7:
+	announce "A strong password and an existing email is a good security!",bc_blue;
+	break;
+
+	case 8:
+	announce "Do yourself a favor, change your password weekly!",bc_blue;
+	break;
+	}
+
+}
+
+//IrisNPC
+
+prt_in,283,135,4	script	Iris Master	72,{
+
+	set $@npcname_iris$, "^4000C0[Iris Master]^000000";
+	mes $@npcname_iris$;
+	mes "Hi there. I'm here to show off the XileRO Iris Set.";
+	mes "This set comes in 5 colors each with its very own Stats Build.";
+	next;
+	mes "You can exchange any color with me at anytime.";
+	mes "You can also view each set - to see how it looks on you.";
+	next;
+	mes "Please, let know what you would like to do.";
+		menu "Exchange Your Iris Set",exchangeiris,
+		"Try On Iris Set",viewiris2,
+		"See Iris Set Stats",statsirir,
+		"Donate For Iris Set",donateiris,
+		"Nevermind",irisclose;
+
+	exchangeiris:
+	mes $@npcname_iris$;
+	mes "Choose Which Iris Set You Currently Own - Must Be In Your Inventory";
+		menu "^676BDC Periwinkle Iris Set ^000000",havepwkl,
+		"^909BD8 Azure Iris Set ^000000",haveazure,
+		"^3F4047 Ebony Azure Iris Set ^000000",haveebony,
+		"^C4C27E Maize Iris Set ^000000",havemaize,
+		"^C44242 Folly Iris Set ^000000",havefolly;
+
+	havepwkl:
+	if(countitem(5772) < 1 && countitem(5773) < 1 && countitem(5765) < 1) goto LNotEnoughIris;
+	mes $@npcname_iris$;
+	mes "Choose Which Set You Want to Have";
+		menu "^909BD8 Azure Iris Set ^000000",getazure1,
+		"^3F4047 Ebony Azure Iris Set ^000000",getebony1,
+		"^C4C27E Maize Iris Set ^000000",getmaize1,
+		"^C44242 Folly Iris Set ^000000",getfolly1;
+
+	haveazure:
+	if(countitem(5743) < 1 && countitem(5744) < 1 && countitem(5745) < 1) goto LNotEnoughIris;
+	mes $@npcname_iris$;
+	mes "Choose Which Set You Want to Have";
+		menu "^676BDC Periwinkle Iris Set ^000000",getpwkl2,
+		"^3F4047 Ebony Azure Iris Set ^000000",getebony2,
+		"^C4C27E Maize Iris Set ^000000",getmaize2,
+		"^C44242 Folly Iris Set ^000000",getfolly2;
+
+	haveebony:
+	if(countitem(5675) < 1 && countitem(5676) < 1 && countitem(5785) < 1) goto LNotEnoughIris;
+	mes $@npcname_iris$;
+	mes "Choose Which Set You Want to Have";
+		menu "^676BDC Periwinkle Iris Set ^000000",getpwkl3,
+		"^909BD8 Azure Iris Set ^000000",getazure3,
+		"^C4C27E Maize Iris Set ^000000",getmaize3,
+		"^C44242 Folly Iris Set ^000000",getfolly3;
+
+	havemaize:
+	if(countitem(5795) < 1 && countitem(5677) < 1 && countitem(5678) < 1) goto LNotEnoughIris;
+	mes $@npcname_iris$;
+	mes "Choose Which Set You Want to Have";
+		menu "^676BDC Periwinkle Iris Set ^000000",getpwkl4,
+		"^909BD8 Azure Iris Set ^000000",getazure4,
+		"^3F4047 Ebony Azure Iris Set ^000000",getebony4,
+		"^C44242 Folly Iris Set ^000000",getfolly4;
+
+	havefolly:
+	if(countitem(5679) < 1 && countitem(5688) < 1 && countitem(5680) < 1) goto LNotEnoughIris;
+	mes $@npcname_iris$;
+	mes "Choose Which Set You Want to Have";
+		menu "^676BDC Periwinkle Iris Set ^000000",getpwkl5,
+		"^909BD8 Azure Iris Set ^000000",getazure5,
+		"^3F4047 Ebony Azure Iris Set ^000000",getebony5,
+		"^C4C27E Maize Iris Set ^000000",getmaize5;
+
+	getpwkl2:
+	if(countitem(5743) < 1 && countitem(5744) < 1 && countitem(5745) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+	mes $@npcname_iris$;
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5743) > 0 && countitem(5744) > 0 && countitem(5745) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5743,1;
+	delitem 5744,1;
+	delitem 5745,1;
+	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Periwinkle Iris Set ^000000.";
+	getitem2 5772,1,1,10,0,0,0,0,0;
+	getitem2 5773,1,1,10,0,0,0,0,0;
+	getitem 5765,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	getpwkl3:
+	if(countitem(5675) < 1 && countitem(5676) < 1 && countitem(5785) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5675) > 0 && countitem(5676) > 0 && countitem(5785) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5675,1;
+	delitem 5676,1;
+	delitem 5785,1;
+	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Periwinkle Iris Set ^000000.";
+	getitem2 5772,1,1,10,0,0,0,0,0;
+	getitem2 5773,1,1,10,0,0,0,0,0;
+	getitem 5765,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	getpwkl4:
+	if(countitem(5795) < 1 && countitem(5677) < 1 && countitem(5678) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5795) > 0 && countitem(5677) > 0 && countitem(5678) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5795,1;
+	delitem 5677,1;
+	delitem 5678,1;
+	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Periwinkle Iris Set ^000000.";
+	getitem2 5772,1,1,10,0,0,0,0,0;
+	getitem2 5773,1,1,10,0,0,0,0,0;
+	getitem 5765,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	getpwkl5:
+	if(countitem(5679) < 1 && countitem(5688) < 1 && countitem(5680) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5679) > 0 && countitem(5688) > 0 && countitem(5680) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5679,1;
+	delitem 5688,1;
+	delitem 5680,1;
+	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Periwinkle Iris Set ^000000.";
+	getitem2 5772,1,1,10,0,0,0,0,0;
+	getitem2 5773,1,1,10,0,0,0,0,0;
+	getitem 5765,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	getazure1:
+	if(countitem(5772) < 1 && countitem(5773) < 1 && countitem(5765) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5772) > 0 && countitem(5773) > 0 && countitem(5765) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5772,1;
+	delitem 5773,1;
+	delitem 5765,1;
+	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Azure Iris Set ^000000.";
+	getitem2 5743,1,1,10,0,0,0,0,0;
+	getitem2 5744,1,1,10,0,0,0,0,0;
+	getitem 5745,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	getazure3:
+	if(countitem(5675) < 1 && countitem(5676) < 1 && countitem(5785) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5675) > 0 && countitem(5676) > 0 && countitem(5785) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5675,1;
+	delitem 5676,1;
+	delitem 5785,1;
+	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Azure Iris Set ^000000.";
+	getitem2 5743,1,1,10,0,0,0,0,0;
+	getitem2 5744,1,1,10,0,0,0,0,0;
+	getitem 5745,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	getazure4:
+	if(countitem(5795) < 1 && countitem(5677) < 1 && countitem(5678) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5795) > 0 && countitem(5677) > 0 && countitem(5678) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5795,1;
+	delitem 5677,1;
+	delitem 5678,1;
+	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Azure Iris Set ^000000.";
+	getitem2 5743,1,1,10,0,0,0,0,0;
+	getitem2 5744,1,1,10,0,0,0,0,0;
+	getitem 5745,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	getazure5:
+	if(countitem(5679) < 1 && countitem(5688) < 1 && countitem(5680) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5679) > 0 && countitem(5688) > 0 && countitem(5680) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5679,1;
+	delitem 5688,1;
+	delitem 5680,1;
+	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Azure Iris Set ^000000.";
+	getitem2 5743,1,1,10,0,0,0,0,0;
+	getitem2 5744,1,1,10,0,0,0,0,0;
+	getitem 5745,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	getebony1:
+	if(countitem(5772) < 1 && countitem(5773) < 1 && countitem(5765) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5772) > 0 && countitem(5773) > 0 && countitem(5765) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5772,1;
+	delitem 5773,1;
+	delitem 5765,1;
+	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Ebony Iris Set ^000000.";
+	getitem2 5675,1,1,10,0,0,0,0,0;
+	getitem2 5676,1,1,10,0,0,0,0,0;
+	getitem 5785,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	getebony2:
+	if(countitem(5743) < 1 && countitem(5744) < 1 && countitem(5745) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5743) > 0 && countitem(5744) > 0 && countitem(5745) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5743,1;
+	delitem 5744,1;
+	delitem 5745,1;
+	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Ebony Iris Set ^000000.";
+	getitem2 5675,1,1,10,0,0,0,0,0;
+	getitem2 5676,1,1,10,0,0,0,0,0;
+	getitem 5785,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	getebony4:
+	if(countitem(5795) < 1 && countitem(5677) < 1 && countitem(5678) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5795) > 0 && countitem(5677) > 0 && countitem(5678) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5795,1;
+	delitem 5677,1;
+	delitem 5678,1;
+	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Ebony Iris Set ^000000.";
+	getitem2 5675,1,1,10,0,0,0,0,0;
+	getitem2 5676,1,1,10,0,0,0,0,0;
+	getitem 5785,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	getebony5:
+	if(countitem(5679) < 1 && countitem(5688) < 1 && countitem(5680) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5679) > 0 && countitem(5688) > 0 && countitem(5680) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5679,1;
+	delitem 5688,1;
+	delitem 5680,1;
+	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Ebony Iris Set ^000000.";
+	getitem2 5675,1,1,10,0,0,0,0,0;
+	getitem2 5676,1,1,10,0,0,0,0,0;
+	getitem 5785,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	getmaize1:
+	if(countitem(5772) < 1 && countitem(5773) < 1 && countitem(5765) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5772) > 0 && countitem(5773) > 0 && countitem(5765) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5772,1;
+	delitem 5773,1;
+	delitem 5765,1;
+	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Maize Iris Set ^000000.";
+	getitem2 5795,1,1,10,0,0,0,0,0;
+	getitem2 5677,1,1,10,0,0,0,0,0;
+	getitem 5678,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	getmaize2:
+	if(countitem(5743) < 1 && countitem(5744) < 1 && countitem(5745) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5743) > 0 && countitem(5744) > 0 && countitem(5745) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5743,1;
+	delitem 5744,1;
+	delitem 5745,1;
+	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Maize Iris Set ^000000.";
+	getitem2 5795,1,1,10,0,0,0,0,0;
+	getitem2 5677,1,1,10,0,0,0,0,0;
+	getitem 5678,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	getmaize3:
+	if(countitem(5675) < 1 && countitem(5676) < 1 && countitem(5785) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5675) > 0 && countitem(5676) > 0 && countitem(5785) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5675,1;
+	delitem 5676,1;
+	delitem 5785,1;
+	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Maize Iris Set ^000000.";
+	getitem2 5795,1,1,10,0,0,0,0,0;
+	getitem2 5677,1,1,10,0,0,0,0,0;
+	getitem 5678,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	getmaize5:
+	if(countitem(5679) < 1 && countitem(5688) < 1 && countitem(5680) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5679) > 0 && countitem(5688) > 0 && countitem(5680) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5679,1;
+	delitem 5688,1;
+	delitem 5680,1;
+	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Maize Iris Set ^000000.";
+	getitem2 5795,1,1,10,0,0,0,0,0;
+	getitem2 5677,1,1,10,0,0,0,0,0;
+	getitem 5678,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	getfolly1:
+	if(countitem(5772) < 1 && countitem(5773) < 1 && countitem(5765) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5772) > 0 && countitem(5773) > 0 && countitem(5765) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5772,1;
+	delitem 5773,1;
+	delitem 5765,1;
+ 	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Folly Iris Set ^000000.";
+	getitem2 5679,1,1,10,0,0,0,0,0;
+	getitem2 5688,1,1,10,0,0,0,0,0;
+	getitem 5680,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	getfolly2:
+	if(countitem(5743) < 1 && countitem(5744) < 1 && countitem(5745) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5743) > 0 && countitem(5744) > 0 && countitem(5745) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5743,1;
+	delitem 5744,1;
+	delitem 5745,1;
+ 	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Folly Iris Set ^000000.";
+	getitem2 5679,1,1,10,0,0,0,0,0;
+	getitem2 5688,1,1,10,0,0,0,0,0;
+	getitem 5680,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	getfolly3:
+	if(countitem(5675) < 1 && countitem(5676) < 1 && countitem(5785) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5675) > 0 && countitem(5676) > 0 && countitem(5785) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5675,1;
+	delitem 5676,1;
+	delitem 5785,1;
+ 	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Folly Iris Set ^000000.";
+	getitem2 5679,1,1,10,0,0,0,0,0;
+	getitem2 5688,1,1,10,0,0,0,0,0;
+	getitem 5680,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	getfolly4:
+	if(countitem(5795) < 1 && countitem(5677) < 1 && countitem(5678) < 1) goto LNotEnoughIris;
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy";
+		mes "Come back to me when you're not carrying";
+		mes "more than 50% of your weight";
+		close;
+	}
+	if(getequipcardcnt(5795) > 0 && countitem(5677) > 0 && countitem(5678) > 0)
+	{
+	mes $@npcname_iris$;
+		mes "Please De-Card Your Set Before You Exchange";
+		close;
+	}
+	delitem 5795,1;
+	delitem 5677,1;
+	delitem 5678,1;
+ 	mes $@npcname_iris$;
+	mes "Woahh, looking good! Here is your new ^676BDC Folly Iris Set ^000000.";
+	getitem2 5679,1,1,10,0,0,0,0,0;
+	getitem2 5688,1,1,10,0,0,0,0,0;
+	getitem 5680,1;
+
+	mes $@npcname_iris$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+
+	viewiris:
+	//save current look for later
+	set @bottomviewiris, getlook(3);
+	set @topviewiris, getlook(4);
+	set @midviewiris, getlook(5);
+
+	addtimer 1000, strnpcinfo(3)+"::On_Leave";
+
+	INTROIRIS:
+
+	mes $@npcname_iris$;
+	mes "Please which set you would like to preview";
+
+		menu "^676BDC Periwinkle Iris Set ^000000",viewpwkl,
+		"^909BD8 Azure Iris Set ^000000",viewazure,
+		"^3F4047 Ebony Azure Iris Set ^000000",viewebony,
+		"^C4C27E Maize Iris Set ^000000",viewmaize,
+		"^C44242 Folly Iris Set ^000000",viewfolly;
+
+	viewpwkl:
+	//modifies char's look based on item
+	set @equippwkl, getiteminfo(5772, 5) && getiteminfo(5773, 5) && getiteminfo(5765, 5);
+	set @viewpwkl, getiteminfo(5772, 11) && getiteminfo(5773, 11) && getiteminfo(5765, 11);
+
+	if(@equippwkl != -1 && @viewpwkl > 0) {
+			//note: yes...i'm using atcommand here cause for some reason 
+			//	  'setlook' has permanent effects...last time i checked at least
+			if(@equippwkl & 1)
+		atcommand "@changelook 3 " + @viewpwkl;
+			if(@equippwkl & 256)
+				atcommand "@changelook 1 " + @viewpwkl;
+			if(@equippwkl & 512) 
+		atcommand "@changelook 2 " + @viewpwkl;
+	}
+
+	viewazure:
+	//modifies char's look based on item
+	set @equipazure, getiteminfo(5743, 5) && getiteminfo(5744, 5) && getiteminfo(5745, 5);
+	set @viewazure, getiteminfo(5743, 11) && getiteminfo(5744, 11) && getiteminfo(5745, 11);
+
+	if(@equipazure != -1 && @viewazure > 0) {
+			//note: yes...i'm using atcommand here cause for some reason 
+			//	  'setlook' has permanent effects...last time i checked at least
+			if(@equipazure & 1)
+		atcommand "@changelook 3 " + @viewazure;
+			if(@equipazure & 256)
+				atcommand "@changelook 1 " + @viewazure;
+			if(@equipazure & 512) 
+		atcommand "@changelook 2 " + @viewazure;
+	}
+
+	viewebony:
+	//modifies char's look based on item
+	set @equipebony, getiteminfo(5675, 5) && getiteminfo(5676, 5) && getiteminfo(5785, 5);
+	set @viewebony, getiteminfo(5675, 11) && getiteminfo(5676, 11) && getiteminfo(5785, 11);
+
+	if(@equipebony != -1 && @viewebony > 0) {
+			//note: yes...i'm using atcommand here cause for some reason 
+			//	  'setlook' has permanent effects...last time i checked at least
+			if(@equipebony & 1)
+		atcommand "@changelook 3 " + @viewebony;
+			if(@equipebony & 256)
+				atcommand "@changelook 1 " + @viewebony;
+			if(@equipebony & 512) 
+		atcommand "@changelook 2 " + @viewebony;
+	}
+
+	viewmaize:
+	//modifies char's look based on item
+	set @equipmaize, getiteminfo(5795, 5) && getiteminfo(5677, 5) && getiteminfo(5678, 5);
+	set @viewmaize, getiteminfo(5795, 11) && getiteminfo(5677, 11) && getiteminfo(5678, 11);
+
+	if(@equipmaize != -1 && @viewmaize > 0) {
+			//note: yes...i'm using atcommand here cause for some reason 
+			//	  'setlook' has permanent effects...last time i checked at least
+			if(@equipmaize & 1)
+		atcommand "@changelook 3 " + @viewmaize;
+			if(@equipmaize & 256)
+				atcommand "@changelook 1 " + @viewmaize;
+			if(@equipmaize & 512) 
+		atcommand "@changelook 2 " + @viewmaize;
+	}
+
+	viewfolly:
+	//modifies char's look based on item
+	set @equipfolly, getiteminfo(5679, 5) && getiteminfo(5688, 5) && getiteminfo(5680, 5);
+	set @viewfolly, getiteminfo(5679, 11) && getiteminfo(5688, 11) && getiteminfo(5680, 11);
+
+	if(@equipfolly != -1 && @viewfolly > 0) {
+			//note: yes...i'm using atcommand here cause for some reason 
+			//	  'setlook' has permanent effects...last time i checked at least
+			if(@equipfolly & 1)
+		atcommand "@changelook 3 " + @viewfolly;
+			if(@equipfolly & 256)
+				atcommand "@changelook 1 " + @viewfolly;
+			if(@equipfolly & 512) 
+		atcommand "@changelook 2 " + @viewfolly;
+	}
+
+		next;
+	mes $@npcname_iris$;
+	mes "Would to like to view another set?";
+	if(select("Yes", "No") == 1) {
+		goto INTROIRIS;
+	}
+		
+	//*preview wears off automatically here due to delayed timer*//
+
+	close;   
+
+	On_Leave:
+	atcommand "@changelook 1 " + @topviewiris;
+	atcommand "@changelook 2 " + @midviewiris;
+	atcommand "@changelook 3 " + @bottomviewiris;
+	close;
+
+	viewiris2:
+	mes $@npcname_iris$;
+	mes "View Iris Sets Coming Soon!";
+	close;	
+
+	statsirir:
+	mes $@npcname_iris$;
+	mes "Stats Coming Soon!";
+	close;
+	
+	donateiris:
+	mes $@npcname_iris$;
+	mes "Donation Info Coming Soon!";
+	close;
+
+	irisclose:
+	mes $@npcname_iris$;
+	mes "Come Back Anytime";
+	close;
+
+	LNotEnoughIris:
+	mes $@npcname_iris$;
+	mes "You Do Not Have An Iris Set In Your Inventory";
+	mes "Come Back When Worthy";
+	close;
+}
+
+prontera,139,181,5	script	3rd Job Items	79,{
+
+	set $@npcname_3rdJI$, "^4000C0[3rd Job Items]^000000";
+	mes $@npcname_3rdJI$;
+	mes "Hello. I offer 3rd job items for Victory Badges";
+	mes "Please, let know what items you would like to have.";
+		menu "Wolf Flute ^C4C27E 50 VB ^000000",WF1Z,
+		"Alloy Trap ^C4C27E 1 VB ^000000",AT1Z,
+		"Throat Lozenge ^C4C27E 4 VB ^000000",TL1Z,
+		"Painful Tear ^C4C27E 2 VB ^000000",PT1Z,
+		"Vulcan Bullet ^C4C27E 1 VB ^000000",VB1Z,
+		"Liquid Condensed Bullet ^C4C27E 5 VB ^000000",LCB1Z,
+		"Pile Bunker ^C4C27E 50 VB ^000000",PIB1Z,
+		"Magic Gears Fuel ^C4C27E 10 VB ^000000",MGF1Z,
+		"Magnetic Field Device ^C4C27E 50 VB ^000000",MFD1Z,
+		"Stealth Field Generator ^C4C27E 50 VB ^000000",SFG1Z,
+		"Grow Plant Genes Book ^C4C27E 75 VB ^000000",GPGB1Z,
+		"Paint Brush ^C4C27E 25 VB ^000000",PAB1Z,
+		"Surface Paint ^C4C27E 10 VB ^000000",SUP1Z,
+		"Indigo ^C4C27E 2 VB ^000000",IND1Z,
+		"Yellow Wish Point ^C4C27E 2 VB ^000000",YWP1Z,
+		"Scarlet Point ^C4C27E 2 VB ^000000",SCP1Z,
+		"Lime Green Point ^C4C27E 2 VB ^000000",LGP1Z,
+		"Mandragora Flowerpot ^C4C27E 2 VB ^000000",MF1Z,
+		"Nevermind",JICLOSE;
+
+	WF1Z:
+	if(countitem(22556) < 50) goto LNotEnoughVB;
+
+	delitem 22556,50;
+	mes $@npcname_3rdJI$;
+	mes "Thank You for your Victory Badges. Here is your ^909BD8 Wolf Flute ^000000.";
+	getitem 6124,1;
+	
+	mes $@npcname_3rdJI$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+	
+	AT1Z:
+	if(countitem(22556) < 1) goto LNotEnoughVB;
+
+	delitem 22556,1;
+	mes $@npcname_3rdJI$;
+	mes "Thank You for your Victory Badges. Here is your ^909BD8 Alloy Trap ^000000.";
+	getitem 7940,1;
+
+	mes $@npcname_3rdJI$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+		
+	TL1Z:
+	if(countitem(22556) < 4) goto LNotEnoughVB;
+
+	delitem 22556,4;
+	mes $@npcname_3rdJI$;
+	mes "Thank You for your Victory Badges. Here is your ^909BD8 Throat Lozenge ^000000.";
+	getitem 11513,1;
+
+	mes $@npcname_3rdJI$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+		
+	PT1Z:
+	if(countitem(22556) < 2) goto LNotEnoughVB;
+
+	delitem 22556,2;
+	mes $@npcname_3rdJI$;
+	mes "Thank You for your Victory Badges. Here is your ^909BD8 Painful Tear ^000000.";
+	getitem 6144,1;
+
+	mes $@npcname_3rdJI$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+		
+	VB1Z:
+	if(countitem(22556) < 1) goto LNotEnoughVB;
+
+	delitem 22556,1;
+	mes $@npcname_3rdJI$;
+	mes "Thank You for your Victory Badges. Here is your ^909BD8 Vulcan Bullet ^000000.";
+	getitem 6145,1;
+
+	mes $@npcname_3rdJI$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+		
+	LCB1Z:
+	if(countitem(22556) < 5) goto LNotEnoughVB;
+
+	delitem 22556,5;
+	mes $@npcname_3rdJI$;
+	mes "Thank You for your Victory Badges. Here is your ^909BD8 Liquid Condensed Bullet ^000000.";
+	getitem 6147,1;
+
+	mes $@npcname_3rdJI$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+		
+	PIB1Z:
+	if(countitem(22556) < 50) goto LNotEnoughVB;
+
+	delitem 22556,50;
+	mes $@npcname_3rdJI$;
+	mes "Thank You for your Victory Badges. Here is your ^909BD8 Pile Bunker ^000000.";
+	getitem 1549,1;
+
+	mes $@npcname_3rdJI$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+		
+	MGF1Z:
+	if(countitem(22556) < 10) goto LNotEnoughVB;
+
+	delitem 22556,10;
+	mes $@npcname_3rdJI$;
+	mes "Thank You for your Victory Badges. Here is your ^909BD8 Magic Gears Fuel ^000000.";
+	getitem 6146,1;
+	
+	mes $@npcname_3rdJI$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+	
+	MFD1Z:
+	if(countitem(22556) < 50) goto LNotEnoughVB;
+
+	delitem 22556,50;
+	mes $@npcname_3rdJI$;
+	mes "Thank You for your Victory Badges. Here is your ^909BD8 Magic Gears Fuel ^000000.";
+	getitem 2805,1;
+	
+	mes $@npcname_3rdJI$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+	
+	SFG1Z:
+	if(countitem(22556) < 50) goto LNotEnoughVB;
+
+	delitem 22556,50;
+	mes $@npcname_3rdJI$;
+	mes "Thank You for your Victory Badges. Here is your ^909BD8 Stealth Field Generator ^000000.";
+	getitem 2808,1;
+	
+	mes $@npcname_3rdJI$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+		
+	GPGB1Z:
+	if(countitem(22556) < 75) goto LNotEnoughVB;
+
+	delitem 22556,75;
+	mes $@npcname_3rdJI$;
+	mes "Thank You for your Victory Badges. Here is your ^909BD8 Grow Plant Genes Book ^000000.";
+	getitem 6284,1;
+	
+	mes $@npcname_3rdJI$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+		
+	PAB1Z:
+	if(countitem(22556) < 25) goto LNotEnoughVB;
+
+	delitem 22556,25;
+	mes $@npcname_3rdJI$;
+	mes "Thank You for your Victory Badges. Here is your ^909BD8 Paint Brush ^000000.";
+	getitem 6122,1;
+	
+	mes $@npcname_3rdJI$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+	
+	SUP1Z:
+	if(countitem(22556) < 10) goto LNotEnoughVB;
+
+	delitem 22556,10;
+	mes $@npcname_3rdJI$;
+	mes "Thank You for your Victory Badges. Here is your ^909BD8 Surface Paint ^000000.";
+	getitem 6123,1;
+	
+	mes $@npcname_3rdJI$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+	
+	IND1Z:
+	if(countitem(22556) < 2) goto LNotEnoughVB;
+
+	delitem 22556,2;
+	mes $@npcname_3rdJI$;
+	mes "Thank You for your Victory Badges. Here is your ^909BD8 Indigo ^000000.";
+	getitem 6361,1;
+	
+	mes $@npcname_3rdJI$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+	
+	YWP1Z:
+	if(countitem(22556) < 2) goto LNotEnoughVB;
+
+	delitem 22556,2;
+	mes $@npcname_3rdJI$;
+	mes "Thank You for your Victory Badges. Here is your ^909BD8 Yellow Wish Point ^000000.";
+	getitem 6362,1;
+	
+	mes $@npcname_3rdJI$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+	
+	SCP1Z:
+	if(countitem(22556) < 2) goto LNotEnoughVB;
+
+	delitem 22556,2;
+	mes $@npcname_3rdJI$;
+	mes "Thank You for your Victory Badges. Here is your ^909BD8 Scarlet Point ^000000.";
+	getitem 6360,1;
+	
+	mes $@npcname_3rdJI$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+	
+	LGP1Z:
+	if(countitem(22556) < 2) goto LNotEnoughVB;
+
+	delitem 22556,2;
+	mes $@npcname_3rdJI$;
+	mes "Thank You for your Victory Badges. Here is your ^909BD8 Lime Green Point ^000000.";
+	getitem 6363,1;
+	
+	mes $@npcname_3rdJI$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+	
+	MF1Z:
+	if(countitem(22556) < 2) goto LNotEnoughVB;
+
+	delitem 22556,2;
+	mes $@npcname_3rdJI$;
+	mes "Thank You for your Victory Badges. Here is your ^909BD8 Mandragora Flowerpot ^000000.";
+	getitem 6217,1;
+	
+	mes $@npcname_3rdJI$;
+	mes ". . .";
+	mes "Gratz! Hope you kill lots more noobs!";
+	close;
+	
+	LNotEnoughVB:
+	mes $@npcname_3rdJI$;
+	mes "You Do Not Have Enough Victory Badges In Your Inventory";
+	mes "Come Back When Worthy";
+	close;
+	
+	JICLOSE:
+	mes $@npcname_3rdJI$;
+	mes "Come Back Anytime";
+	close;
+}

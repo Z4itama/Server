@@ -1,0 +1,57 @@
+//////////////////////////////////////////////////////////
+//             Healer Script Omega (v1.0)              //
+//////////////////////////////////////////////////////////
+//
+//=====eAthena Script====================================
+// Healer Script
+//=====By================================================
+// ShadowLady
+//=====Current Version===================================
+// 1.0
+//=====Compatible With:==================================
+// Any eAthena Version
+//=====Description=======================================
+// Fully working heal script with ontouch and no talk ^^
+//=====Additional Comments:==============================
+// Made for WishRO and Wishy specially DO NOT STEAL :3
+//=======================================================
+
+prontera,150,192,4	script	Kitty Girl#heal1::kittyheal1	725,{
+	mes "[Kitty Girl]";
+	mes "Meow! Have a nice day. ^_^";
+	percentheal 100,100;
+	message strcharinfo(0),"HP/SP 100% Restored";
+	close;
+}
+izlude,125,118,4	script	Healer	111,5,5,{
+	percentheal 100,100;
+	end;
+}
+
+izlude,122,106,4	duplicate(kittyheal1)	Kitty Girl#heal2	725
+morocc,160,86,4	duplicate(kittyheal1)	Kitty Girl#heal3	725
+geffen,123,75,4	duplicate(kittyheal1)	Kitty Girl#heal4	725
+payon,149,231,4	duplicate(kittyheal1)	Kitty Girl#heal5	725
+ayothaya,171,152,5	duplicate(kittyheal1)	Kitty Girl#heal6	725
+
+//NoobieSetNPC
+
+prontera,147,155,5	script	Noobie Set	811,{
+	
+	mes "[Start Item]";
+	if(#StartItem == 1) {
+		mes "You have already Received the Starting Items.";
+		close;
+	}
+	mes "Hey, You seems to be new...";
+	mes "I got some special Item's for you.";
+	mes "Hope you will like them!";
+	next;
+	set #StartItem, 1;
+	mes "[Start Item]";
+	getitem 3348,1;
+	getitem 3368,1;
+	getitem 3357,1;
+	mes "Here, you go!";
+	close;
+}

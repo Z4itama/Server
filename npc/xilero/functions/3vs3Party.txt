@@ -1,0 +1,532 @@
+// ====================================================
+// 3 vs 3 Party Script
+// v3.0: New Winner detecting system, anti-partycheat, spawn and respawn points (Knx)
+// v2.0: With custom queueing system (Knx)
+// v1.0: Coded by Teny + Knx
+// ====================================================
+
+//	Flags
+
+guild_vs1	mapflag	noteleport
+guild_vs1	mapflag	nomemo
+guild_vs1	mapflag	nowarp
+guild_vs1	mapflag	nowarpto
+guild_vs1	mapflag	noicewall
+guild_vs1	mapflag	noreturn
+guild_vs1	mapflag	nosave	SavePoint
+guild_vs1	mapflag	nopenalty
+guild_vs1	mapflag	noexp
+guild_vs1	mapflag	nobranch
+guild_vs1	mapflag	pvp_noguild
+guild_vs1	mapflag	restricted	3
+guild_vs1	mapflag	partylock
+guild_vs1	mapflag	loadevent
+
+guild_vs1-1	mapflag	noteleport
+guild_vs1-1	mapflag	nomemo
+guild_vs1-1	mapflag	nowarp
+guild_vs1-1	mapflag	nowarpto
+guild_vs1-1	mapflag	noicewall
+guild_vs1-1	mapflag	noreturn
+guild_vs1-1	mapflag	nosave	SavePoint
+guild_vs1-1	mapflag	nopenalty
+guild_vs1-1	mapflag	noexp
+guild_vs1-1	mapflag	nobranch
+guild_vs1-1	mapflag	pvp_noguild
+guild_vs1-1	mapflag	restricted	3
+guild_vs1-1	mapflag	partylock
+guild_vs1-1	mapflag	loadevent
+
+
+//-------------------------------------------------------------------------
+//
+//	Register NPC
+//
+//-------------------------------------------------------------------------
+
+arena_room,102,100,5	script	3vs3Party	822,{
+
+	//npctalk getpartymembercount(getcharid(1));
+
+	mes "[Arena Guide]";
+	mes "Welcome to the 3 vs 3 Party Arena!!!";
+	mes "Would you like to compete?";
+	next;
+	menu "Oooh Yeeaahh!!!",L_Yes, "Nuuu", L_No;
+	close;
+
+L_Yes:
+	if (BaseLevel < 250 || Class==Job_Novice || Class==Job_Baby || Class==Job_Novice_High) goto L_Level;
+	if (getpartymembercount(getcharid(1)) == 3 && getpartycount(getcharid(1)) == 3){
+		set .@myparty, getcharid(1);
+		if(.@myparty==$PP1_Team1_id || .@myparty==$PP1_Team2_id || .@myparty==$PP2_Team1_id || .@myparty==$PP2_Team2_id){
+			mes "[Arena Guide]";
+			mes "Your party is already playing...";
+			close;
+		}
+
+		getmapxy(@PRTYPRTY_city$, @PRTYPRTY_x, @PRTYPRTY_y, 0);
+		set .@pos, arena_queue_add(2); //sets @PRTYPRTY_active=1 as well
+
+		mes "[Arena Guide]";
+		if(.@pos==0){
+			mes "The queue is full. Please wait a while and try again.";
+		}else if(.@pos==-2){
+			mes "Sorry, you and your Party need to be at least level 200. No Novices allowed either.";
+		}else if(.@pos==-1){
+			mes "You / your party already are on a waiting line...";
+		}else if(.@pos==2){
+			if($@PP1_running==0){
+				set $@PP1_running, 1;
+				donpcevent "PARTYVSPARTY_WINR::OnStart1";
+			}else if($@PP2_running==0){
+				set $@PP2_running, 1;
+				donpcevent "PARTYVSPARTY_WINR::OnStart2";
+			}else{
+				mes "Congratulations, you are now on the waiting line for 3vs3 Party!";
+				mes "Your position is: ^FF0000"+(.@pos-1)+"^000000";
+				next;
+				mes "[Arena Guide]";
+				mes "^0000FFWhen it's your turn, you will be taken to the Arena even if you moved away from this map!";
+				mes "^FF0000But if you logout, you will be put out of the queue.";
+			}
+		}else{
+			mes "Congratulations, you are now on the waiting line for 3vs3 Party!";
+			mes "Your position is: ^FF0000"+(.@pos-1)+"^000000";
+			next;
+			mes "[Arena Guide]";
+			mes "^0000FFWhen it's your turn, you will be taken to the Arena even if you moved away from this map!";
+			mes "^FF0000But if you logout, you will be put out of the queue.";
+			close;
+		}
+	}else{
+		mes "[Arena Guide]";
+		mes "Sorry, you do not meet the requirements, check that your party has exactly 3 people in it and try again.";
+	}
+	close;
+
+L_No:
+	mes "[Arena Guide]";
+	mes "Okay, please come again!";
+	close;
+
+L_Level:
+	mes "[Arena Guide]";
+	mes "Sorry, you need to be at least level 250.";
+	close;
+
+}
+
+izlude,135,114,5	duplicate(3vs3Party)	3vs3Party#2	822
+payon, 158,233,5	duplicate(3vs3Party)	3vs3Party#3	822
+
+
+//-------------------------------------------------------------------------
+//
+//	ARENA 1
+//
+//-------------------------------------------------------------------------
+
+guild_vs1,0,0,0	script	PARTYVSPARTY_TIMR1	-1,{
+
+OnTimer10000:
+	set $PP1_times_10s, $PP1_times_10s + 1;
+
+	//4 minutes
+	if ($PP1_times_10s==24){
+		mapannounce "guild_vs1", "Everyone, you have one minute to finish this fight!!", 1;
+	}
+
+	//4.66 minutes
+	if ($PP1_times_10s==28){
+		mapannounce "guild_vs1", "Attention! The round is over in 20 seconds, the team with more people alive will win!", 1;
+	}
+
+	//5 minutes - time's over
+	if ($PP1_times_10s>=30){
+		stopnpctimer;
+		stopnpctimer "PPTimer1";
+
+		set .@PP1_Team1_alive, countpartyin("guild_vs1", $PP1_Team1_id);
+		set .@PP1_Team2_alive, countpartyin("guild_vs1", $PP1_Team2_id);
+
+		if(.@PP1_Team1_alive > .@PP1_Team2_alive){
+			//team1 wins
+
+			if($PP1_Team2_x) warpparty $PP1_Team2_city$,$PP1_Team2_x,$PP1_Team2_y,$PP1_Team2_id;
+			else warpparty "prontera",156,173,$PP1_Team2_id;
+
+			if (getpartymembercount($PP1_Team1_id) <= 3)
+				warpparty "lhz_cube",122,74,$PP1_Team1_id;
+			else
+				warpparty "prontera",156,173,$PP1_Team1_id; //they cheated
+
+			mapannounce "arena_room", "We have a winner for this 3vs3 fight! Party "
+				+getpartyname($PP1_Team1_id)+" defeated "+getpartyname($PP1_Team2_id)+"!!", 1;
+			sleep 10000;
+			donpcevent "PARTYVSPARTY_WINR::OnStart1";
+		}else if(.@PP1_Team2_alive > .@PP1_Team1_alive){
+			//team2 wins
+
+			if($PP1_Team1_x) warpparty $PP1_Team1_city$,$PP1_Team1_x,$PP1_Team1_y,$PP1_Team1_id;
+			else warpparty "prontera",156,173,$PP1_Team1_id;
+
+			if (getpartymembercount($PP1_Team2_id) <= 3)
+				warpparty "lhz_cube",122,74,$PP1_Team2_id;
+			else
+				warpparty "prontera",156,173,$PP1_Team2_id; //they cheated
+
+			mapannounce "arena_room", "We have a winner for this 3vs3 fight! Party "
+				+getpartyname($PP1_Team2_id)+" defeated "+getpartyname($PP1_Team1_id)+"!!", 1;
+			sleep 10000;
+			donpcevent "PARTYVSPARTY_WINR::OnStart1";
+		}else{
+			//draw
+			if($PP1_Team1_x) warpparty $PP1_Team1_city$,$PP1_Team1_x,$PP1_Team1_y,$PP1_Team1_id;
+			else warpparty "prontera",156,173,$PP1_Team1_id;
+
+			if($PP1_Team2_x) warpparty $PP1_Team2_city$,$PP1_Team2_x,$PP1_Team2_y,$PP1_Team2_id;
+			else warpparty "prontera",156,173,$PP1_Team2_id;
+
+			mapannounce "arena_room", "The 3vs3 fight between party "
+				+getpartyname($PP1_Team1_id)+" and "+getpartyname($PP1_Team2_id)+" was a draw!!", 1;
+			sleep 10000;
+			donpcevent "PARTYVSPARTY_WINR::OnStart1";
+		}
+		end;
+	}
+
+	donpcevent "PARTYVSPARTY_WINR::OnCheckWinner1";
+
+}
+
+guild_vs1,1,1,1	script	PPTimer1	-1,{
+
+OnTimer10001:
+	if (getpartycount($PP1_Team1_id) > 3){ set .@cheater, $PP1_Team1_id; goto L_Cheat; }
+	if (getpartycount($PP1_Team2_id) > 3){ set .@cheater, $PP1_Team2_id; goto L_Cheat; }
+	initnpctimer;
+	end;
+
+L_Cheat:
+	stopnpctimer;
+	stopnpctimer "PARTYVSPARTY_TIMR1";
+	set $PP1_Team1_id, 0;
+	set $PP1_Team2_id, 0;
+	mapwarp "guild_vs1","prontera",156,173;
+	mapannounce "arena_room", "Party "
+		+getpartyname(.@cheater)+" tried to get more than 3 members during the 3vs3 fight. This match is cancelled!!", 1;
+	sleep 10000;
+	donpcevent "PARTYVSPARTY_WINR::OnStart1";
+	end;	
+}
+
+
+//-------------------------------------------------------------------------
+//
+//	ARENA 2
+//
+//-------------------------------------------------------------------------
+
+guild_vs1-1,0,0,0	script	PARTYVSPARTY_TIMR2	-1,{
+
+OnTimer10000:
+	set $PP2_times_10s, $PP2_times_10s + 1;
+
+	//4 minutes
+	if ($PP2_times_10s==24){
+		mapannounce "guild_vs1-1", "Everyone, you have one minute to finish this fight!!", 1;
+	}
+
+	//4.66 minutes
+	if ($PP2_times_10s==28){
+		mapannounce "guild_vs1-1", "Attention! The round is over in 20 seconds, the team with more people alive will win!", 1;
+	}
+
+	//5 minutes - time's over
+	if ($PP2_times_10s>=30){
+		stopnpctimer;
+		stopnpctimer "PPTimer2";
+
+		set .@PP2_Team1_alive, countpartyin("guild_vs1-1", $PP2_Team1_id);
+		set .@PP2_Team2_alive, countpartyin("guild_vs1-1", $PP2_Team2_id);
+
+		if(.@PP2_Team1_alive > .@PP2_Team2_alive){
+			//team1 wins
+
+			if($PP2_Team2_x) warpparty $PP2_Team2_city$,$PP2_Team2_x,$PP2_Team2_y,$PP2_Team2_id;
+			else warpparty "prontera",156,173,$PP2_Team2_id;
+
+			if (getpartymembercount($PP2_Team1_id) <= 3)
+				warpparty "lhz_cube",122,74,$PP2_Team1_id;
+			else
+				warpparty "prontera",156,173,$PP2_Team1_id; //they cheated
+
+			mapannounce "arena_room", "We have a winner for this 3vs3 fight! Party "
+				+getpartyname($PP2_Team1_id)+" defeated "+getpartyname($PP2_Team2_id)+"!!", 1;
+			sleep 10000;
+			donpcevent "PARTYVSPARTY_WINR::OnStart2";
+		}else if(.@PP2_Team2_alive > .@PP2_Team1_alive){
+			//team2 wins
+
+			if($PP2_Team1_x) warpparty $PP2_Team1_city$,$PP2_Team1_x,$PP2_Team1_y,$PP2_Team1_id;
+			else warpparty "prontera",156,173,$PP2_Team1_id;
+
+			if (getpartymembercount($PP2_Team2_id) <= 3)
+				warpparty "lhz_cube",122,74,$PP2_Team2_id;
+			else
+				warpparty "prontera",156,173,$PP2_Team2_id; //they cheated
+
+			mapannounce "arena_room", "We have a winner for this 3vs3 fight! Party "
+				+getpartyname($PP2_Team2_id)+" defeated "+getpartyname($PP2_Team1_id)+"!!", 1;
+			sleep 10000;
+			donpcevent "PARTYVSPARTY_WINR::OnStart2";
+		}else{
+			//draw
+			if($PP2_Team1_x) warpparty $PP2_Team1_city$,$PP2_Team1_x,$PP2_Team1_y,$PP2_Team1_id;
+			else warpparty "prontera",156,173,$PP2_Team1_id;
+
+			if($PP2_Team2_x) warpparty $PP2_Team2_city$,$PP2_Team2_x,$PP2_Team2_y,$PP2_Team2_id;
+			else warpparty "prontera",156,173,$PP2_Team2_id;
+
+			mapannounce "arena_room", "The 3vs3 fight between party "
+				+getpartyname($PP2_Team1_id)+" and "+getpartyname($PP2_Team2_id)+" was a draw!!", 1;
+			sleep 10000;
+			donpcevent "PARTYVSPARTY_WINR::OnStart2";
+		}
+		end;
+	}
+
+	donpcevent "PARTYVSPARTY_WINR::OnCheckWinner2";
+
+}
+
+guild_vs1-1,1,1,1	script	PPTimer2	-1,{
+
+OnTimer10001:
+	if (getpartycount($PP2_Team1_id) > 3){ set .@cheater, $PP2_Team1_id; goto L_Cheat; }
+	if (getpartycount($PP2_Team2_id) > 3){ set .@cheater, $PP2_Team2_id; goto L_Cheat; }
+	initnpctimer;
+	end;
+
+L_Cheat:
+	stopnpctimer;
+	stopnpctimer "PARTYVSPARTY_TIMR2";
+	set $PP2_Team1_id, 0;
+	set $PP2_Team2_id, 0;
+	mapwarp "guild_vs1-1","prontera",156,173;
+	mapannounce "arena_room", "Party "
+		+getpartyname(.@cheater)+" tried to get more than 3 members during the 3vs3 fight. This match is cancelled!!", 1;
+	sleep 10000;
+	donpcevent "PARTYVSPARTY_WINR::OnStart2";
+	end;
+}
+
+
+//-------------------------------------------------------------------------
+//
+//	GAME NPC
+//
+//-------------------------------------------------------------------------
+
+guild_vs1,0,0,0	script	PARTYVSPARTY_WINR	-1,{
+
+	mes "[Arena Guide]";
+	mes "What are you doing here? :)";
+	close;
+
+OnInit:
+	mapwarp "guild_vs1","prontera",156,173;
+	mapwarp "guild_vs1-1","prontera",156,173;
+
+	set $@PP1_running, 1;
+	set $@PP2_running, 1;
+
+	donpcevent "PARTYVSPARTY_WINR::OnStart1";
+	donpcevent "PARTYVSPARTY_WINR::OnStart2";
+
+	end;
+
+OnStart1:
+	set $PP1_Team1_id, 0;
+	set $PP1_Team2_id, 0;
+	set $PP1_times_10s, 0;
+	set $PP1_Team1_city$, 0; set $PP1_Team1_x, 0; set $PP1_Team1_y, 0;
+	set $PP1_Team2_city$, 0; set $PP1_Team2_x, 0; set $PP1_Team2_y, 0;
+
+	if(warp_arena_queue(2,1,"guild_vs1",0,0,2) > 0){ //sets $team1id $team2id as well
+		set $@PP1_running, 1;
+		set $PP1_times_10s, 0;
+		initnpctimer "PARTYVSPARTY_TIMR1";
+		initnpctimer "PPTimer1";
+	}else{
+		set $@PP1_running, 0;
+	}
+	end;
+
+OnStart2:
+	set $PP2_Team1_id, 0;
+	set $PP2_Team2_id, 0;
+	set $PP2_times_10s, 0;
+	set $PP2_Team1_city$, 0; set $PP2_Team1_x, 0; set $PP2_Team1_y, 0;
+	set $PP2_Team2_city$, 0; set $PP2_Team2_x, 0; set $PP2_Team2_y, 0;
+
+	if(warp_arena_queue(2,2,"guild_vs1-1",0,0,2) > 0){ //sets $team1id $team2id as well
+		set $@PP2_running, 1;
+		set $PP2_times_10s, 0;
+		initnpctimer "PARTYVSPARTY_TIMR2";
+		initnpctimer "PPTimer2";
+	}else{
+		set $@PP2_running, 0;
+	}
+	end;
+
+OnPCLogoutEvent:
+	if(@PRTYPRTY_active==1)
+		arena_queue_del(2);
+	end;
+
+OnPCDieEvent:
+	getmapxy(.@mapname$, .@mapx, .@mapy, 0);
+	if(.@mapname$=="guild_vs1" || .@mapname$=="guild_vs1-1"){
+		if(@PRTYPRTY_x) warp @PRTYPRTY_city$,@PRTYPRTY_x,@PRTYPRTY_y;
+		else warp "prontera",156,173;
+		set @PRTYPRTY_city$, 0; set @PRTYPRTY_x, 0; set @PRTYPRTY_y, 0;
+		sleep2 1000;
+		alive;
+	}
+	end;
+
+OnCheckWinner1:
+	set .@PP1_Team1_alive, countpartyin("guild_vs1", $PP1_Team1_id);
+	set .@PP1_Team2_alive, countpartyin("guild_vs1", $PP1_Team2_id);
+
+	if ( .@PP1_Team1_alive==0 && .@PP1_Team2_alive==0 ) goto L_NoWinner1;
+
+	if ( .@PP1_Team1_alive == 0 ) {
+		//team2 wins
+		stopnpctimer "PARTYVSPARTY_TIMR1";
+		stopnpctimer "PPTimer1";
+
+		if($PP1_Team1_x) warpparty $PP1_Team1_city$,$PP1_Team1_x,$PP1_Team1_y,$PP1_Team1_id;
+		else warpparty "prontera",156,173,$PP1_Team1_id;
+
+		if (getpartymembercount($PP1_Team2_id) <= 3)
+			warpparty "lhz_cube",122,74,$PP1_Team2_id;
+		else
+			warpparty "prontera",156,173,$PP1_Team2_id; //they cheated
+
+		//declare winner
+		mapannounce "arena_room", "We have a winner for this 3vs3 fight! Party "
+			+getpartyname($PP1_Team2_id)+" defeated "+getpartyname($PP1_Team1_id)+"!!", 1;
+		sleep 10000;
+		donpcevent "PARTYVSPARTY_WINR::OnStart1";
+	}else if ( .@PP1_Team2_alive == 0){
+		//team1 wins
+		stopnpctimer "PARTYVSPARTY_TIMR1";
+		stopnpctimer "PPTimer1";
+
+		if($PP1_Team2_x) warpparty $PP1_Team2_city$,$PP1_Team2_x,$PP1_Team2_y,$PP1_Team2_id;
+		else warpparty "prontera",156,173,$PP1_Team2_id;
+
+		if (getpartymembercount($PP1_Team1_id) <= 3)
+			warpparty "lhz_cube",122,74,$PP1_Team1_id;
+		else
+			warpparty "prontera",156,173,$PP1_Team1_id; //they cheated
+
+		//declare winner
+		mapannounce "arena_room", "We have a winner for this 3vs3 fight! Party "
+			+getpartyname($PP1_Team1_id)+" defeated "+getpartyname($PP1_Team2_id)+"!!", 1;
+		sleep 10000;
+		donpcevent "PARTYVSPARTY_WINR::OnStart1";
+	}else{
+		initnpctimer "PARTYVSPARTY_TIMR1";
+	}
+	end;
+
+L_NoWinner1:
+	stopnpctimer "PARTYVSPARTY_TIMR1";
+	stopnpctimer "PPTimer1";
+	mapannounce "arena_room", "The 3vs3 fight between party "
+		+getpartyname($PP1_Team1_id)+" and "+getpartyname($PP1_Team2_id)+" was a draw!!", 1;
+	sleep 10000;
+	donpcevent "PARTYVSPARTY_WINR::OnStart1";
+	end;
+
+OnCheckWinner2:
+	set .@PP2_Team1_alive, countpartyin("guild_vs1-1", $PP2_Team1_id);
+	set .@PP2_Team2_alive, countpartyin("guild_vs1-1", $PP2_Team2_id);
+
+	if ( .@PP2_Team1_alive==0 && .@PP2_Team2_alive==0 ) goto L_NoWinner2;
+
+	if ( .@PP2_Team1_alive == 0 ) {
+		//team2 wins
+		stopnpctimer "PARTYVSPARTY_TIMR2";
+		stopnpctimer "PPTimer2";
+
+		if($PP2_Team1_x) warpparty $PP2_Team1_city$,$PP2_Team1_x,$PP2_Team1_y,$PP2_Team1_id;
+		else warpparty "prontera",156,173,$PP2_Team1_id;
+
+		if (getpartymembercount($PP2_Team2_id) <= 3)
+			warpparty "lhz_cube",122,74,$PP2_Team2_id;
+		else
+			warpparty "prontera",156,173,$PP2_Team2_id; //they cheated
+
+		//declare winner
+		mapannounce "arena_room", "We have a winner for this 3vs3 fight! Party "
+			+getpartyname($PP2_Team2_id)+" defeated "+getpartyname($PP2_Team1_id)+"!!", 1;
+		sleep 10000;
+		donpcevent "PARTYVSPARTY_WINR::OnStart2";
+	}else if ( .@PP2_Team2_alive == 0){
+		//team1 wins
+		stopnpctimer "PARTYVSPARTY_TIMR2";
+		stopnpctimer "PPTimer2";
+
+		if($PP2_Team2_x) warpparty $PP2_Team2_city$,$PP2_Team2_x,$PP2_Team2_y,$PP2_Team2_id;
+		else warpparty "prontera",156,173,$PP2_Team2_id;
+
+		if (getpartymembercount($PP2_Team1_id) <= 3)
+			warpparty "lhz_cube",122,74,$PP2_Team1_id;
+		else
+			warpparty "prontera",156,173,$PP2_Team1_id; //they cheated
+
+		//declare winner
+		mapannounce "arena_room", "We have a winner for this 3vs3 fight! Party "
+			+getpartyname($PP2_Team1_id)+" defeated "+getpartyname($PP2_Team2_id)+"!!", 1;
+		sleep 10000;
+		donpcevent "PARTYVSPARTY_WINR::OnStart2";
+	}else{
+		initnpctimer "PARTYVSPARTY_TIMR2";
+	}
+	end;
+
+L_NoWinner2:
+	stopnpctimer "PARTYVSPARTY_TIMR2";
+	stopnpctimer "PPTimer2";
+	mapannounce "arena_room", "The 3vs3 fight between party "
+		+getpartyname($PP2_Team1_id)+" and "+getpartyname($PP2_Team2_id)+" was a draw!!", 1;
+	sleep 10000;
+	donpcevent "PARTYVSPARTY_WINR::OnStart2";
+	end;
+
+}
+
+
+//
+//	Prize NPC
+//
+
+lhz_cube,124,74,3	script	winnerPrize#3vs3	818,2,2,{
+
+	sc_end SC_ALL;
+
+	mes "[Winner Prize]";
+	mes "Congratulations, you're the winners! Here's your prize ~ ";
+	next;
+	getitem 22555,1;
+	percentheal 100,100;
+	if(@PRTYPRTY_x) warp @PRTYPRTY_city$,@PRTYPRTY_x,@PRTYPRTY_y;
+	else warp "prontera",156,173;
+	set @PRTYPRTY_city$, 0; set @PRTYPRTY_x, 0; set @PRTYPRTY_y, 0;
+	end;
+}

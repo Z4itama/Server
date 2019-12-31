@@ -1,0 +1,583 @@
+//morocc.gat,148,85,1	script	New Head Gear Assistant	93,{
+prontera.gat,153,215,1	script	New Headgear Assistant::nhgaGold2	93,{
+	mes "[New Head Gear Quest Assistant]";
+	mes "GOLD! GIMME GOLD! For just 3 gold bars you can have any one of these great hats! They all have room for one card!! All thx to ~XiLe~,it's a great deal!";
+	next;
+	menu "Helmet of Orc Hero",Helmetoforchero,"Decorative Golden Bell",Goldenbell,"Lazy Smokie",LazySmokie,"Red Ribbon",Redribbon,"Decorative Mushroom",DecoMushroom,"Crown of Mistress",CrownMistress,"Crown of Ancient Queen",AncientQueen,"X Hairpin",Xhairpin,"Sea-Otter Hat",SeaotterHat,"Tulip Hairpin",TulipHairPin,"Beanie",Beanie,"Cowboy Hat",Cowboyhat,"Angel Wing Ears",Angelwingears,"Model Training Hat",ModelTrainingHat,"Indian Headband",IndianHeadband,"Hot-blooded Headband",HotbloodedHeadband,"Evil Wing Ears",EvilWingEars,"Sombrero",Sombrero,"Blue Fish",BlueFish,"Smokie Leaf",SmokieLeaf,"Giant Band Aid",GiantBandAid,"Straw Hat",StrawHat,"Party Hat",PartyHat,"Teddybear Hat",TeddybearHat,"Drooping Cat",DroopingCat,"Black Cat Ears",BlackCatEars,"Cancel",LCancel;
+// Helmet of Orc Hero
+Helmetoforchero:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Helm Of Orc Hero Assistance.";
+        mes "That'll be 3 Gold plz!"; 
+	next;
+	menu "Sure, I want to make it.",LYes,"Cancel.",LCancel;
+LYes:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5094,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Helmet of Orc Hero'^000000...! Please Take it!";
+	close;
+LNoItems:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items to Make this Helm!";
+	close;
+LCancel:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Decorative Golden Bell
+Goldenbell:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is decorative golden bell Assistance.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes1,"Cancel.",LCancel1;
+LYes1:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5091,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Decorative Golden Bell'^000000...! Please Take it!";
+	close;
+LNoItems1:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Decorative Golden Bell!";
+	close;
+LCancel1:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Lazy Smokie
+LazySmokie:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Lazy Smokie.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes3,"Cancel.",LCancel3;
+LYes3:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5084,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Lazy Smokie'^000000...! Please Take it!";
+	close;
+LNoItems3:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Lazy Smokie!";
+	close;
+LCancel3:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Red Ribbon
+Redribbon:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Red Ribbon.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes4,"Cancel.",LCancel4;
+LYes4:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;	
+	getitem 5083,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Red Ribbon'^000000...! Please Take it!";
+	close;
+LNoItems4:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Red Ribbon!";
+	close;
+LCancel4:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Decorative Mushroom
+DecoMushroom:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Decorative Mushroom.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes5,"Cancel.",LCancel5;
+LYes5:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5082,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Decorative Mushroom'^000000...! Please Take it!";
+	close;
+LNoItems5:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Decorative Mushroom!";
+	close;
+LCancel5:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Crown of Mistress
+CrownMistress:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Crown of Mistress.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes6,"Cancel.",LCancel6;
+LYes6:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5081,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Crown of Mistress'^000000...! Please Take it!";
+	close;
+LNoItems6:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Crown of Mistress!";
+	close;
+LCancel6:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Crown of Ancient Queen
+AncientQueen:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Crown of Ancient Queen.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes7,"Cancel.",LCancel7;
+LYes7:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5080,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Crown of Ancient Queen'^000000...! Please Take it!";
+	close;
+LNoItems7:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Crown of Ancient Queen!";
+	close;
+LCancel7:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// X Hairpin
+Xhairpin:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is X Hairpin.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes8,"Cancel.",LCancel8;
+LYes8:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5079,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'X Hairpin'^000000...! Please Take it!";
+	close;
+LNoItems8:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a X Hairpin!";
+	close;
+LCancel8:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Sea-Otter Hat
+SeaotterHat:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Sea-Otter Hat.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes9,"Cancel.",LCancel9;
+LYes9:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5078,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Sea-Otter Hat'^000000...! Please Take it!";
+	close;
+LNoItems9:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Sea-Otter Hat!";
+	close;
+LCancel9:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Tulip Hairpin
+TulipHairPin:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Tulip Hairpin.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes10,"Cancel.",LCancel10;
+LYes10:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5077,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Tulip Hairpin'^000000...! Please Take it!";
+	close;
+LNoItems10:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Tulip Hairpin!";
+	close;
+LCancel10:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Beanie
+Beanie:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Beanie.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes11,"Cancel.",LCancel11;
+LYes11:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5076,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Beanie'^000000...! Please Take it!";
+	close;
+LNoItems11:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Beanie!";
+	close;
+LCancel11:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Cowboy Hat
+Cowboyhat:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Cowboy Hat.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes12,"Cancel.",LCancel12;
+LYes12:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5075,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Cowboy Hat'^000000...! Please Take it!";
+	close;
+LNoItems12:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Cowboy Hat!";
+	close;
+LCancel12:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Angel Wing Ears
+Angelwingears:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Angel Wing Ears.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes13,"Cancel.",LCancel13;
+LYes13:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5074,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Angel Wing Ears'^000000...! Please Take it!";
+	close;
+LNoItems13:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Angel Wing Ears!";
+	close;
+LCancel13:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Model Training Hat
+ModelTrainingHat:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Model Training Hat.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes14,"Cancel.",LCancel14;
+LYes14:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5073,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Model Training Hat'^000000...! Please Take it!";
+	close;
+LNoItems14:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Model Training Hat!";
+	close;
+LCancel14:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Indian Headband
+IndianHeadband:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Indian Headband.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes15,"Cancel.",LCancel15;
+LYes15:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5071,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Indian Headband'^000000...! Please Take it!";
+	close;
+LNoItems15:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Indian Headband!";
+	close;
+LCancel15:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Hot-blooded Headband
+HotbloodedHeadband:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Hot-blooded Headband.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes16,"Cancel.",LCancel16;
+LYes16:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5070,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Hot-blooded Headband'^000000...! Please Take it!";
+	close;
+LNoItems16:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Hot-blooded Headband!";
+	close;
+LCancel16:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Evil Wing Ears
+EvilWingEars:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Evil Wing Ears.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes18,"Cancel.",LCancel18;
+LYes18:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5068,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Evil Wing Ears'^000000...! Please Take it!";
+	close;
+LNoItems18:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Evil Wing Ears!";
+	close;
+LCancel18:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Sombrero
+Sombrero:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Sombrero.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes19,"Cancel.",LCancel19;
+LYes19:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5067,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Sombrero'^000000...! Please Take it!";
+	close;
+LNoItems19:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Sombrero!";
+	close;
+LCancel19:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Blue Fish
+BlueFish:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Blue Fish.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes20,"Cancel.",LCancel20;
+LYes20:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5065,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Blue Fish'^000000...! Please Take it!";
+	close;
+LNoItems20:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Blue Fish!";
+	close;
+LCancel20:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Smokie Leaf
+SmokieLeaf:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Smokie Leaf.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes21,"Cancel.",LCancel21;
+LYes21:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5064,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Smokie Leaf'^000000...! Please Take it!";
+	close;
+LNoItems21:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Smokie Leaf!";
+	close;
+LCancel21:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Giant Band Aid
+GiantBandAid:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Giant Band Aid.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes22,"Cancel.",LCancel22;
+LYes22:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5063,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Giant Band Aid'^000000...! Please Take it!";
+	close;
+LNoItems22:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Giant Band Aid!";
+	close;
+LCancel22:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Straw Hat
+StrawHat:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Straw Hat.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes23,"Cancel.",LCancel23;
+LYes23:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5062,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Straw Hat'^000000...! Please Take it!";
+	close;
+LNoItems23:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Straw Hat!";
+	close;
+LCancel23:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Party Hat
+PartyHat:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Party Hat.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes25,"Cancel.",LCancel25;
+LYes25:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5060,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Party Hat'^000000...! Please Take it!";
+	close;
+LNoItems25:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Party Hat!";
+	close;
+LCancel25:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Teddybear Hat
+TeddybearHat:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Teddybear Hat.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes26,"Cancel.",LCancel26;
+LYes26:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5059,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Teddybear Hat'^000000...! Please Take it!";
+	close;
+LNoItems26:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Teddybear Hat!";
+	close;
+LCancel26:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Drooping Cat
+DroopingCat:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Drooping Cat.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes27,"Cancel.",LCancel27;
+LYes27:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5058,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Drooping Cat'^000000...! Please Take it!";
+	close;
+LNoItems27:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Drooping Cat!";
+	close;
+LCancel27:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+// Black Cat Ears
+BlackCatEars:
+	mes "[New Head Gear Quest Assistant]";
+	mes "This is Black Cat Ears.";
+        mes "That'll be 3 Gold plz!";
+	next;
+	menu "Sure, I want to make it.",LYes28,"Cancel.",LCancel28;
+LYes28:
+	if(countitem(969) < 3) goto LNoItems;
+	delitem 969,3;
+	getitem 5057,1;
+	mes "[New Head Gear Quest Assistant]";
+	mes "Tah Dah!!! ^3355FF'Black Cat Ears'^000000...! Please Take it!";
+	close;
+LNoItems28:
+	mes "Thank you for joining us!";
+	mes "Please come back after gathering all Items for a Black Cat Ears!";
+	close;
+LCancel28:
+	mes "[New Head Gear Quest Assistant]";
+	mes "That's too bad. Come back soon!";
+	close;
+}
+
+morocc.gat,148,85,1	duplicate(nhgaGold2)	New Head Gear Assistant::nhgaGold1	93
+geffen.gat,112,64,1	duplicate(nhgaGold2)	New Head Gear Assistant::nhgaGold3	93
+payon.gat,162,220,1	duplicate(nhgaGold2)	New Head Gear Assistant::nhgaGold4	93

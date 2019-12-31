@@ -1,0 +1,24 @@
+prt_are01,182,207,5	script	announcerpvp	-1,{
+
+OnPCKillEvent:
+getmapxy(.@mapname$,.@x,.@y,0);
+if(.@mapname$ == "prt_are01")
+{
+mapannounce "prt_are01",""+ strcharinfo(0) +" has killed "+ rid2name(killedrid) +"",0;
+detachrid;
+end;
+}
+
+OnPCDieEvent:
+getmapxy(.@map1$,.@x1,.@y1,0);
+if(.@map1$ == "prt_are01")
+{
+if("(null)" == rid2name(killerrid))
+{
+mapannounce "prt_are01",""+ strcharinfo(0) +" has suicided.",0;
+detachrid;
+end;
+}
+}
+
+}

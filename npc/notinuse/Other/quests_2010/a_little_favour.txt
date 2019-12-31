@@ -1,0 +1,292 @@
+//===== Script: ===============================================================
+//= 2010 XileRO's A Little Favour Quest.
+//= By Honor/Lover Romeo
+//==============================================================================
+yuno,335,65,6	script	Vincent Velou	881,{
+set .npcname$,"[^0000ff Vincent V. ^000000]";
+set @urname$,"[^ff3310 "+strcharinfo(0)+" ^000000]";
+
+if(ALFpart==8) { mes .npcname$; mes "You already done this quest."; close; }
+if(ALFpart==7) {
+	mes @urname$;
+	mes "Hey Vince here's your money...";
+	mes .npcname$;
+	mes "Thanks alot man, here's your reward...";
+	set ALFpart,8;
+	set qpoints,qpoints+1;
+	set alittlefavour$,"^0000ffDone^000000";
+	getitem 3273,1;
+	message strcharinfo(0),"Congratulations you just completed 'A Little Favour' Quest!!";
+	close;
+}
+if(ALFpart == 1) {
+	mes .npcname$;
+	mes "I need you to find someone in Louyang called Roan and tell him that I need my MONEY NOW!";
+	close;
+}
+if(ALFpart == 0) {
+	mes @urname$;
+	mes "Hi ^003399Vincent^000000 I was searching for you...";
+	sleep2 1000;
+	mes .npcname$;
+	mes "Why?";
+	next;
+	mes @urname$;
+	mes "I need a pair of Jirachi Cards and You're the only one that know how to do them.";
+	sleep2 600;
+	mes .npcname$;
+	mes "Hm...";
+	sleep2 1000;
+	mes "Hmmmm...";
+	next;
+	mes .npcname$;
+	mes "Okay but I will need you to make me a little favour first ^^";
+	next;
+	mes @urname$;
+	mes "Sure dude, anything you want...";
+	next;
+	mes .npcname$;
+	mes "I need you to find someone in Louyang called Roan and tell him that I need my MONEY NOW!";
+	next;
+	mes @urname$;
+	mes "Okay, will do.";
+	next;
+	mes .npcname$;
+	mes "Have fun~!";
+	mes " ";
+	set ALFpart,1;
+	set alittlefavour$,"^ff8800In Progress^000000";
+	mes "You've Activated - ^ff0000A Little favour^000000 ~Quest.";
+	close;
+}
+end;
+}
+
+louyang,300,139,3	script	Guardian Roan	707,{
+
+set .npcname$,"[^0000ff Roan ^000000]";
+
+if(ALFpart==8) { mes .npcname$; mes "You already done this quest."; close; }
+if(ALFpart == 0) { end; }
+if(ALFpart == 2) { 
+	mes .npcname$;
+	mes "So...how's my ring going?";
+	close;	
+}
+	if(ALFpart == 1) {
+		set @roantalk,rand(1,20);
+
+	if(@roantalk != 17) {
+		mes "[......Sleeping......]";
+		close;
+	} else {
+		mes .npcname$;
+		mes ".............";
+		menu "Leave",-,
+		"Ask about Vince's money",Lvmoney;
+		close;
+	}
+	Lvmoney:
+		next;
+		mes .npcname$;
+		mes "I will give the money to vince if you do me a favor first.";
+		mes "What do you say?";
+		menu "Decline",-,
+		"Accept",Laccept;
+		close;
+	Laccept:
+		next;
+		mes .npcname$;
+		mes "I need you to talk to this jeweler located in lighthalzen at the jewelery.";
+		mes "Ask him about how's my ring going, Im getting married.";
+		mes "Tell him Roan sent you.";
+		set ALFpart,2;
+		close;
+}
+if(ALFpart == 6) {
+	mes .npcname$;
+	delitem 3291,1;
+	mes "Thank you very much, here is vince's money";
+	set ALFpart,7;
+	dispbottom "You got Vince's money now...";
+	close;
+}
+end;
+}
+
+lhz_in02,89,36,6	script	Jeweler Assistant	701,{
+set .npcname$,"[^0000ff Jeweler Assistant ^000000]";
+
+	emotion 21;
+	mes .npcname$;
+	mes "Yes sir, how can I help you?";
+	menu "Jeweler Shop",-, 
+	"I'm Looking for something...",Lmisc;
+	close2;
+	callshop "JewelerAss",1;
+	end;
+
+Lmisc:
+	next;
+	mes .npcname$;
+	mes "What are you looking for?";
+	menu "I'm looking for a Ring",Lring,
+	"I'm looking for rare jewelery",-;
+	close2;
+	callshop "AdJeweler",1;
+	end;
+
+Lring:
+	next;
+	mes .npcname$;
+	mes "What type of Ring you're looking for?";
+	menu "Show off Ring",Lshowoffring,
+	"Wedding Ring",Lweddingring,
+	"Rare Stone Rings",-;
+	next;
+	mes .npcname$;
+	mes "Sorry but we ran out of Rare Stone Rings";
+	close;
+
+Lshowoffring:
+	next;
+	mes .npcname$;
+	mes "Sorry but we ran out of those kind of rings";
+	close;
+Lweddingring:
+	next;
+	mes .npcname$;
+	mes "Sure, we have some working on";
+	menu "I would like to make a ring request",-,
+	"Roan...",Lroanring;
+	next;
+	mes .npcname$;
+	mes "We've been so busy around here, come back again later.";
+	close;
+Lroanring:
+if(ALFpart==8) { mes .npcname$; mes "You already done this quest."; close; }
+
+		if(ALFpart == 5 && Roajewel == 1 && Roajewel2 == 1) {
+			next;
+			mes .npcname$;
+			mes "Oh I see you have roan's Jewel";
+			mes "Here, have this";
+			delitem 3290,1;
+			getitem 3291,1;
+			next;
+			mes .npcname$;
+			mes "Sorry for causing you issues, have this instead...";
+			set @ALFrand3,rand(1,3);
+			if(@ALFrand3 == 1) { getitem 4196,1; }
+			if(@ALFrand3 == 2) { getitem 4172,1; }
+			if(@ALFrand3 == 3) { getitem 4121,1; }
+			set ALFpart,6;
+			close;
+
+
+		}
+
+
+if(ALFpart == 0 || ALFpart == 1) {
+	next;
+	mes .npcname$;
+	mes "Who's roan? o.o";
+	close;
+}
+if(ALFpart == 2) {
+	next;
+	mes .npcname$;
+	mes "Yeah I've been working on a ring for him...";
+	mes "But...I need more time, maybe I could speed up if you help me with something...";
+	menu "Decline",-,
+	"Accept",Laccept1;
+	close;
+
+Laccept1:
+	next;
+	mes .npcname$;
+	mes "I need you to bring me some stuff for my son's party";
+	mes "^0000ff150^000000x Candy";
+	mes "^0000ff200^000000x pieces of cake";
+	mes "^0000ff100^000000x well baked cookies";
+	set ALFpart,3;
+	close;
+}
+if(ALFpart == 3) {
+if (countitem(538) > 99 && countitem(529) > 149 && countitem(539) > 199) {
+	next;
+	mes .npcname$;
+	mes "Thank you very much "+strcharinfo(0)+", but I have a problem now...";
+	mes "I have the ring without jewel on it, i must have dropped it somewhere in one of geffen's dungeons";
+	mes "p.s: Im very sorry, but this is all I have.";
+	delitem 538,100;
+	delitem 529,150;
+	delitem 539,200;
+	getitem 3290,1;
+	set ALFpart,4;
+	set @ALFrand,rand(1,3);
+	if(@ALFrand == 1) { set ALFgeffen$,"gef_dun01"; }
+	if(@ALFrand == 2) { set ALFgeffen$,"gef_dun02"; }
+	if(@ALFrand == 3) { set ALFgeffen$,"gef_dun03"; }
+	set @ALFrand2,rand(1,3);
+	if(@ALFrand2 == 1) { set ALFgeffen2$,"gef_dun01"; }
+	if(@ALFrand2 == 2) { set ALFgeffen2$,"gef_dun02"; }
+	if(@ALFrand2 == 3) { set ALFgeffen2$,"gef_dun03"; }
+	close;
+}
+	next;
+	mes .npcname$;
+	mes "I need you to bring me some stuff for my son's party";
+	mes "^0000ff150^000000x Candy";
+	mes "^0000ff200^000000x pieces of cake";
+	mes "^0000ff100^000000x well baked cookies";
+	close;
+}
+close;
+}
+
+gef_dun01,1,1,1	script	Jewelpieces	-1,{
+end;
+
+OnNPCKillEvent:
+if (ALFpart == 4) {
+	getmapxy(@mapname$,$mapx,$mapy,0);
+
+	if(@mapname$ == ALFgeffen$) {
+			set @Jlucky,rand(1,1000);
+	
+			if(@Jlucky < 10) {
+				if(Roajewel != 1) {
+					set Roajewel,1;
+					message strcharinfo(0),"You got Roan's Jewel part 1!!";
+				}
+				if(Roajewel == 1 && Roajewel2 == 1) {
+					message strcharinfo(0),"You now both parts!!";
+					set ALFpart,5;
+				}
+				end;
+			}
+	}
+
+		if(@mapname$ == ALFgeffen2$) {
+			set @Jlucky2,rand(1,1000);
+	
+			if(@Jlucky2 < 10) {
+				if(Roajewel2 != 1) {
+					set Roajewel2,1;
+					message strcharinfo(0),"You got Roan's Jewel part 2!!";
+				}
+				if(Roajewel == 1 && Roajewel2 == 1) {
+					message strcharinfo(0),"You now both parts!!";
+					set ALFpart,5;
+				}
+			end;
+		}
+	}
+}
+end;
+}
+
+//Jeweler Assistant shop & Advanced Rare Jewelery
+-	shop	JewelerAss	99,730:-1,2613:-1
+-	shop	AdJeweler	91,721:1500000,723:1500000,726:1500000,728:1500000,729:1500000

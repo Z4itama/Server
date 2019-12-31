@@ -1,0 +1,16 @@
+;//||||||||||||||||||||||||||||||||||||||||||||||\\;
+;//|	   eAthena Monster Database Editor	|\\;
+;//|	      Copyright by Jukka, 2006		|\\;
+;//|						|\\;
+;//|	        Custom Itemname File		|\\;
+;//|						|\\;
+;//|	     Add own Items with: ID=Name	|\\;
+;//|		Do NOT edit "0=..."		|\\;
+;//||||||||||||||||||||||||||||||||||||||||||||||\\;
+
+[Items]
+0=...
+7950=THG Membership
+7951=Token Bag
+1998=Jeramiah's Jur
+1999=Zed's Staff

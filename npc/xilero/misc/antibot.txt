@@ -1,0 +1,80 @@
+//===== XileRO Script ===================================================||
+//= fakename ~AntiBot~				                         ||
+//===== Written By: =====================================================||
+//= Honor							         ||
+//===== Additional Comments: ============================================||
+//= Report any bugs found.				                 ||
+//===== Updates: ========================================================||
+//= 1.1 Needs to be tested					      	 ||
+//= 1.2 Removed General Antibot					      	 ||
+//=======================================================================||
+function	script	botcheck	{
+
+Lfuncagain:
+ABOT_N_1:
+if(checkcart()==0)  { set @gotcart,0; } else { set @gotcart,1; }
+if(checkfalcon()==0) { set @gotfalcon,0; } else { set @gotfalcon,1; }
+if(checkriding()==0) { set @gotpeco,0; } else { set @gotpeco,1; }
+atcommand "@option 2 0 0";
+set @fakecharname,1;
+setarray @bot_abc1$[0],"a","b","c","d","e","f","g","h","i","j","k","m","l","n","o","p","q","r","s","t","u","v","w","x","y","z";
+setarray @bot_abc2$[0],"a","b","c","d","e","f","g","h","i","j","k","m","l","n","o","p","q","r","s","t","u","v","w","x","y","z","1","2","3","4","5","6","7","8","9","~","%","!","+","=","&","-","[","]","^";
+
+setarray @bot_abc3$[0],"a","b","c","d","e","f","g","h","i","j","k","m","l","n","o","p","q","r","s","t","u","v","w","x","y","z","1","2","3","4","5","6","7","8","9","~","%","!","+","=","&","-","[","]","^";
+setarray @bot_abc4$[0],"a","b","c","d","e","f","g","h","i","j","k","m","l","n","o","p","q","r","s","t","u","v","w","x","y","z","1","2","3","4","5","6","7","8","9","~","%","!","+","=","&","-","[","]","^";
+
+setarray @bot_abc5$[0],"a","b","c","d","e","f","g","h","i","j","k","m","l","n","o","p","q","r","s","t","u","v","w","x","y","z","1","2","3","4","5","6","7","8","9","~","%","!","+","=","&","-","[","]","^";
+setarray @bot_abc6$[0],"a","b","c","d","e","f","g","h","i","j","k","m","l","n","o","p","q","r","s","t","u","v","w","x","y","z","1","2","3","4","5","6","7","8","9","~","%","!","+","=","&","-","[","]","^";
+
+setarray @bot_abc7$[0],"a","b","c","d","e","f","g","h","i","j","k","m","l","n","o","p","q","r","s","t","u","v","w","x","y","z","1","2","3","4","5","6","7","8","9","~","%","!","+","=","&","-","[","]","^";
+setarray @bot_abc8$[0],"a","b","c","d","e","f","g","h","i","j","k","m","l","n","o","p","q","r","s","t","u","v","w","x","y","z","1","2","3","4","5","6","7","8","9","~","%","!","+","=","&","-","[","]","^";
+setarray @bot_coma$[0],",",",,",",,,",",,,",",.,,,",",,.,";
+set @globalbanti$,""+@bot_coma$[rand(5)]+""+@bot_abc1$[rand(45)]+""+@bot_abc2$[rand(45)]+""+@bot_abc3$[rand(45)]+""+@bot_coma$[rand(5)]+""+@bot_abc4$[rand(45)]+""+@bot_abc5$[rand(45)]+""+@bot_coma$[rand(5)]+""+@bot_abc6$[rand(45)]+""+@bot_abc7$[rand(45)]+""+@bot_abc8$[rand(45)]+"";
+
+		atcommand strcharinfo(0)+":@fakename "+@globalbanti$;
+		next;
+		mes "[^ff0000~^000000^ff8800AntiBot^000000^ff0000~^000000]";
+		mes "^ff0000Warning^000000: Please Check your name to get the code (Character Name).";
+		input @botfakename$;
+		if(@botfakename$ == @globalbanti$) {
+				atcommand "@option 0 0 0";
+				atcommand "@fakename";
+				set @fakecharname,0;
+				dispbottom "[Bot Check] Approved!";
+				if(@gotcart == 1 && getskilllv(39)>0) { setcart; set @gotcart,0; }
+				if(@gotfalcon == 1 && getskilllv(127)>0) { setfalcon; set @gotfalcon,0; }
+				if(@gotpeco == 1 && getskilllv(63)>0) { setriding; set @gotpeco,0; }
+				next;
+				return 1;
+		}
+
+	next;
+		mes "[^ff0000~^000000^ff8800AntiBot^000000^ff0000~^000000]";
+		mes "^ff0000*^000000You're wrong ^ff8800sorry^000000~";
+		atcommand "@option 0 0 0";
+		atcommand "@fakename";
+		set @fakecharname,0;
+		dispbottom "[Bot Check] Wrong!";
+		next;
+		mes "[^ff0000~^000000^ff8800AntiBot^000000^ff0000~^000000]";
+		mes "Try again?";
+		menu "~No",-,"~Yes",Lfuncagain;
+		if(@gotcart == 1 && getskilllv(39)>0) { setcart; set @gotcart,0; }
+		if(@gotfalcon == 1 && getskilllv(127)>0) { setfalcon; set @gotfalcon,0; }
+		if(@gotpeco == 1 && getskilllv(63)>0) { setriding; set @gotpeco,0; }
+	L_jumphere:
+		return 0;
+
+}
+
+payon,1,1,1	script	fakecharnamebot	-1,{
+end;
+
+OnPCDieEvent:
+	if(@fakecharname==1) {
+		set @fakecharname,0;
+		atcommand "@option 0 0 0";
+		atcommand "@fakename";
+	}
+end;
+}

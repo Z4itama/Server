@@ -1,0 +1,220 @@
+//=================eAthena Script============================
+// Written by: Kikuko
+//=================Script Name===============================
+// Gatekeeper - for XileRO
+//=================Script Defenition=========================
+// Quest NPC for Gate bosses
+//=================Version History===========================
+//1.0 - Done. Still needs to be tested.
+
+job_thief1.gat,184,22,3	script	Forsaken Mystic	795,{
+
+mes "[ ^0065DFForsaken Mystic^000000 ]";
+mes "At the end of this dungeon, there will be 5 people waiting. Each will be in their own special section."; 
+mes "Each one, holds a special gateway to an area which will contain one of five ultimate Demons.";
+mes "The demons hold special items, wich I request.";
+mes "If you can bring them to me, I can grant you with items that hold power beyond your imagination!";
+mes "Would you like a peak at these items? Careful not to die, while talking to me!";
+next;
+menu "Are those wings your hiding?",sWings,"I see a stack of nice looking cards there...",sCards,"What are these items the Demons hold?",di,"Cancel",L_cancel;
+
+di:
+mes "[Forsaken Mystic]";
+mes "Each Demon holds one of five Seals, I need all of them to grant me freedom from the underworld!";
+mes "The Seal of Power, held by the mighty demon Shax.";
+mes "The Seal of Wisdom, held by the mighty demon Raum.";
+mes "The Seal of Spirit, held by the mighty demon Apollyon.";
+mes "The Seal of Hate, held by the mighty demon Paimon.";
+mes "The Seal of Death, held by the mighty demon Balam.";
+close;
+
+sWings:
+mes "[Forsaken Mystic]";
+mes "Oh yes, these are my prize posessions. They will come at a high cost!";
+mes "So, which would u like to gander?";
+next;
+menu "Alpha Wings",apw,"Omega Wings",omw,"ArchAngel Wings",aaw,"Cancel",L_cancel;
+
+apw:
+mes "[Forsaken Mystic]";
+mes "The ultimate wings, created at the begining of time. Holds enomous power.";
+mes "Alpha Wings are Lower Headgear, Str +5,Agi +15,Vit +5,Int +15,Dex +5,Luk +15,+5 Def,and 1 slot.";
+next;
+mes "[Forsaken Mystic]";
+mes "I require all 5 seals for these wings, one from each of the Demons.";
+mes "Prehaps, you are holding the items I seek. Yes?";
+next;
+menu "Yes, and I would love to trade for those wings!",-,"No, I'm sorry.",napw;
+if(countitem($@soh) < 1 || countitem($@sod) < 1 || countitem($@sos) < 1 || countitem($@sow) < 1 || countitem($@sop) < 1) goto L_nitems;
+delitem $@soh,1;
+delitem $@sod,1;
+delitem $@sos,1;
+delitem $@sop,1;
+delitem $@sow,1;
+getitem 5041,1;
+mes "[Forsaken Mystic]";
+mes "There is your wings.";
+close;
+
+omw:
+mes "[Forsaken Mystic]";
+mes "Wings rumored to bring ending to all things. The power of them, scares even me.";
+mes "Omega wings are Lower Headgear, Str +15,Agi +5,Vit +15,Int +5,Dex +15,Luk +5,+5 Def,and 1 slot.";
+next;
+mes "[Forsaken Mystic]";
+mes "I require all 5 seals for these wings, one from each of the Demons.";
+mes "Might you have what I am seeking?";
+next;
+menu "Here are your items, now give me the wings!",-,"Those wings are filthy, no thank you!",nomw;
+if(countitem($@soh) < 1 || countitem($@sod) < 1 || countitem($@sos) < 1 || countitem($@sow) < 1 || countitem($@sop) < 1) goto L_nitems;
+delitem $@soh,1;
+delitem $@sod,1;
+delitem $@sos,1;
+delitem $@sop,1;
+delitem $@sow,1;
+getitem 2288,1;
+mes "[Forsaken Mystic]";
+mes "There is your wings.";
+close;
+
+aaw:
+mes "[Forsaken Mystic]";
+mes "Awe yes, the wings created in the heavens by the ArchAngels themselves.";
+mes "ArchAngel Wings are Lower Headgear, +10 to all Stats, +5 Def, and 1 slot.";
+next;
+mes "[Forsaken Mystic]";
+mes "I require all 5 seals for these wings, one from each of the Demons.";
+mes "Prehaps you are worthy of such wings, and brought what I ask.";
+next;
+menu "I am indeed worthy",-,"Prehaps, I am not yet worthy",naaw;
+if(countitem($@soh) < 1 || countitem($@sod) < 1 || countitem($@sos) < 1 || countitem($@sow) < 1 || countitem($@sop) < 1) goto L_nitems;
+delitem $@soh,1;
+delitem $@sod,1;
+delitem $@sos,1;
+delitem $@sop,1;
+delitem $@sow,1;
+getitem 6012,1;
+mes "[Forsaken Mystic]";
+mes "There is your wings.";
+close;
+
+sCards:
+mes "[Forsaken Mystic]";
+mes "Yes, I have some very nice rare cards, which can grant you Great power!";
+mes "For each of these cards, I will require specific items from those Demons.";
+mes "Which of my grand cards would you like to know more about?";
+next;
+menu "Exile Card",exc,"Lust Card",lc,"Faith Card",fc,"Envy Card",ec,"Greed Card",gc,"Cancel",L_cancel;
+
+exc:
+mes "[Forsaken Mystic]";
+mes "Exile Card - Equipt Accesory, +35 Dex.";
+mes "Seal of Hate and Seal of Death are needed.";
+next;
+menu "Here are the seals.",-,"I don't have those.",L_nSeal;
+if(countitem($@soh) < 1 || countitem($@sod) < 1) goto L_nitems;
+delitem $@soh,1;
+delitem $@sod,1;
+getitem 4211,1;
+mes "[Forsaken Mystic]";
+mes "There is your card.";
+close;
+
+lc:
+mes "[Forsaken Mystic]";
+mes "Lust Card - Equipt Accesory, +35 Luk.";
+mes "Seal of Wisdon and Seal of Hate are needed.";
+next;
+menu "Here are the seals.",-,"I don't have those.",L_nSeal;
+if(countitem($@sow) < 1 || countitem($@soh) < 1) goto L_nitems;
+delitem $@soh,1;
+delitem $@sow,1;
+getitem 4210,1;
+mes "[Forsaken Mystic]";
+mes "There is your card.";
+close;
+
+fc:
+mes "[Forsaken Mystic]";
+mes "Faith Card - Equipt Accesory, +35 Int.";
+mes "Seal of Death and Seal of Spirit are needed.";
+next;
+menu "Here are the seals.",-,"I don't have those.",L_nSeal;
+if(countitem($@sos) < 1 || countitem($@sod) < 1) goto L_nitems;
+delitem $@sos,1;
+delitem $@sod,1;
+getitem 4209,1;
+mes "[Forsaken Mystic]";
+mes "There is your card.";
+close;
+
+ec:
+mes "[Forsaken Mystic]";
+mes "Envy Card - Equipt Accesory, +35 Agi.";
+mes "Seal of Spirit and Seal of Power are needed.";
+next;
+menu "Here are the seals.",-,"I don't have those.",L_nSeal;
+if(countitem($@sos) < 1 || countitem($@sop) < 1) goto L_nitems;
+delitem $@sos,1;
+delitem $@sop,1;
+getitem 4208,1;
+mes "[Forsaken Mystic]";
+mes "There is your card.";
+close;
+
+gc:
+mes "[Forsaken Mystic]";
+mes "Greed Card - Equipt Accesory, +35 Vit.";
+mes "Seal of Power and Seal of Wisdom are needed.";
+next;
+menu "Here are the seals.",-,"I don't have those.",L_nSeal;
+if(countitem($@sow) < 1 || countitem($@sop) < 1) goto L_nitems;
+delitem $@sop,1;
+delitem $@sow,1;
+getitem 4207,1;
+mes "[Forsaken Mystic]";
+mes "There is your card.";
+close;
+
+L_nitems:
+mes "[Forsaken Mystic]";
+mes "You lie! Come back when u have the items!";
+close;
+
+napw:
+mes "[Forsaken Mystic]";
+mes "Then it seems you have work to do.";
+close;
+
+nomw:
+mes "[Forsaken Mystic]";
+mes "Prehaps one day, you will get to wear these wings.";
+close;
+
+naaw:
+mes "[Forsaken Mystic]";
+mes "One day, a great warrior like you, will be worthy of such great wings.";
+close;
+
+L_nSeal:
+mes "[Forsaken Mystic]";
+mes "Come back with the seals.";
+close;
+
+L_cancel:
+mes "[Forsaken Mystic]";
+mes "Come back again.";
+close;
+
+OnInit:
+set $@sop, 3130;
+set $@sow, 3131;
+set $@sos, 3132;
+set $@soh, 3133;
+set $@sod, 3134;
+end;
+
+}
+
+
+

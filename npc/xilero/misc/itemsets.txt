@@ -1,0 +1,926 @@
+//Remade script thingy
+
+prontera.gat,156,285,5	script	Azazel	930,{
+	cutin "v_breid06",2;
+	
+	mes "[^0000FFAzazel^000000]";
+	mes "Yes, yes, what is it? Can't you see I'm busy?";
+	mes "...";
+	mes "...";
+	mes "OH, you don't know?...well I guess you wouldn't.";
+	next;
+	mes "[^0000FFAzazel^000000]";
+	mes "My name is Azazel, I've come here to help the people of this land.";
+	mes "I am a very talented crafter. The items I make are of the highest quaility and are hard to beat.";
+	mes "Well, now you know who I am and what I do, ";
+	
+	cutin "v_breid06",255;
+	
+	//--- For code minimisation
+	//Dragon Helm
+	set @dragonhelm_id,2265;
+	setarray @dragonhelm_req[0], 3115, 3116, 3130, 5013, 7447, 1035, 1036, 7123;
+	setarray @dragonhelm_cnt[0], 3, 3, 1, 1, 25, 100, 100, 100;
+	set @dragonhelm_cost,100000000;
+	
+	//Travler Hat
+	set @travlerhat_id,2278;
+	setarray @travlerhat_req[0], 3119, 3115, 3131, 5013, 7448, 7099, 1061, 7015;
+	setarray @travlerhat_cnt[0], 3, 3, 1, 1, 25, 100, 100, 100;
+	set @travlerhat_cost,100000000;
+	
+	//Dowry
+	set @dowry_id,5061;
+	setarray @dowry_req[0], 3117, 3118, 3133, 5013, 7445, 1066, 706;
+	setarray @dowry_cnt[0], 3, 3, 1, 1, 25, 250, 50;
+	set @dowry_cost,100000000;
+	
+	//Renove
+	set @renove_id,3000;
+	setarray @renove_req[0], 3115, 3116, 3117, 3118, 3119, 3131, 3132, 3134, 7445, 7446, 7447, 7448, 7451, 7069, 7062, 1036;
+	setarray @renove_cnt[0], 5, 5, 5, 5, 5, 1, 1, 1, 50, 50, 50, 50, 2, 200, 200, 200;
+	set @renove_cost,100000000;
+	
+	//Tannin
+	set @tannin_id,3001;
+	setarray @tannin_req[0], 3115, 3116, 3117, 3118, 3119, 3133, 3132, 3134, 7445, 7446, 7447, 7448, 7451, 7069, 7062, 1036;
+	setarray @tannin_cnt[0], 5, 5, 5, 5, 5, 1, 1, 1, 50, 50, 50, 50, 2, 200, 200, 200;
+	set @tannin_cost,100000000;
+	
+	//Lilim
+	set @lilim_id,3002;
+	setarray @lilim_req[0], 3115, 3116, 3117, 3118, 3119, 3133, 3131, 3134, 7445, 7446, 7447, 7448, 7451, 7069, 7062, 1036;
+	setarray @lilim_cnt[0], 5, 5, 5, 5, 5, 1, 1, 1, 50, 50, 50, 50, 2, 200, 200, 200;
+	set @lilim_cost,100000000;
+	
+	for(;;)
+	{
+		mes "What is it that you want?";
+		next;
+		set .@failreqs,0;
+		switch(select("Make Me Something", "What Can You Make?", "Disassemble Set Into Parts", "Nevermind"))
+		{
+			case 1:
+				mes "[^0000FFAzazel^000000]";
+				mes "Which would you like made?";
+				next;
+				switch(select(getitemname(@dragonhelm_id),getitemname(@travlerhat_id),getitemname(@dowry_id),
+					getitemname(@renove_id),getitemname(@tannin_id),getitemname(@lilim_id)))
+				{
+					case 1:
+						mes "[^0000FFAzazel^000000]";
+						mes "Do you wish to create the "+getitemname(@dragonhelm_id)+"?";
+						set @temp,select("Yes", "No");
+						
+						if(@temp == 2)
+							break;
+						
+						if(Zeny < @dragonhelm_cost)
+						{
+							mes "You do not have enough Zeny.";
+							mes "You need "+(@dragonhelm_cost - Zeny)+" more Zeny.";
+							break;
+						}
+						
+						for(set @i,0; @i < getarraysize(@dragonhelm_req); set @i,@i + 1)
+						{
+							if(countitem(@dragonhelm_req[@i]) < @dragonhelm_cnt[@i])
+							{
+								mes "You do not have enough ^FF0000"+getitemname(@dragonhelm_req[@i])+"^000000.";
+								mes "You require "+(@dragonhelm_cnt[@i] - countitem(@dragonhelm_req[@i]))+" more.";
+								set .@failreqs,1;
+								break;
+							}
+						}
+
+						if(.@failreqs) break;
+						
+						set Zeny,Zeny - @dragonhelm_cost;
+						
+						for(set @i,0; @i < getarraysize(@dragonhelm_req); set @i,@i + 1)
+						{
+							delitem @dragonhelm_req[@i],@dragonhelm_cnt[@i];
+						}
+						
+						getitem @dragonhelm_id,1;
+						break;
+						
+					case 2:
+						mes "[^0000FFAzazel^000000]";
+						mes "Do you wish to create the "+getitemname(@travlerhat_id)+"?";
+						set @temp,select("Yes", "No");
+						
+						if(@temp == 2)
+							break;
+						
+						if(Zeny < @travlerhat_cost)
+						{
+							mes "You do not have enough Zeny.";
+							mes "You need "+(@travlerhat_cost - Zeny)+" more Zeny.";
+							break;
+						}
+						
+						for(set @i,0; @i < getarraysize(@travlerhat_req); set @i,@i + 1)
+						{
+							if(countitem(@travlerhat_req[@i]) < @travlerhat_cnt[@i])
+							{
+								mes "You do not have enough ^FF0000"+getitemname(@travlerhat_req[@i])+"^000000.";
+								mes "You require "+(@travlerhat_cnt[@i] - countitem(@travlerhat_req[@i]))+" more.";
+								set .@failreqs,1;
+								break;
+							}
+						}
+
+						if(.@failreqs) break;
+						
+						set Zeny,Zeny - @travlerhat_cost;
+						
+						for(set @i,0; @i < getarraysize(@travlerhat_req); set @i,@i + 1)
+						{
+							delitem @travlerhat_req[@i],@travlerhat_cnt[@i];
+						}
+						
+						getitem @travlerhat_id,1;
+						break;
+					
+					case 3:
+						mes "[^0000FFAzazel^000000]";
+						mes "Do you wish to create the "+getitemname(@dowry_id)+"?";
+						set @temp,select("Yes", "No");
+						
+						if(@temp == 2)
+							break;
+						
+						if(Zeny < @dowry_cost)
+						{
+							mes "You do not have enough Zeny.";
+							mes "You need "+(@dowry_cost - Zeny)+" more Zeny.";
+							break;
+						}
+						
+						for(set @i,0; @i < getarraysize(@dowry_req); set @i,@i + 1)
+						{
+							if(countitem(@dowry_req[@i]) < @dowry_cnt[@i])
+							{
+								mes "You do not have enough ^FF0000"+getitemname(@dowry_req[@i])+"^000000.";
+								mes "You require "+(@dowry_cnt[@i] - countitem(@dowry_req[@i]))+" more.";
+								set .@failreqs,1;
+								break;
+							}
+						}
+
+						if(.@failreqs) break;
+						
+						set Zeny,Zeny - @dowry_cost;
+						
+						for(set @i,0; @i < getarraysize(@dowry_req); set @i,@i + 1)
+						{
+							delitem @dowry_req[@i],@dowry_cnt[@i];
+						}
+						
+						getitem @dowry_id,1;
+						break;
+						
+					case 4:
+						mes "[^0000FFAzazel^000000]";
+						mes "Do you wish to create the "+getitemname(@renove_id)+"?";
+						set @temp,select("Yes", "No");
+						
+						if(@temp == 2)
+							break;
+						
+						if(Zeny < @renove_cost)
+						{
+							mes "You do not have enough Zeny.";
+							mes "You need "+(@renove_cost - Zeny)+" more Zeny.";
+							break;
+						}
+						
+						for(set @i,0; @i < getarraysize(@renove_req); set @i,@i + 1)
+						{
+							if(countitem(@renove_req[@i]) < @renove_cnt[@i])
+							{
+								mes "You do not have enough ^FF0000"+getitemname(@renove_req[@i])+"^000000.";
+								mes "You require "+(@renove_cnt[@i] - countitem(@renove_req[@i]))+" more.";
+								set .@failreqs,1;
+								break;
+							}
+						}
+
+						if(.@failreqs) break;
+						
+						set Zeny,Zeny - @renove_cost;
+						
+						for(set @i,0; @i < getarraysize(@renove_req); set @i,@i + 1)
+						{
+							delitem @renove_req[@i],@renove_cnt[@i];
+						}
+						
+						getitem @renove_id,1;
+						break;
+					
+					case 5:
+						mes "[^0000FFAzazel^000000]";
+						mes "Do you wish to create the "+getitemname(@tannin_id)+"?";
+						set @temp,select("Yes", "No");
+						
+						if(@temp == 2)
+							break;
+						
+						if(Zeny < @tannin_cost)
+						{
+							mes "You do not have enough Zeny.";
+							mes "You need "+(@tannin_cost - Zeny)+" more Zeny.";
+							break;
+						}
+						
+						for(set @i,0; @i < getarraysize(@tannin_req); set @i,@i + 1)
+						{
+							if(countitem(@tannin_req[@i]) < @tannin_cnt[@i])
+							{
+								mes "You do not have enough ^FF0000"+getitemname(@tannin_req[@i])+"^000000.";
+								mes "You require "+(@tannin_cnt[@i] - countitem(@tannin_req[@i]))+" more.";
+								set .@failreqs,1;
+								break;
+							}
+						}
+
+						if(.@failreqs) break;
+						
+						set Zeny,Zeny - @tannin_cost;
+						
+						for(set @i,0; @i < getarraysize(@tannin_req); set @i,@i + 1)
+						{
+							delitem @tannin_req[@i],@tannin_cnt[@i];
+						}
+						
+						getitem @tannin_id,1;
+						break;
+					
+					case 6:
+						mes "[^0000FFAzazel^000000]";
+						mes "Do you wish to create the "+getitemname(@lilim_id)+"?";
+						set @temp,select("Yes", "No");
+						
+						if(@temp == 2)
+							break;
+						
+						if(Zeny < @lilim_cost)
+						{
+							mes "You do not have enough Zeny.";
+							mes "You need "+(@lilim_cost - Zeny)+" more Zeny.";
+							break;
+						}
+						
+						for(set @i,0; @i < getarraysize(@lilim_req); set @i,@i + 1)
+						{
+							if(countitem(@lilim_req[@i]) < @lilim_cnt[@i])
+							{
+								mes "You do not have enough ^FF0000"+getitemname(@lilim_req[@i])+"^000000.";
+								mes "You require "+(@lilim_cnt[@i] - countitem(@lilim_req[@i]))+" more.";
+								set .@failreqs,1;
+								break;
+							}
+						}
+
+						if(.@failreqs) break;
+						
+						set Zeny,Zeny - @lilim_cost;
+						
+						for(set @i,0; @i < getarraysize(@lilim_req); set @i,@i + 1)
+						{
+							delitem @lilim_req[@i],@lilim_cnt[@i];
+						}
+						
+						getitem @lilim_id,1;
+						break;
+				}
+				
+				break;
+				
+			case 2:
+				mes "[^0000FFAzazel^000000]";
+				mes "This is what I can make, what would you like to know more about?";
+				next;
+				switch(select(getitemname(@dragonhelm_id),getitemname(@travlerhat_id),getitemname(@dowry_id),
+					getitemname(@renove_id),getitemname(@tannin_id),getitemname(@lilim_id)))
+				{
+					case 1:
+						mes "[^0000FFAzazel^000000]";
+						mes "The ^FF0000"+getitemname(@dragonhelm_id)+"^000000 is as follows: ";
+						mes "4 defense, and 3 slots.";
+						mes "It will also give you 3 magic defense and 10 str.";
+						next;
+						mes "[^0000FFAzazel^000000]";
+						mes "It requires the following items: ^0000FF";
+						for(set @i,0; @i < getarraysize(@dragonhelm_req); set @i,@i + 1)
+						{
+							mes @dragonhelm_cnt[@i]+" "+getitemname(@dragonhelm_req[@i]);
+						}
+						mes "^000000";
+						break;
+						
+					case 2:
+						mes "[^0000FFAzazel^000000]";
+						mes "The ^FF0000"+getitemname(@travlerhat_id)+"^000000 is as follows: ";
+						mes "4 defense, and 3 slots.";
+						mes "It will also give you 3 magic defense and 10 int.";
+						next;
+						mes "[^0000FFAzazel^000000]";
+						mes "It requires the following items: ^0000FF";
+						for(set @i,0; @i < getarraysize(@travlerhat_req); set @i,@i + 1)
+						{
+							mes @travlerhat_cnt[@i]+" "+getitemname(@travlerhat_req[@i]);
+						}
+						mes "^000000";
+						break;
+						
+					case 3:
+						mes "[^0000FFAzazel^000000]";
+						mes "The ^FF0000"+getitemname(@dowry_id)+"^000000 is as follows: ";
+						mes "4 defense, and 3 slots.";
+						mes "It will also give you 3 magic defense and 10 agi.";
+						next;
+						mes "[^0000FFAzazel^000000]";
+						mes "It requires the following items: ^0000FF";
+						for(set @i,0; @i < getarraysize(@dowry_req); set @i,@i + 1)
+						{
+							mes @dowry_cnt[@i]+" "+getitemname(@dowry_req[@i]);
+						}
+						mes "^000000";
+						break;
+						
+					case 4:
+						mes "[^0000FFAzazel^000000]";
+						mes "The ^FF0000"+getitemname(@renove_id)+"^000000 is as follows: ";
+						mes "This armor has 8 defense, and 1 slot.";
+						mes "It will also give you 5 vit and 5 int.";
+						mes "Its true masterwork shines when you wear this armor with a Traveler Hat.";
+						mes "If both are worn you will get (as well as the items other stats):";
+						mes "20 int, 10 vit, 20 luk, 10 str, 10 agi, 5 def, 20 mdef, 8 crit, 5% attack, 10% magic attack, 10% max hp/sp, 100 hit, and slight sp/hp drain on attacks.";
+						next;
+						mes "[^0000FFAzazel^000000]";
+						mes "It requires the following items: ^0000FF";
+						for(set @i,0; @i < getarraysize(@renove_req); set @i,@i + 1)
+						{
+							mes @renove_cnt[@i]+" "+getitemname(@renove_req[@i]);
+						}
+						mes "^000000";
+						break;
+						
+					case 5:
+						mes "[^0000FFAzazel^000000]";
+						mes "The ^FF0000"+getitemname(@tannin_id)+"^000000 is as follows: ";
+						mes "This armor has 8 defense, and 1 slot.";
+						mes "It will also give you 10 dex.";
+						mes "Its true masterwork shines when you wear this armor with a Dowry.";
+						mes "If both are worn you will get (as well as the items other stats):";
+						mes "10 vit, 20 luk, 25 dex, 5 def, 20 mdef, 15 crit, 5% attack, 15% max hp, 5% max sp, and 50 flee.";
+						next;
+						mes "[^0000FFAzazel^000000]";
+						mes "It requires the following items: ^0000FF";
+						for(set @i,0; @i < getarraysize(@tannin_req); set @i,@i + 1)
+						{
+							mes @tannin_cnt[@i]+" "+getitemname(@tannin_req[@i]);
+						}
+						mes "^000000";
+						break;
+						
+					case 6:
+						mes "[^0000FFAzazel^000000]";
+						mes "The ^FF0000"+getitemname(@lilim_id)+"^000000 is as follows: ";
+						mes "This armor has 8 defense, and 1 slot.";
+						mes "It will also give you 10 str.";
+						mes "Its true masterwork shines when you wear this armor with a Dragon Helm.";
+						mes "If both are worn you will get (as well as the items other stats):";
+						mes "25 srt, 20 vit, 20 agi, 5 def, 20 mdef, 5 crit, 10% attack, 20% max hp, and 25% attack speed.";
+						next;
+						mes "[^0000FFAzazel^000000]";
+						mes "It requires the following items: ^0000FF";
+						for(set @i,0; @i < getarraysize(@lilim_req); set @i,@i + 1)
+						{
+							mes @lilim_cnt[@i]+" "+getitemname(@lilim_req[@i]);
+						}
+						mes "^000000";
+						break;
+				}
+				
+				break;
+				
+			case 3:
+				mes "[^0000FFAzazel^000000]";
+				mes "I can reverse the creation process if you wish, but it will cost you.";
+				mes "My price is 250,000,000 Zeny";
+				mes "Are you interested?";
+				set @temp,select("Yes", "Nevermind");
+				
+				if(@temp == 2)
+					break;
+				
+				next;
+				mes "[^0000FFAzazel^000000]";
+				mes "Which equipment would you like to disassemble?";
+				next;
+				switch(select(getitemname(@dragonhelm_id),getitemname(@travlerhat_id),getitemname(@dowry_id),
+					getitemname(@renove_id),getitemname(@tannin_id),getitemname(@lilim_id)))
+				{
+					case 1:
+						mes "[^0000FFAzazel^000000]";
+						mes "Are you sure you want to disassemble your "+getitemname(@dragonhelm_id)+"?";
+						set @temp,select("Yes", "I've Changed My Mind");
+						
+						if(@temp == 2)
+							break;
+						
+						if(Zeny < 250000000)
+						{
+							mes "You do not have enough Zeny";
+							break;
+						}
+						
+						if(isequipped(@dragonhelm_id) == 0)
+						{
+							mes "Please ensure you have the "+getitemname(@dragonhelm_id)+" equipped.";
+							break;
+						}
+						
+						if(callfunc("token_and_seal_check") == 1)
+						{
+							mes "You have tokens/seals in your inventory. Please store all tokens and seals before you continue.";
+							break;
+						}
+						
+						set @temp,countitem(@dragonhelm_id);
+						
+						set @temp2,getequiprefinerycnt(EQI_HEAD_TOP);
+						delitem2 @dragonhelm_id,1,1,getequiprefinerycnt(EQI_HEAD_TOP),0,getequipcardid(EQI_HEAD_TOP, 0),getequipcardid(EQI_HEAD_TOP, 1),getequipcardid(EQI_HEAD_TOP, 2),getequipcardid(EQI_HEAD_TOP, 3);
+						set Zeny,Zeny - 250000000;
+						
+						if(@temp <= countitem(@dragonhelm_id))
+						{
+							mes "Sorry, I was unable to disassemble your "+getitemname(@dragonhelm_id)+".";
+							mes "Please remove any other "+getitemname(@dragonhelm_id)+"s in your inventory, and try again.";
+							break;
+						}
+						
+						for(set @i,0; @i < getarraysize(@dragonhelm_req); set @i,@i + 1)
+						{
+							getitem @dragonhelm_req[@i],@dragonhelm_cnt[@i];
+						}
+						
+						if(@temp2 >= 6)
+						{
+							getitem @dragonhelm_req[0],1;
+							getitem @dragonhelm_req[1],1;
+							getitem @dragonhelm_req[2],1;
+							getitem @dragonhelm_req[3],1;
+						}
+						
+						if(@temp2 >= 8)
+						{
+							getitem @dragonhelm_req[0],1;
+							getitem @dragonhelm_req[1],1;
+							getitem @dragonhelm_req[2],1;
+							getitem @dragonhelm_req[3],1;
+						}
+						
+						if(@temp2 == 10)
+						{
+							getitem @dragonhelm_req[0],1;
+							getitem @dragonhelm_req[1],1;
+							getitem @dragonhelm_req[2],1;
+							getitem @dragonhelm_req[3],1;
+						}
+						
+						mes "Your "+getitemname(@dragonhelm_id)+" has been successfully disassembled.";
+						break;
+						
+					case 2:
+						mes "[^0000FFAzazel^000000]";
+						mes "Are you sure you want to disassemble your "+getitemname(@travlerhat_id)+"?";
+						set @temp,select("Yes", "I've Changed My Mind");
+						
+						if(@temp == 2)
+							break;
+						
+						if(Zeny < 250000000)
+						{
+							mes "You do not have enough Zeny";
+							break;
+						}
+						
+						if(isequipped(@travlerhat_id) == 0)
+						{
+							mes "Please ensure you have the "+getitemname(@travlerhat_id)+" equipped.";
+							break;
+						}
+						
+						if(callfunc("token_and_seal_check") == 1)
+						{
+							mes "You have tokens/seals in your inventory. Please store all tokens and seals before you continue.";
+							break;
+						}
+						
+						set @temp,countitem(@travlerhat_id);
+						
+						set @temp2,getequiprefinerycnt(EQI_HEAD_TOP);
+						delitem2 @travlerhat_id,1,1,getequiprefinerycnt(EQI_HEAD_TOP),0,getequipcardid(EQI_HEAD_TOP, 0),getequipcardid(EQI_HEAD_TOP, 1),getequipcardid(EQI_HEAD_TOP, 2),getequipcardid(EQI_HEAD_TOP, 3);
+						set Zeny,Zeny - 250000000;
+						
+						if(@temp <= countitem(@travlerhat_id))
+						{
+							mes "Sorry, I was unable to disassemble your "+getitemname(@travlerhat_id)+".";
+							mes "Please remove any other "+getitemname(@travlerhat_id)+"s in your inventory, and try again.";
+							break;
+						}
+						
+						for(set @i,0; @i < getarraysize(@travlerhat_req); set @i,@i + 1)
+						{
+							getitem @travlerhat_req[@i],@travlerhat_cnt[@i];
+						}
+						
+						if(@temp2 >= 6)
+						{
+							getitem @travlerhat_req[0],1;
+							getitem @travlerhat_req[1],1;
+							getitem @travlerhat_req[2],1;
+							getitem @travlerhat_req[3],1;
+						}
+						
+						if(@temp2 >= 8)
+						{
+							getitem @travlerhat_req[0],1;
+							getitem @travlerhat_req[1],1;
+							getitem @travlerhat_req[2],1;
+							getitem @travlerhat_req[3],1;
+						}
+						
+						if(@temp2 == 10)
+						{
+							getitem @travlerhat_req[0],1;
+							getitem @travlerhat_req[1],1;
+							getitem @travlerhat_req[2],1;
+							getitem @travlerhat_req[3],1;
+						}
+						
+						mes "Your "+getitemname(@travlerhat_id)+" has been successfully disassembled.";
+						break;
+						
+					case 3:
+						mes "[^0000FFAzazel^000000]";
+						mes "Are you sure you want to disassemble your "+getitemname(@dowry_id)+"?";
+						set @temp,select("Yes", "I've Changed My Mind");
+						
+						if(@temp == 2)
+							break;
+						
+						if(Zeny < 250000000)
+						{
+							mes "You do not have enough Zeny";
+							break;
+						}
+						
+						if(isequipped(@dowry_id) == 0)
+						{
+							mes "Please ensure you have the "+getitemname(@dowry_id)+" equipped.";
+							break;
+						}
+						
+						if(callfunc("token_and_seal_check") == 1)
+						{
+							mes "You have tokens/seals in your inventory. Please store all tokens and seals before you continue.";
+							break;
+						}
+						
+						set @temp,countitem(@dowry_id);
+						
+						set @temp2,getequiprefinerycnt(EQI_HEAD_TOP);
+						delitem2 @dowry_id,1,1,getequiprefinerycnt(EQI_HEAD_TOP),0,getequipcardid(EQI_HEAD_TOP, 0),getequipcardid(EQI_HEAD_TOP, 1),getequipcardid(EQI_HEAD_TOP, 2),getequipcardid(EQI_HEAD_TOP, 3);
+						set Zeny,Zeny - 250000000;
+						
+						if(@temp <= countitem(@dowry_id))
+						{
+							mes "Sorry, I was unable to disassemble your "+getitemname(@dowry_id)+".";
+							mes "Please remove any other "+getitemname(@dowry_id)+"s in your inventory, and try again.";
+							break;
+						}
+						
+						for(set @i,0; @i < getarraysize(@dowry_req); set @i,@i + 1)
+						{
+							getitem @dowry_req[@i],@dowry_cnt[@i];
+						}
+						
+						if(@temp2 >= 6)
+						{
+							getitem @dowry_req[0],1;
+							getitem @dowry_req[1],1;
+							getitem @dowry_req[2],1;
+							getitem @dowry_req[3],1;
+						}
+						
+						if(@temp2 >= 8)
+						{
+							getitem @dowry_req[0],1;
+							getitem @dowry_req[1],1;
+							getitem @dowry_req[2],1;
+							getitem @dowry_req[3],1;
+						}
+						
+						if(@temp2 == 10)
+						{
+							getitem @dowry_req[0],1;
+							getitem @dowry_req[1],1;
+							getitem @dowry_req[2],1;
+							getitem @dowry_req[3],1;
+						}
+						
+						mes "Your "+getitemname(@dowry_id)+" has been successfully disassembled.";
+						break;
+						
+					case 4:
+						mes "[^0000FFAzazel^000000]";
+						mes "Are you sure you want to disassemble your "+getitemname(@renove_id)+"?";
+						set @temp,select("Yes", "I've Changed My Mind");
+						
+						if(@temp == 2)
+							break;
+						
+						if(Zeny < 250000000)
+						{
+							mes "You do not have enough Zeny";
+							break;
+						}
+						
+						if(isequipped(@renove_id) == 0)
+						{
+							mes "Please ensure you have the "+getitemname(@renove_id)+" equipped.";
+							break;
+						}
+						
+						if(callfunc("token_and_seal_check") == 1)
+						{
+							mes "You have tokens/seals in your inventory. Please store all tokens and seals before you continue.";
+							break;
+						}
+						
+						set @temp,countitem(@renove_id);
+						
+						set @temp2,getequiprefinerycnt(EQI_ARMOR);
+						delitem2 @renove_id,1,1,getequiprefinerycnt(EQI_ARMOR),0,getequipcardid(EQI_ARMOR, 0),getequipcardid(EQI_ARMOR, 1),getequipcardid(EQI_ARMOR, 2),getequipcardid(EQI_ARMOR, 3);
+						set Zeny,Zeny - 250000000;
+						
+						if(@temp <= countitem(@renove_id))
+						{
+							mes "Sorry, I was unable to disassemble your "+getitemname(@renove_id)+".";
+							mes "Please remove any other "+getitemname(@renove_id)+"s in your inventory, and try again.";
+							break;
+						}
+						
+						for(set @i,0; @i < getarraysize(@renove_req); set @i,@i + 1)
+						{
+							getitem @renove_req[@i],@renove_cnt[@i];
+						}
+						
+						if(@temp2 >= 6)
+						{
+							getitem @renove_req[0],1;
+							getitem @renove_req[1],1;
+							getitem @renove_req[2],1;
+							getitem @renove_req[3],1;
+							getitem @renove_req[4],1;
+							getitem @renove_req[5],1;
+							getitem @renove_req[6],1;
+							getitem @renove_req[7],1;
+						}
+						
+						if(@temp2 >= 8)
+						{
+							getitem @renove_req[0],1;
+							getitem @renove_req[1],1;
+							getitem @renove_req[2],1;
+							getitem @renove_req[3],1;
+							getitem @renove_req[4],1;
+							getitem @renove_req[5],1;
+							getitem @renove_req[6],1;
+							getitem @renove_req[7],1;
+						}
+						
+						if(@temp2 == 10)
+						{
+							getitem @renove_req[0],1;
+							getitem @renove_req[1],1;
+							getitem @renove_req[2],1;
+							getitem @renove_req[3],1;
+							getitem @renove_req[4],1;
+							getitem @renove_req[5],1;
+							getitem @renove_req[6],1;
+							getitem @renove_req[7],1;
+						}
+						
+						mes "Your "+getitemname(@renove_id)+" has been successfully disassembled.";
+						break;
+						
+					case 5:
+						mes "[^0000FFAzazel^000000]";
+						mes "Are you sure you want to disassemble your "+getitemname(@tannin_id)+"?";
+						set @temp,select("Yes", "I've Changed My Mind");
+						
+						if(@temp == 2)
+							break;
+						
+						if(Zeny < 250000000)
+						{
+							mes "You do not have enough Zeny";
+							break;
+						}
+						
+						if(isequipped(@tannin_id) == 0)
+						{
+							mes "Please ensure you have the "+getitemname(@tannin_id)+" equipped.";
+							break;
+						}
+						
+						if(callfunc("token_and_seal_check") == 1)
+						{
+							mes "You have tokens/seals in your inventory. Please store all tokens and seals before you continue.";
+							break;
+						}
+						
+						set @temp,countitem(@tannin_id);
+						
+						set @temp2,getequiprefinerycnt(EQI_ARMOR);
+						delitem2 @tannin_id,1,1,getequiprefinerycnt(EQI_ARMOR),0,getequipcardid(EQI_ARMOR, 0),getequipcardid(EQI_ARMOR, 1),getequipcardid(EQI_ARMOR, 2),getequipcardid(EQI_ARMOR, 3);
+						set Zeny,Zeny - 250000000;
+						
+						if(@temp <= countitem(@tannin_id))
+						{
+							mes "Sorry, I was unable to disassemble your "+getitemname(@tannin_id)+".";
+							mes "Please remove any other "+getitemname(@tannin_id)+"s in your inventory, and try again.";
+							break;
+						}
+						
+						for(set @i,0; @i < getarraysize(@tannin_req); set @i,@i + 1)
+						{
+							getitem @tannin_req[@i],@tannin_cnt[@i];
+						}
+						
+						if(@temp2 >= 6)
+						{
+							getitem @tannin_req[0],1;
+							getitem @tannin_req[1],1;
+							getitem @tannin_req[2],1;
+							getitem @tannin_req[3],1;
+							getitem @tannin_req[4],1;
+							getitem @tannin_req[5],1;
+							getitem @tannin_req[6],1;
+							getitem @tannin_req[7],1;
+						}
+						
+						if(@temp2 >= 8)
+						{
+							getitem @tannin_req[0],1;
+							getitem @tannin_req[1],1;
+							getitem @tannin_req[2],1;
+							getitem @tannin_req[3],1;
+							getitem @tannin_req[4],1;
+							getitem @tannin_req[5],1;
+							getitem @tannin_req[6],1;
+							getitem @tannin_req[7],1;
+						}
+						
+						if(@temp2 == 10)
+						{
+							getitem @tannin_req[0],1;
+							getitem @tannin_req[1],1;
+							getitem @tannin_req[2],1;
+							getitem @tannin_req[3],1;
+							getitem @tannin_req[4],1;
+							getitem @tannin_req[5],1;
+							getitem @tannin_req[6],1;
+							getitem @tannin_req[7],1;
+						}
+						
+						mes "Your "+getitemname(@tannin_id)+" has been successfully disassembled.";
+						break;
+						
+					case 6:
+						mes "[^0000FFAzazel^000000]";
+						mes "Are you sure you want to disassemble your "+getitemname(@lilim_id)+"?";
+						set @temp,select("Yes", "I've Changed My Mind");
+						
+						if(@temp == 2)
+							break;
+						
+						if(Zeny < 250000000)
+						{
+							mes "You do not have enough Zeny";
+							break;
+						}
+						
+						if(isequipped(@lilim_id) == 0)
+						{
+							mes "Please ensure you have the "+getitemname(@lilim_id)+" equipped.";
+							break;
+						}
+						
+						if(callfunc("token_and_seal_check") == 1)
+						{
+							mes "You have tokens/seals in your inventory. Please store all tokens and seals before you continue.";
+							break;
+						}
+						
+						set @temp,countitem(@lilim_id);
+						
+						set @temp2,getequiprefinerycnt(EQI_ARMOR);
+						delitem2 @lilim_id,1,1,getequiprefinerycnt(EQI_ARMOR),0,getequipcardid(EQI_ARMOR, 0),getequipcardid(EQI_ARMOR, 1),getequipcardid(EQI_ARMOR, 2),getequipcardid(EQI_ARMOR, 3);
+						set Zeny,Zeny - 250000000;
+						
+						if(@temp <= countitem(@lilim_id))
+						{
+							mes "Sorry, I was unable to disassemble your "+getitemname(@lilim_id)+".";
+							mes "Please remove any other "+getitemname(@lilim_id)+"s in your inventory, and try again.";
+							break;
+						}
+						
+						for(set @i,0; @i < getarraysize(@lilim_req); set @i,@i + 1)
+						{
+							getitem @lilim_req[@i],@lilim_cnt[@i];
+						}
+						
+						if(@temp2 >= 6)
+						{
+							getitem @lilim_req[0],1;
+							getitem @lilim_req[1],1;
+							getitem @lilim_req[2],1;
+							getitem @lilim_req[3],1;
+							getitem @lilim_req[4],1;
+							getitem @lilim_req[5],1;
+							getitem @lilim_req[6],1;
+							getitem @lilim_req[7],1;
+						}
+						
+						if(@temp2 >= 8)
+						{
+							getitem @lilim_req[0],1;
+							getitem @lilim_req[1],1;
+							getitem @lilim_req[2],1;
+							getitem @lilim_req[3],1;
+							getitem @lilim_req[4],1;
+							getitem @lilim_req[5],1;
+							getitem @lilim_req[6],1;
+							getitem @lilim_req[7],1;
+						}
+						
+						if(@temp2 == 10)
+						{
+							getitem @lilim_req[0],1;
+							getitem @lilim_req[1],1;
+							getitem @lilim_req[2],1;
+							getitem @lilim_req[3],1;
+							getitem @lilim_req[4],1;
+							getitem @lilim_req[5],1;
+							getitem @lilim_req[6],1;
+							getitem @lilim_req[7],1;
+						}
+						
+						mes "Your "+getitemname(@lilim_id)+" has been successfully disassembled.";
+						break;
+				}
+				
+				break;
+				
+				
+			case 4:
+				mes "[^0000FFAzazel^000000]";
+				mes "Stop wasting my time.";
+				close;
+		}
+		
+		next;
+		mes "[^0000FFAzazel^000000]";
+	}
+	
+	//Script will never reach this point, so as to make sure
+	//that the dialogue can be returned to.
+}
+
+function	script	token_and_seal_check	{
+
+	setarray @tokens[0],3100,3101,3102,3103,3104,3105,3106,3107,3108,3109,3110,3111,3112,3113,3114,3115,3116,3117,3118,3119;
+	setarray @seals[0],3130,3131,3132,3133,3134;
+
+
+	for(set @i,0; @i < getarraysize(@tokens); set @i,@i + 1)
+	{
+		if(countitem(@tokens[@i]) > 0)
+			return 1;
+	}
+	
+	for(set @i,0; @i < getarraysize(@seals); set @i,@i + 1)
+	{
+		if(countitem(@seals[@i]) > 0)
+			return 1;
+	}
+	
+	return 0;
+}

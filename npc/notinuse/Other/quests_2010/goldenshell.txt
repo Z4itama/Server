@@ -1,0 +1,500 @@
+//===== Script: ===============================================================
+//= 2010 XileRO's GoldenShell Quest.
+//= By Honor/Lover Romeo, WalkNPC - Kikuko
+//==============================================================================
+function	script	TrueWalkNPCgtb	{
+	set $@_SNS, getarg(0);
+	set $@_ZNS, rand(1,3);
+	if ($@_ZNS == 1) set $@_SNS, $@_SNS + rand(2,5);
+	if ($@_ZNS == 2) set $@_SNS, $@_SNS - rand(2,5);
+	if ($@_SNS < 0) set $@_SNS, $@_SNS + rand(2,5);
+	if ($@_SNS > 300) set $@_SNS, $@_SNS - rand(2,5);
+	return $@_SNS;
+}
+
+prt_fild08,269,317,1	script	Bug Collector	907,{
+if(qpoints < 5) { mes "You need at least ^0000ff5 Qp^000000(s) to be able to do this Quest."; close; }
+set .bugcol$,"[^ff3300 Bug Collector ^000000]";
+if(GSpart==3) { mes .bugcol$; mes "You already done this quest."; close; }
+
+if(GSpart==2) {
+		if(GetGS == 1) {
+			mes .bugcol$;
+			mes "Awesome Good Job!!";
+			mes "Thanks Alot I really needed this";
+			mes "Here have this...";
+			getitem 4128,1;
+			set GSpart,3;
+			set goldenshell$,"^0000ffDone^000000";
+			set qpoints,qpoints+2;
+			close;
+		} else {
+			mes .bugcol$;
+			mes "You still owe me the Golden Shell";
+			mes "...";
+			close;
+		}
+}
+
+if(GSpart==1) {
+	if(buglarvas >= 300 && bugfemale >= 250 && bugmale >= 200) {
+		mes .bugcol$;
+		mes "Good Job!";
+		mes "Now...I need you to get a Golden Shell from the most rarest Bug ever";
+		mes "The ^ff0000GoldenThief Bug^000000";
+		set GSpart,2;
+		close;
+	} else {
+		mes .bugcol$;
+		mes "You haven't do what I asked for.";
+		mes "^ff0000Kill^000000:";
+		mes "300 Thiefbug Larva";
+		mes "250 Thiefbug Female";
+		mes "200 Thiefbug Male";
+		close;
+	}
+}	
+
+if(GSpart==0) {
+	mes .bugcol$;
+	mes "Hey "+strcharinfo(0)+"...";
+	mes "I'm the ^0000ffBug Collector^000000.";
+	mes "I need some help are you in?";
+	menu "-Yes",-,"-No thanks",LCancel;
+	next;
+	mes .bugcol$;
+	mes "I need you to do something for me:";
+	mes "^ff0000Kill^000000:";
+	mes "300 Thiefbug Larva";
+	mes "250 Thiefbug Female";
+	mes "200 Thiefbug Male";
+	next;
+	mes .bugcol$;
+	mes "After you do that, just come back to me ^_^!";
+	mes "You've Activated -"; 
+	mes "^ff0000Golden Shell^000000 ~Quest.";
+	set goldenshell$,"^ff8800In Progress^000000";
+	set GSpart,1;
+	close;
+
+LCancel:
+	close;
+}
+
+OnNPCKillEvent:
+if(GSpart==2) {
+//=============== Thiefbug Larva ==============================================
+if (killedrid == 1086) { if(GetGS==1) { end; }
+set @GSrand,rand(1,1000); if(@GSrand < 100) { set GetGS,1; dispbottom "You got ("+GetGS+"/1) GodenShell"; }
+end;
+}
+//=============================================================================
+}
+
+if(GSpart==1) {
+//=============== Thiefbug Larva ==============================================
+if (killedrid == 1048) { if(buglarvas==300) { end; } 
+set buglarvas,buglarvas+1; dispbottom "You had killed ("+buglarvas+"/300) Thiefbug Larvas!"; end;
+}
+//=============== Thiefbug Larva ==============================================
+if (killedrid == 1053) { if(bugfemale==250) { end; } 
+set bugfemale,bugfemale+1; dispbottom "You had killed ("+bugfemale+"/250) Thiefbug Female!"; end;
+}
+//=============== Thiefbug Larva ==============================================
+if (killedrid == 1054) { if(bugmale==200) { end; } 
+set bugmale,bugmale+1; dispbottom "You had killed ("+bugmale+"/200) Theifbug Male!"; end;
+}
+//=============================================================================
+}
+
+OnTimer1800:
+	set $@npcusetime_gtbq,$@npcusetime_gtbq+1;
+	if( $@npcusetime_gtbq > 20 )
+	{
+		set $@npcusetime_gtbq, 0;
+		set $@npcinuse_gtbq,0;
+	}
+	if( $@npcinuse_gtbq )
+	{
+		initnpctimer;
+		end;	
+	}
+	
+	if ($@_gtbq_CNT == $@_gtbq_MAXCNT) set $@_gtbq_FLAG, 1; // Set Flag to return mode
+	if ($@_gtbq_FLAG == 1) goto TrueWalkReturn;
+
+	set $@_gtbq_X, callfunc("TrueWalkNPCgtb", $@_gtbq_ARRX[$@_gtbq_CNT]);
+	set $@_gtbq_Y, callfunc("TrueWalkNPCgtb", $@_gtbq_ARRY[$@_gtbq_CNT]);
+	
+	set $@_gtbq_CNT, $@_gtbq_CNT + 1;  //Step Counter
+	set $@_gtbq_ARRX[$@_gtbq_CNT], $@_gtbq_X; // Save step X for return
+	set $@_gtbq_ARRY[$@_gtbq_CNT], $@_gtbq_Y; // Save step Y for return
+	goto Walk;
+	
+TrueWalkReturn:
+	set $@_gtbq_ARRX[$@_gtbq_CNT], 0;
+	set $@_gtbq_ARRY[$@_gtbq_CNT], 0;
+	set $@_gtbq_CNT, $@_gtbq_CNT - 1; // Downstep Counter
+	set $@_gtbq_X, $@_gtbq_ARRX[$@_gtbq_CNT]; // Restore Saved coords
+	set $@_gtbq_Y, $@_gtbq_ARRY[$@_gtbq_CNT];
+	if ($@_gtbq_CNT == 0) set $@_gtbq_FLAG, 0; // Set Flag to forward
+
+Walk:
+	npcwalkto $@_gtbq_X, $@_gtbq_Y;
+	initnpctimer;
+	end;
+
+OnInit:
+	set $@npcusetime_gtbq,0;
+	set $@npcinuse_gtbq,0;
+	set $@_gtbq_ARRX[0], 269; // Set initial coord X - NPC Position X
+	set $@_gtbq_ARRY[0], 317; // Set initial coord Y - NPC Position Y
+	set $@_gtbq_CNT,0; // Don't change
+	set $@_gtbq_FLAG,0; // Don't change
+	set $@_gtbq_MAXCNT,50; // Max Movements
+	npcspeed 250; // Set Walk Speed 100=Faster 200=Slower
+	initnpctimer;
+	end;
+}
+
+dicastes02.gat,105,147,4	script	Bekuni	981,
+{
+	set @HQ1_ReqID1,913; //tooth of bat
+	set @HQ1_ReqID2,7214; //Bat Cage
+	set @HQ1_ReqID3,956; // Heart of Mermaid
+	set @HQ1_NPCName$,"Bekuni";
+	//script start
+	if ($HQ1_InProcess == 1)
+	{
+		mes @HQ1_NPCName;
+		mes "So good to see you again";
+		mes "please tell me you got what I need";
+		switch(select("Yeah, I've got everything right here:I forgot, What did you need?"))
+		{
+			Case 1:
+			if (countitem(@HQ1_ReqID1) >= 100) && (countitem(@HQ1_ReqID2) >= 75) && (countitem(@HQ1_ReqID3) >= 60)
+			{
+				delitem @HQ1_ReqID1,100;
+				delitem @HQ1_ReqID2,75;
+				delitem @HQ1_ReqID3,60;
+				set $HQ1_InProcess,0;
+				set $HQ1_Completed,1;
+				mes @HQ1_NPCName$;
+				mes "Ah, Thank you.  These are worth a bundle these days!";
+				mes "Unfortunately, I can't tell you exactly where she is";
+				mes "But I know someone who might";
+				next;
+				mes @HQ1_NPCName$;
+				mes "Here's your clue:";
+				mes "^#800000Look for her in a new map that is filled with water and mushrooms.";
+				close;
+			}
+			else
+			{
+				mes @HQ1_NPCName$;
+				mes "What?! Stop wasting time!";
+				mes "In case you just forgot, here's what I need";
+				mes "^#800000 100 Tooth of Bat";
+				mes "^#800000 75 Bat Cages";
+				mes "^#800000 60 Heats of Mermaid";
+				close;
+			}
+			Case 2:
+				mes @HQ1_NPCName$;
+				mes *sigh* Really? This is what I need";
+				mes "^#800000 100 Tooth of Bat";
+				mes "^#800000 75 Bat Cages";
+				mes "^#800000 60 Heats of Mermaid";
+				close;
+		}
+	}	
+	if ($HQ1_Completed == 1)
+	{
+		mes @HQ1_NPCName$;
+		mes "You forgot already?";
+		mes "I said to ^#800000Look for her in a new map that is filled with water and mushrooms^000000.";
+		close;
+	}
+	mes @HQ1_NPCName$;
+	mes "*Cough Cough*;
+	mes "What a horrible woman!";
+	mes "What do you want?";
+	switch(select("I'm looking for Queen Hekate:Nothing, Nevermind"))
+	{
+		Case 1:
+			mes @HQ1_NPCName$;
+			mes "Why are you looking for that horrible witch?!";
+			mes "Look at what she did to me! I'm a statue!";
+			next;
+			mes @HQ1_NPCName$;
+			mes "Anyway, I can help you find her";
+			mes "But you'll have to do something for me";
+			switch(select("Sure, I'll do anything:Uh...That's alright. No thanks."))
+			{
+			Case 1:
+				mes @HQ1_NPCName$;
+				mes "Anything huh? That's great, for me anyway";
+				mes "I need you to bring me some items";
+				mes "And I'll tell you what you want to know";
+				next;
+				mes @HQ1_NPCName$;
+				mes "Bring me the Following Things:";
+				mes "^#800000 100 Tooth of Bat";
+				mes "^#800000 75 Bat Cages";
+				mes "^#800000 60 Heats of Mermaid";
+				next;
+				mes @HQ1_NPCName$;
+				mes "Now go and get those but hurry!";
+				set $HQ1_InProgress,1;
+				set $HQ3_Completed,0;
+				close;
+			Case 2:
+				mes @HQ1_NPCName$;
+				mes "Fine! Be that way, You selfish ba... *sob*";
+				close;
+			}
+		Case 2:
+			mes @HQ1_NPCName$;
+			mes "Whatever... Get turned into a statue and see how you like it!";
+			close;
+	}
+	end;
+}
+
+mid_camp.gat,205,220,4	script	Crowley	999,
+{
+	set @HQ2_ReqID1,637; //old broom
+	set @HQ2_ReqID2,1006; //old magic book
+	set @HQ2_NPCName$,"Crowley";
+	//script start
+	if ($HQ1_Completed != 1)
+	{
+		mes @HQ2_NPCName$;
+		mes "Who are you? Wait, Don't tell me";
+		mes "Don't care to be honest, leave me alone";
+		close;
+	}
+	if ($HQ2_InProcess == 1)
+	{
+		mes @HQ2_NPCName$;
+		mes "So good to see you again";
+		mes "please tell me you got what I need";
+		switch(select("Here's Everything!:Uh... Sorry, What was it again?"))
+		{
+			Case 1:
+			if (countitem(@HQ2_ReqID1) >= 100) && (countitem(@HQ2_ReqID2) >= 100)
+			{
+				delitem @HQ2_ReqID1,100;
+				delitem @HQ2_ReqID2,100;
+				set $HQ2_InProcess,0;
+				set $HQ2_Completed,1;
+				mes @HQ2_NPCName$;
+				mes "Thank you Thank you Thank you";
+				mes "The witch is hiding in ^#800000nif_in 190 105";
+				mes "Good luck and Thanks again!";
+				close;
+			}
+			else
+			{
+				mes @HQ2_NPCName$;
+				mes "Do you enjoy seeing me like this?";
+				mes "Please bring the following so i can get help";
+				mes "^#800000 100 Old Brooms";
+				mes "^#800000 100 Old Magic Books";
+				close;
+			}
+			Case 2:
+				mes @HQ2_NPCName$;
+				mes "Please bring the following so I can get help";
+				mes "^#800000 100 Old Brooms";
+				mes "^#800000 100 Old Magic Books";
+				close;
+		}
+	}	
+	if ($HQ2_Completed == 1)
+	{
+		mes @HQ2_NPCName$;
+		mes "You forgot her address?";
+		mes "she is in ^#800000nif_in 190 105";
+		close;
+	}	
+	mes @HQ2_NPCName$;
+	mes "*Gurggle* See what she did to me??";
+	mes "All I wanted was a hat!";
+	mes	"What do you want?";
+	switch(select("I was told you could tell me where to find Hekate:Uhm, Nothing! *runs*"))
+		{
+		Case 1:
+			mes @HQ2_NPCName$;
+			mes "Yes! She was the one that did this to me";
+			mes "But you MUST help me or I won't tell you anything";
+			next;
+			mes @HQ2_NPCName$;
+			mes "There's someone nearby, he says he can reverse this";
+			mes "There's a few ingredients he needs to complete the formula";
+			switch(select("I will help you:Not my problem")
+			{
+			Case 1:
+				mes @HQ2_NPCName$;
+				mes "Thank you so much!";
+				mes "I need you to get the following for me";
+				mes "^#800000 100 Old Brooms";
+				mes "^#800000 100 Old Magic Books";
+				next;
+				mes @HQ2_NPCName$;
+				mes "Come back when you have everything";
+				set $HQ2_InProgress,1;
+				close;
+			Case 2:
+				mes @HQ2_NPCName$;
+				mes "Not your problem Huh?";
+				mes "I will never tell you anything!";
+				close;
+			}
+		Case 2:
+			mes @HQ2_NPCName$;
+			mes "You better run!";
+			close;
+		}
+	end;
+}
+
+nif_in.gat,190,105,4	script	Hekate	856,
+{
+	set @HQ3_ReqID1,535; // pumpkin
+	set @HQ3_ReqID2,12128; // Royal Cooking Set
+	set @HQ3_NPCName$,"Hekate";
+	//script start
+	if ($HQ2_Completed != 1)
+	{
+		mes @HQ3_NPCName$;
+		mes "How Dare you Barge in here infidel!";
+		mes "Begone!";
+		close2;
+		warp nif_fild02 0 0;
+		end;
+	}
+	if ($HQ3_InProcess == 1)
+	{
+		mes @HQ3_NPCName$;
+		mes "What is it?";
+		switch(select("Here's Everything!:Oops..."))
+		{
+			Case 1:
+			if (countitem(@HQ3_ReqID1) >= 100) && (countitem(@HQ3_ReqID2) >= 50)
+			{
+				delitem @HQ3_ReqID1,100;
+				delitem @HQ3_ReqID2,50;
+				set $HQ3_InProcess,0;
+				set $HQ3_Completed,1;
+				mes @HQ3_NPCName$;
+				mes "Hmph, very well then";
+				mes "You may choose one of these;
+				mes "but you better hurry before I changed my mind.";
+				switch(select("Pumpkin Rucksack:Sakura Myst Hat:Halloween Mask:Halloween Hood"))
+				{
+					Case 1:
+						set $HQ1_Completed,0;
+						set $HQ2_completed,0;
+						getitem 3349,1;
+						mes @HQ3_NPCName;
+						mes "Good, now leave before I change my mind";
+						close;
+					Case 2:
+						set $HQ1_Completed,0;
+						set $HQ2_completed,0;
+						getitem 5523,1;
+						mes @HQ3_NPCName;
+						mes "Good, now leave before I change my mind";
+						close;
+					Case 3:
+						set $HQ1_Completed,0;
+						set $HQ2_completed,0;
+						getitem 3401,1;
+						mes @HQ3_NPCName;
+						mes "Good, now leave before I change my mind";
+						close;
+					Case 4:
+						set $HQ1_Completed,0;
+						set $HQ2_completed,0;
+						getitem 3400,1;
+						mes @HQ3_NPCName;
+						mes "Good, now leave before I change my mind";
+						close;
+				}
+			}
+			else
+			{
+				mes @HQ3_NPCName$;
+				mes "You dare mock me?!?";
+				mes "Consider yourself lucky, just bring me these now!";
+				mes "^#800000 100 Pumpkins";
+				mes "^#800000 50 Royal Cooking Sets";
+				close;
+			}
+			Case 2:
+				mes @HQ3_NPCName$;
+				mes "Oops? What do you mean oops?";
+				mes "Your puny little brain must have forgotten";
+				mes "Bring me the following before I change my mind";
+				mes "^#800000 100 Pumpkins";
+				mes "^#800000 50 Royal Cooking Sets";
+				close;
+		}
+	}	
+	if ($HQ3_Completed == 1)
+	{
+		mes @HQ3_NPCName$;
+		mes "How Dare you Barge in here infidel!";
+		mes "Begone!";
+		close2;
+		warp nif_fild02 0 0;
+		end;
+	}	
+	mes @HQ3_NPCName$;
+	mes "Who are you? And be quick about it";
+	mes "I have no patience for the likes of you";
+	mes	"So? What is it? Why are you wasting my time?";
+	switch(select("Oh great Lady Hekate, I am but your servant:Nothing! Sorry to disturb you! *runs*"))
+		{
+		Case 1:
+			mes @HQ3_NPCName$;
+			mes "Flattery will get you nowhere.";
+			mes "You must have heard of this Hats I have";
+			mes "Alright, time to prove yourself";
+			next;
+			mes @HQ3_NPCName$;
+			mes "I happen to be hungry";
+			mes "and I want a pumpkin pie";
+			mes "Bring me what I need";
+			mes "and maybe I won't turn you into a toad";
+			switch(select("As you wish M'lady:I changed my mind")
+			{
+			Case 1:
+				mes @HQ3_NPCName$;
+				mes "Very well.";
+				mes "This is what I need";
+				mes "^#800000 100 Pumpkins";
+				mes "^#800000 50 Royal Cooking Sets";
+				next;
+				mes @HQ3_NPCName$;
+				mes "Hurry up, I haven't got all day";
+				set $HQ3_InProgress,1;
+				close;
+			Case 2:
+				mes @HQ3_NPCName$;
+				mes "I should punish you for your transgression";
+				mes "but a lowlife like you wouldn't understand.";
+				mes "Get out of here now";
+				close;
+			}
+		Case 2:
+			mes @HQ3_NPCName$;
+			mes "Sorry? Sorry?!";
+			mes "Begone!";
+			close2;
+			warp nif_fild02 0 0;
+			end;
+		}
+	end;
+}

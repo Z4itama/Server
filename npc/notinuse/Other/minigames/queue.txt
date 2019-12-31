@@ -1,0 +1,44 @@
+/globals
+struct arena_fifo are_queue[ARENA_QUEUES][ARENA_QUEUE_MAX_LENGTH];	//todo: init memcpy
+int are_queue_first_empty[ARENA_QUEUES]={0,0,0};
+struct arena_fifo *are_queue_first[ARENA_QUEUES]={NULL,NULL,NULL};
+struct arena_fifo *are_queue_last[ARENA_QUEUES]={NULL,NULL,NULL};
+int are_queue_length[ARENA_QUEUES]={0,0,0};
+
+//functions
+int fifo_new(struct map_session_data *sd, int que){
+	struct arena_fifo *newfifo=NULL;
+	int i;
+	if( que>=ARENA_QUEUES || are_queue_length[que] >= ARENA_QUEUE_MAX_LENGTH ) return -1;
+
+	for( i=are_queue_first_empty[que] ; i<ARENA_QUEUE_MAX_LENGTH ; i++ ){ //todo: use newfifo instead of i
+		newfifo=&(are_queue[que][i]);
+		if(newfifo->sd == NULL){
+			if(are_queue_first[que]==NULL) are_queue_first[que] = newfifo;
+			if(are_queue_last[que]!=NULL) are_queue_last[que]->next = newfifo;
+			newfifo->prev = are_queue_last[que]; newfifo->next = NULL; are_queue_last[que] = newfifo;
+			newfifo->sd = sd;
+			are_queue_length[que]++;
+			are_queue_first_empty[que] = i+1;
+			return 0;
+		}
+	}
+ 	return -1;
+}
+int fifo_del(struct arena_fifo* fifo, int que){
+	if(fifo==NULL || que>=ARENA_QUEUES) return -1;
+
+	if(fifo==are_queue_last[que]) are_queue_last[que] = fifo->prev;
+	if(fifo==are_queue_first[que]) are_queue_first[que] = fifo->next;
+	if(fifo->next!=NULL) fifo->next->prev = fifo->prev;
+	if(fifo->prev!=NULL) fifo->prev->next = fifo->next;
+	if(fifo->sd==NULL){ 
+		fifo->prev = NULL; fifo->next = NULL; 
+		printf("[Warning Arenas]: Attempt to remove someone who had already been removed?"); return 0;
+	}
+	fifo->sd = NULL; fifo->prev = NULL; fifo->next = NULL;
+	are_queue_length[que]--;
+	if(are_queue_length[que]<0){ are_queue_length[que]=0; printf("[Warning Arenas]: Length of queue reached negative values."); }
+	if(fifo-&(are_queue[que][0]) < are_queue_first_empty[que]) are_queue_first_empty[que] = fifo-&(are_queue[que][0]);
+	return 0;
+}

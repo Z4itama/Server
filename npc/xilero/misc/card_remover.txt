@@ -1,0 +1,103 @@
+prt_in,28,73,4	script	Decarder::DECARD	846,{
+
+	mes "[Wise Old Woman]";
+	mes "Good day, young one.";
+	mes "I have the power to remove cards that you ";
+	mes "have compounded onto your equipment.";
+	mes "Which piece of equiment do you wish to decard?";
+	next;
+	// Pick the equip slot to decard
+	set @decard_select, select(
+		"Head ("+getequipname(EQI_HEAD_TOP)+")", 
+		"Armor ("+getequipname(EQI_ARMOR)+")",
+		"Weapon ("+getequipname(EQI_HAND_L)+")",
+		"Shield ("+getequipname(EQI_HAND_R)+")",
+		"Garment ("+getequipname(EQI_GARMENT)+")",
+		"Shoes ("+getequipname(EQI_SHOES)+")",
+		"Accessory L ("+getequipname(EQI_ACC_L)+")",
+		"Accessory R ("+getequipname(EQI_ACC_R)+")",
+		"Head Mid ("+getequipname(EQI_HEAD_MID)+")",
+		"Head Low ("+getequipname(EQI_HEAD_LOW)+")",
+		"Nevermind");
+	
+	// Assign some constants for simplicity
+	switch(@decard_select)
+	{
+		case 1: set @decard_slot, EQI_HEAD_TOP; break;
+		case 2: set @decard_slot, EQI_ARMOR; break;
+		case 3: set @decard_slot, EQI_HAND_L; break;
+		case 4: set @decard_slot, EQI_HAND_R; break;
+		case 5: set @decard_slot, EQI_GARMENT; break;
+		case 6: set @decard_slot, EQI_SHOES; break;
+		case 7: set @decard_slot, EQI_ACC_L; break;
+		case 8: set @decard_slot, EQI_ACC_R; break;
+		case 9: set @decard_slot, EQI_HEAD_MID; break;
+		case 10: set @decard_slot, EQI_HEAD_LOW; break;
+		default:
+			close;	
+	}
+	
+	mes "[Wise Old Woman]";
+	mes "My fee is "+$DECARD_COST+" zeny.";
+	mes "Do you wish to continue?";
+	next;
+	set @decard_select, select("Yes", "No");
+	
+	mes "[Wise Old Woman]";
+	if(@decard_select == 2)
+	{
+		mes "... Very well then.";
+		close;
+	}
+	
+	// Check money requirement
+	if(Zeny < $DECARD_COST)
+	{
+		mes "Sorry, you don't have enough Zeny.";
+		mes "You need "+($DECARD_COST - Zeny)+" more zeny.";
+		close;
+	}
+	
+	// Check to make sure something is equipped there
+	if(getequipid(@decard_slot) == -1)
+	{
+		mes "You have nothing equipped there ...";
+		close;
+	}
+	
+	// Check the lower and upper bounds, incase an issue occurs
+	if(getequipcardcnt(@decard_slot) < 1 || getequipcardcnt(@decard_slot) > 4)
+	{
+		mes "You have no cards in that item ...";
+		close;
+	}
+	
+	// Weight check, need to be below 50% weight
+	if((((100 * Weight)/MaxWeight) + 1) > 50)
+	{
+		mes "You seem to be a little heavy.";
+		mes "Come back to me when you're not carrying ";
+		mes "more than 50% of your weight ...";
+		close;
+	}
+	
+	// Decard successful
+	set Zeny,(Zeny - $DECARD_COST);
+	successremovecards @decard_slot;
+	mes "The process was a success.";
+	mes "Here are your items ...";
+	close;
+	
+	
+	// Initialisations
+	end;
+	OnInit:
+		set $DECARD_COST, 100000;
+}
+
+// Duplicates
+prt_in.gat,28,73,4	duplicate(DECARD)	Decarder#2	846
+morocc.gat,174,88,4	duplicate(DECARD)	Decarder#3	846
+geffen.gat,127,64,4	duplicate(DECARD)	Decarder#4	846
+payon.gat,146,229,4	duplicate(DECARD)	Decarder#5	846
+ayothaya,178,140,2	duplicate(DECARD)	Decarder#6	846

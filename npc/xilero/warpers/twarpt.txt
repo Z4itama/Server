@@ -1,0 +1,398 @@
+//===== eAthena Script ======================================= 
+//= Warp Npc With Warp To Almost Everywhere 
+//===== By: ================================================== 
+//= Someone(thats his name!) (1.0)
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= Any eAthena Version with duplicate; RO Ep6+
+//===== Description: ========================================= 
+//= -
+//===== Additional Comments: ================================= 
+//= 1.1 by Darkchild
+//= 1.2 by Darkchild
+//= 1.3 Fixed by x[tsk] Added missing code for Valkyrie + Added  
+//= a warp NPC in Valkyrie it self. Checked/Added by Lupus
+//============================================================ 
+
+-	script	Warp NPC#w::warpra	791,{
+	mes "[Warp NPC]";
+	mes "Hello, I can warp you to any Town and Dungeon! Were do you want to go?";
+	next;
+	menu "Towns",town,"Dungeons",dungeon,"Special",special,"Guild Dungeons",guildw;
+town:
+	menu "Alberta",walberta,"Aldebaran",waldebaran,"Amatsu",wamatsu,"Ayothaya",wayothaya,"Comodo",wcomodo,"Einbroch",weinbroch,"Einbech",weinbech,"Geffen",wgeffen,"Gonryun",wgonryun,"Hugel",whugel,"Izlude",wizlude,"Lighthalzen",wlighthalzen,"Louyang",wlouyang,"Lutie",wxmas,"Morroc",wmorroc,"Payon",wpayon,"Prontera",wprontera,"Rachel",wrachel,"Umbala",wumbala,"Veins",wveins,"Yuno",wyuno;
+dungeon:
+	menu "Abbey",dabbey,"Abyss Lake",dabbys,"Amatsu Dungeon",ama,"Ayothaya Dungeon",dayothaya,"Anthell",ant,"Beach Dungeon",beach,"Byalan Dungeon",byalan,"Clock Tower",clock,"Coal Mines",coal,"Culvert",culvert,"Einbech Dungeon",dein,"Gefenia",gefenia,"Geffen Dungeon",geffen,"Glast Heim",glast,"Gonryun Dungeon",gon,"Hidden Dungeon",hidden,"Ice Dungeon",dice,"Juperos",djuperos,"Kiel Dungeon",dkh,"Lighthalzen Bio Lab",dlighthalzen,"Magma Dungeon",magma,"Odin Temple",dodin,"Orc Dungeon",orc,"Payon Dungeon",payon,"Pyramids",pyramids,"Sanctuary",dsanc,"Sphinx",sphinx,"Sunken Ship",sunken,"Thor Dungeon",dthor,"Toy Factory",toy,"Thanatos Tower",dthanatos,"Turtle Dungeon",turtle;
+ant:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",danthell1;
+beach:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",dbeach1,"Level 2",dbeach2;
+byalan:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",dbyalan1,"Level 2",dbyalan2,"Level 3",dbyalan3,"Level 4",dbyalan4;
+clock:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",dclock1,"Level 2",dclock2,"Level 3",dclock3,"Basement 1",dalde1,"Basement 2",dalde2,"Basement 3",dalde3;
+coal:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",dcoal1,"Level 2",dcoal2;
+culvert:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",dculvert1,"Level 2",dculvert2,"Level 3",dculvert3;
+geffen:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",dgeffen1,"Level 2",dgeffen2;
+glast:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Entrance",dglastent,"Castle 1",dglastcast1,"Chivalry 1",dglastchiv1,"Culvert 1",dglastcul1,"Culvert 2",dglastcul1,"Culvert 3",dglastcul3,"Staircase Dungeon",dglaststep,"Underground Cave 1",dglastcave1,"Underground Prison 1",dglastpris1;
+hidden:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",dhidden1,"Level 2",dhidden2;
+magma:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",dmagma1;
+orc:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",dorc1;
+payon:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",dpayon1,"Level 2",dpayon2,"Level 3",dpayon3,"Level 4",dpayon4;
+pyramids:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",dpyramids1,"Level 2",dpyramids2,"Level 3",dpyramids3,"Basement 1",dpyramidsb1;
+sphinx:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",dsphinx1,"Level 2",dsphinx2,"Level 3",dsphinx3,"Level 4",dsphinx4;
+sunken:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",dsunken1;
+toy:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",dtoy1;
+turtle:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Entrance",dturtleent,"Level 1",dturtle1,"Level 2",dturtle2;
+ama:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",dama1,"Level 2",dama2;
+gon:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",dgon1,"Level 2",dgon2;
+gefenia:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",dgefenia1,"Level 2",dgefenia2,"Level 3",dgefenia3;
+special:
+	menu "Niflheim",nif,"Field of Nightmares",fon,"Crystal Caves",cc;
+nif:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",nif1,"Level 2",nif2;
+cc:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",cc1,"Level 2",cc2;
+guildw:
+	next;
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+	menu "Level 1",gld1,"Level 2",gld2,"Level 3",gld3,"Level 4",gld4;
+dabbys:
+	mes "[Warp Agent]";
+	mes "Select the level:";
+	next;
+	menu "Entrance",dabysse;
+dayothaya:
+	mes "[Warp Agent]";
+	mes "Select the level:";
+	next;
+	menu "Level 1",dayothaya1;
+dein:
+	mes "[Warp Agent]";
+	mes "Select the level:";
+	next;
+	menu "Level 1",dein1;
+djuperos:
+	mes "[Warp Agent]";
+	mes "Select the level:";
+	next;
+	menu "Entrance",djuperose;
+dlighthalzen:
+	mes "[Warp Agent]";
+	mes "Select the level:";
+	next;
+	menu "Level 1",dlighthalzen1;
+dodin:	
+	mes "[Warp Agent]";
+	mes "Select the level:";
+	next;
+	menu "Level 1",dodin1;
+dthanatos:
+	mes "[Warp Agent]";
+	mes "Select the level:";
+	next;
+	menu "Level 1",dthanatos1;
+dabbey:
+	mes "[Warp Agent]";
+	mes "Select the level.";
+	next;
+	menu "Level 1",dwabbey1;
+dthor:
+	mes "[Warp Agent]";
+	mes "Select the level.";
+	next;
+	menu "Level 1",dwthor1;
+dsanc:
+	mes "[Warp Agent]";
+	mes "Select the level.";
+	next;
+	menu "Level 1",dwsanc1;
+dice:
+	mes "[Warp Agent]";
+	mes "Select the level.";
+	next;
+	menu "Level 1",dwice1;
+dkh:
+	mes "[Warp Agent]";
+	mes "Select the level.";
+	next;
+	menu "Level 1",dwkh1;
+	
+//----------------Towns----------------\\
+walberta:	warp "alberta.gat",	27,	236;	close; end;
+waldebaran:	warp "aldebaran.gat",	145,	120;	close; end;
+wamatsu:	warp "amatsu.gat",	197,	86;	close; end;
+wayothaya:	warp "ayothaya.gat",	149,	118;	close; end;
+wcomodo:   	warp "comodo.gat",	188,	161;    close; end;
+weinbroch:   	warp "einbroch.gat",	64, 	200;	close; end;
+weinbech:   	warp "einbech.gat",	70, 	95;	close; end;
+wgeffen:	warp "geffen.gat",	119,	66;	close; end;
+wgonryun:	warp "gonryun.gat",	150,    130; 	close; end;
+whugel:   	warp "hugel.gat",	96,	145;    close; end;
+wizlude:	warp "izlude.gat",	128,	111;	close; end;
+wlighthalzen:	warp "lighthalzen.gat",	158,	92;	close; end;
+wlouyang:	warp "louyang.gat",	210,	108;	close; end;
+wmorroc:	warp "morocc.gat",	159,	93;	close; end;
+wprontera:	warp "prontera.gat",	156,	187;	close; end;
+wpayon:	warp "payon.gat",	152,	75;	close; end;
+wumbala:	warp "umbala.gat",	130,    130; 	close; end;
+wxmas:	warp "xmas.gat",	148,	131;	close; end;
+wyuno:   	warp "yuno.gat",	160,	168;    close; end;
+wrachel:	warp "rachel.gat",	130,	110;	close; end;
+wveins:	warp "veins.gat",	216,	123;	close; end;
+//----------------Dungeons----------------\\
+
+danthell1:	warp "anthell01.gat",35,262;	close; end;
+danthell2:	warp "anthell02.gat",168,170;	close; end;
+dbeach1:	warp "beach_dun.gat",266,67;	close; end;
+dbeach2:	warp "beach_dun2.gat",255,244;	close; end;
+dbeach3:	warp "beach_dun3.gat",23,260;	close; end;
+dbyalan1:	warp "iz_dun00.gat",168,168;	close; end;
+dbyalan2:	warp "iz_dun01.gat",253,252;	close; end;
+dbyalan3:	warp "iz_dun02.gat",236,204;	close; end;
+dbyalan4:	warp "iz_dun03.gat",32,63;	close; end;
+dbyalan5:	warp "iz_dun04.gat",26,27;	close; end;
+dalde1:		warp "alde_dun01.gat",297,25;	close; end;
+dalde2:		warp "alde_dun02.gat",127,169;	close; end;
+dalde3:		warp "alde_dun03.gat",277,178;	close; end;
+dalde4:		warp "alde_dun04.gat",268,74;	close; end;
+dclock1:	warp "c_tower1.gat",199,159;	close; end;
+dclock2:	warp "c_tower2.gat",148,283;	close; end;
+dclock3:	warp "c_tower3.gat",65,147;	close; end;
+dclock4:	warp "c_tower4.gat",56,155;	close; end;
+dcoal1:		warp "mjo_dun01.gat",52,17;	close; end;
+dcoal2:		warp "mjo_dun02.gat",381,343;	close; end;
+dcoal3:		warp "mjo_dun03.gat",302,262;	close; end;
+dculvert1:	warp "prt_sewb1.gat",131,247;	close; end;
+dculvert2:	warp "prt_sewb2.gat",19,19;	close; end;
+dculvert3:	warp "prt_sewb3.gat",180,169;	close; end;
+dculvert4:	warp "prt_sewb4.gat",100,92;	close; end;
+dgeffen1:	warp "gef_dun00.gat",104,99;	close; end;
+dgeffen2:	warp "gef_dun01.gat",115,236;	close; end;
+dgeffen3:	warp "gef_dun02.gat",106,132;	close; end;
+dgeffen4:	warp "gef_dun03.gat",203,200;	close; end;
+dglastent:	warp "glast_01.gat",370,304;	close; end;
+dglastcast1:	warp "gl_cas01.gat",199,29;	close; end;
+dglastcast2:	warp "gl_cas02.gat",104,25;	close; end;
+dglastchiv1:	warp "gl_knt01.gat",150,15;	close; end;
+dglastchiv2:	warp "gl_knt02.gat",157,287;	close; end;
+dglastyard:	warp "gl_chyard.gat",147,15;	close; end;
+dglastcul1:	warp "gl_sew01.gat",258,255;	close; end;
+dglastcul2:	warp "gl_sew02.gat",108,291;	close; end;
+dglastcul3:	warp "gl_sew03.gat",171,283;	close; end;
+dglastcul4:	warp "gl_sew04.gat",68,277;	close; end;
+dglastchur:	warp "gl_church.gat",156,7;	close; end;
+dglaststep:	warp "gl_step.gat",12,7;	close; end;
+dglastcave1:	warp "gl_dun01.gat",133,271;	close; end;
+dglastcave2:	warp "gl_dun02.gat",224,274;	close; end;
+dglastpris1:	warp "gl_prison.gat",14,70;	close; end;
+dglastpris2:	warp "gl_prison1.gat",150,14;	close; end;
+dhidden1:	warp "prt_maze01.gat",176,7;	close; end;
+dhidden2:	warp "prt_maze02.gat",94,29;	close; end;
+dhidden3:	warp "prt_maze03.gat",23,8;	close; end;
+dmagma1:	warp "mag_dun01.gat",126,68;	close; end;
+dmagma2:	warp "mag_dun02.gat",47,30;	close; end;
+dorc1:		warp "orcsdun01.gat",32,170;	close; end;
+dorc2:		warp "orcsdun02.gat",21,185;	close; end;
+dpayon1:	warp "pay_dun00.gat",21,183;	close; end;
+dpayon2:	warp "pay_dun01.gat",19,33;	close; end;
+dpayon3:	warp "pay_dun02.gat",19,63;	close; end;
+dpayon4:	warp "pay_dun03.gat",155,159;	close; end;
+dpayon5:	warp "pay_dun04.gat",201,204;	close; end;
+dpyramids1:	warp "moc_pryd01.gat",192,9;	close; end;
+dpyramids2:	warp "moc_pryd02.gat",10,192;	close; end;
+dpyramids3:	warp "moc_pryd03.gat",100,92;	close; end;
+dpyramids4:	warp "moc_pryd04.gat",181,11;	close; end;
+dpyramidsb1:	warp "moc_pryd05.gat",94,96;	close; end;
+dpyramidsb2:	warp "moc_pryd06.gat",192,8;	close; end;
+dsphinx1:	warp "in_sphinx1.gat",288,9;	close; end;
+dsphinx2:	warp "in_sphinx2.gat",149,81;	close; end;
+dsphinx3:	warp "in_sphinx3.gat",210,54;	close; end;
+dsphinx4:	warp "in_sphinx4.gat",10,222;	close; end;
+dsphinx5:	warp "in_sphinx5.gat",100,99;	close; end;
+dsunken1:	warp "treasure01.gat",69,24;	close; end;
+dsunken2:	warp "treasure02.gat",102,27;	close; end;
+dtoy1:		warp "xmas_dun01.gat",205,17;	close; end;
+dtoy2:		warp "xmas_dun02.gat",129,133;	close; end;
+dturtleent:	warp "tur_dun01.gat",154,49;	close; end;
+dturtle1:	warp "tur_dun02.gat",148,261;	close; end;
+dturtle2:	warp "tur_dun03.gat",132,189;	close; end;
+dturtle3:	warp "tur_dun04.gat",100,192;	close; end;
+dama1:		warp "ama_dun01.gat",228,11;	close; end;
+dama2:		warp "ama_dun02.gat",34,41;	close; end;
+dama3:		warp "ama_dun03.gat",119,14;	close; end;
+dgon1:		warp "gon_dun01.gat",153,53;	close; end;
+dgon2:		warp "gon_dun02.gat",28,113;	close; end;
+dgon3:		warp "gon_dun03.gat",68,16;	close; end;
+dgefenia1:	warp "gefenia01.gat",40,103;	close; end;
+dgefenia2:	warp "gefenia02.gat",203,34;	close; end;
+dgefenia3:	warp "gefenia03.gat",266,168;	close; end;
+dgefenia4:	warp "gefenia04.gat",130,272;	close; end;
+dabysse:	warp "hu_fild05.gat",189,207;	close; end;
+dabyss1:	warp "abyss_01.gat",264,271;	close; end;
+dabyss2:	warp "abyss_02.gat",275,270;	close; end;
+dabyss3:	warp "abyss_03.gat",116,27;	close; end;
+dayothaya1:	warp "ayo_dun01.gat",275,17;	close; end;
+dayothaya2:	warp "ayo_dun02.gat",282,150;	close; end;
+dein1:		warp "ein_dun01.gat",22,14;	close; end;
+dein2:		warp "ein_dun02.gat",292,290;	close; end;
+djuperose:	warp "yuno_fild07.gat",218,176;	close; end;
+djcave1:	warp "jupe_cave.gat",143,52;	close; end;
+dj12:		warp "juperos_01.gat",53,247;	close; end;
+dj23:		warp "juperos_02.gat",36,60;	close; end;
+djeler4:	warp "yuno_fild07.gat",218,176;	close; end;
+djgate5:	warp "jupe_gate.gat",49,52;	close; end;
+djarea16:	warp "jupe_area1.gat",115,158;	close; end;
+djare27:	warp "jupe_area2.gat",48,158;	close; end;
+dlighthalzen1:	warp "lhz_dun01.gat",150,286;	close; end;
+dlighthalzen2:	warp "lhz_dun02.gat",150,18;	close; end;
+dlighthalzen3:	warp "lhz_dun03.gat",140,137;	close; end;
+dodin1:		warp "odin_tem01.gat",98,144;	close; end;
+dodin2:		warp "odin_tem01.gat",22,181;	close; end;
+dodin3:		warp "odin_tem01.gat",121,51;	close; end;
+dthanatos1:	warp "tha_scene01.gat",131,223;	close; end;
+dthanatos2:	warp "tha_t01.gat",150,39;	close; end;
+dthanatos3:	warp "tha_t02.gat",150,136;	close; end;
+dthanatos4:	warp "tha_t03.gat",220,158;	close; end;
+dthanatos5:	warp "tha_t04.gat",59,143;	close; end;
+dthanatos6:	warp "tha_t05.gat",62,11;	close; end;
+dthanatos7:	warp "tha_t06.gat",206,8;	close; end;
+dthanatos8:	warp "tha_t07.gat",65,166;	close; end;
+dthanatos9:	warp "tha_t08.gat",104,44;	close; end;
+dthanatos10:	warp "tha_t09.gat",88,145;	close; end;
+dthanatos11:	warp "tha_t10.gat",168,138;	close; end;
+dthanatos12:	warp "tha_t11.gat",90,36;	close; end;
+dthanatos13:	warp "tha_t12.gat",129,52;	close; end;
+dthanatos14:	warp "thana_boss.gat",85,76;	close; end;
+
+dwthor1:	warp "thor_v01.gat",21,229;	close; end;
+dwice1:	warp "ice_dun01.gat",157,15;	close; end;
+dwsanc1:	warp "ra_san01.gat",139,135;	close; end;
+dwabbey1:	warp "abbey01.gat",52,13;	close; end;
+dwkh1:	warp "kh_dun01.gat",4,230;	close; end;
+
+//----------------Special----------------\\
+
+nif1:	warp "nif_fild02.gat",372,236;	close; end;
+nif2:	warp "nif_fild01.gat",338,321;	close; end;
+fon:	warp "gon_fild01.gat",262,227;  close; end;
+gld1:	warp "gld_dun01.gat",120,57;  close; end;
+gld2:	warp "gld_dun02.gat",39,161;  close; end;
+gld3:	warp "gld_dun03.gat",236,257;  close; end;
+gld4:	warp "gld_dun04.gat",50,218;  close; end;
+cc1:	warp "um_dun01.gat",42,35;	close; end;
+cc2:	warp "um_dun02.gat",45,32;	close; end;
+}
+alberta.gat,31,240,4	duplicate(warpra)	Warp NPC#w1	115
+aldebaran.gat,145,118,4	duplicate(warpra)	Warp NPC#w2	115
+amatsu.gat,194,79,1	duplicate(warpra)	Warp NPC#w3	115
+comodo.gat,194,158,4	duplicate(warpra)	Warp NPC#w4	115
+geffen.gat,115,66,4	duplicate(warpra)	Warp NPC#w5	115
+izlude.gat,131,116,4	duplicate(warpra)	Warp NPC#w6	115
+xmas_fild01.gat,115,174,4	duplicate(warpra)	Warp NPC#w7	115
+morocc.gat,156,97,4	duplicate(warpra)	Warp NPC#w8	115
+payon.gat,182,110,4	duplicate(warpra)	Warp NPC#w9	115
+prontera.gat,156,188,4	duplicate(warpra)	Warp NPC#w10	115
+yuno.gat,137,162,4	duplicate(warpra)	Warp NPC#w11	115
+moc_fild04.gat,207,331,4	duplicate(warpra)	Warp NPC#w12	115
+izlu2dun.gat,104,82,4	duplicate(warpra)	Warp NPC#w13	115
+mjolnir_02.gat,85,363,4	duplicate(warpra)	Warp NPC#w14	115
+prt_fild05.gat,273,215,4	duplicate(warpra)	Warp NPC#w15	115
+glast_01.gat,370,308,4	duplicate(warpra)	Warp NPC#w16	115
+yuno_fild03.gat,37,135,4	duplicate(warpra)	Warp NPC#w17	115
+gef_fild10.gat,71,339,4	duplicate(warpra)	Warp NPC#w18	115
+pay_arche.gat,39,135,4	duplicate(warpra)	Warp NPC#w19	115
+moc_ruins.gat,64,166,4	duplicate(warpra)	Warp NPC#w20	115
+moc_fild19.gat,106,97,4	duplicate(warpra)	Warp NPC#w21	115
+alb2trea.gat,73,101,4	duplicate(warpra)	Warp NPC#w22	115
+tur_dun01.gat,148,239,4	duplicate(warpra)	Warp NPC#w23	115
+gonryun.gat,151,130,4	duplicate(warpra)	Warp NPC#w24	115
+louyang.gat,210,106,4	duplicate(warpra)	Warp NPC#w25	115
+umbala.gat,132,130,4	duplicate(warpra)	Warp NPC#w26	115
+valkyrie.gat,48,35,8	duplicate(warpra)	Warp NPC#w28	115
+ayothaya,171,145,5	duplicate(warpra)	Warp NPC#w29	115

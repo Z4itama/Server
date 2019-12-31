@@ -1,0 +1,617 @@
+//===== eAthena Script ======================================= 
+//= Warlock Job Quest
+//===== By: ================================================== 
+//= alexxdls
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Initial Version]
+//= Job Change quest for Warlock class.
+//= Dialogs are taken from videos captured at pRO and iRO
+//===== Additional Comments: ================================= 
+//= 1.0 First public release. [alexx]
+//============================================================
+
+morocc,102,143,0	script	SecretEntrence#wrlk1	994,{
+	end;
+	
+OnTouch:
+	if ((BaseLevel == 99 && (BaseClass == Job_Wizard && ((Upper == 0 && JobLevel > 49) || (Upper == 1 && JobLevel > 59))) && ep13_2_rhea > 99) || BaseClass == Job_Warlock) {
+		mes "- There is a strange distortion here -";
+		next;
+		switch(select("Search the area.","Ignore it.")) {
+			case 1:
+				mes "- There appears to be nothing here. But I can definitely feel something around here... -";
+				next;
+				switch(select("Extend arm.","Leave it alone.")) {
+					case 1:
+						mes "- I extend my arm as a fierce sound resonetes in your ear and a coll wave surround you. -";
+						close2;
+						warp "spl_in02",79,102;
+						end;
+					case 2:
+						close;
+				}
+			case 2:
+				close;
+		}
+	}	
+}
+
+splendide,140,284,0	duplicate(SecretEntrence#wrlk1)	SecretEntrence#wrlk2	-1,1,1
+
+spl_in02,80,108,5	script	Guild Master#wrlk	465,{
+OnFirstVisit:
+	if (WARLOCK_Q < 1) {
+		mes "[Assistant]";
+		mes "Huh!!! Human!?!";
+		mes "How did you enter here?";
+		mes "This is only connected by a special gate!";		
+		next;
+		mes "[Assistant]";
+		mes "I don't know how...";
+		mes "But we should leave before my master spots you...!";		
+		next;
+		mes "[???]";
+		mes "What's that noise out there?";
+		mes "I warned them to be quiet while I'm meditating.";		
+		next;
+		mes "[Assistant]";
+		mes "Huh!?!";
+		mes "Master...";
+		mes "It's nothing...";			
+		next;
+		mes "[Master]";
+		mes "Oh~ there's a human being in front of me.";
+		next;
+		mes "[Assistant]";
+		mes "Oh this thing?";
+		mes "I was just leading it out.";		
+		next;
+		mes "[Master]";
+		mes "Yoop!!!";
+		next;
+		mes "[Yoop]";
+		mes "Yeap...!";
+		next;
+		mes "[Master]";
+		mes "There's the warp portal beyond you... Is it an illusion?";
+		next;
+		mes "[Yoop]";
+		mes "Sorry!!!";
+		mes "It's my mistake...";		
+		next;
+		mes "[Master]";
+		mes "Fool...";
+		mes "I'll deal with you after you send the human away.";
+		next;
+		mes "[Master]";
+		mes "MushSartas Ir Cyamar";
+		mes "UdenLo";
+		next;
+		mes "- The fairy with the green hair chants a spell. -";
+		mes "- I feel like something special surrounds me. -";
+		specialeffect2 EF_DISPELL;
+		next;
+		mes "[Master]";
+		mes "Oh, that's interesting.";
+		mes "How dare you resist me human?";
+		next;
+		switch(select("I'm not sure. Who are you?")) {
+			mes "[Master]";
+			mes "I am the leader of the ^000077Warlock^000000s.";
+			mes "'^000077Sila Egnoloria^000000'";
+			mes "If you are a Wizard, it would be good of you to memorize my name.";			
+			next;
+			switch(select("What is a ^000077Warlock^000000?")) {
+				mes "[Master Egnoloria]";
+				mes "Oh are you interested?";
+				next;				
+				mes "[Master Egnoloria]";
+				mes "A ^000077Warlock^000000 is one who uses the magic of the giants of Jotunheim.";
+				mes "It can't be defined in any other words.";
+				next;				
+				mes "[Master Egnoloria]";
+				mes "Only strong magic can explain it.";
+				next;	
+				mes "[Master Egnoloria]";
+				mes "Only strong magic can explain it.";
+				next;
+				switch(select("Could I becime a Warlock?")) {
+					case 1:
+						mes "[Master Egnoloria]";
+						mes "You?";
+						mes "You wanna become a Warlock?";	
+						mes "Hahaha.";				
+						next;
+						mes "[Master Egnoloria]";
+						mes "You're so interesting."; 
+						mes "It would be difficult for a human to become a Warlock.";	
+						mes "The strong power would gnaw at your weak body.";				
+						next;		
+						mes "[Master Egnoloria]";
+						mes "If you dare to face death, you can try to become one.";				
+						next;
+						switch(select("What do I need to do?","Cancel.")) {
+							case 1:
+								mes "[Master Egnoloria]";
+								mes "Are you serious?";	
+								mes "You hunger for power, don't you, human?";				
+								next;	
+								mes "[Master Egnoloria]";
+								mes "The strong desire to be more powerful makes your soul more beautiful.";				
+								next;
+								mes "[Master Egnoloria]";
+								mes "But, I need to check that you're qualified.";				
+								next;	
+								mes "[Master Egnoloria]";
+								mes "Yoop!";				
+								next;
+								mes "[Yoop]";
+								mes "Yeap!";				
+								next;
+								mes "[Master Egnoloria]";
+								mes "Give this to the human.";				
+								next;
+								mes "[Master Egnoloria]";
+								mes "Talk to the guy with the weird hair.";
+								mes "He'll let you know what you should do.";
+								set WARLOCK_Q,1;
+								setquest 11106;
+								close;							
+							case 2:
+								close;
+					}	
+				}
+			}
+		}
+	}	
+	if (WARLOCK_Q > 0 && WARLOCK_Q < 3)  {
+		mes "[Master Egnoloria]";
+		mes "......";
+		next;	
+		mes "[Yoop]";
+		mes "My master is meditating now, please follow me.";
+		donpcevent "Assistant#wrlk1::OnEmotionIdea";
+		close;
+	}
+	if (WARLOCK_Q == 3) {
+		mes "[Master Egnoloria]";
+		mes "I've heard from Yoop that a very useful stone can be created.";
+		mes "Kkk.";		
+		next;
+		mes "[Master Egnoloria]";
+		mes "It can be used to make magical jewlery that can cast powerful magic.";
+		next;
+		mes "[Master Egnoloria]";
+		mes "Yoop.";
+		next;	
+		mes "[Yoop]";
+		mes "Yeap, Master!";
+		next;
+		mes "[Master Egnoloria]";
+		mes "Please take him to the magical room.";
+		next;
+		mes "[Yoop]";
+		mes "Yup, Master.";
+		mes "Please follow me.";
+		donpcevent "Assistant#wrlk2::OnEmotionIdea";
+		set WARLOCK_Q,4;
+		changequest 11108,11109;
+		close;
+	}
+	if (WARLOCK_Q > 3 && WARLOCK_Q < 9)  {
+		mes "[Master Egnoloria]";
+		mes "......";
+		next;	
+		mes "[Yoop]";
+		mes "My master is meditating now, please follow me.";
+		donpcevent "Assistant#wrlk2::OnEmotionIdea";
+		close;
+	}
+	if (WARLOCK_Q == 9)  {
+		mes "[Master Egnoloria]";
+		mes "Beautiful light...";
+		mes "Don't make me disappointed at you...";		
+		next;	
+		mes "[Master Egnoloria]";
+		mes "You have become a member of the Warlocks.";
+		mes "Be proud.";
+		next;	
+		mes "[Master Egnoloria]";
+		mes "This crystallized magical stone will keep you safe.";
+		set WARLOCK_Q,10;
+		completequest 11112;
+		jobchange Warlock;
+		getitem 5753,1; //Magic_Stone_Hat			
+		getitem 2795,1; //Green_Apple_Ring	
+		close;
+	}
+	if (WARLOCK_Q > 9)  {	
+		mes "[Master Egnoloria]";
+		mes "You have become a member of the Warlocks.";
+		mes "Be proud.";
+		close;
+	}		
+}
+
+spl_in02,77,107,5	script	Assistant#wrlk1	437,{
+	if (WARLOCK_Q < 1) {
+		donpcevent "Guild Master#wrlk::OnFirstVisit";
+		end;	
+	}
+	if (WARLOCK_Q > 0 && WARLOCK_Q < 3) {
+		if (WARLOCK_Q == 1) {
+			mes "[Yoop]";
+			mes "Dear, master! My pony-tail is funny looking?!";
+			mes "Oh, but I spent a lot time on it!";		
+			next;
+			mes "[Master Egnoloria]";
+			mes "It's noisy.";
+			mes "I need to meditate so do as I said.";
+			next;
+			mes "[Yoop]";
+			mes "Huh..";
+			mes "Oh, yeah!";		
+			next;	
+			mes "[Yoop]";
+			mes "Hey, human!";
+			mes "Would you like to become a Warlock?";	
+			mes "This is the Master's decision so let me know.";
+			next;
+			mes "[Yoop]";
+			mes "We need to test if your body can withstand being a Warlock?";	
+			mes "So you need to gather materials to prove yourself.";
+			next;
+		}
+		mes "[Yoop]";
+		mes "Please gather ^000077Glittering Crystal^000000s";	
+		mes "and Giant ^000077Bradium Fragment^000000s.";
+		next;
+		mes "[Yoop]";		
+		mes "You must be wearing these Magical Stone Rings to get these items while hunting.";	
+		mes "You need to hunt Naga and Bradium Golems while wearing these rings.";
+		next;
+		if (WARLOCK_Q == 1) {
+			mes "[Yoop]";
+			mes "Show us how strong you are.";			
+			getitem 2796,1; //Rocks
+			getitem 2797,1; //Rocks
+			set WARLOCK_Q,2;
+			changequest 11106,11107;
+			next;
+		}
+		mes "[Yoop]";
+		mes "Bring these stones with you or else you won't be able to return!";	
+		mes "Be creful!";
+		next;
+		mes "[Yoop]";
+		mes "One of Mster's assistants will let you out if you talk to him.";	
+		mes "Be creful!";
+		next;
+		mes "[Yoop]";
+		mes "My lab is located on the north western part of Splendide. Bring these to me when you've gathered them.";			
+		close;
+	}
+	if (WARLOCK_Q > 2 && WARLOCK_Q < 10)  {
+		mes "[Assistant]";
+		mes "It's not me you are looking for currently.";
+		close;
+	}
+	if (WARLOCK_Q > 9)  {	
+		mes "[Assistant]";
+		mes "You have become a member of the Warlocks.";
+		mes "Be proud.";
+		close;
+	}
+
+OnEmotionIdea:
+	emotion e_ic;
+	end;	
+}
+
+spl_in02,60,231,5	script	Yoop#wrlk	437,{
+	if (WARLOCK_Q < 1) {
+		mes "[Yoop]";
+		mes "Huh!!! Human!?!";	
+		close;
+	}
+	if (WARLOCK_Q == 1) {
+		mes "[Yoop]";
+		mes "Hey, human!";
+		mes "Would you like to become a Warlock?";	
+		mes "This is the Master's decision so let me know.";	
+		close;
+	}	
+	if (WARLOCK_Q == 2) {
+		mes "[Yoop]";
+		mes "Are you back?";
+		next;
+		switch(select("I brought the materials.","I've lost the stone.","Nothing.")) {
+			case 1:
+				if (countitem(6151) > 0 && countitem(6152) > 0) {
+					mes "[Yoop]";
+					mes "Alright! All the materials are ready!";
+					mes "While I am concentrating on working on this stone. Can you go back to my master?";
+					mes "I will follow up once it's done.";
+					delitem 6151,countitem(6151);
+					delitem 6152,countitem(6152);
+					getitem 2796,1; 
+					getitem 2797,1;				
+					set WARLOCK_Q,3;
+					changequest 11107,11108;					
+					close;				
+				}
+				else {
+					mes "[Yoop]";
+					mes "You should gather ^000077Glittering Crystal^000000s";	
+					mes "and Giant ^000077Bradium Fragment^000000s.";
+					next;
+					mes "[Yoop]";		
+					mes "You must be wearing these Magical Stone Rings to get these items while hunting.";	
+					mes "You need to hunt Naga and Bradium Golems while wearing these rings.";
+					close;
+				}
+			case 2:
+				close;
+			case 3:
+				close;
+		}
+	}
+	if (WARLOCK_Q == 3) {
+		mes "[Yoop]";
+		mes "While I am concentrating on working on this stone. Can you go back to my master?";
+		mes "I will follow up once it's done.";	
+		close;
+	}
+	if (WARLOCK_Q > 3 && WARLOCK_Q < 10)  {
+		mes "[Yoop]";
+		mes "It's not me you are looking for currently.";
+		close;
+	}
+	if (WARLOCK_Q > 9)  {	
+		mes "[Yoop]";
+		mes "You have become a member of the Warlocks.";
+		mes "Be proud.";
+		close;
+	}	
+}
+
+spl_in02,84,103,3	script	Assistant#wrlk2	439,{
+	if (WARLOCK_Q < 1) {
+		donpcevent "Guild Master#wrlk::OnFirstVisit";
+		end;	
+	}
+	if (WARLOCK_Q > 0 && WARLOCK_Q < 4)  {
+		mes "[Assistant]";
+		mes "It's not me you are looking for currently.";
+		close;
+	}	
+	if (WARLOCK_Q > 3 && WARLOCK_Q < 8) {
+		if (WARLOCK_Q == 4) {
+			mes "[Yoop]";
+			mes "The test isn't that hard.";
+			mes "We can create the magic stone the magic room.";
+			next;	
+			mes "[Yoop]";
+			mes "Be careful of the monsters in the room.";
+			mes "These are rainbow Rubies sealed with a Warlock's magic.";
+			mes "Use these during the test.";
+			next;
+			mes "[Yoop]";
+			mes "I will guide you into the magic room.";
+		}
+		else {
+			mes "[Assistant]";
+			mes "Would you like to try it again?";
+			mes "Let me give you more rubies.";
+			next;	
+			mes "[Assistant]";
+			mes "Would you like to try it again?";
+			mes "Let me give you more rubies.";		
+		}
+		set WARLOCK_Q,5;
+		changequest 11109,11110;		
+		getitem 12384,5-countitem(12384); //Rainbow_Ruby
+		getitem 12385,5-countitem(12385); //Rainbow_Ruby
+		getitem 12386,5-countitem(12386); //Rainbow_Ruby
+		getitem 12387,5-countitem(12387); //Rainbow_Ruby
+		close2;	
+		warp "job3_war01",23,20;
+		end;
+	}
+	if (WARLOCK_Q > 7 && WARLOCK_Q < 10)  {
+		if (WARLOCK_Q == 8)  {
+			mes "[Assistant]";
+			mes "So have successfully crystallized the hollow stone.";
+			mes "Sorry for doubting you.";
+			next;
+		}
+		mes "[Assistant]";
+		mes "All of the tests are done.";
+		mes "Now talk to Master Egnoloria.";
+		mes "I'm so happy that you have succeeded.";
+		if (WARLOCK_Q == 8)  {
+			delitem 12384,countitem(12384);
+			delitem 12385,countitem(12385);
+			delitem 12386,countitem(12386);
+			delitem 12387,countitem(12387);		
+			set WARLOCK_Q,9;
+			changequest 11111,11112;
+		}
+		close;
+	}
+	if (WARLOCK_Q > 9)  {	
+		mes "[Assistant]";
+		mes "You have become a member of the Warlocks.";
+		mes "Be proud.";
+		close;
+	}	
+	
+OnEmotionIdea:
+	emotion e_ic;
+	end;
+}
+
+job3_war01,29,25,7	script	Ebein#wrlk	439,{
+	end;
+
+OnInit:
+	waitingroom "The chamber of magic",10,"Ebein#wrlk::OnStartArena",1;
+	enablewaitingroomevent;
+	end;
+
+OnStartArena:
+	donpcevent "WarlockTest::OnMobSpawn1";
+	sleep2 2000;
+	warpwaitingpc "job3_war02",30,27;
+	disablewaitingroomevent;	
+	donpcevent "WarlockTest::OnEnable";
+	end;
+
+OnStart:
+	enablewaitingroomevent;
+	end;
+}
+
+-	script	WarlockTest	-1,{
+	end;
+	
+OnEnable:
+	set WARLOCK_Q,6;
+	set .MobWave,1;
+	initnpctimer;
+	sleep2 2000;
+	mapannounce "job3_war02","The chamber of magic: Magical power fragments has been created in the magical power room.",bc_map;
+	mapannounce "job3_war02","The chamber of magic: We should defend this room from monsters for 5 min.",bc_map;
+	mapannounce "job3_war02","The chamber of magic: Once we've destroed all monsters, we will start to stabilaze.",bc_map;
+	end;
+
+OnMobSpawn1:
+	set .MyMobs,8;
+	monster "job3_war02",23,32,"Naga",2047,2,"WarlockTest::OnMyMobDead1";
+	monster "job3_war02",23,21,"Dark Pinguicula",2048,2,"WarlockTest::OnMyMobDead1";
+	monster "job3_war02",34,32,"Bradium Golem",2049,2,"WarlockTest::OnMyMobDead1";	
+	monster "job3_war02",34,21,"Aqua Elemental",2050,2,"WarlockTest::OnMyMobDead1";	
+	end;
+	
+OnMyMobDead1:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		set .MobWave,.MobWave+1;
+		stopnpctimer;
+		initnpctimer;
+		mapannounce "job3_war02","The chamber of magic: The Monster invation has been stopped.",bc_map;
+		if (.MobWave == 2)
+			donpcevent "WarlockTest::OnMobSpawn1";
+		else
+			donpcevent "WarlockTest::OnMobSpawn2";
+		sleep2 2000;
+		if (.MobWave == 2)
+			mapannounce "job3_war02","The chamber of magic: Defend this room from monsters for 5 min.",bc_map;
+		else
+			mapannounce "job3_war02","The chamber of magic: Defend this room from monsters for 1 min.",bc_map;
+		mapannounce "job3_war02","The chamber of magic: Destroy all the monsters, and the Chamber will stabilaze.",bc_map;
+	}
+	end;
+	
+OnMobSpawn2:
+	set .MyMobs,8;
+	monster "job3_war02",23,32,"Magic Monster",1725,2,"WarlockTest::OnMyMobDead2";
+	monster "job3_war02",34,32,"Magic Monster",1725,2,"WarlockTest::OnMyMobDead2";
+	monster "job3_war02",23,21,"Magic Monster",1725,2,"WarlockTest::OnMyMobDead2";
+	monster "job3_war02",34,21,"Magic Monster",1725,2,"WarlockTest::OnMyMobDead2";	
+	end;
+
+OnMyMobDead2:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		set .MobWave,.MobWave+1;
+		set WARLOCK_Q,7;			
+		stopnpctimer;
+		initnpctimer;	
+		donpcevent "WarlockTest::OnMobSpawn3";	
+	}
+	end;
+	
+OnMobSpawn3:
+	mapannounce "job3_war02","Hollow Stone: The Hollow Stone needs to be crystallized with magic.",bc_map;
+	mapannounce "job3_war02","Hollow Stone: The Hollow Stone will absorb any magic thrown at it.",bc_map;
+	mapannounce "job3_war02","Hollow Stone: You have 10 minutes to crystallize the Hollow Stone with your magic.",bc_map;
+	monster "job3_war02",29,32,"Hollow Stone",1908,1,"WarlockTest::OnTestComplete"; //S_EMPEL_2,Guardian Stone?
+	end;
+
+OnTestComplete:
+	set WARLOCK_Q,8;
+	changequest 11110,11111;	
+	mapannounce "job3_war02","Hollow Stone: The Hollow Stone is crystallized with enough magic power.",bc_map;
+	sleep2 2000;
+	warp "spl_in02",79,102;
+	donpcevent "Ebein#wrlk::OnStart";
+	end;
+
+OnTimer60000:
+	if (.MobWave == 3) {
+		stopnpctimer;
+		warp "spl_in02",79,102;	
+		killmonsterall "job3_war02";
+		donpcevent "Ebein#wrlk::OnStart";		
+	}
+	end;
+
+OnTimer300000:
+	if (.MobWave < 3) {
+		stopnpctimer;
+		warp "spl_in02",79,102;	
+		killmonsterall "job3_war02";
+		donpcevent "Ebein#wrlk::OnStart";
+	}	
+	end;
+	
+OnTimer600000:
+	if (.MobWave == 4) {
+		stopnpctimer;
+		warp "spl_in02",79,102;		
+		killmonsterall "job3_war02";
+		donpcevent "Ebein#wrlk::OnStart";		
+	}
+	end;
+}	
+
+spl_in02,76,110,5	script	Assistant#teleport1	437,{
+	if (WARLOCK_Q < 1) {
+		donpcevent "Guild Master#wrlk::OnFirstVisit";
+		end;
+	}
+	if (WARLOCK_Q > 0) {
+		mes "[Assistant]";
+		mes "Please be quiet while my master is meditating.";
+		next;
+		switch(select("Leave.","Cancel.")) {
+			case 1:
+				mes "[Assistant]";
+				mes "Then be careful.";
+				close2;
+				warp "splendide",200,100;
+			case 2:
+				close;
+		}
+	}	
+}
+
+job3_war01,22,22,7	script	Yoop#teleport2	437,{
+	mes "[Assistant]";
+	mes "I can warp you away from testing room.";
+	next;
+	switch(select("Leave.","Cancel.")) {
+		case 1:
+			mes "[Assistant]";
+			mes "Then be careful.";
+			close2;
+			warp "spl_in02",79,102;	
+		case 2:
+			close;
+	}	
+}

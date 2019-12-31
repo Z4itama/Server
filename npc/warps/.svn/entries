@@ -1,0 +1,59 @@
+10
+
+dir
+650
+http://3ceam.googlecode.com/svn/trunk/rewrite/npc/warps
+http://3ceam.googlecode.com/svn
+
+
+
+2011-03-26T11:19:38.215290Z
+602
+xazax.hun
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ca0df34e-21c1-4b9e-08a3-f23acb074bb3
+
+cities
+dir
+
+other
+dir
+
+disabled_warps.txt
+file
+
+
+
+
+
+df57b9fd4842a2f2caba1a21724d4014
+2010-11-20T08:15:07.251631Z
+562
+xazax.hun
+has-props
+
+dungeons
+dir
+
+guild
+dir
+
+pvp
+dir
+
+fields
+dir
+

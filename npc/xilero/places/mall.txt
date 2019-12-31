@@ -1,0 +1,2017 @@
+//------------------------- MODED on 5/18/08 --------------------------------------------------------
+
+/* 
+ra_temsky.gat,128,103,6	shop	Daggers	810,1211:-1,1214:-1,1217:-1,1220:-1,1226:-1,1206:50000,1203:50000,1209:100000
+ra_temsky.gat,131,103,6	shop	Swords	852,1111:-1,1114:-1,1120:-1,1125:-1,1124:50000,1127:-1,1128:-1,1129:-1,1152:-1,1155:-1,1158:-1,1162:-1,1163:-1,1103:80000
+ra_temsky.gat,134,103,6	shop	Axes	813,1304:15000,1305:-1,1355:-1,1358:-1,1361:-1,1303:100000,1353:150000
+ra_temsky.gat,137,100,4	shop	Staffs & Wands	846,1605:-1,1608:-1,1611:-1,1615:100000,1614:100000
+ra_temsky.gat,134,92,2	shop	Maces	847,1508:-1,1511:-1,1514:-1,1517:-1,1520:-1,1522:-1
+ra_temsky.gat,131,92,2	shop	Katars	798,1251:-1,1253:-1,1255:-1
+ra_temsky.gat,71,103,6	shop	Shields	808,2103:-1,2101:-1,2107:-1,2105:-1,2109:100000,2104:200000,2102:200000,2108:200000,2106:200000
+ra_temsky.gat,68,103,6	shop	Armors	827,2603:-1,2314:-1,2309:-1,2316:-1,2327:200000,2304:-1,2334:-1,2307:-1,2337:-1,2312:-1,2325:-1,2323:-1,2321:-1,2332:-1,2335:-1,2330:-1,2329:-1,7170:500000,2315:200000,2310:150000,2320:150000,2317:250000,2342:300000,2313:150000,2326:150000,2324:200000,2322:150000,2333:150000,2336:200000,2331:200000
+ra_temsky.gat,62,100,4	shop	Shoes	770,2405:-1,2407:200000,2402:-1,2403:-1,2406:150000,2404:125000
+ra_temsky.gat,65,103,6	shop	Garments	803,2507:-1,2502:-1,2505:-1,2503:-1,2508:-1,2506:150000,2504:150000
+ra_temsky.gat,62,95,4	shop	Accesories	806,2605:30000,2617:30000,2616:1000000,2602:30000,2604:30000,2618:30000,2603:30000,2601:30000,2620:200000,2608:30000,2615:200000
+ra_temsky.gat,65,92,2	shop	2-2 Class	845,1950:-1,1952:-1,1954:-1,1956:-1,1958:-1,1960:-1,1801:-1,1803:-1,1805:-1,1811:-1,1809:-1,1901:-1,1903:-1,1905:-1,1909:-1,1911:-1,1907:-1,1550:-1,1551:-1,1552:-1,1553:-1,1554:-1,1555:-1,1556:-1,1557:-1,1558:-1,2341:-1,2343:-1
+ra_temsky.gat,128,92,2	shop	Spears	821,1454:-1,1452:-1,1463:-1,1401:-1,1410:-1,1457:-1,1407:-1,1404:-1,1460:-1,1409:50000,1406:80000
+ra_temsky.gat,71,92,2	shop	Ninja-GS Shop	730,7521:-1,7522:-1,7523:-1,7524:-1,13006:-1,13008:-1,13009:-1,13011:-1,13013:-1,13015:-1,13250:-1,13251:-1,13252:-1,13253:-1,13254:-1,13255:-1,13256:-1,13257:-1,13258:-1,13259:-1,13300:-1,13301:-1,13303:-1,13101:-1,13103:-1,13104:-1,13106:-1,13150:-1,13151:-1,13154:-1,13155:-1,13156:-1,13157:-1,13158:-1,13160:-1,13162:-1,13200:-1,13201:-1,13202:-1,13203:-1,13204:-1,13205:-1,13206:-1,13207:-1
+ra_temsky.gat,68,92,2	shop	Alchemist Items	805,1093:-1,1092:-1,7127:-1,7128:-1,7129:-1,7130:-1,7131:-1,7132:-1,7133:-1,7134:-1,7135:-1,7136:-1,7137:-1,7138:-1,7139:-1
+ra_temsky.gat,77,94,4	shop	Tool Dealer::td4	774,611:-1,505:-1,1750:-1,501:-1,502:-1,503:-1,504:-1,506:-1,525:-1,601:-1,602:-1,1065:-1,2239:-1,645:-1,656:-1,657:-1,717:-1,716:-1,715:-1,1000:-1,989:-1
+*/
+
+
+
+//------------------------- Reorganized & Fixed by Hissis --------------------------------------------------------------------------
+
+ra_temsky.gat,80,103,5	shop	One-handed Sword	733,1109:1000000,1140:1000000,1134:1000000,13400:1000000,1106:1000000,1133:1000000,1149:1000000,1143:1000000,1128:1000000,1145:1000000,1131:1000000,1141:1000000,1142:1000000,1130:1000000,1124:1000000,1112:1000000,1125:1000000,1127:1000000,1144:1000000,1115:1000000,1136:1000000,1148:1000000,1103:1000000,1147:1000000,1121:1000000,1108:1000000
+ra_temsky.gat,83,103,5	shop	Two-handed Sword	734,1156:30000,1162:70000,1172:80000,1180:1000000,1118:30000,1170:1000000,1165:1000000,1164:1000000,1178:1000000,1153:30000,1159:70000,1171:1000000
+ra_temsky.gat,86,103,5	shop	One-handed Spear	767,1414:1000000,1418:1000000,1403:1000000,1409:1000000,1417:1000000,1406:1000000,1416:1000000,1408:1000000,1402:1000000,1405:1000000
+ra_temsky.gat,89,103,5	shop	Two-handed Spear	780,1467:1000000,1470:1000000,1476:1000000,1475:1000000,1474:1000000,1456:20000,1453:15000,1465:55000,1412:60000,1469:1000000,1459:30000,1462:60000,1468:1000000
+ra_temsky.gat,92,99,5	shop	Knuckle	808,1816:1000000,1810:70000,1812:60000,1808:55000,1815:1000000,1813:1000000,1804:25000,1806:35000,1802:10000
+ra_temsky.gat,95,99,5	shop	Mace	821,1521:25000,1503:1000,1512:20000,1524:1000000,1528:1000000,1529:1000000,1525:1000000,1506:3000,1515:45000,1527:1000000,1526:1000000,1509:10000,1523:1000000,1532:60000,1518:50000,1531:1000000
+ra_temsky.gat,119,103,4	shop	One-handed Axe	826,1303:1000000,1304:1000000,1305:1000000,1308:1000000,1306:1000000,1307:1000000,1302:1000000,1309:1000000
+ra_temsky.gat,116,103,4	shop	Two-handed Axe	813,1353:6000,1363:1000000,1359:35000,1364:1000000,1369:1000000,1356:20000,1366:1000000,1365:1000000,1368:1000000,1362:60000
+ra_temsky.gat,113,103,4	shop	Katar	885,1266:1000000,1251:20000,1255:40000,1253:60000,1256:100000,1259:100000,1257:100000,1258:100000,1260:100000,1262:1000000,1264:1000000,1263:1000000
+ra_temsky.gat,110,103,4	shop	Rod & Staff	735,1612:50000,1615:500000,1613:1000000,1603:1000,1472:1000000,1609:10000,1618:1000000,1620:1000000,1614:500000,1606:5000,1616:1000000,1473:1000000
+ra_temsky.gat,107,99,4	shop	Whip	862,1969:1000000,1964:1000000,1971:1000000,1967:1000000,1966:1000000,1962:1000000,1970:1000000,1957:35000,1963:1000000,1965:1000000,1951:3000,1968:1000000,1959:45000,1953:12000,1961:40000,1955:20000
+ra_temsky.gat,104,99,4	shop	Bow	832,1715:50000,1727:150000,1703:1000,1706:3000,1712:20000,1724:1000000,1716:45000,1709:10000,1726:65000,1723:1000000,1725:1000000,1721:100000,1719:1000000,1720:1000000
+ra_temsky.gat,119,92,4	shop	Book	893,1562:1000000,1551:80000,1553:50000,1556:50000,1554:50000,1557:80000,1555:50000,1550:50000,1558:5000,1561:1000000,1559:1000000,1560:1000000,1552:55000
+ra_temsky.gat,117,90,4	shop	Dagger	884,13005:1000000,1232:1000000,1235:1000000,1246:50000,13004:55000,1241:80000,1206:2000,1242:150000,1215:15000,1226:50000,1212:10000,13001:1000000,1233:1000000,1223:1000000,1221:45000,13006:250000,1237:1000000,13015:1000000,13008:20000,1229:1000000,1203:1000,1209:3000,1234:1000000,13013:1000000,1240:1000000,1218:20000,13018:1000000,1227:1000000,1238:1000000,13009:50000,1244:1000000,13016:1000000,13019:1000000,13000:1000000,1249:1000000,1247:1000000,1248:1000000,1205:1250,1214:14000,1220:43000,1202:50,1208:2400,1217:19500
+ra_temsky.gat,115,88,4	shop	Musical Instrument	741,1914:1000000,1913:1000000,1917:1000000,1916:1000000,1908:50000,1912:55000,1910:65000,1915:1000000,1906:25000,1904:20000,1918:1000000,1902:5000
+ra_temsky.gat,113,86,4	shop	Gun	852,13103:60000,13105:100000,13106:200000,13101:10000,13150:6000,13152:30000,13153:50000,13155:60000,13156:100000,13154:30000,13159:250000,13157:150000,13161:300000,13162:500000
+ra_temsky.gat,111,84,4	shop	Fuuma Shuriken	880,13302:100000,13303:150000,13300:200000,13304:1000000,7522:500,7521:500,7523:500
+ra_temsky.gat,80,92,5	shop	Armor	752,2306:100000,2315:1000000,2310:50000,2302:5000,2320:1000000,2317:1000000,2319:1000000,2354:1000000,2373:1000000,2304:10000,2342:1000000,2318:1000000,2372:1000000,2308:1000000,2311:1000000,2359:1000000,2353:1000000,2313:1000000,2371:10000,2360:1000000,2326:1000000,2324:1000000,2322:500000,2333:500000,2336:1000000,2331:1000000,2338:1000000,2329:50000,2349:3000000,2351:3000000,2345:3000000,2347:3000000
+ra_temsky.gat,82,90,5	shop	Footgear	913,2406:50000,2415:50000,2407:50000,2417:1000000,2419:1000000,2412:1000000,2432:50000,2422:30000,2413:50000,2402:10000,2408:50000,2404:50000,2418:1000000
+ra_temsky.gat,84,88,5	shop	Shield	707,2118:1000000,2131:1000000,2104:1000000,2130:1000000,2102:10000,2110:1000000,2120:1000000,2121:1000000,2108:1000000,2128:1000000,2129:1000000,2106:50000,2114:1000000,2125:1000000,2124:1000000
+ra_temsky.gat,86,86,5	shop	Garment	806,2525:1000000,2515:1000000,2516:1000000,2520:1000000,2513:1000000,2502:10000,2506:50000,2518:1000000,2519:1000000,2504:50000,2514:1000000,2508:1000000,2511:1000000,2509:1000000,2523:50000,2517:1000000
+ra_temsky.gat,88,84,5	shop	Accessory	856,2656:20000,2664:10000,2627:20000,2655:1000000,2671:1000000,2605:30000,2646:1000000,2617:10000,2631:1000000,2607:30000,2616:1000000,2613:1000000,2602:30000,2665:1000000,2614:1000000,2641:1000000,2612:2000,2663:1000000,2604:30000,2652:1000000,2636:50000,2610:50000,2640:1000000,2657:1000000,2666:1000000,2618:10000,2645:1000000,2649:1000000,2648:1000000,2650:1000000,2651:1000000,2603:50000,2658:1000000,2639:1000000,2638:1000000,2667:1000000,2670:1000000,2601:50000,2669:1000000,2620:1000000,2608:20000,2615:1000000,2654:1000000,2637:40000,2611:40000,2715:1000000
+ra_temsky.gat,91,84,5	shop	Novice Shop	882,569:100,5055:1000,5125:10000,5112:50000,2340:100000,2352:40000,2355:50000,1243:50000,1621:80000,2112:10000,2116:30000,2113:50000,2521:30000,2512:100000,2510:50000,2414:1000,2420:30000,2416:50000,2628:50000,7271:10000
+ra_temsky.gat,107,84,4	shop	Wedding Shop	71,745:12000,2338:43000,2206:23000,2613:45000,7170:43000
+ra_temsky.gat,75,103,5	shop	Bows & Arrows	832,1750:2,1766:40,1767:2,1755:2,1754:2,1761:2,1752:2,1760:2,1759:2,1757:2,1770:2,1769:2,1765:2,1763:2,1762:2,1764:2,1751:2,1768:2,1753:2,1756:2,1758:2
+ra_temsky.gat,124,103,4	shop	Alchemist Items	106,7419:100000000,7142:10000000,7224:50000000,1093:-1,1092:-1,7127:-1,7128:-1,7129:-1,7130:-1,7131:-1,7132:-1,7133:-1,7134:-1,7135:-1,7136:-1,7137:-1,7138:-1,7139:-1
+ra_temsky.gat,122,94,4	shop	Super Hat Shop	772,5011:100000,2254:200000,2284:50000,2285:100000,2261:50000,2211:50000,5042:100000,5051:50000,2244:50000,2296:100000,2217:100000,2295:100000,5052:100000,5040:100000,2279:100000,5017:50000,5046:100000,5016:100000,5034:2000000,2214:100000.5024:100000,5028:100000,2227:50000,5026:100000,2267:100000,2233:200000,2249:100000,5019:100000,5048:1000000,5036:1000000,2235:100000,2250:100000,2205:50000,2273:50000,2276:100000,2283:100000,5015:10000,2286:1000000,2255:200000,2212:100000,2207:50000,5047:100000,5018:100000,5014:100000,2215:100000,2219:50000,2290:100000,5005:100000,2243:100000,2231:100000,2274:100000,2204:300000,2225:30000,2246:500000,5007:100000,2298:50000,2221:30000,5038:200000,5022:200000,5001:10000,2282:50000,5010:100000,2266:100000,2271:100000,5002:100000,5003:100000,5020:100000,2213:100000,5006:100000,5027:100000,5045:100000,2256:100000,2291:100000,5031:50000,2260:50000,2259:50000,5021:100000                                                                       
+ra_temsky.gat,77,94,5	shop	Super Hat Shop 2	775,2251:100000,2264:100000,2277:30000,2281:100000,2299:30000,5004:100000,5030:100000,5023:100000,5012:100000,5043:100000,2262:20000,2287:30000,2289:20000,5035:100000,2293:50000,2242:50000,5033:100000,5039:100000,2275:100000,2209:30000,2269:100000,2247:100000,2270:100000,5009:50000,2280:50000,2236:20000,5053:100000:2258:100000,5029:50000,2294:50000,2272:100000,5049:100000,5032:100000,2253:50000,2201:50000,2245:100000,2234:100000,2223:100000,2206:100000,2292:100000,2248:100000,2252:100000,5050:100000,2263:100000
+ra_temsky.gat,101,99,4	shop	Uber Items	838,6000:60000000,6001:60000000,6002:60000000,1814:60000000,6004:60000000,6005:60000000,1367:60000000,6007:60000000,6008:60000000,1139:60000000,6010:60000000,6011:60000000,2629:30000000,2630:1000000,2631:3000000,2202:200000,2410:5000000,13302:60000000,13105:60000000,13152:60000000,13159:60000000,13161:60000000,13167:60000000,1559:60000000
+ra_temsky.gat,98,99,6	shop	Elite Items	834,3150:350000000,3151:350000000,3152:350000000,3153:350000000,3154:350000000,3155:350000000,3156:350000000,3157:350000000,3158:350000000,3159:350000000,3160:350000000,3161:350000000
+ra_temsky.gat,94,84,5	shop	Cards	842,4086:300000,4082:300000,4126:300000,4092:1000000,4077:2000000,4131:3000000,4132:3000000,4135:10000000,4142:15000000,4143:10000000,4145:5000000,4148:15000000,4146:10000000,4196:200000000
+
+
+prt_in.gat,58,54,1	shop	Forging Items	63,986:-1,987:-1,988:-1,612:-1,613:-1,614:-1,615:-1,994:-1,995:-1,996:-1,997:-1,998:-1,1003:-1
+prontera.gat,164,157,3	shop	Tool Dealer::td1	774,611:-1,505:-1,1750:-1,501:-1,502:-1,503:-1,504:-1,506:-1,525:-1,601:-1,602:-1,1065:-1,2239:-1,645:-1,656:-1,657:-1,717:-1,716:-1,715:-1,1000:-1,989:-1
+izlude.gat,118,121,3	shop	Tool Dealer::td2	774,611:-1,505:-1,1750:-1,501:-1,502:-1,503:-1,504:-1,506:-1,525:-1,601:-1,602:-1,1065:-1,2239:-1,645:-1,656:-1,657:-1,717:-1,716:-1,715:-1,1000:-1,989:-1
+
+//-------------------------- ADDED 5/18/08 ---------------------------------------------------------------
+
+
+payon.gat,142,229,6	shop	Tool Dealer::td3	774,611:-1,505:-1,1750:-1,501:-1,502:-1,503:-1,504:-1,506:-1,525:-1,601:-1,602:-1,1065:-1,2239:-1,645:-1,656:-1,657:-1,717:-1,716:-1,715:-1,1000:-1,989:-1
+
+
+
+ra_temsky.gat,97,83,4	script	Donation Guide	936,{
+mes "[^0000FFDonation Guide^000000]";
+mes "To the north, you will find our regular mall which sells items for Zeny.";
+next;
+mes "[^0000FFDonation Guide^000000]";
+mes "To the south, you will find the XileRO Donation Mall. Which sells items for Uber Points. You can get these points by donating to XileRO at ^0000FFwww.xilero.net^000000";
+if(select("More about donations","Okay, Thank you!")==1){
+next;
+mes "[^0000FFDonation Guide^000000]";
+mes "For Donating to XileRO you will get Uber Points to spend in the Donation Mall. Below are the Amount you need to Donate for the Amount of Uber Points for This Server Only. All prices are the same now for all servers!";
+next;
+mes "[^0000FFDonation Guide^000000]";
+mes "$10 =  ^FF99003 Uber Points!^000000";
+mes "$20 =  ^FF99007 Uber Points!^000000";
+mes "$30 =  ^FF990010 Uber Points!^000000";
+mes "$40 =  ^FF990014 Uber Points!^000000";
+mes "$50 =  ^FF990020 uber Points!^000000";
+mes "$75 =  ^FF990032 uber Points!^000000";
+mes "$100 =  ^FF990046 Uber Points!^000000";
+mes "$125 =  ^FF990062 Uber Points!^000000";
+mes "$150 =  ^FF990080 Uber Points!^000000";
+}
+close;
+}
+
+ra_temsky,104,54,4	script	Rapture	774,{
+
+setarray @rapitems$[0],
+"iPhreeoni Card - 6 ubers",
+"Mystic Maya Card - 6 ubers",
+"Jirachi Card - 4 ubers",
+"Greed Defense Amulet - 12 ubers",
+"Envy Defense Amulet - 12 ubers",
+"Faith Defense Amulet - 12 ubers",
+"Lust Defense Amulet - 12 ubers",
+"Exile Defense Amulet - 12 ubers",
+"Rage Defense Amulet - 12 ubers",
+"Greed Defense Ring - 6 ubers",
+"Envy Defense Ring - 6 ubers",
+"Faith Defense Ring - 6 ubers",
+"Lust Defense Ring - 6 ubers",
+"Exile Defense Ring - 6 ubers",
+"Rage Defense Ring - 6 ubers";
+
+setarray @rapitemsp[0],6,6,4,12,12,12,12,12,12,6,6,6,6,6,6;
+
+setarray @rapitems[0],
+3270,
+3271,
+3273,
+23050,
+23051,
+23052,
+23053,
+23054,
+23055,
+23060,
+23061,
+23062,
+23063,
+23064,
+23065;
+
+
+	set @np$,"[^008800Rapture^000000]";
+	set @var$,"rapitems";
+	set @epicline$,"Items Created in Times of Great Despair";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+ra_temsky,113,58,4	script	Card Master	766,{
+setarray @ubcard$[0],
+"Resistance Card - 8 ubers",
+"Obsessed Greed Card - 8 ubers",
+"Vengeful Envy Card - 8 ubers",
+"Endless Faith Card - 8 ubers",
+"Blood Lust Card - 8 ubers",
+"Master Exile Card - 8 ubers",
+"Bloody Knight Champion Card - 1 uber",
+"Choco Card - 1 uber",
+"Ghoststring Card - 1 uber",
+"Exile Card - 1 uber",
+"Lust Card - 1 uber",
+"Faith Card 1 uber",
+"Envy Card - 1 uber",
+"Greed Card - 1 uber",
+"Golden Thief Bug Card - 1 uber",
+"Amon Ra Card - 200 uber",
+"Fallen Bishop Card - 200 uber";
+
+setarray @ubcardp[0],8,8,8,8,8,8,1,1,1,1,1,1,1,1,1,200,200;
+
+setarray @ubcard[0],
+3162,
+23020,
+23021,
+23022,
+23023,
+23024,
+4196,
+4172,
+4047,
+4211,
+4210,
+4209,
+4208,
+4207,
+4128,
+4236,
+4441;
+	set @np$,"[^008800Card Master^000000]";
+	set @var$,"ubcard";
+	set @epicline$,"cards to boost your characters";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+ra_temsky,111,56,4	script	Godly Forger Jr	769,{
+
+setarray @ubweapon$[0],
+"Godly Staff of Ages - 3 ubers",
+"Godly Soul Seeker - 3 ubers",
+"Godly Holy Flail - 3 ubers",
+"Godly Oblivion Blade - 3 ubers",
+"Godly Frenzic - 3 ubers",
+"Godly Katar of Chaos - 3 ubers",
+"Godly Reaper - 3 ubers",
+"Godly Wind Weaver - 3 ubers",
+"Godly Dark Defier - 3 ubers",
+"Godly Phoenix Wing - 3 ubers",
+"Godly Retribution - 3 ubers",
+"Godly Raging Mic - 3 ubers",
+"Godly Fuuma Shuriken - 3 ubers",
+"Godly Garrison - 3 ubers",
+"Godly Cyclone - 3 ubers",
+"Godly Butcher - 3 ubers",
+"Godly Destroyer - 3 ubers",
+"Godly Legacy of Dragon - 3 ubers",
+"Godly Gate Keeper - 3 ubers";
+
+setarray @ubweaponp[0],3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3;
+
+setarray @ubweapon[0],
+3180,
+3199,
+3182,
+3183,
+3184,
+3185,
+3186,
+3187,
+3188,
+3189,
+3190,
+3191,
+3192,
+3193,
+3194,
+3195,
+3196,
+3197,
+3198;
+
+
+	set @np$,"[^555500Godly Forger Jr^000000]";
+	set @var$,"ubweapon";
+	set @epicline$,"Godly weapons from my master";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+ra_temsky,109,54,4	script	Godly Forger	778,{
+setarray @ubweapont$[0],
+"+10 Godly Staff of Ages - 8 ubers",
+"+10 Godly Soul Seeker - 8 ubers",
+"+10 Godly Holy Flail - 8 ubers",
+"+10 Godly Oblivion Blade - 8 ubers",
+"+10 Godly Frenzic - 8 ubers",
+"+10 Godly Katar of Chaos - 8 ubers",
+"+10 Godly Reaper - 8 ubers",
+"+10 Godly Wind Weaver - 8 ubers",
+"+10 Godly Dark Defier - 8 ubers",
+"+10 Godly Phoenix Wing - 8 ubers",
+"+10 Godly Retribution - 8 ubers",
+"+10 Godly Raging Mic - 8 ubers",
+"+10 Godly Fuuma Shuriken - 8 ubers",
+"+10 Godly Garrison - 8 ubers",
+"+10 Godly Cyclone - 8 ubers",
+"+10 Godly Butcher - 8 ubers",
+"+10 Godly Destroyer - 8 ubers",
+"+10 Godly Legacy of Dragon - 8 ubers",
+"+10 Godly Gate Keeper - 8 ubers";
+
+setarray @ubweapontp[0],8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8;
+
+setarray @ubweapont[0],
+3180,
+3199,
+3182,
+3183,
+3184,
+3185,
+3186,
+3187,
+3188,
+3189,
+3190,
+3191,
+3192,
+3193,
+3194,
+3195,
+3196,
+3197,
+3198;
+	set @np$,"[^FF0000Godly Forger^000000]";
+	set @var$,"ubweapont";
+	set @epicline$,"+10 Godly weapons";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+ra_temsky,114,63,4	script	Messerschmidth	797,{
+setarray @ubarmor$[0],
+"Boots of Guidance - 2 ubers",
+"Hero Plate Armor - 2 ubers",
+"Rally Plate Armor - 2 ubers",
+"Mithril Armor - 2 ubers",
+"Grand Gaiters - 2 ubers",
+"Clothes of Brilliance - 2 ubers",
+"Kaho's Horn - 1 uber",
+"Dark Helm - 1 uber",
+"Valkyrie's Armor - 1 uber",
+"Valkyrie's Shoes - 1 uber",
+"Equality Wings - 1 uber",
+"Hercules' Belt - 9 ubers",
+"Megingjard - 1 uber";
+
+setarray @ubarmorp[0],2,2,2,2,2,2,1,1,1,1,1,9,100;
+
+setarray @ubarmor[0],
+3163,
+3164,
+3165,
+3166,
+3167,
+3168,
+5013,
+5088,
+2357,
+2421,
+5037,
+23025,
+6343;
+	set @np$,"[^555500Messerschmidth^000000]";
+	set @var$,"ubarmor";
+	set @epicline$,"Godly armors from my master";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+ra_temsky,112,63,4	script	Skadii	818,{
+setarray @ubarmort$[0],
+"+10 Boots of Guidance - 5 ubers",
+"+10 Hero Plate Armor - 5 ubers",
+"+10 Rally Plate Armor - 5 ubers",
+"+10 Mithril Armor - 5 ubers",
+"+10 Grand Gaiters - 5 ubers",
+"+10 Clothes of Brilliance - 5 ubers",
+"+10 Kaho's Horn - 3 uber",
+"+10 Dark Helm - 3 uber",
+"+10 Valkyrie's Armor - 3 uber",
+"+10 Valkyrie's Shoes - 3 uber",
+"+10 Equality Wings - 3 uber",
+"+10 Valkyrie Shield - 25 uber",
+"+10 Diabolous Manteau - 25 uber",
+"+10 Nydhorgg's Shadow Garb - 40 uber";
+
+setarray @ubarmortp[0],5,5,5,5,5,5,3,3,3,3,3,25,25,40;
+
+setarray @ubarmort[0],
+3163,
+3164,
+3165,
+3166,
+3167,
+3168,
+5013,
+5088,
+2357,
+2421,
+5037,
+2115,
+2537,
+2554;
+
+	set @np$,"[^FF0000Skadii^000000]";
+	set @var$,"ubarmort";
+	set @epicline$,"+10 Godly armors";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+ra_temsky,110,63,4	script	Clemente	822,{
+setarray @ubset$[0],
+"Lightning Elemental Headband - 7 ubers",
+"Lightning Elemental Wings - 15 ubers",
+"Ice Elemental Headband - 7 ubers",
+"Ice Elemental Wings - 15 ubers",
+"Fire Elemental Headband - 7 ubers",
+"Fire Elemental Wings - 15 ubers",
+"Little Devil Horns - 3 ubers",
+"Little Devil Wings - 8 ubers",
+"Lightning Elemental Mask - 7 ubers",
+"Ice Elemental Mask - 7 ubers",
+"Fire Elemental Mask - 7 ubers",
+"Little Devil Tail - 3 ubers",
+"Imperial Crown - 15 ubers",
+"Imperial Wings - 20 ubers",
+"Imperial Winged Tiara - 15 ubers",
+"Onyx Blindfold - 12 ubers",
+"Sapphire Blindfold - 12 ubers",
+"Emerald Blindfold - 12 ubers";
+
+setarray @ubsetp[0],7,15,7,15,7,15,3,8,7,7,7,3,15,20,15,12,12,12;
+
+setarray @ubset[0],
+23000,
+23001,
+23003,
+23004,
+23006,
+23007,
+3176,
+3177,
+23002,
+23005,
+23008,
+3178,
+3200,
+3201,
+3202,
+3219,
+3220,
+3221;
+	set @np$,"[^555500Clemente^000000]";
+	set @var$,"ubset";
+	set @epicline$,"Strong sets from my master";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+ra_temsky,108,63,4	script	Celeste	824,{
+setarray @ubsett$[0],
+"+10 Lightning Elemental Headband - 18 ubers",
+"+10 Lightning Elemental Wings - 25 ubers",
+"+10 Ice Elemental Headband - 18 ubers",
+"+10 Ice Elemental Wings - 25 ubers",
+"+10 Fire Elemental Headband - 18 ubers",
+"+10 Fire Elemental Wings - 25 ubers",
+"+10 Little Devil Horns - 9 ubers",
+"+10 Little Devil Wings - 15 ubers",
+"+10 Imperial Crown - 20 ubers",
+"+10 Imperial Wings - 30 ubers",
+"+10 Onyx Dragon Helm - 20 ubers",
+"+10 Onyx Dark Wings - 30 ubers",
+"+10 Onyx Lilim Armor - 16 ubers",
+"+10 Sapphire Traveler Hat - 20 ubers",
+"+10 Sapphire Phychic Wings - 30 ubers",
+"+10 Sapphire Renove Armor - 16 ubers",
+"+10 Emerald Dowry Hat - 20 ubers",
+"+10 Emerald Enchanted Wings - 30 ubers",
+"+10 Emerald Tannin Armor - 16 ubers";
+
+setarray @ubsettp[0],18,25,18,25,18,25,9,15,20,30,20,30,16,20,30,16,20,30,16;
+
+setarray @ubsett[0],
+23000,
+23001,
+23003,
+23004,
+23006,
+23007,
+3176,
+3177,
+3200,
+3201,
+3210,
+3216,
+3213,
+3211,
+3217,
+3214,
+3212,
+3218,
+3215;
+
+	set @np$,"[^FF0000Celeste^000000]";
+	set @var$,"ubsett";
+	set @epicline$,"+10 Strong sets";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+ra_temsky,95,54,5	script	Infinity	825,{
+setarray @ubinset$[0],
+"+10 Infinity . Helm - 30 ubers",
+"+10 Infinity . Wings - 40 ubers",
+"Infinity . Helm - 15 ubers",
+"Infinity . Wings - 20 ubers",
+"Infinity . Shoulder - 25 ubers",
+"+10 Crown of the Fallen - 30 ubers",
+"+10 Wings of the Fallen - 40 ubers",
+"Crown of the Fallen - 15 ubers",
+"Wings of the Fallen - 20 ubers",
+"Aura of the Fallen - 25 ubers",
+"+10 Guardian Angel Crown - 30 ubers",
+"+10 Guardian Angel Wings - 40 ubers",
+"Guardian Angel Aura - 25 ubers",
+"Guardian Angel Crown - 15 ubers",
+"Guardian Angel Wings - 20 ubers",
+"Guardian Angel Aura - 25 ubers";
+
+setarray @ubinsetp[0],30,40,15,20,25,30,40,15,20,25,30,40,25,15,20,25;
+
+setarray @ubinset[0],
+3286,
+3287,
+3286,
+3287,
+3288,
+3293,
+3294,
+3293,
+3294,
+3295,
+3267,
+3268,
+3269,
+3267,
+3268;
+
+	set @np$,"[^008800Infinity^000000]";
+	set @var$,"ubinset";
+	set @epicline$,"Strong sets from Infinity";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+ra_temsky,84,60,4	script	Clementine	825,{
+setarray @ubmset$[0],
+"+10 Scarlet Angel Helm - 8 ubers",
+"+10 Scarlet Angel Wings - 12 ubers",
+"+10 Emperor's Helm - 8 ubers",
+"+10 Emperor's Wings - 12 ubers",
+"Scarlet Angel Helm - 3 ubers",
+"Scarlet Angel Wings - 7 ubers",
+"Emperor's Helm - 3 ubers",
+"Emperor's Wings - 7 ubers",
+"Emperor's Shoulders - 3 ubers",
+"Scarlet Angel Ears - 3 ubers",
+"+10 Dark Devil Horns - 20 ubers",
+"+10 Dark Devil Wings - 25 ubers",
+"Dark Devil Tail - 15 ubers";
+
+setarray @ubmsetp[0],8,12,8,12,3,7,3,7,3,3,20,25,15;
+
+setarray @ubmset[0],
+3170,
+3171,
+3173,
+3174,
+3170,
+3171,
+3173,
+3174,
+3175,
+3172,
+3280,
+3281,
+3282;
+	set @np$,"[^008800Clementine^000000]";
+	set @var$,"ubmset";
+	set @epicline$,"Cool sets";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+ra_temsky,86,58,4	script	Epic Trader	833,{
+setarray @ubtokseal$[0],
+"Creamhilt Token - 2 ubers",
+"Sbanhealt Token - 2 ubers",
+"Lazrigees Token - 2 ubers",
+"Squagul Token - 2 ubers",
+"Guindull Token - 2 ubers",
+"Seal of Power - 2 ubers",
+"Seal of Wisdom - 2 ubers",
+"Seal of Spirit - 2 ubers",
+"Seal of Hate - 2 ubers",
+"Seal of Death - 2 ubers";
+
+setarray @ubtoksealp[0],2,2,2,2,2,2,2,2,2,2;
+
+setarray @ubtokseal[0],
+3115,
+3116,
+3117,
+3118,
+3119,
+3130,
+3131,
+3132,
+3133,
+3134;
+	set @np$,"[^008800Epic Trader^000000]";
+	set @var$,"ubtokseal";
+	set @epicline$,"tokens and seals";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+ra_temsky,88,56,4	script	Wing Guardian	839,{
+setarray @ubwings$[0],
+"+10 Mutual Wings - 9 ubers",
+"+10 Omega wings - 9 ubers",
+"+10 Alpha Wings - 9 ubers",
+"+10 ArchAngel Wings - 9 ubers",
+"+10 Shadow Craft Wings - 9 ubers ",
+"Mutual Wings - 3 ubers",
+"Omega wings - 3 ubers",
+"Alpha Wings - 3 ubers",
+"ArchAngel Wings - 3 ubers",
+"Shadow Craft Wings - 3 ubers";
+
+setarray @ubwingsp[0],9,9,9,9,9,3,3,3,3,3;
+
+setarray @ubwings[0],
+3169,
+2288,
+5041,
+6012,
+5100,
+3169,
+2288,
+5041,
+6012,
+5100;
+	set @np$,"[^008800Wing Guardian^000000]";
+	set @var$,"ubwings";
+	set @epicline$,"various enticing wings";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+ra_temsky,90,54,4	script	Donation Pets A	852,{
+setarray @ubegga$[0],
+"Lude Egg - 1 uber",
+"Wanderman Egg - 1 uber",
+"Wild Rose Egg - 1 uber",
+"Archangeling Egg - 1 uber",
+"Garm Egg - 1 uber",
+"Lava Golem Egg - 1 uber",
+"Werewolf Egg - 1 uber",
+"Wind Crystal Egg - 1 uber",
+"Earth Crystal Egg - 1 uber",
+"Fire Crystal Egg - 1 uber",
+"Water Crystal Egg - 1 uber",
+"Gryphon Egg - 1 uber",
+"Dark Illusion Egg - 1 uber",
+"Giant Hornet Egg - 1 uber",
+"Giant Spider Egg - 1 uber",
+"Ancient Worm Egg - 1 uber",
+"Gajomart Egg - 1 uber",
+"Gullinbursti Egg - 1 uber",
+"Leaf Cat Egg - 1 uber",
+"Tamruan Egg - 1 uber",
+"Mime Monkey Egg - 1 uber",
+"Kraben Egg - 1 uber",
+"Metaling Egg - 1 uber",
+"Teddy Bear Egg - 1 uber",
+"Deviling Egg - 1 uber",
+"Loli Ruri Egg - 1 uber",
+"Dryad Egg - 1 uber",
+"Kapha Egg - 1 uber",
+"Miyabi Doll Egg - 1 uber",
+"Poison Toad Egg - 1 uber",
+"Mobster Egg - 1 uber",
+"Orc Skeleton Egg - 1 uber",
+"Orc Zombie Egg - 1 uber",
+"Orc Archer Zairo Egg - 1 uber",
+"Kobold Morning Star Egg - 1 uber",
+"Kobold Archer Egg - 1 uber",
+"Incubus Egg - 1 uber",
+"Santa Poring Egg - 1 uber",
+"Agav Egg - 1 uber",
+"Echio Egg - 1 uber",
+"Vanberk Egg - 1 uber",
+"Isilla Egg - 1 uber",
+"Hodremlin Egg - 1 uber",
+"Seeker Egg - 1 uber",
+"Snowier Egg - 1 uber",
+"Siroma Egg - 1 uber",
+"Ice Titan Egg - 1 uber",
+"Gazeti Egg - 1 uber",
+"Ktullanux Egg - 1 uber",
+"Muscipular Egg - 1 uber",
+"Roween Egg - 1 uber",
+"Galion Egg - 1 uber",
+"Atros Egg - 1 uber",
+"Kiel D-10 Egg - 1 uber",
+"Ancient Mummy Egg - 1 uber",
+"Armeyer Dinze Egg - 1 uber",
+"Blazer Egg - 1 uber",
+"Caramel Egg - 1 uber",
+"Carat Egg - 1 uber",
+"Chepet Egg - 1 uber",
+"Chimera Egg - 1 uber",
+"Christmas Cookie Egg - 1 uber",
+"Christmas Goblin Egg - 1 uber",
+"Clock Egg - 1 uber",
+"Cruiser Egg - 1 uber",
+"Dark Frame Egg - 1 uber",
+"Deleter Earth Egg - 1 uber",
+"Deleter Sky Egg - 1 uber",
+"Dimik Fire Egg - 1 uber",
+"Dimik Water Egg - 1 uber",
+"Drainliar Egg - 1 uber",
+"Driller Egg - 1 uber",
+"Dumpling Child Egg - 1 uber",
+"Eclipse Egg - 1 uber",
+"Egnigem Cenia Egg - 1 uber",
+"Elder Egg - 1 uber",
+"Elder Willow Egg - 1 uber",
+"Errende Ebecee Egg - 1 uber",
+"Explosion Egg - 1 uber",
+"Filamentous Egg - 1 uber",
+"Firelock Soldier Egg - 1 uber",
+"Freezer Egg - 1 uber",
+"Frilldora Egg - 1 uber",
+"Gargoyle Egg - 1 uber",
+"Giearth Egg - 1 uber",
+"Goblin Axe Egg - 1 uber",
+"Goblin Frail Egg - 1 uber",
+"Goblin Morning Star Egg - 1 uber",
+"Goblin Archer Egg - 1 uber",
+"Goblin Steamrider Egg - 1 uber",
+"Grizzly Egg - 1 uber",
+"Harpy Egg - 1 uber",
+"Horong Egg - 1 uber",
+"Injustice Egg - 1 uber",
+"Iron Fist Egg - 1 uber",
+"Kavach Icarus Egg - 1 uber",
+"Killer Mantis Egg - 1 uber",
+"Leib Olmai Egg - 1 uber",
+"Marduk Egg - 1 uber",
+"Marionette Egg - 1 uber",
+"Martin Egg - 1 uber",
+"Maya Egg - 1 uber",
+"Maya Purple Egg - 1 uber",
+"Megalith Egg - 1 uber",
+"Mini Demon Egg - 1 uber",
+"Minorous Egg - 1 uber",
+"Muka Egg - 1 uber",
+"Myst Egg - 1 uber",
+"Myst Case Egg - 1 uber",
+"Nightmare Egg - 1 uber",
+"Nine Tail Egg - 1 uber",
+"Novus Egg - 1 uber",
+"Noxious Egg - 1 uber",
+"Obeaune Egg - 1 uber",
+"Laurell Weinder Egg - 1 uber",
+"Ungoliant Egg - 1 uber",
+"Vagabond Wolf Egg - 1 uber",
+"Venatu Water Egg - 1 uber",
+"Venomous Egg - 1 uber",
+"Violy Egg - 1 uber",
+"Wormtail Egg - 1 uber",
+"Wraith Dead Egg - 1 uber",
+"Zipper Bear Egg - 1 uber",
+"Zombie Master Egg - 1 uber";
+
+for(set .p,0; .p<getarraysize(@ubegga$);set .p,.p+1)
+setarray @ubeggap[.p],1;
+
+setarray @ubegga[0],
+18042,
+9053,
+9054,
+9056,
+18087,
+18136,
+18151,
+18155,
+18156,
+18157,
+18158,
+18165,
+18166,
+18167,
+18168,
+18169,
+18170,
+18171,
+19059,
+19063,
+19064,
+19065,
+19066,
+19069,
+19070,
+19071,
+19072,
+19078,
+19080,
+19081,
+19083,
+19084,
+19085,
+19086,
+19092,
+19093,
+19094,
+19097,
+19108,
+19109,
+19110,
+19111,
+19112,
+19113,
+19114,
+19115,
+19116,
+19117,
+19118,
+19119,
+19121,
+19122,
+19124,
+19048,
+19203,
+19207,
+19210,
+19213,
+19214,
+19215,
+19216,
+19217,
+19218,
+19219,
+19224,
+19225,
+19226,
+19227,
+19231,
+19232,
+19236,
+19237,
+19238,
+19239,
+19241,
+19242,
+19243,
+19246,
+19247,
+19248,
+19249,
+19250,
+19251,
+19253,
+19254,
+19256,
+19257,
+19260,
+19261,
+19262,
+19263,
+19264,
+19265,
+19266,
+19267,
+19271,
+19273,
+19276,
+19281,
+19282,
+19285,
+19286,
+19287,
+19288,
+19293,
+19294,
+19295,
+19297,
+19298,
+19300,
+19301,
+19302,
+19304,
+19305,
+19307,
+19311,
+19313,
+19315,
+19317,
+19318,
+19321,
+19323,
+19324,
+19326;
+	set @np$,"[^0000FFDonation Pets A^000000]";
+	set @var$,"ubegga";
+	set @epicline$,"monster eggs";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+ra_temsky,85,63,4	script	Donation Pets B	859,{
+setarray @ubeggb$[0],
+"Anolian Egg - 1 uber",
+"Alligator Egg - 1 uber",
+"Alarm Egg - 1 uber",
+"Assaulter Egg - 1 uber",
+"Apocalypse Egg - 1 uber",
+"Abyss Knight Egg - 1 uber",
+"Am Mut Egg - 1 uber",
+"Amon Ra Egg - 1 uber",
+"Antonio Egg - 1 uber",
+"Angeling Egg - 1 uber",
+"Bloody Murderer Egg - 1 uber",
+"Boiled Rice Egg - 1 uber",
+"Bacsojin Egg - 1 uber",
+"Bloody Knight Egg - 1 uber",
+"Bloody Butterfly Egg - 1 uber",
+"Baby Leopard Egg - 1 uber",
+"Bongun Egg - 1 uber",
+"Baphomet Egg - 1 uber",
+"Bapho Jr. Egg - 1 uber",
+"Baby Desert Wolf Egg - 1 uber",
+"Bigfoot Egg - 1 uber",
+"Creamy Fear Egg - 1 uber",
+"Cat'o'Nine Tails Egg - 1 uber",
+"Clock Tower Manager Egg - 1 uber",
+"Ching E Egg - 1 uber",
+"Condor Egg - 1 uber",
+"Chonchon Egg - 1 uber",
+"Choco Egg - 1 uber",
+"Deviruchi Egg - 1 uber",
+"Doppelganger Egg - 1 uber",
+"Dark Lord Egg - 1 uber",
+"Dancing Dragon Egg - 1 uber",
+"Deviace Egg - 1 uber",
+"Dokkaebi Egg - 1 uber",
+"Dark Priest Egg - 1 uber",
+"Dark Snake Lord Egg - 1 uber",
+"Desert Wolf Egg - 1 uber",
+"Dullahan Egg - 1 uber",
+"Drake Egg - 1 uber",
+"Drops Egg - 1 uber",
+"Dracula Egg - 1 uber",
+"Eddga Egg - 1 uber",
+"Evil Druid Egg - 1 uber",
+"Evil Cloud Hermit Egg - 1 uber",
+"Executioner Egg - 1 uber",
+"Fake Angel Egg - 1 uber",
+"Grand Peco Egg - 1 uber",
+"Goat Egg - 1 uber",
+"Giant Whisper Egg - 1 uber",
+"Garm Baby Egg - 1 uber",
+"Green Petite Egg - 1 uber",
+"Galapago Egg - 1 uber",
+"Golden Thief Bug Egg - 1 uber",
+"Ghostring Egg - 1 uber",
+"Gibbet Egg - 1 uber",
+"Goblin Leader Egg - 1 uber",
+"Geographe Egg - 1 uber",
+"Hyegun Egg - 1 uber",
+"Hylozoist Egg - 1 uber",
+"Hunter Fly Egg - 1 uber",
+"Incantation Samurai Egg - 1 uber",
+"Isis Egg - 1 uber",
+"Knight of Windstorm Egg - 1 uber",
+"Kobold Leader Egg - 1 uber",
+"Lude Egg - 1 uber",
+"Lord of Death Egg - 1 uber",
+"Li Me Mang Ryang Egg - 1 uber",
+"Lunatic Egg - 1 uber",
+"Munak Egg - 1 uber",
+"Majoruros Egg - 1 uber",
+"Mastering Egg - 1 uber",
+"Mysteltainn Egg - 1 uber",
+"Mimic Egg - 1 uber",
+"Mistress Egg - 1 uber",
+"Matyr Egg - 1 uber",
+"Moonlight Egg - 1 uber",
+"Mutant Dragon Egg - 1 uber",
+"Nightmare Terror Egg - 1 uber",
+"Orc Hero Egg - 1 uber",
+"Orc Lord Egg - 1 uber",
+"Osiris Egg - 1 uber",
+"Owl Baron Egg - 1 uber",
+"Orc Warrior Egg - 1 uber",
+"Poring Egg - 1 uber",
+"Pharaoh Egg - 1 uber",
+"PecoPeco Egg - 1 uber",
+"Phreeoni Egg - 1 uber",
+"Penomena Egg - 1 uber",
+"Phendark Egg - 1 uber",
+"Poison Spore Egg - 1 uber",
+"Poporing Egg - 1 uber",
+"Picky Egg - 1 uber",
+"Quve Egg - 1 uber",
+"Rocker Egg - 1 uber",
+"Raydric Archer Egg - 1 uber",
+"Rybio Egg - 1 uber",
+"Raydric Egg - 1 uber",
+"Rideword Egg - 1 uber",
+"Steel Chonchon Egg - 1 uber",
+"Savage Babe Egg - 1 uber",
+"Spore Egg - 1 uber",
+"Side Winder Egg - 1 uber",
+"See Otter Egg - 1 uber",
+"Shinobi Egg - 1 uber",
+"Skeleton Archer Egg - 1 uber",
+"Skeleton General Egg - 1 uber",
+"Skeleton Soldier Egg - 1 uber",
+"Sprint Rabbit Egg - 1 uber",
+"Shining Plant Egg - 1 uber",
+"Sohee Egg - 1 uber",
+"Smokie Egg - 1 uber",
+"Succubus Egg - 1 uber",
+"Tirfing Egg - 1 uber",
+"Turtle General Egg - 1 uber",
+"Toad Egg - 1 uber",
+"Valaris Egg - 1 uber",
+"Valaris Wornshipper Egg - 1 uber",
+"Vocal Egg - 1 uber",
+"Verit Egg - 1 uber",
+"Wolf Egg - 1 uber",
+"Wind Ghost Egg - 1 uber",
+"Wanderman Egg - 1 uber",
+"Wootan Shooter Egg - 1 uber",
+"Wootan Fighter Egg - 1 uber",
+"Wooden Golem Egg - 1 uber",
+"Whisper Egg - 1 uber";
+
+for(set .p,0; .p<getarraysize(@ubeggb$);set .p,.p+1)
+setarray @ubeggbp[.p],1;
+
+setarray @ubeggb[0],
+9143,
+9128,
+9126,
+9118,
+9115,
+9111,
+9066,
+9060,
+9055,
+9030,
+9117,
+9099,
+9097,
+9069,
+9046,
+9031,
+9025,
+9085,
+9024,
+9010,
+9148,
+9067,
+9146,
+9127,
+9098,
+9037,
+9006,
+9125,
+9023,
+9084,
+9068,
+9093,
+9035,
+9019,
+9051,
+9091,
+9036,
+9124,
+9076,
+9002,
+9092,
+9075,
+9138,
+9120,
+9142,
+9039,
+9107,
+9109,
+9114,
+9094,
+9022,
+9057,
+9082,
+9032,
+9123,
+9147,
+9108,
+9102,
+9059,
+9008,
+9090,
+9021,
+9071,
+9044,
+9042,
+9058,
+9096,
+9004,
+9018,
+9095,
+9078,
+9139,
+9080,
+9083,
+9145,
+9074,
+9070,
+9137,
+9079,
+9081,
+9086,
+9043,
+9017,
+9001,
+9073,
+9014,
+9072,
+9112,
+9141,
+9013,
+9003,
+9005,
+9045,
+9011,
+9129,
+9140,
+9149,
+9050,
+9007,
+9009,
+9012,
+9049,
+9062,
+9061,
+9133,
+9116,
+9134,
+9063,
+9034,
+9020,
+9015,
+9110,
+9047,
+9064,
+9077,
+9100,
+9101,
+9033,
+9048,
+9038,
+9052,
+9053,
+9088,
+9089,
+9105,
+9113;
+	set @np$,"[^0000FFDonation Pets B^000000]";
+	set @var$,"ubeggb";
+	set @epicline$,"monster eggs";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+ra_temsky,87,63,4	script	Donation Pets C	860,{
+setarray @ubeggc$[0],
+"Wicked Nymph Egg - 1 uber",
+"Wild Ginseng Egg - 1 uber",
+"Xmas-Jakk Egg - 1 uber",
+"Yoyo Egg - 1 uber",
+"Anopheles Egg - 1 uber",
+"Mole Egg - 1 uber",
+"Hill Wind Egg - 1 uber",
+"Gremlin Egg - 1 uber",
+"Beholder Egg - 1 uber",
+"Seyren Egg - 1 uber",
+"Eremes Egg - 1 uber",
+"Harword Egg - 1 uber",
+"Magaleta Egg - 1 uber",
+"Shecil Egg - 1 uber",
+"Katrinn Egg - 1 uber",
+"Poton Canon Egg red - 1 uber",
+"Poton Canon Egg yellow - 1 uber",
+"Poton Canon Egg green - 1 uber",
+"Poton Canon Egg blue - 1 uber",
+"Archdam Egg - 1 uber",
+"Dimik Egg - 1 uber",
+"Monemus Egg - 1 uber",
+"Venatu Egg - 1 uber",
+"Hill Wind Egg - 1 uber",
+"Gemini Egg - 1 uber",
+"Removal Egg - 1 uber",
+"Vesper Egg - 1 uber",
+"Orc Baby Egg - 1 uber",
+"Green Iguana Egg - 1 uber",
+"Breeze Egg - 1 uber",
+"Plasma Egg - 1 uber",
+"Deathword Egg - 1 uber",
+"Ancient Mimic Egg - 1 uber",
+"Observation Egg - 1 uber",
+"Shelter Egg - 1 uber",
+"Retribution Egg - 1 uber",
+"Solace Egg - 1 uber",
+"Thanatos Odium Egg - 1 uber",
+"Thanatos Despero Egg - 1 uber",
+"Thanatos Maero Egg - 1 uber",
+"Thanatos Dolor Egg - 1 uber",
+"Thanatos Egg - 1 uber",
+"Acidus Egg - 1 uber",
+"Ferus Egg - 1 uber",
+"Novus Egg - 1 uber",
+"Acidus Egg_ - 1 uber",
+"Ferus Egg_ - 1 uber",
+"Detale Egg - 1 uber",
+"Hydro Egg - 1 uber",
+"Kiel Egg - 1 uber",
+"Alicel Egg - 1 uber",
+"Aliot Egg - 1 uber",
+"Aliza Egg - 1 uber",
+"Constant Egg - 1 uber",
+"Valkyrie Randgris Egg - 1 uber",
+"Skogul Egg - 1 uber",
+"Frus Egg - 1 uber",
+"Skeggiold Egg brown - 1 uber",
+"Skeggiold Egg black - 1 uber";
+
+for(set .p,0; .p<getarraysize(@ubeggc$);set .p,.p+1)
+setarray @ubeggcp[.p],1;
+
+setarray @ubeggc[0],
+9121,
+9122,
+9040,
+9016,
+19000,
+19001,
+19002,
+19003,
+19004,
+19005,
+19006,
+19007,
+19008,
+19009,
+19010,
+19011,
+19012,
+19013,
+19014,
+19015,
+19016,
+19017,
+19018,
+19019,
+19020,
+19021,
+19022,
+19023,
+19024,
+19026,
+19027,
+19028,
+19029,
+19030,
+19031,
+19032,
+19033,
+19034,
+19035,
+19036,
+19037,
+19038,
+19039,
+19040,
+19041,
+19042,
+19043,
+19045,
+19046,
+19047,
+19049,
+19050,
+19051,
+19052,
+19053,
+19054,
+19055,
+19056,
+19057;
+	set @np$,"[^0000FFDonation Pets C^000000]";
+	set @var$,"ubeggc";
+	set @epicline$,"monster eggs";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+function	script	funcdon8_1	{
+set @menustr$,"";
+mes getarg(0);
+mes "If you have donated to XileRO already I will give you ^FF9900"+getarg(1)+"^000000 in exchange for your uber points!";
+next;
+set .max,getarraysize(getd("@"+getarg(2)));
+if(.max > 20){
+set .start,rand(.max-20);
+set .end,.start+20;
+}else{
+set .start,0;
+set .end,.max;
+}
+
+	for(set @i,.start;@i < .end;set @i,@i+1){
+		if(compare(getd("@"+getarg(2)+"$["+@i+"]"),"+10")==1 || compare(getd("@"+getarg(2)+"$["+@i+"]"),"IFC")==1){
+			set @menustr$,@menustr$+"^FF0000";
+		}else if(compare(getarg(0),"Pets")==1){
+			set @menustr$,@menustr$+"^0000FF";
+		}else if(compare(getarg(0),"Epic")==1 || compare(getarg(0),"Mess")==1 || compare(getarg(0),"Clemente")==1 || compare(getarg(0),"Card Mas")==1){
+			set @menustr$,@menustr$+"^008800";
+		}else{
+			set @menustr$,@menustr$+"^005555";
+		}
+		set @menustr$,@menustr$ + (getd("@" + getarg(2) + "$["+@i+"]"));
+		if(@i < .end - 1){
+				set @menustr$,@menustr$ + "^000000:";
+		}
+	}
+	set @menustr$,@menustr$ + "^000000";
+	set @c,select(@menustr$);
+	set @c,(@c-1)+.start;
+		mes getarg(0);
+		mes (getitemname(getd("@"+getarg(2)+"["+@c+"]")))+" costs ^0000FF" + (getd("@"+getarg(2)+"p["+@c+"]"))+"^000000 Uber points";
+		query_sql("SELECT `uberpoints` FROM `donationlog` WHERE `account_id`='"+getcharid(3)+"'",@uberpoints);
+		dispbottom "Your total Uber Points:"+ @uberpoints + " UB";
+		next;
+		if(select("Wait, I'll think about it..","I'll take that one!")==2){
+			if(@uberpoints >= getd("@"+getarg(2)+"p["+@c+"]")){
+				mes getarg(0);
+				mes "Thank you for donating, please come again!";
+
+				query_sql("UPDATE `donationlog` SET `uberpoints`=`uberpoints`-"+(getd("@"+getarg(2)+"p["+@c+"]"))+" WHERE `account_id`='"+getcharid(3)+"'");
+				if (compare(getd("@"+getarg(2)+"$["+@c+"]"),"+10")==1){
+					getitem2(getd("@"+getarg(2)+"["+@c+"]"),1,1,10,0,0,0,0,0);
+				}else{
+					getitem(getd("@"+getarg(2)+"["+@c+"]"),1);
+				}
+				close;
+			}
+			else{
+				mes getarg(0);
+				mes "Sorry,but you need^0000FF "+ (getd("@"+getarg(2)+"p["+@c+"]")-@uberpoints) + " ^000000more Uber points to get this item!";
+			}
+		}else{
+			mes @np$;
+			mes "Okay, please take your time! For more information, ask the ^0000FFDonation Guide^000000 NPC. Thanks!";
+		}
+return;
+}
+
+prontera.gat,164,155,3	script	Shopping Mall	73,{
+	mes "Ready To Go Shopping??";
+	next;
+	menu "Yes",yes,"No",no;
+	close;
+	yes:	warp "ra_temsky.gat",100,85;
+close;
+	no:
+close;
+}
+
+ra_temsky,96,62,4	script	XileRO Hats A	859,{
+setarray @xilehat1$[0],
+"Xilero Hat 1 - 4 ubers",
+"Xilero Hat 2 - 4 ubers",
+"Xilero Hat 3 - 4 ubers",
+"Xilero Hat 4 - 4 ubers",
+"Xilero Hat 5 - 4 ubers",
+"Xilero Hat 6 - 4 ubers",
+"Xilero Hat 7 - 4 ubers",
+"Xilero Hat 8 - 4 ubers",
+"Xilero Hat 9 - 4 ubers",
+"Xilero Hat 10 - 4 ubers",
+"Xilero Hat 11 - 4 ubers",
+"Xilero Hat 12 - 4 ubers",
+"Xilero Hat 13 - 4 ubers",
+"Xilero Hat 14 - 4 ubers",
+"Xilero Hat 15 - 4 ubers",
+"Xilero Hat 16 - 4 ubers",
+"Xilero Hat 17 - 4 ubers",
+"Xilero Hat 18 - 4 ubers",
+"Xilero Hat 19 - 4 ubers",
+"Xilero Hat 20 - 4 ubers",
+"Xilero Hat 21 - 4 ubers",
+"Xilero Hat 22 - 4 ubers",
+"Xilero Hat 23 - 4 ubers",
+"Xilero Hat 24 - 4 ubers",
+"Xilero Hat 25 - 4 ubers",
+"Xilero Hat 26 - 4 ubers",
+"Xilero Hat 27 - 4 ubers",
+"Xilero Hat 28 - 4 ubers",
+"Xilero Hat 29 - 4 ubers",
+"Xilero Hat 30 - 4 ubers",
+"Xilero Hat 31 - 4 ubers",
+"Xilero Hat 32 - 4 ubers",
+"Xilero Hat 33 - 4 ubers",
+"Xilero Hat 34 - 4 ubers",
+"Xilero Hat 35 - 4 ubers",
+"Xilero Hat 36 - 4 ubers",
+"Xilero Hat 37 - 4 ubers",
+"Xilero Hat 38 - 4 ubers",
+"Xilero Hat 39 - 4 ubers",
+"Xilero Hat 40 - 4 ubers",
+"Xilero Hat 41 - 4 ubers",
+"Xilero Hat 42 - 4 ubers",
+"Xilero Hat 43 - 4 ubers",
+"Xilero Hat 44 - 4 ubers",
+"Xilero Hat 45 - 4 ubers",
+"Xilero Hat 46 - 4 ubers",
+"Xilero Hat 47 - 4 ubers",
+"Xilero Hat 48 - 4 ubers",
+"Xilero Hat 49 - 4 ubers",
+"Xilero Hat 50 - 4 ubers",
+"Xilero Hat 51 - 4 ubers",
+"Xilero Hat 52 - 4 ubers",
+"Xilero Hat 53 - 4 ubers",
+"Xilero Hat 54 - 4 ubers",
+"Xilero Hat 55 - 4 ubers",
+"Xilero Hat 56 - 4 ubers",
+"Xilero Hat 57 - 4 ubers",
+"Xilero Hat 58 - 4 ubers",
+"Xilero Hat 59 - 4 ubers",
+"Xilero Hat 60 - 4 ubers",
+"Xilero Hat 61 - 4 ubers",
+"Xilero Hat 62 - 4 ubers",
+"Xilero Hat 63 - 4 ubers",
+"Xilero Hat 64 - 4 ubers",
+"Xilero Hat 65 - 4 ubers",
+"Xilero Hat 66 - 4 ubers",
+"Xilero Hat 67 - 4 ubers",
+"Xilero Hat 68 - 4 ubers",
+"Xilero Hat 69 - 4 ubers",
+"Xilero Hat 70 - 4 ubers",
+"Xilero Hat 71 - 4 ubers",
+"Xilero Hat 72 - 4 ubers",
+"Xilero Hat 73 - 4 ubers",
+"Xilero Hat 74 - 4 ubers",
+"Xilero Hat 75 - 4 ubers",
+"Xilero Hat 76 - 4 ubers",
+"Xilero Hat 77 - 4 ubers",
+"Xilero Hat 78 - 4 ubers",
+"Xilero Hat 79 - 4 ubers",
+"Xilero Hat 80 - 4 ubers",
+"Xilero Hat 81 - 4 ubers",
+"Xilero Hat 82 - 4 ubers",
+"Xilero Hat 83 - 4 ubers",
+"Xilero Hat 84 - 4 ubers",
+"Xilero Hat 85 - 4 ubers",
+"Xilero Hat 86 - 4 ubers",
+"Xilero Hat 87 - 4 ubers",
+"Xilero Hat 88 - 4 ubers",
+"Xilero Hat 89 - 4 ubers",
+"Xilero Hat 90 - 4 ubers",
+"Xilero Hat 91 - 4 ubers",
+"Xilero Hat 92 - 4 ubers",
+"Xilero Hat 93 - 4 ubers",
+"Xilero Hat 94 - 4 ubers",
+"Xilero Hat 95 - 4 ubers",
+"Xilero Hat 96 - 4 ubers",
+"Xilero Hat 97 - 4 ubers",
+"Xilero Hat 98 - 4 ubers",
+"Xilero Hat 99 - 4 ubers",
+"Xilero Hat 100 - 4 ubers",
+"Xilero Hat 101 - 4 ubers";
+
+
+for(set .p,0; .p<getarraysize(@xilehat1$);set .p,.p+1)
+setarray @xilehat1p[.p],4;
+
+setarray @xilehat1[0],
+22564,
+22565,
+22566,
+22567,
+22568,
+22569,
+22570,
+22571,
+22572,
+22573,
+22574,
+22575,
+22576,
+22577,
+22578,
+22579,
+22580,
+22581,
+22582,
+22583,
+22584,
+22585,
+22586,
+22587,
+22588,
+22589,
+22590,
+22591,
+22592,
+22593,
+22594,
+22595,
+22596,
+22597,
+22598,
+22599,
+22600,
+22601,
+22602,
+22603,
+22604,
+22605,
+22606,
+22607,
+22608,
+22609,
+22610,
+22611,
+22612,
+22613,
+22614,
+22615,
+22616,
+22617,
+22618,
+22619,
+22620,
+22621,
+22622,
+22623,
+22624,
+22625,
+22626,
+22627,
+22628,
+22629,
+22630,
+22631,
+22632,
+22633,
+22634,
+22635,
+22636,
+22637,
+22638,
+22639,
+22640,
+22641,
+22642,
+22643,
+22644,
+22645,
+22646,
+22647,
+22648,
+22649,
+22650,
+22651,
+22652,
+22653,
+22654,
+22655,
+22656,
+22657,
+22658,
+22659,
+22660,
+22661,
+22662,
+22663,
+22664;
+	set @np$,"[^0000FFXileRO Hats A^000000]";
+	set @var$,"xilehat1";
+	set @epicline$,"xile hats";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+ra_temsky,103,62,4	script	XileRO Hats B	859,{
+setarray @xilehat2$[0],
+"Xilero Hat 100 - 4 ubers",
+"Xilero Hat 101 - 4 ubers",
+"Xilero Hat 102 - 4 ubers",
+"Xilero Hat 103 - 4 ubers",
+"Xilero Hat 104 - 4 ubers",
+"Xilero Hat 105 - 4 ubers",
+"Xilero Hat 106 - 4 ubers",
+"Xilero Hat 107 - 4 ubers",
+"Xilero Hat 108 - 4 ubers",
+"Xilero Hat 109 - 4 ubers",
+"Xilero Hat 110 - 4 ubers",
+"Xilero Hat 111 - 4 ubers",
+"Xilero Hat 112 - 4 ubers",
+"Xilero Hat 113 - 4 ubers",
+"Xilero Hat 114 - 4 ubers",
+"Xilero Hat 115 - 4 ubers",
+"Xilero Hat 116 - 4 ubers",
+"Xilero Hat 117 - 4 ubers",
+"Xilero Hat 118 - 4 ubers",
+"Xilero Hat 119 - 4 ubers",
+"Xilero Hat 120 - 4 ubers",
+"Xilero Hat 121 - 4 ubers",
+"Xilero Hat 122 - 4 ubers",
+"Xilero Hat 123 - 4 ubers",
+"Xilero Hat 124 - 4 ubers",
+"Xilero Hat 125 - 4 ubers",
+"Xilero Hat 126 - 4 ubers",
+"Xilero Hat 127 - 4 ubers",
+"Xilero Hat 128 - 4 ubers",
+"Xilero Hat 129 - 4 ubers",
+"Xilero Hat 130 - 4 ubers",
+"Xilero Hat 131 - 4 ubers",
+"Xilero Hat 132 - 4 ubers",
+"Xilero Hat 133 - 4 ubers",
+"Xilero Hat 134 - 4 ubers",
+"Xilero Hat 135 - 4 ubers",
+"Xilero Hat 136 - 4 ubers";
+
+for(set .p,0; .p<getarraysize(@xilehat2$);set .p,.p+1)
+setarray @xilehat2p[.p],4;
+
+setarray @xilehat2[0],
+22664,
+22665,
+22666,
+22667,
+22668,
+22669,
+22670,
+22671,
+22672,
+22673,
+22674,
+22675,
+22676,
+22677,
+22678,
+22679,
+22680,
+22681,
+22682,
+22683,
+22684,
+22685,
+22686,
+22687,
+22688,
+22689,
+22690,
+22691,
+22692,
+22693,
+22694,
+22695,
+22696,
+22697,
+22698,
+22699,
+22700;
+	set @np$,"[^0000FF XileRO Hats B^000000]";
+	set @var$,"xilehat2";
+	set @epicline$,"xile hats";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+ra_temsky,94,61,4	script	+10 Xilero Hats A	859,{
+setarray @xilehat1$[0],
+"+10 Xilero Hat 1 - 7 ubers",
+"+10 Xilero Hat 2 - 7 ubers",
+"+10 Xilero Hat 3 - 7 ubers",
+"+10 Xilero Hat 4 - 7 ubers",
+"+10 Xilero Hat 5 - 7 ubers",
+"+10 Xilero Hat 6 - 7 ubers",
+"+10 Xilero Hat 7 - 7 ubers",
+"+10 Xilero Hat 8 - 7 ubers",
+"+10 Xilero Hat 9 - 7 ubers",
+"+10 Xilero Hat 10 - 7 ubers",
+"+10 Xilero Hat 11 - 7 ubers",
+"+10 Xilero Hat 12 - 7 ubers",
+"+10 Xilero Hat 13 - 7 ubers",
+"+10 Xilero Hat 14 - 7 ubers",
+"+10 Xilero Hat 15 - 7 ubers",
+"+10 Xilero Hat 16 - 7 ubers",
+"+10 Xilero Hat 17 - 7 ubers",
+"+10 Xilero Hat 18 - 7 ubers",
+"+10 Xilero Hat 19 - 7 ubers",
+"+10 Xilero Hat 20 - 7 ubers",
+"+10 Xilero Hat 21 - 7 ubers",
+"+10 Xilero Hat 22 - 7 ubers",
+"+10 Xilero Hat 23 - 7 ubers",
+"+10 Xilero Hat 24 - 7 ubers",
+"+10 Xilero Hat 25 - 7 ubers",
+"+10 Xilero Hat 26 - 7 ubers",
+"+10 Xilero Hat 27 - 7 ubers",
+"+10 Xilero Hat 28 - 7 ubers",
+"+10 Xilero Hat 29 - 7 ubers",
+"+10 Xilero Hat 30 - 7 ubers",
+"+10 Xilero Hat 31 - 7 ubers",
+"+10 Xilero Hat 32 - 7 ubers",
+"+10 Xilero Hat 33 - 7 ubers",
+"+10 Xilero Hat 34 - 7 ubers",
+"+10 Xilero Hat 35 - 7 ubers",
+"+10 Xilero Hat 36 - 7 ubers",
+"+10 Xilero Hat 37 - 7 ubers",
+"+10 Xilero Hat 38 - 7 ubers",
+"+10 Xilero Hat 39 - 7 ubers",
+"+10 Xilero Hat 40 - 7 ubers",
+"+10 Xilero Hat 41 - 7 ubers",
+"+10 Xilero Hat 42 - 7 ubers",
+"+10 Xilero Hat 43 - 7 ubers",
+"+10 Xilero Hat 44 - 7 ubers",
+"+10 Xilero Hat 45 - 7 ubers",
+"+10 Xilero Hat 46 - 7 ubers",
+"+10 Xilero Hat 47 - 7 ubers",
+"+10 Xilero Hat 48 - 7 ubers",
+"+10 Xilero Hat 49 - 7 ubers",
+"+10 Xilero Hat 50 - 7 ubers",
+"+10 Xilero Hat 51 - 7 ubers",
+"+10 Xilero Hat 52 - 7 ubers",
+"+10 Xilero Hat 53 - 7 ubers",
+"+10 Xilero Hat 54 - 7 ubers",
+"+10 Xilero Hat 55 - 7 ubers",
+"+10 Xilero Hat 56 - 7 ubers",
+"+10 Xilero Hat 57 - 7 ubers",
+"+10 Xilero Hat 58 - 7 ubers",
+"+10 Xilero Hat 59 - 7 ubers",
+"+10 Xilero Hat 60 - 7 ubers",
+"+10 Xilero Hat 61 - 7 ubers",
+"+10 Xilero Hat 62 - 7 ubers",
+"+10 Xilero Hat 63 - 7 ubers",
+"+10 Xilero Hat 64 - 7 ubers",
+"+10 Xilero Hat 65 - 7 ubers",
+"+10 Xilero Hat 66 - 7 ubers",
+"+10 Xilero Hat 67 - 7 ubers",
+"+10 Xilero Hat 68 - 7 ubers",
+"+10 Xilero Hat 69 - 7 ubers",
+"+10 Xilero Hat 70 - 7 ubers",
+"+10 Xilero Hat 71 - 7 ubers",
+"+10 Xilero Hat 72 - 7 ubers",
+"+10 Xilero Hat 73 - 7 ubers",
+"+10 Xilero Hat 74 - 7 ubers",
+"+10 Xilero Hat 75 - 7 ubers",
+"+10 Xilero Hat 76 - 7 ubers",
+"+10 Xilero Hat 77 - 7 ubers",
+"+10 Xilero Hat 78 - 7 ubers",
+"+10 Xilero Hat 79 - 7 ubers",
+"+10 Xilero Hat 80 - 7 ubers",
+"+10 Xilero Hat 81 - 7 ubers",
+"+10 Xilero Hat 82 - 7 ubers",
+"+10 Xilero Hat 83 - 7 ubers",
+"+10 Xilero Hat 84 - 7 ubers",
+"+10 Xilero Hat 85 - 7 ubers",
+"+10 Xilero Hat 86 - 7 ubers",
+"+10 Xilero Hat 87 - 7 ubers",
+"+10 Xilero Hat 88 - 7 ubers",
+"+10 Xilero Hat 89 - 7 ubers",
+"+10 Xilero Hat 90 - 7 ubers",
+"+10 Xilero Hat 91 - 7 ubers",
+"+10 Xilero Hat 92 - 7 ubers",
+"+10 Xilero Hat 93 - 7 ubers",
+"+10 Xilero Hat 94 - 7 ubers",
+"+10 Xilero Hat 95 - 7 ubers",
+"+10 Xilero Hat 96 - 7 ubers",
+"+10 Xilero Hat 97 - 7 ubers",
+"+10 Xilero Hat 98 - 7 ubers",
+"+10 Xilero Hat 99 - 7 ubers",
+"+10 Xilero Hat 100 - 7 ubers",
+"+10 Xilero Hat 101 - 7 ubers";
+
+
+for(set .p,0; .p<getarraysize(@xilehat1$);set .p,.p+1)
+setarray @xilehat1p[.p],7;
+
+setarray @xilehat1[0],
+22564,
+22565,
+22566,
+22567,
+22568,
+22569,
+22570,
+22571,
+22572,
+22573,
+22574,
+22575,
+22576,
+22577,
+22578,
+22579,
+22580,
+22581,
+22582,
+22583,
+22584,
+22585,
+22586,
+22587,
+22588,
+22589,
+22590,
+22591,
+22592,
+22593,
+22594,
+22595,
+22596,
+22597,
+22598,
+22599,
+22600,
+22601,
+22602,
+22603,
+22604,
+22605,
+22606,
+22607,
+22608,
+22609,
+22610,
+22611,
+22612,
+22613,
+22614,
+22615,
+22616,
+22617,
+22618,
+22619,
+22620,
+22621,
+22622,
+22623,
+22624,
+22625,
+22626,
+22627,
+22628,
+22629,
+22630,
+22631,
+22632,
+22633,
+22634,
+22635,
+22636,
+22637,
+22638,
+22639,
+22640,
+22641,
+22642,
+22643,
+22644,
+22645,
+22646,
+22647,
+22648,
+22649,
+22650,
+22651,
+22652,
+22653,
+22654,
+22655,
+22656,
+22657,
+22658,
+22659,
+22660,
+22661,
+22662,
+22663,
+22664;
+	set @np$,"[^0000FF+10 XileRO Hats A^000000]";
+	set @var$,"xilehat1";
+	set @epicline$,"+10 xile hats";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+ra_temsky,105,61,4	script	+10 XileRO Hats B	859,{
+setarray @xilehat2$[0],
+"+10 Xilero Hat 100 - 7 ubers",
+"+10 Xilero Hat 101 - 7 ubers",
+"+10 Xilero Hat 102 - 7 ubers",
+"+10 Xilero Hat 103 - 7 ubers",
+"+10 Xilero Hat 104 - 7 ubers",
+"+10 Xilero Hat 105 - 7 ubers",
+"+10 Xilero Hat 106 - 7 ubers",
+"+10 Xilero Hat 107 - 7 ubers",
+"+10 Xilero Hat 108 - 7 ubers",
+"+10 Xilero Hat 109 - 7 ubers",
+"+10 Xilero Hat 110 - 7 ubers",
+"+10 Xilero Hat 111 - 7 ubers",
+"+10 Xilero Hat 112 - 7 ubers",
+"+10 Xilero Hat 113 - 7 ubers",
+"+10 Xilero Hat 114 - 7 ubers",
+"+10 Xilero Hat 115 - 7 ubers",
+"+10 Xilero Hat 116 - 7 ubers",
+"+10 Xilero Hat 117 - 7 ubers",
+"+10 Xilero Hat 118 - 7 ubers",
+"+10 Xilero Hat 119 - 7 ubers",
+"+10 Xilero Hat 120 - 7 ubers",
+"+10 Xilero Hat 121 - 7 ubers",
+"+10 Xilero Hat 122 - 7 ubers",
+"+10 Xilero Hat 123 - 7 ubers",
+"+10 Xilero Hat 124 - 7 ubers",
+"+10 Xilero Hat 125 - 7 ubers",
+"+10 Xilero Hat 126 - 7 ubers",
+"+10 Xilero Hat 127 - 7 ubers",
+"+10 Xilero Hat 128 - 7 ubers",
+"+10 Xilero Hat 129 - 7 ubers",
+"+10 Xilero Hat 130 - 7 ubers",
+"+10 Xilero Hat 131 - 7 ubers",
+"+10 Xilero Hat 132 - 7 ubers",
+"+10 Xilero Hat 133 - 7 ubers",
+"+10 Xilero Hat 134 - 7 ubers",
+"+10 Xilero Hat 135 - 7 ubers",
+"+10 Xilero Hat 136 - 7 ubers";
+
+for(set .p,0; .p<getarraysize(@xilehat2$);set .p,.p+1)
+setarray @xilehat2p[.p],7;
+
+setarray @xilehat2[0],
+22664,
+22665,
+22666,
+22667,
+22668,
+22669,
+22670,
+22671,
+22672,
+22673,
+22674,
+22675,
+22676,
+22677,
+22678,
+22679,
+22680,
+22681,
+22682,
+22683,
+22684,
+22685,
+22686,
+22687,
+22688,
+22689,
+22690,
+22691,
+22692,
+22693,
+22694,
+22695,
+22696,
+22697,
+22698,
+22699,
+22700;
+	set @np$,"[^0000FF+10 XileRO Hats B^000000]";
+	set @var$,"xilehat2";
+	set @epicline$,"+10 xile hats";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+ra_temsky,96,51,5	script	Fury Forger	778,{
+setarray @ubfweapont$[0],
+"+10 Fury Staff Of Judgement - 12 ubers",
+"+10 Fury Echo Tracer - 12 ubers",
+"+10 Fury Path Finder - 12 ubers",
+"+10 Fury Sacred Blade - 12 ubers",
+"+10 Fury Supreme Fist - 12 ubers",
+"+10 Fury Katarmageddon - 12 ubers",
+"+10 Fury Terminator - 12 ubers",
+"+10 Fury Reality Weaver - 12 ubers",
+"+10 Fury Impaler Lance - 12 ubers",
+"+10 Fury Stealth Wing - 12 ubers",
+"+10 Fury Bandos - 12 ubers",
+"+10 Fury Mega Mic - 12 ubers",
+"+10 Fury Gyro Shuriken - 12 ubers",
+"+10 Fury Deagle - 12 ubers",
+"+10 Fury Maverick - 12 ubers",
+"+10 Fury Krieg - 12 ubers",
+"+10 Fury Lunar Launcher - 12 ubers",
+"+10 Fury Dragon Legacy - 12 ubers",
+"+10 Fury Barrager - 12 ubers";
+
+setarray @ubfweapontp[0],12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12;
+
+setarray @ubfweapont[0],
+3519,
+3520,
+3521,
+3522,
+3523,
+3524,
+3525,
+3526,
+3527,
+3528,
+3529,
+3530,
+3531,
+3532,
+3533,
+3534,
+3535,
+3536,
+3537;
+
+	set @np$,"[^FF0000Fury Forger^000000]";
+	set @var$,"ubfweapont";
+	set @epicline$,"+10 Fury weapons";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}

@@ -1,0 +1,184 @@
+;//||||||||||||||||||||||||||||||||||||||||||||||\\;
+;//|	   eAthena Monster Database Editor	|\\;
+;//|	      Copyright by Jukka, 2006		|\\;
+;//|						|\\;
+;//|		   Language File		|\\;
+;//|						|\\;
+;//||||||||||||||||||||||||||||||||||||||||||||||\\;
+
+
+;//||||||||||||||||||||||||||||||||||||||||||||||\\;
+;//| 	   Infos about the language file 	|\\;
+;//||||||||||||||||||||||||||||||||||||||||||||||\\;
+[Info]
+
+Language=English
+lang=eng
+Translator=Angeldeath
+
+version=1.0.1 Beta1
+
+;//||||||||||||||||||||||||||||||||||||||||||||||\\;
+;//| 	  	       Interface 		|\\;
+;//||||||||||||||||||||||||||||||||||||||||||||||\\;
+[Interface]
+openmobdb=Load Mobdatabase
+newmob=New Mob
+delmob=Delete Mob
+searchid=Search for ID
+searchname=Search for Name
+searchname2=New Search
+nextsearch=Search on
+nameinput=Input Name
+apply=Apply
+save=Save
+
+Tab1=General Mobdatabase
+Tab2=Mob Property
+Tab3=Mobtype
+Tab4=Drops && Chances
+
+;//|||||||||||||||||||| Tab #1 ||||||||||||||||||\\;
+inactivchk=Deactivated
+id=ID
+name=Name
+name2=iRO Name
+sprite=Spritename
+
+;//|||||||||||||||||||| Tab #2 ||||||||||||||||||\\;
+level=Level
+exp=Experience
+jexp=Job Experience
+mexp=MVP Experience
+mvpchk=MVP
+HP=HP
+SP=SP
+atk1=Attack1
+atk2=Attack2
+def=Defence
+mdef=Magical Defence
+STR=STR
+AGI=AGI
+VIT=VIT
+INT=INT
+LUK=LUK
+DEX=DEX
+speed=Walkspeed
+
+size=Size
+size1=Small
+Size2=Medium
+Size3=Huge
+
+adelay=Attackspeed
+amotion=Length of attack animation
+dmotion=Damagedelay
+
+;//|||||||||||||||||||| Tab #3 ||||||||||||||||||\\;
+element=Element
+element1=Neutral
+element2=Water
+element3=Earth
+element4=Fire
+element5=Wind
+element6=Poison
+element7=Holy
+element8=Dark
+element9=Ghost
+element0=Undead
+elelevel1=Level 1
+elelevel2=Level 2
+elelevel3=Level 3
+elelevel4=Level 4
+
+Range1=Attackrange
+Range2=Sightrange
+Range3=Hunting Range
+
+Race=Race
+Race1=Shapeless
+Race2=Undead
+Race3=Animal
+Race4=Plant
+Race5=Insect
+Race6=Fish
+Race7=Damon
+Race8=Demi-Human
+Race9=Angel
+Race0=Dragon
+
+moveable=Moveable
+looter=Looter
+aggressively=Aggressive
+supporter=Supporter
+detectcast=Detect Cast
+boss=Boss
+plant=Plant
+canattack=Can Attack
+seehide=Detect Player in "Hide"
+changetraged=Changes Target
+angry=Angry
+
+;//|||||||||||||||||||| Tab #4 ||||||||||||||||||\\;
+itemid=Item ID
+cardid=Card ID
+mvpid=MVP Item
+percent=Percent
+mexpper=MVP EXP Chance
+hint=Dropchance: (Chance*0,01)*Rates
+unknownitem=Unknown Item
+unknowncrad=Unknown Card
+
+
+;//||||||||||||||||||||||||||||||||||||||||||||||\\;
+;//| 	  	     Mainlanguage 		|\\;
+;//||||||||||||||||||||||||||||||||||||||||||||||\\;
+[Language]
+dberror=Error when opening Mobdatabase
+
+mobsaverequest=The mob was changed. Do you want to save the Changes?
+
+monsternotfound=Mob could not be.
+nomoremobfound=No more mobs found.
+
+IDinput=Search Monster with ID
+IDinputtext=Enter a ID, please.
+invaildid=Invalid Mob ID!
+idnotfound=Mob ID was not found.
+
+Dbsaved=Mobdatabase was successfully saved!
+
+
+
+;//||||||||||||||||||||||||||||||||||||||||||||||\\;
+;//| 	   	 Language for history 		|\\;
+;//|    %s = a string (e.g. to show the time)	|\\;
+;//|        %d = a integer, shows an number	|\\;
+;//|       %6.5f = float with 6 places and	|\\;
+;//|		   5 behind places		|\\;
+;//||||||||||||||||||||||||||||||||||||||||||||||\\;
+[History]
+
+itemdberror=[%s] Itemnametable was not able to open. Impossible to show the Itemnames!
+customitemdberror=[%s] Custom Itemnametable was not able to open. Impossible to show the Custom Itemnames!
+
+editorstarted=[%s] Mobdatabaseeditor started in %.5f seconds
+dbopenerror=[%s] Error when opening database
+
+mobsloaded=[%s] %d Mob was loaded in in %.5f seconds (%d Entries)
+dbsaved=[%s] %d Mob was saved in %.5f seconds (%d Entries)
+
+mobfound=[%s] Mob with the name "%s" was found.
+nextmobfound=[%s] No more Mobs with the name "%s" were found.
+mobnotfound=[%s] No Mobs with the name "%s" were found.
+invaildid=[%s] Input was not in numbers
+
+;//| IMPORTANT: Here: the Mob ID is %s !!! //////////////////////////////|
+idnotfound=[%s] Mob ID %s was not found
+idfound=[%s] Mob %s found. Jumped to %s
+;//|/////////////////////////////////////////////////////////////////////|
+
+addmob=[%s] Added Mob
+delmob=[%s] Mob with ID %d was deleted.
+savemob=[%s] Mob ID %d was changed.
+notsavemob=[%s] Not saved the mob with ID %d

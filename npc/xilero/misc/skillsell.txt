@@ -1,0 +1,98 @@
+//===== eAthena Script =======================================
+//= skill Seller
+//===== By: ==================================================
+//= kikuko
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= Any Athena Version
+//===== Description: =========================================
+//= buy skills
+//===== Additional Comments: =================================
+//= buy skill points
+//============================================================
+
+
+//=========================================================
+// Stat Seller: Prontera Stat Seller
+//=========================================================
+prontera.gat,141,179,5	script	Skill Point Seller	727,{
+
+set @maxskills, 97;
+set @skillcost, 1000000;
+
+mes "^4000C0[Skill Point Seller]^000000";
+mes "Hello! I'm here to sell skills to players that might have missed some levels.";
+next;
+if( 	(Class < Job_Lord_Knight || Class > Job_Paladin2) 
+	&& Class != Job_Taekwon 
+	&& Class != Job_Star_Gladiator && Class != Job_Star_Gladiator2 && Class != Job_Soul_Linker
+	&& Class != Job_Gunslinger && Class != Job_Ninja
+) goto L_nclass;
+set @maxskills, @maxskills + JobLevel;
+set @currentskill, skillpointcount();
+if( @currentskill >= @maxskills ) goto L_nskills;
+mes "^4000C0[Skill Point Seller]^000000";
+mes "You can buy the skills one at a time or as many as you like.";
+next;
+menu "Buy one at a time",-,"Input Number",L_bnum,"Cancel",L_ncancel;
+
+if( Zeny < @skillcost ) goto L_nzeny;
+set Zeny, Zeny - @skillcost;
+set SkillPoint, SkillPoint + 1;
+mes "^4000C0[Skill Point Seller]^000000";
+mes "Here is your skill point. Thank you and have a nice day.";
+close;
+
+L_bnum:
+mes "^4000C0[Skill Point Seller]^000000";
+mes "Enter how many skill points you would like to buy. Max is 100.";
+input @buynum;
+if( @buynum < 1 ) goto L_badnum;
+if( @buynum > 100 ) goto L_badnum;
+set @skillcost, @skillcost * @buynum;
+next;
+if( @currentskill + @buynum >= @maxskills ) goto L_nnskills;
+mes "^4000C0[Skill Point Seller]^000000";
+mes "That will cost " + @skillcost + " zeny. Still want to buy that many?";
+next;
+menu "Yes",-,"No",L_ncancel;
+if( Zeny < @skillcost ) goto L_nzeny;
+set Zeny, Zeny - @skillcost;
+set SkillPoint, SkillPoint + @buynum;
+mes "^4000C0[Skill Point Seller]^000000";
+mes "Here are your skill points. Thank you and have a nice day.";
+close;
+
+L_nskills:
+mes "^4000C0[Skill Point Seller]^000000";
+mes "You already have enough skill points.";
+close;
+
+L_nnskills:
+mes "^4000C0[Skill Point Seller]^000000";
+mes "You can not buy that many skill points.";
+close;
+
+L_nclass:
+mes "^4000C0[Skill Point Seller]^000000";
+mes "I'm sorry but I can only sell skills to advance classes.";
+close;
+
+L_ncancel:
+mes "^4000C0[Skill Point Seller]^000000";
+mes "Sorry to hear that, please come back if you change your mind.";
+close;
+
+L_badnum:
+next;
+mes "^4000C0[Skill Point Seller]^000000";
+mes "Please try again and enter a positive number to a max of 100.";
+close;
+
+L_nzeny:
+mes "^4000C0[Skill Point Seller]^000000";
+mes "Seems you dont have enough zeny.";
+close;
+
+}

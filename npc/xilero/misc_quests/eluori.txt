@@ -1,0 +1,95 @@
+//
+//    ----------------------------------------------------------
+//   |								|
+//   |    Hey jon left the location and appearence upto you.	|
+//   |								|
+//    ----------------------------------------------------------
+//
+prt_in.gat,53,63,5	script	Refineores	712,{
+	mes "[^EA0616RefineOres^000000]";
+	mes "Howdy,i can refine ori and elu";
+	mes "which do you want to make?";
+	mes "Remember,5 rough equals 1 refined.";
+	next;
+	menu "Oridecon",ORI,"Eluminum",ELU,"Nothing",L_CANCEL;
+//--------------------------Oridecon-----------------------------------------------------------
+ORI:
+	mes "[^EA0616RefineOres^000000]";
+	mes "Okay. I need 5 rough Oridecon. Do you have these?";
+	next;
+	menu "Yes",MAKEORI,"Refine all i have!",MASSORI,"No",L_CANCEL;
+
+MAKEORI:
+	set @item$,"Rough Oridecon";
+	if (countitem(756) < 5) goto NEEDITEM;
+	delitem 756,5;
+	getitem 984,1;
+	set @item2$,"Oridecon";
+	goto WORKDONE;
+MASSORI:
+	set @item$,"Rough Oridecon";
+	if (countitem(756) < 5) goto NEEDITEM;
+	delitem 756,5;
+	getitem 984,1;
+	set @item2$,"Oridecon";
+	goto MASSORI2;
+
+MASSORI2:
+	set @item$,"Rough Oridecon";
+	if (countitem(756) < 5) goto NEEDITEM;
+	delitem 756,5;
+	getitem 984,1;
+	set @item2$,"Oridecon";
+	goto MASSORI;
+
+//----------------------------Elunium----------------------------------------------------------
+ELU:
+	mes "[^EA0616RefineOres^000000]";
+	mes "Okay. I need 5 rough Elunium. Do you have these?";
+	next;
+	menu "Yes",MAKEELU,"Refine all i have!",MASSELU,"No",L_CANCEL;
+
+MAKEELU:
+	set @item$,"Rough Elunium";
+	if (countitem(757) < 5) goto NEEDITEM;
+	delitem 757,5;
+	getitem 985,1;
+	set @item2$,"Elunium";
+	goto WORKDONE;
+MASSELU:
+	set @item$,"Rough Elunium";
+	if (countitem(757) < 5) goto NEEDITEM;
+	delitem 757,5;
+	getitem 985,1;
+	set @item2$,"Elunium";
+	goto MASSELU2;
+
+MASSELU2:
+	set @item$,"Rough Elunium";
+	if (countitem(757) < 5) goto NEEDITEM;
+	delitem 757,5;
+	getitem 985,1;
+	set @item2$,"Elunium";
+	goto MASSELU;
+
+//---------------------------------------------------------------------------------------------
+NEEDITEM:
+	mes "[^EA061RefineOres^000000]";
+	mes "Your out of rough materials!";
+	next;
+	goto L_CLOSE;
+
+WORKDONE:
+	mes "[^EA061RefineOres^000000]";
+	mes"Here is your " + @item2$ + ".";
+	mes "Have a nice day";
+	next;
+	goto L_CLOSE;
+L_CANCEL:
+	mes "[^EA061RefineOres^000000]";
+	mes "Your loss budd.";
+	goto L_CLOSE;
+
+L_CLOSE:
+	close;
+}

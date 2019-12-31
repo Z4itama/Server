@@ -1,0 +1,306 @@
+/*
+OnDay0111: // Jan11
+OnDay0211: // Feb11
+OnDay0311: // March11
+OnDay0411: // April11
+OnDay0511: // May11
+OnDay0611: // June11
+OnDay0711: // July11
+OnDay0811: // Aug11
+OnDay0911: // Sep11
+OnDay1011: // Oct11
+OnDay1111: // Nov11
+OnDay1211: // Dec11
+*/
+
+gonryun,35,24,2	script	Danielle	882,1,1,{
+set .danielle$,"[^ff8800 Danielle <3 ~ ^000000]";
+if(KMQpart==6) { mes .danielle$; mes "You already done this quest."; close; }
+if($KMCactive==0) { message strcharinfo(0),"This quest is only available 10th - 11th"; end; }
+if(KMQpart==5) { 
+	mes .danielle$;
+	mes "Go find Rob somewhere in Al De Baran";
+	close;
+}
+if(KMQpart==4) {
+	mes .danielle$;
+	mes "Thank you so much for everything "+strcharinfo(0);
+	mes "You really helped me a lot!!";
+	next;
+	mes .danielle$;
+	mes "Go find Rob somewhere in Al De Baran";
+	set KMQpart,5;
+	close;
+}
+if(KMQpart==3) {
+	if(DanielleBra==1) {
+	mes .danielle$;
+	mes "Omigosh!!";
+	mes "You got my bracelet!!";
+	mes "Thank you thank you thank you thank you a lot really";
+	next;
+	emotion e_kis;
+	mes .danielle$;
+	mes "How can I even thank you =(";
+	menu "Give me 500z",Lgiv500z,"Heheh, no worries =)",-;
+	next;
+	mes .danielle$;
+	mes "This is so sweet!!";
+	mes "At least let me tell you what I've decided...";
+	next;
+	mes .danielle$;
+	mes "Well I've been thinking a lot..";
+	mes "I've decided im going to leave him..";
+	mes "coz as so many people told me, I shouldn't go on if I really don't feel anything anymore..";
+	next;
+	mes .danielle$;
+	mes "This guy really loves me, I can tell, he's so sweet to me and he make me fall in Love with him";
+	mes "In just days, It's amazing, I can't stop thinking about him, I sleep late, wake up very soon...";
+	mes "Just to come and talk with him.";
+	next;
+	mes .danielle$;
+	mes "I just Love him so much really, he's so sweet and cute to me";
+	mes "Hehe sorry if Im talking too much but yeah heh, I love him <3 <3";
+	mes "I do!!";
+	set KMQpart,4;
+	close;
+Lgiv500z:
+	next;
+	mes .danielle$;
+	mes "I don't have that much =(";
+	close;
+}
+	mes .danielle$;
+	mes "I need my Bracelet =/";
+	close;
+}
+if(KMQpart==2) {
+	mes .danielle$;
+	mes "Hi again "+strcharinfo(0)+".";
+	menu "Hai! cya!",LCancel,"Anything Else I can help?",-;
+	next;
+	mes .danielle$;
+	mes "Well I've lost my Bracelet, I think a Wild Hell Poodle took it from me";
+	mes "But im not sure, I was walking Chi Chi but I didn't really notice =/";
+	next;
+	mes .danielle$;
+	mes "Would you help me finding it?";
+	menu "Well Im a bit busy...",LCancel,"Suree!! I would love to ^_^",-;
+	next;
+	mes .danielle$;
+	mes "Hehe Thank you!!";
+	set KMQpart,3;
+	close;
+}
+if(KMQpart==1) {
+	if(countitem(4001) >= 1111 && countitem(518) >= 111 && countitem(668) >= 111) {
+	delitem 4001,1111;
+	delitem 518,111;
+	delitem 668,111;
+	mes .danielle$;
+	mes "Aww!! Thanks "+strcharinfo(0)+", that's so sweet of you =)";
+	mes "Really thanks a lot ~";
+	set KMQpart,2;
+	close;
+	}
+	mes .danielle$;
+	mes "I need you to bring me:";
+	mes "1111x - Poring Card";
+	mes "111x - Honey";
+	mes "111x - Christmas Card/Red Envelope =)";
+	mes "LOVE <3";
+	close;
+}
+if(KMQpart==0) {
+	mes .danielle$;
+	mes "Haii!! how are ya?";
+	menu "Hai! ~",-,"O.o",LCancel;
+	next;
+	mes .danielle$;
+	mes "Hai, what's your name?";
+	menu "...",LCancel,strcharinfo(0),-;
+	next;
+	mes .danielle$;
+	mes "Oh hey "+strcharinfo(0)+".";
+	mes "I don't know what to do =/";
+	mes "Do you think you can help me?";
+	menu "No...",LCancel,"Sure, what's up",-;
+	next;
+	mes .danielle$;
+	mes "Have you ever felt like you don't know if you're doing the right thing?";
+	menu "Not really...",LCancel,"Yeah why =/",-;
+	next;
+	mes .danielle$;
+	mes "Coz I met this guy, we talked a lot and had fun...";
+	mes "But from the other-side I have a guy i've been with a lot of time already...";
+	mes "But I just don't feel it anymore, and this new guy I met I just can't stop thinking about him <3...";	
+	next;
+	mes .danielle$;
+	mes "But you know it's not hard to leave someone just like that, even more when you've been with him a lot of time...";
+	mes "But I just can't take it anymore, he had done enough to me already...";
+	next;
+	mes .danielle$;
+	mes "What should I do =/?";
+	menu "BreakUp Already...",LCancel,"Give it some time, see how it goes...",-;
+	next;
+	mes .danielle$;
+	mes "I guess you're right =/";
+	mes "But Im feeling so low, do you think you can bring me some stuff that my Mom asked me for?";
+	menu "Actually Im in a hurry =/",LCancel,"Sure why not ;p",-;
+	next;
+	mes .danielle$;
+	mes "Okay hehe...";
+	next;
+	mes .danielle$;
+	mes "I need you to bring me:";
+	mes "1111x - Poring Card";
+	mes "111x - Honey";
+	mes "111x - Christmas Card/Red Envelope =)";
+	mes "LOVE <3";
+	set KMQpart,1;
+	close2;
+	set kismetcall$,"^ff8800In Progress^000000";
+	message strcharinfo(0),"You just activated ' Kismet's Call ' Quest~";
+	end;
+}
+LCancel:
+	close;
+
+OnTouch:
+	switch(rand(4)) {
+
+		case 0:
+			emotion e_heh;
+			end;
+		case 1:
+			emotion e_lv;
+			end;
+		case 2:
+			emotion e_ok;
+			end;
+		case 3:
+			emotion e_no1;
+			end;
+	}
+		end;
+}
+
+gonryun,34,24,6	script	Chi Chi	1167,1,1,{
+end;
+
+OnTouch:
+	switch(rand(4)) {
+
+		case 0:
+			npctalk "Oinkee!!!";
+			end;
+		case 1:
+			npctalk "OOoinkkee!!";
+			end;
+		case 2:
+			npctalk "Oiiinkeeeeee!";
+			end;
+		case 3:
+			npctalk "Oinkee!!...";
+			end;
+	}
+		end;
+
+OnNPCKillEvent:
+if(KMQpart==3) {
+if($KMCactive==0) { end; }
+	if (killedrid == 1866) { if(DanielleBra==1) { end; }
+	set @Dbracelet,rand(1,1000); if(@Dbracelet < 5) { set DanielleBra,1; message strcharinfo(0),"You got Danielle's Bracelet!!"; end; }
+	end;
+}
+}
+end;
+}
+
+aldebaran,152,210,2	script	Rob	778,{
+	set .robb$,"[^ff8800 Robb ~ ^000000]";
+
+if($KMCactive==0) { message strcharinfo(0),"This quest is only available 10th - 11th"; end; }
+if(KMQpart==5) {
+	if(HH_exp < 1000) { message strcharinfo(0),"You still need "+(1000-HH_exp)+" Head Hunter's Exp to get your Prize."; end; }
+	mes .robb$;
+	mes "Hi, yea yea Dani told me ;P";
+	mes "Here ya go!";
+			getitem 5136,1; getitem 12132,20;
+			set KMQpart,6;
+			set kismetcall$,"^0000ffDone^000000";
+			set qpoints,qpoints+2;
+	next;
+	mes .robb$;
+	mes "Enjoy ^_^!";
+	mes "------------------";
+	mes "Quest Done!";
+	next;
+	mes .robb$;
+	mes "Credits: Martin&Nicole";
+	mes "A True Love Story";
+	mes "I Love You!!~";
+	close;
+}
+	mes .robb$;
+	mes "Hi..O.o";
+	close;
+}
+
+ayothaya,160,172,4	script	KisMet	1395,{
+set .npcname$,"[^ff8800 KisMet ^000000]";
+
+	if(getgmlevel() >= 99) {
+			menu "~ Activate/Deactive My KisMet",L_gm_kismet,
+			"~ Normal Menu",normalmenu,
+			"~ Cancel",LCancel;
+
+		L_gm_kismet:
+			if($diskismet==0) { set $diskismet,1; message strcharinfo(0),"~ Server's Kismet has been activated !!"; } 
+			else { set $diskismet,0; message strcharinfo(0),"~ Server's Kismet has been deactivated !!"; }
+
+	}
+
+normalmenu:
+	mes .npcname$;
+	mes "Hi how can I help you =)?";
+	menu "~ Activate/Deactive My KisMet",L_a_kismet,
+	"~ Cancel",LCancel;
+	close;
+
+L_a_kismet:
+	if(diskismet==0) { set diskismet,1; message strcharinfo(0),"~ Your Kismet has been activated !!"; } 
+	else { set diskismet,0; message strcharinfo(0),"~ Your Kismet has been deactivated !!"; }
+LCancel:
+	close;
+}
+
+// FUNCTION
+function	script	F_kismetq	{
+
+		if(diskismet != 1) { end; }
+		if($diskismet != 1) { end; }
+	switch(rand(4)) {
+
+		case 0:
+			set @mobid$,1395;
+			atcommand strcharinfo(0)+":@disguise "+@mobid$;
+			message strcharinfo(0),"~Kismet !!";
+			end;
+		case 1:
+			set @mobid$,1396;
+			atcommand strcharinfo(0)+":@disguise "+@mobid$;
+			message strcharinfo(0),"~Kismet !!";
+			end;
+		case 2:
+			set @mobid$,1397;
+			atcommand strcharinfo(0)+":@disguise "+@mobid$;
+			message strcharinfo(0),"~Kismet !!";
+			end;
+		case 3:
+			set @mobid$,1398;
+			atcommand strcharinfo(0)+":@disguise "+@mobid$;
+			message strcharinfo(0),"~Kismet !!";
+			end;
+}
+}

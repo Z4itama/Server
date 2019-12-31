@@ -1,0 +1,90 @@
+//=================eAthena Script============================
+// Written by: DeathAnge11
+//=================Script Name===============================
+// Lord Executioner - for XileRO
+//=================Script Defenition=========================
+// Quest NPC for the two-handed sword executioner
+//=================Version History===========================
+//1.0 - Done. Still needs to be tested.
+//=================Server Info===============================
+// eAthena SVN vrs. 1583, havent tested yet
+//===========================================================
+
+prt_in.gat,88,104,3	script	Lord Executioner	734,{
+
+mes "[Lord Executioner]";
+mes "So you have succeeded in finding me young one.";
+next;
+mes "[Lord Executioner]";
+mes "What would the likes of you want with me";
+menu "What is it that you do excactly?",Exec_Descript,"umm...nevermind, you are scary.",Exec_Done;
+
+Exec_Descript:
+mes "[Lord Executioner]";
+mes "I am the legendary Lord Executioner";
+mes "I am known by everyone far and wide as a legendary forger.";
+mes "What would you have me do";
+menu "Can you make an Executioner for me",Exec_Make,"What items do I need",Exec_Need,"umm...nevermind, you are wierd",Exec_Done;
+
+Exec_Done:
+mes "[Lord Executioner]";
+mes "How dare you speak to me that way!";
+mes "Be gone before I lose my temper";
+close;
+
+Exec_Fail:
+mes "[Lord Executioner]";
+mes "Hmm...to bad, you dont have what I need to complete the sword.";
+mes "I am sorry but I cant help you.";
+close;
+
+Exec_Need:
+mes "[Lord Executioner]";
+mes "HAHAHA";
+mes "How dare you come to me unprepared!";
+mes "I guess it cant be helped, o well.";
+next;
+mes "[Lord Executioner]";
+mes "In order for me to make you the best sword that I can,";
+mes "I will need :";
+next;
+mes "^FF0000Executioner Mitten : 100^000000";
+mes "^FF0000Bloody Edge : 20^000000";
+mes "^FF0000Emperium : 10^000000";
+mes "^FF0000Necklace of Oblivion : 50^000000";
+mes "^FF0000Amulet : 50^000000";
+mes "^FF0000zweihander : 1^000000";
+mes "and 1000000 zeny";
+next;
+mes "[Lord Executioner]";
+mes "So, do you want me to make you an Executioner";
+menu "Yes",Exec_Make,"No...leave me alone",Exec_Done;
+
+
+Exec_Make:
+mes "[Lord Executioner]";
+mes "Let me see if you possess the items needed for my work.";
+next;
+// - 100 - exec.glove(7017) , 10 - bloody edge(7024), 10 - emp(714) , 50 - necklace of oblivion(1008), 50-amulet(609), 1 - zweihander(1168)  
+if (Zeny < 1000000) goto Exec_Fail;
+if (countitem(7017) < 100) goto Exec_Fail;
+if (countitem(7024) < 20) goto Exec_Fail;
+if (countitem(714) < 10) goto Exec_Fail;
+if (countitem(1008) < 50) goto Exec_Fail;
+if (countitem(609) < 50) goto Exec_Fail;
+if (countitem(1168) < 1) goto Exec_Fail;
+mes "[Lord Executioner]";
+mes "Hmm, you are strong young one, and this sword will make you even stronger.";
+getitem 1169,1;
+delitem 7017,100;
+delitem 7024,10;
+delitem 714,10;
+delitem 1008,50;
+delitem 609,50;
+delitem 1168,1;
+set Zeny, Zeny-1000000;
+next;
+mes "[Lord Executioner]";
+mes "Good Bye young one, may that sword treat you well.";
+close;
+}

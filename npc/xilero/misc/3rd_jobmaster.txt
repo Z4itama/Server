@@ -1,0 +1,506 @@
+prontera,161,179,4	script	3rd Class Job Changer	459,{
+
+	if(going_third == 1) { goto third_menu; }	// FROM HIGH JOB TO 3RD JOB
+	if(thirdprejob == 1) { goto third_prereborn; }	// FROM HIGH JOB TO 2ND ADVANCED CLASS
+	if(Class == Job_Novice_High || lastforthird != 0) { goto L_high_novice; }
+
+if(Class == Job_Lord_Knight) { goto L_thirdReborn; } //Lord Kight
+if(Class == Job_High_Priest) { goto L_thirdReborn; }	//High Priest
+if(Class == Job_High_Wizard) { goto L_thirdReborn; }	//High Wizard
+if(Class == Job_Whitesmith) { goto L_thirdReborn; }	//Whitesmith
+if(Class == Job_Sniper) { goto L_thirdReborn; }	//Sniper
+if(Class == Job_Assassin_Cross) { goto L_thirdReborn; }	//Assassin Cross
+if(Class == Job_Paladin) { goto L_thirdReborn; }	//Paladin
+if(Class == Job_Champion) { goto L_thirdReborn; }	//Champion
+if(Class == Job_Professor) { goto L_thirdReborn; }	//Professor
+if(Class == Job_Stalker) { goto L_thirdReborn; }	//STalker
+if(Class == Job_Creator) { goto L_thirdReborn; }	//Creator
+if(Class == Job_Clown) { goto L_thirdReborn; }	//Clown
+if(Class == Job_Gypsy) { goto L_thirdReborn; }	//Gypsy
+
+	mes "[^0000ffXileRO 3rd Job Changer^000000]";
+	mes "You can't use this feat. yet.";
+	close;
+
+	if(lastforthird == 0) { 
+			mes "[^0000ffXileRO 3rd Job Changer^000000]"; 
+			mes "Sorry, but you can't use this feat.";
+			close;
+	}
+
+third_prereborn:
+	if(JobLevel < 40) goto L_notdone;
+	if(lastforthird == Job_Lord_Knight) { jobchange Job_Lord_Knight; set JobLevel,1; } 	//Lord Kight
+	if(lastforthird == Job_High_Priest) { jobchange Job_High_Priest; set JobLevel,1; }		//High Priest
+	if(lastforthird == Job_High_Wizard) { jobchange Job_High_Wizard; set JobLevel,1; }		//High Wizard
+	if(lastforthird == Job_Whitesmith) { jobchange Job_Whitesmith; set JobLevel,1; }		//Whitesmith
+	if(lastforthird == Job_Sniper) { jobchange Job_Sniper; set JobLevel,1; }		//Sniper
+	if(lastforthird == Job_Assassin_Cross) { jobchange Job_Assassin_Cross; set JobLevel,1; }	//Assassin Cross
+	if(lastforthird == Job_Paladin) { jobchange Job_Paladin; set JobLevel,1; }		//Paladin
+	if(lastforthird == Job_Champion) { jobchange Job_Champion; set JobLevel,1; }		//Champion
+	if(lastforthird == Job_Professor) { jobchange Job_Professor; set JobLevel,1; }		//Professor
+	if(lastforthird == Job_Stalker) { jobchange Job_Stalker; set JobLevel,1; }		//STalker
+	if(lastforthird == Job_Creator) { jobchange Job_Creator; set JobLevel,1; }		//Creator
+	if(lastforthird == Job_Clown) { jobchange Job_Clown; set JobLevel,1; }		//Clown
+	if(lastforthird == Job_Gypsy) { jobchange Job_Gypsy; set JobLevel,1; }		//Gypsy
+		set thirdprejob,0;
+		set going_third,1;
+		mes "[^0000ffXileRO 3rd Job Changer^000000]";
+		mes "Have fun ^0000ff~^000000";
+		close;
+
+L_high_novice:
+	if(JobLevel < 10) { goto L_notdone; }
+if(Class != Job_Novice_High) { goto L_novicelevel; }
+	
+	if(lastforthird == Job_Lord_Knight) { goto L_h_swordman; } 	//Lord Kight
+	if(lastforthird == Job_High_Priest) { goto L_h_acolyte; }		//High Priest
+	if(lastforthird == Job_High_Wizard) { goto L_h_mage; }		//High Wizard
+	if(lastforthird == Job_Whitesmith) { goto L_h_merchant; }		//Whitesmith
+	if(lastforthird == Job_Sniper) { goto L_h_archer; }		//Sniper
+	if(lastforthird == Job_Assassin_Cross) { goto L_h_thief; }		//Assassin Cross
+	if(lastforthird == Job_Paladin) { goto L_h_swordman; }		//Paladin
+	if(lastforthird == Job_Champion) { goto L_h_acolyte; }		//Champion
+	if(lastforthird == Job_Professor) { goto L_h_mage; }		//Professor
+	if(lastforthird == Job_Stalker) { goto L_h_thief; }		//STalker
+	if(lastforthird == Job_Creator) { goto L_h_merchant; }		//Creator
+	if(lastforthird == Job_Clown) { goto L_h_archer; }		//Clown
+	if(lastforthird == Job_Gypsy) { goto L_h_archer; }		//Gypsy
+
+L_h_swordman:
+		mes "[^0000ffXileRO 3rd Job Changer^000000]";
+		mes "Do you want to change into a High Swordsman?";
+		next;
+		menu "No",L_quit,"Yes",-;
+		jobchange Job_Swordman_High;
+		set JobLevel, 1;
+		set thirdprejob,1;
+		mes "[^0000ffXileRO 3rd Job Changer^000000]";
+		mes "Thank you, please come again soon!";
+		close;
+
+L_h_acolyte:
+		mes "[^0000ffXileRO 3rd Job Changer^000000]";
+		mes "Do you want to change into a High Acolyte?";
+		next;
+		menu "No",L_quit,"Yes",-;
+		jobchange Job_Acolyte_High;
+		set JobLevel, 1;
+		set thirdprejob,1;
+		mes "[^0000ffXileRO 3rd Job Changer^000000]";
+		mes "Thank you, please come again soon!";
+		close;
+L_h_mage:
+		mes "[^0000ffXileRO 3rd Job Changer^000000]";
+		mes "Do you want to change into a High Mage?";
+		next;
+		menu "No",L_quit,"Yes",-;
+		jobchange Job_Mage_High;
+		set JobLevel, 1;
+		set thirdprejob,1;
+		mes "[^0000ffXileRO 3rd Job Changer^000000]";
+		mes "Thank you, please come again soon!";
+		close;
+L_h_merchant:
+		mes "[^0000ffXileRO 3rd Job Changer^000000]";
+		mes "Do you want to change into a High Merchant?";
+		next;
+		menu "No",L_quit,"Yes",-;
+		jobchange Job_Merchant_High;
+		set JobLevel, 1;
+		set thirdprejob,1;
+		mes "[^0000ffXileRO 3rd Job Changer^000000]";
+		mes "Thank you, please come again soon!";
+		close;
+L_h_archer:
+		mes "[^0000ffXileRO 3rd Job Changer^000000]";
+		mes "Do you want to change into a High Archer?";
+		next;
+		menu "No",L_quit,"Yes",-;
+		jobchange Job_Archer_High;
+		set JobLevel, 1;
+		set thirdprejob,1;
+		mes "[^0000ffXileRO 3rd Job Changer^000000]";
+		mes "Thank you, please come again soon!";
+		close;
+L_h_thief:
+		mes "[^0000ffXileRO 3rd Job Changer^000000]";
+		mes "Do you want to change into a High Thief?";
+		next;
+		menu "No",L_quit,"Yes",-;
+		jobchange Job_Thief_High;
+		set JobLevel, 1;
+		set thirdprejob,1;
+		mes "[^0000ffXileRO 3rd Job Changer^000000]";
+		mes "Thank you, please come again soon!";
+		close;
+
+L_notdone:
+	next;
+	mes "[^0000ffXileRO 3rd Job Changer^000000]";
+	mes "You haven't get your Job Level above 10^0000ff~^000000";
+	close;
+
+L_quit:
+	close;
+
+	if(lastforthird == 0) { 
+			mes "[^0000ffXileRO 3rd Job Changer^000000]"; 
+			mes "Sorry, but you can't use this feat.";
+			close;
+	}
+
+L_thirdReborn:
+		if(BaseLevel < 255 || JobLevel < 70) { goto L_level; }
+		set lastforthird,readparam(Class);
+		jobchange Job_Novice_High;
+		resetlvl(1);
+		skill 142,1,0;
+		skill 143,1,0;
+		mes "[^0000ffXileRO 3rd Job Changer^000000]";
+		mes "Have fun!^0000ff~^000000";
+		close;
+
+third_menu:
+	mes "[Third Job Changer]";
+	mes "Hello [" + strcharinfo(0) + "], so you'd like to change to the 3rd Class.";
+	mes "Well, which class should it be ?";
+	next;
+
+	if(BaseLevel < 180 || JobLevel < 70) { goto L_level; }
+	menu "^0000ff>^000000 Rune Knight",-,
+	"^0000ff>^000000 Guillotine Cross",L_1,
+	"^0000ff>^000000 Ranger",L_2,
+	"^0000ff>^000000 Warlock",L_3,
+	"^0000ff>^000000 Archbishop",L_4,
+	"^0000ff>^000000 Mechanic",L_5,
+	"^0000ff>^000000 Royal Guard",L_6,
+	"^0000ff>^000000 Shadow Chaser",L_7,
+	"^0000ff>^000000 Minstrel",L_8,
+	"^0000ff>^000000 Wanderer",L_9,
+	"^0000ff>^000000 Sorcerer",L_10,
+	"^0000ff>^000000 Sura",L_11,
+	"^0000ff>^000000 Genetic",L_12,
+	"^0000ff>^000000 Cancel",L_End;
+
+	mes "[Third Job Changer]";
+	mes "So you would like to be an Rune Knight ?";
+	next;
+	menu "Yes",-,"No",L_End;
+	
+	if (Weight > 20000) goto LWeight;
+    if ((Class == 4014) || (Class == 4022)) goto Lpeco;
+	
+	if (Class != Job_Lord_Knight) goto L_cant;
+	
+	set BaseLevel, 1;
+	set JobLevel, 1;
+    resetstatus;
+	resetskill;
+	set SkillPoint, 0;
+    set StatusPoint, 100;
+	jobchange 4060;
+
+	mes "[Third Job Changer]";
+	mes "Congratulations ! You're now Rune Knight !!";
+	close;
+
+L_1:
+	mes "[Third Job Changer]";
+	mes "So you would like to be an Guillotine Cross ?";
+	next;
+	menu "Yes",-,"No",L_End;
+		
+	if (Weight > 20000) goto LWeight;
+	
+	if (Class != Job_Assassin_Cross) goto L_cant;
+	
+	set BaseLevel, 1;
+	set JobLevel, 1;
+    resetstatus;
+	resetskill;
+	set SkillPoint, 0;
+    set StatusPoint, 100;
+	jobchange 4065;
+	
+	mes "[Third Job Changer]";
+	mes "Congratulations ! You're now Guillotine Cross !!";
+	close;
+
+L_2:
+	mes "[Third Job Changer]";
+	mes "So you would like to be an Ranger ?";
+	next;
+	menu "Yes",-,"No",L_End;
+
+	if (Weight > 20000) goto LWeight;
+    if (checkfalcon() != 0) goto LFalcon;
+	
+	if (Class != Job_Sniper) goto L_cant;
+	
+	set BaseLevel, 1;
+	set JobLevel, 1;
+    resetstatus;
+	resetskill;
+	set SkillPoint, 0;
+    set StatusPoint, 100;
+	jobchange 4062;
+	getitem 6124,1;
+
+	mes "[Third Job Changer]";
+	mes "Congratulations ! You're now Ranger !!";
+	close;
+
+L_3:
+	mes "[Third Job Changer]";
+	mes "So you would like to be an Warlock ?";
+	next;
+	menu "Yes",-,"No",L_End;
+	
+	if (Weight > 20000) goto LWeight;
+	
+	if (Class != Job_High_Wizard) goto L_cant;
+	
+	set BaseLevel, 1;
+	set JobLevel, 1;
+    resetstatus;
+	resetskill;
+	set SkillPoint, 0;
+    set StatusPoint, 100;
+	jobchange 4061;
+	
+	mes "[Third Job Changer]";
+	mes "Congratulations ! You're now Warlock !!";
+	close;
+   
+L_4:
+	mes "[Third Job Changer]";
+	mes "So you would like to be an Arc Bishop ?";
+	next;
+	menu "Yes",-,"No",L_End;
+	
+	if (Weight > 20000) goto LWeight;
+	
+	if (Class != Job_High_Priest) goto L_cant;
+	
+	set BaseLevel, 1;
+	set JobLevel, 1;
+    resetstatus;
+	resetskill;
+	set SkillPoint, 0;
+    set StatusPoint, 100;
+	jobchange 4063;
+	
+	mes "[Third Job Changer]";
+	mes "Congratulations ! You're now Arc Bishop !!";
+	close;
+  
+L_5:
+	mes "[Third Job Changer]";
+	mes "So you would like to be an Mechanic ?";
+	next;
+	menu "Yes",-,"No",L_End;
+
+	if (Weight > 20000) goto LWeight;
+    if (checkcart() != 0) goto LCart;
+	
+	if (Class != Job_Whitesmith) goto L_cant;
+	
+	set BaseLevel, 1;
+	set JobLevel, 1;
+    resetstatus;
+	resetskill;
+	set SkillPoint, 0;
+    set StatusPoint, 100;
+	jobchange 4064;
+
+	mes "[Third Job Changer]";
+	mes "Congratulations ! You're now Mechanic !!";
+	close;
+
+L_6:
+	mes "[Third Job Changer]";
+	mes "So you would like to be an Royal Guard ?";
+	next;
+	menu "Yes",-,"No",L_End;
+	
+	if (Weight > 20000) goto LWeight;
+    if ((Class == 4014) || (Class == 4022)) goto Lpeco;
+	
+	if (Class != Job_Paladin) goto L_cant;
+	
+	set BaseLevel, 1;
+	set JobLevel, 1;
+    resetstatus;
+	resetskill;
+	set SkillPoint, 0;
+    set StatusPoint, 100;
+	jobchange 4073;
+
+	mes "[Third Job Changer]";
+	mes "Congratulations ! You're now Royal Guard !!";
+	close;
+
+L_7:
+	mes "[Third Job Changer]";
+	mes "So you would like to be an Shadow Chaser ?";
+	next;
+	menu "Yes",-,"No",L_End;
+		
+	if (Weight > 20000) goto LWeight;
+	
+	if (Class != Job_Stalker) goto L_cant;
+	
+	set BaseLevel, 1;
+	set JobLevel, 1;
+    resetstatus;
+	resetskill;
+	set SkillPoint, 0;
+    set StatusPoint, 100;
+	jobchange 4079;
+
+	mes "[Third Job Changer]";
+	mes "Congratulations ! You're now Shadow Chaser !!";
+	close;
+
+L_8:
+	mes "[Third Job Changer]";
+	mes "So you would like to be an Minstrell ?";
+	next;
+	menu "Yes",-,"No",L_End;
+	
+	if (Weight > 20000) goto LWeight;
+	
+	if (Class != Job_Clown) goto L_cant;
+	
+	set BaseLevel, 1;
+	set JobLevel, 1;
+    resetstatus;
+	resetskill;
+	set SkillPoint, 0;
+    set StatusPoint, 100;
+	jobchange 4076;
+	
+	mes "[Third Job Changer]";
+	mes "Congratulations ! You're now Minstrell !!";
+	close;
+
+L_9:
+	mes "[Third Job Changer]";
+	mes "So you would like to be an Wanderer ?";
+	next;
+	menu "Yes",-,"No",L_End;
+
+	if (Weight > 20000) goto LWeight;
+	
+	if (Class != Job_Gypsy) goto L_cant;
+	
+	set BaseLevel, 1;
+	set JobLevel, 1;
+    resetstatus;
+	resetskill;
+	set SkillPoint, 0;
+    set StatusPoint, 100;
+	jobchange 4075;
+	
+	mes "[Third Job Changer]";
+	mes "Congratulations ! You're now Wanderer !!";
+	close;
+
+L_10:
+	mes "[Third Job Changer]";
+	mes "So you would like to be an Sorcerer ?";
+	next;
+	menu "Yes",-,"No",L_End;
+
+	if (Weight > 20000) goto LWeight;
+	
+	if (Class != Job_Professor) goto L_cant;
+	
+	set BaseLevel, 1;
+	set JobLevel, 1;
+    resetstatus;
+	resetskill;
+	set SkillPoint, 0;
+    set StatusPoint, 100;
+	jobchange 4074;
+
+	mes "[Third Job Changer]";
+	mes "Congratulations ! You're now Sorcerer !!";
+	close;
+
+L_11:
+	mes "[Third Job Changer]";
+	mes "So you would like to be an Sura ?";
+	next;
+	menu "Yes",-,"No",L_End;
+	
+	if (Weight > 20000) goto LWeight;
+	
+	if (Class != Job_Champion) goto L_cant;
+	
+	set BaseLevel, 1;
+	set JobLevel, 1;
+    resetstatus;
+	resetskill;
+	set SkillPoint, 0;
+    set StatusPoint, 100;
+	jobchange 4077;
+	
+	mes "[Third Job Changer]";
+	mes "Congratulations ! You're now Sura !!";
+	close;
+
+L_12:
+	mes "[Third Job Changer]";
+	mes "So you would like to be an Genetic ?";
+	next;
+	menu "Yes",-,"No",L_End;
+
+	if (Weight > 20000) goto LWeight;
+    if (checkcart() != 0) goto LCart;
+	
+	if (Class != Job_Creator) goto L_cant;
+	
+	set BaseLevel, 1;
+	set JobLevel, 1;
+    resetstatus;
+	resetskill;
+	set SkillPoint, 0;
+    set StatusPoint, 100;
+	jobchange 4078;
+	
+	mes "[Third Job Changer]";
+	mes "Congratulations ! You're now Genetic !!";
+	close;
+	
+L_level:
+	mes "Sorry, but be sure if your";
+	mes "Base Lvl. is 180 (or Higher) / Job Lvl. is 70 and you've ate all your Skillpoints.";
+	close;
+	
+L_cant:
+	mes "Sorry, but you can't change from that Class!";
+	close;
+	
+LWeight:
+	mes "Sorry, but you're overweight,";
+	mes "please put some of your items in the storage.";
+	close;
+	
+Lpeco:
+	mes "Please release your Peco before changing.";
+	close;
+	
+LCart:
+	mes "Please remove your Cart before changing.";
+	close;
+	
+LFalcon:
+	mes "Please release your Falcon before changing.";
+	close;
+	
+L_End:
+	mes "Bye.";
+	close;
+}

@@ -1,0 +1,300 @@
+function	script	dofind	{
+	dispbottom " ";
+
+	switch(getarg(0)){
+	case 1:{//searchbycharname
+			if(callfunc("inject",getarg(1))==0){
+				set @handle,query_sql("select `account_id`,`char_id` from `char` where `name`='"+getarg(1)+"'",@val1,@val2);
+				set @handle,query_sql("select `last_ip` from `login` WHERE `account_id`="+@val1,@val3$);
+				dispbottom "Information of the character: "+getarg(1);
+				dispbottom "Account ID:"+@val1;
+				dispbottom "Character ID:"+@val2;
+				dispbottom "Last IP:"+@val3$;
+
+				deletearray @val1[0],getarraysize(@val1);
+				deletearray @val2[0],getarraysize(@val2);
+				deletearray @val3$[0],getarraysize(@val3$);
+			}
+			break;
+		}
+	case 2:{//searchbyaccountid
+			query_sql("select `char_id`,`name` from `char` where `account_id`="+getarg(1),@val1,@val2$);
+			query_sql("select `last_ip` from `login` WHERE `account_id`="+getarg(1),@val3$);
+			dispbottom "Information of the account: "+getarg(1);
+			dispbottom "Character ID(s)/Name(s):";
+			for(set @counter,0;@counter<getarraysize(@val1);set @counter,@counter+1) dispbottom @val1[@counter]+" / "+@val2$[@counter];
+			dispbottom "---------------------";
+			dispbottom "Last IP:"+@val3$;
+
+			deletearray @val1[0],getarraysize(@val1);
+			deletearray @val2$[0],getarraysize(@val2$);
+			deletearray @val3$[0],getarraysize(@val3$);
+
+			break;
+		}
+	case 3:{//searchbyip
+			if(callfunc("inject",getarg(1))==0){
+				query_sql("select `account_id`,`state` from `login` WHERE `last_ip`='"+getarg(1)+"'",@val1,@val2);
+				setarray @cast$[0],"`nameid`","`card0`","`card1`","`card2`","`card3`";
+				for(set @selection,0; @selection < getarraysize(@cast$);set @selection,@selection+1){
+					set @querystring$,"(("+@cast$[@selection]+">='3170' AND "+@cast$[@selection]+"<='3178') OR ("+@cast$[@selection]+"='2265' OR "+@cast$[@selection]+"='5061' OR "+@cast$[@selection]+"='2278') OR "+@cast$[@selection]+"='31000' OR "+@cast$[@selection]+"='4236' OR "+@cast$[@selection]+"='4239' AND `amount`>0)";
+					for(set @a,0;@a<((getarraysize(@val1)>=120)?120:getarraysize(@val1));set @a,@a+1){
+						query_sql("select `char_id` from `char` where `account_id`='"+@val1[@a]+"'",@charseed);
+						for(set @c,0;@c<getarraysize(@charseed);set @c,@c+1){
+							set @handle,query_sql("SELECT `amount` FROM `inventory` where "+@querystring$+" AND `char_id`='"+@charseed[@c]+"' LIMIT 1",@potential1 );
+							if(@potential1 > 0) {
+								set @geared[@a],@geared[@a]+1;
+								set @handle,0;
+							}
+							set @handle,query_sql("SELECT `amount` FROM `cart_inventory` where "+@querystring$+" AND `char_id`='"+@charseed[@c]+"' LIMIT 1",@potential2 );
+							if(@potential2 > 0) {
+								set @geared[@a],@geared[@a]+1;
+								set @handle,0;
+							}
+						//	set @handle,query_sql("SELECT `guild_id` from `guild_member` where `char_id`='"+@charseed[@c]+"' LIMIT 1",@guildid );
+						//	if(@guildid > 0){
+						//		set @handle,0;
+						//		set @handle,query_sql("SELECT `amount` FROM `guild_storage` where `guild_id`='"+@guildid+"' AND "+@querystring$+" LIMIT 1", @potential3);
+						//		if(@potential3 > 0){
+						//			set @geared[@a],@geared[@a]+1;
+						//			set @handle,0;
+						//		}
+						//	}
+							set @potential1,0;
+							set @potential2,0;
+						//	set @potential3,0;
+						//	set @guildid,0;
+						}
+						deletearray @charseed[0],getarraysize(@charseed);
+						set @handle,query_sql("select `amount` from `storage` WHERE `account_id`='"+@val1[@a]+"' AND "+@querystring$ + " LIMIT 1",@potential4 );
+						if(@potential4 > 0){
+							set @geared[@a],@geared[@a]+1;
+							set @handle,0;
+						}
+						set @potential4,0;
+					}
+				}
+				dispbottom "Information of this IP address -  "+getarg(1);
+				dispbottom "Account ID / Blocked / Geared:";
+				for(set @counter,0;@counter<getarraysize(@val1);set @counter,@counter+1) dispbottom @val1[@counter]  +  " / " + ((@val2[@counter]==5)?"blocked":"n") + " / " + @geared[@counter] + " points";
+				deletearray @val1[0],getarraysize(@val1);
+				deletearray @val2[0],getarraysize(@val2);
+				deletearray @geared[0],getarraysize(@geared);
+			}
+			break;
+		}
+	case 4:{//searchitem
+			//check inventory including equipments
+			query_sql("select `char_id`,`amount`,`card0`,`card1`,`card2`,`card3` from `inventory` WHERE `nameid`='"+getarg(1)+"' OR `card0`='"+getarg(1)+"' OR `card1`='"+getarg(1)+"' OR `card2`='"+getarg(1)+"' OR `card3`='"+getarg(1)+"' ",@val1,@val2,@card0,@card1,@card2,@card3);
+			for(set @counts,0;@counts < getarraysize(@val1);set @counts, @counts+1){
+				query_sql("select `name` from `char` WHERE `char_id`='"+@val1[@counts]+"'",@placeholder$);
+				setarray @val3$[@counts],@placeholder$;
+			}
+			set @placeholder$,"";
+			dispbottom "Here are the characters who have the item ID:"+getarg(1);
+			dispbottom "Char ID/ Character Name / Amount / Card 1 / Card 2 / Card 3 / Card 4";
+			for(set @counts,0;@counts < getarraysize(@val2);set @counts, @counts+1) dispbottom @val1[@counts] + " / " + @val3$[@counts] + " / " + @val2[@counts] + " / " + @card0[@counts] + " / " + @card1[@counts] + " / " + @card2[@counts] + " / " + @card3[@counts];
+			deletearray @card0[0],getarraysize(@card0);
+			deletearray @card1[0],getarraysize(@card1);
+			deletearray @card2[0],getarraysize(@card2);
+			deletearray @card3[0],getarraysize(@card3);
+
+
+
+			//check storage
+			dispbottom "----------------------------------";
+			query_sql("select `account_id`,`amount`,`card0`,`card1`,`card2`,`card3` from `storage` WHERE `nameid`='"+getarg(1)+"' OR `card0`='"+getarg(1)+"' OR `card1`='"+getarg(1)+"' OR `card2`='"+getarg(1)+"' OR `card3`='"+getarg(1)+"' ",@val4,@val5,@card0,@card1,@card2,@card3);
+			dispbottom "Here are the accounts that have the item ID:"+getarg(1)+" in their storage.";
+			dispbottom "Account ID / Amount / Card 1 / Card 2 / Card 3 / Card 4";
+			for(set @counts,0;@counts < getarraysize(@val4);set @counts, @counts+1) dispbottom @val4[@counts] + " / " + @val5[@counts] + " / " + @card0[@counts] + " / " + @card1[@counts] + " / " + @card2[@counts] + " / " + @card3[@counts];
+			deletearray @card0[0],getarraysize(@card0);
+			deletearray @card1[0],getarraysize(@card1);
+			deletearray @card2[0],getarraysize(@card2);
+			deletearray @card3[0],getarraysize(@card3);
+			
+			//check cart
+			dispbottom "----------------------------------";
+			query_sql("select `char_id`,`amount`,`card0`,`card1`,`card2`,`card3` from `cart_inventory` WHERE `nameid`='"+getarg(1)+"' OR  `card0`='"+getarg(1)+"' OR `card1`='"+getarg(1)+"' OR `card2`='"+getarg(1)+"' OR `card3`='"+getarg(1)+"' ",@val6,@val7,@card0,@card1,@card2,@card3);
+			for(set @counts,0;@counts < getarraysize(@val6);set @counts, @counts+1){
+				query_sql("select `name` from `char` WHERE `char_id`='"+@val6[@counts]+"'",@placeholder$);
+				setarray @val8$[@counts],@placeholder$;
+			}
+			set @placeholder$,"";
+			dispbottom "Here are the characters who have the item ID:"+getarg(1)+" on their cart";
+			dispbottom "Char ID/ Character Name (If blank, char doesn't exist) / Amount / Card 1 / Card 2 / Card 3 / Card 4";
+			for(set @counts,0;@counts < getarraysize(@val7);set @counts, @counts+1) dispbottom @val6[@counts] + " / " + @val8$[@counts] + " / " + @val7[@counts] + " / " + @card0[@counts] + " / " + @card1[@counts] + " / " + @card2[@counts] + " / " + @card3[@counts];
+			deletearray @card0[0],getarraysize(@card0);
+			deletearray @card1[0],getarraysize(@card1);
+			deletearray @card2[0],getarraysize(@card2);
+			deletearray @card3[0],getarraysize(@card3);
+			
+			//check guild storage
+			dispbottom "----------------------------------";
+			query_sql("select `guild_id`,`amount`,`card0`,`card1`,`card2`,`card3` from `guild_storage` WHERE `nameid`='"+getarg(1)+"' OR  `card0`='"+getarg(1)+"' OR `card1`='"+getarg(1)+"' OR `card2`='"+getarg(1)+"' OR `card3`='"+getarg(1)+"' ",@val9,@val10,@card0,@card1,@card2,@card3);
+			for(set @counts,0;@counts < getarraysize(@val9);set @counts, @counts+1){
+				query_sql("select `name`,`master` from `guild` WHERE `guild_id`='"+@val9[@counts]+"'",@placeholder$,@placeholder2$);
+				setarray @val11$[@counts],@placeholder$;
+				setarray @val12$[@counts],@placeholder2$;
+			}
+			set @placeholder$,"";
+			set @placeholder2$,"";
+			dispbottom "Here are the guilds that possess the item ID: "+getarg(1);
+			dispbottom "Guild ID / Guild Name / Guild Master / Amount / Card 1 / Card 2 / Card 3 / Card 4";
+			for(set @counter,0;@counter<getarraysize(@val10);set @counter,@counter+1)
+			dispbottom @val9[@counter]+" / "+@val11$[@counter]+" / "+@val12$[@counter]+" / "+@val10[@counter] + " / " + @card0[@counter] + " / " + @card1[@counter] + " / " + @card2[@counter] + " / " + @card3[@counter];
+			deletearray @card0[0],getarraysize(@card0);
+			deletearray @card1[0],getarraysize(@card1);
+			deletearray @card2[0],getarraysize(@card2);
+			deletearray @card3[0],getarraysize(@card3);
+
+
+
+			deletearray @val1[0],getarraysize(@val1);
+			deletearray @val2[0],getarraysize(@val2);
+			deletearray @val3$[0],getarraysize(@val3$);
+			deletearray @val4[0],getarraysize(@val4);
+			deletearray @val5[0],getarraysize(@val5);
+			deletearray @val6[0],getarraysize(@val6);
+			deletearray @val7[0],getarraysize(@val7);
+			deletearray @val8$[0],getarraysize(@val8$);
+			deletearray @val9[0],getarraysize(@val9);
+			deletearray @val10[0],getarraysize(@val10);
+			deletearray @val11$[0],getarraysize(@val11$);
+			deletearray @val12$[0],getarraysize(@val12$);
+
+
+			break;
+		}
+	case 5:{//searchguildname
+			if(callfunc("inject",getarg(1))==0){
+				query_sql("select `guild_id`,`master` from `guild` WHERE `name`='"+getarg(1)+"'",@val1,@val2$);
+				for(set @counts,0;@counts < getarraysize(@val1);set @counts, @counts+1)
+				query_sql("select `name` from `guild_member` WHERE `guild_id`="+@val1[@counts],@val3$);
+				
+				dispbottom "Guild ID:"+@val1;
+				dispbottom "Guild Master:"+@val2$;
+				dispbottom "Members:";
+				for(set @counter,0;@counter<getarraysize(@val3$);set @counter,@counter+1)
+				dispbottom @val3$[@counter];
+				
+				dispbottom "----------------------------------";
+				query_sql("select `nameid`,`amount` from `guild_storage` WHERE `guild_id`="+@val1,@val4,@val5);
+				
+				dispbottom "Here are the items in this guild:";
+				dispbottom "Item ID / Amount";
+				for(set @counter,0;@counter<getarraysize(@val4);set @counter,@counter+1)
+				dispbottom @val4[@counter]+":"+getitemname(@val4[@counter])+" / "+@val5[@counter];
+			}
+
+
+			deletearray @val1[0],getarraysize(@val1);
+			deletearray @val2$[0],getarraysize(@val2$);
+			deletearray @val3$[0],getarraysize(@val3$);
+			deletearray @val4[0],getarraysize(@val4);
+			deletearray @val5[0],getarraysize(@val5);
+
+			break;
+		}
+	case 6:{//searchbanunbanlogs
+			if(callfunc("inject",getarg(1))==0){
+			query_sql("SELECT `account_id` FROM `char` WHERE `name`='"+getarg(1)+"'",@acc$);
+			query_sql("SELECT `last_ip` FROM `login` WHERE `account_id`='"+@acc$+"'",@lastip$);
+			query_sql("SELECT `reason` FROM `ipbanlist` WHERE `list`='"+@lastip$+"'",@reason$);
+			query_sql("SELECT `name` FROM `char` WHERE `account_id`='"+@acc$+"'",@namearr$);
+				for(set @a,0;@a<getarraysize(@namearr$);set @a,@a+1){
+					query_sql("SELECT `atcommand_date`,`account_id`,`command` FROM `atcommandlog` WHERE (`command` LIKE CONVERT( _utf8 '%@BAN%' USING latin1 ) OR `command` LIKE CONVERT( _utf8 '%@UNBAN%' USING latin1 ) OR `command` LIKE CONVERT( _utf8 '%@BLOCK%' USING latin1 ) OR `command` LIKE CONVERT( _utf8 '%@UNBLOCK%' USING latin1 )) AND (`command` LIKE CONVERT( _utf8 '%"+@namearr$[@a]+"%' USING latin1 )) ORDER BY `atcommandlog`.`atcommand_date` DESC",@val1$,@val2,@val3$);
+					dispbottom "All (bans/unban) history of the character :"+@namearr$[@a];
+					dispbottom "Atcommand Date/GM Account ID/Atcommand Parameter";
+						for(set @counter,0;@counter<getarraysize(@val1$);set @counter,@counter+1)
+							dispbottom @val1$[@counter]+" / "+@val2[@counter]+" / "+@val3$[@counter];
+					deletearray @val1$[0],getarraysize(@val1$);
+					deletearray @val2[0],getarraysize(@val2);
+					deletearray @val3$[0],getarraysize(@val3$);
+				}
+				if(getarraysize(@reason$)) dispbottom "***This character has been IP banned because: "+@reason$+"***";
+			}
+
+			
+
+			break;
+		}
+	}
+	return;
+}
+
+
+function	script	inject	{
+	if(compare(getarg(0),"create ") || compare(getarg(0),"insert ") || compare(getarg(0),"update ") || compare(getarg(0),"set ") || compare(getarg(0),"grant ") || compare(getarg(0)," from ") || compare(getarg(0)," where ") || compare(getarg(0),"select ") || compare(getarg(0),"`='") || compare(getarg(0),"` = '") || compare(getarg(0),"rm ") || compare(getarg(0),"rm *") || compare(getarg(0),"alter ") || compare(getarg(0),"index ") || compare(getarg(0),"show view") || compare(getarg(0),"drop ") || compare(getarg(0),"references ") || compare(getarg(0),"delete all") || compare(getarg(0),"delete *") || compare(getarg(0),"delete ")){
+		set @malicious,1;
+	}
+	else {
+		set @malicious,0;
+	}
+	dispbottom "Checking input..."+((@malicious==1)?"Input have illegal parameters.":"Input is valid.");
+	return @malicious;
+}
+
+
+function	script	ChuckNorris	{
+	if(getgmlevel() >= 60){
+		dispbottom " ";
+		dispbottom "Chuck Norris says:";
+		dispbottom "Mwahahaha, what would you like to do, evil one?";
+		switch(select("Look for my victim!","I have a more evil plan..")){
+		case 1:{
+				dispbottom "Mwahahaha, What information do you have?";
+				switch(select("My victim's pet name","My victim's school ID","My victim's home address")){
+				case 1:{
+						dispbottom "Input the character name:";
+						input @inp$;
+						callfunc("dofind",1,@inp$);
+						break;
+					}
+				case 2:{
+						dispbottom "Input the account ID:";
+						input @inp$;
+						set @inp,atoi(@inp$); //automatically sets to 0 if string was input.
+						callfunc("dofind",2,@inp);
+						break;
+					}
+				case 3:{
+						dispbottom "Input the IP address:";
+						input @inp$;
+						callfunc("dofind",3,@inp$);
+						break;
+					}
+				}
+				close;
+				break;
+			}
+		case 2:{
+				dispbottom "Mwahahaha, evil eh...?";
+				switch(select("Find item","Get Guild Info","Show criminal records")){
+				case 1:{
+						dispbottom "Input the item ID:";
+						input @inp$;
+						set @inp, atoi(@inp$);
+						callfunc "dofind",4,@inp;
+						break;
+					}
+				case 2:{
+						dispbottom "Input the name of the guild:";
+						input @inp$;
+						callfunc "dofind",5,@inp$;
+						break;
+					}
+				case 3:{
+						dispbottom "Input the name of the character:";
+						input @inp$;
+						callfunc "dofind",6,@inp$;
+						break;
+					}
+				}
+				close;
+				break;
+			}
+		}
+	}
+	end;
+}
+

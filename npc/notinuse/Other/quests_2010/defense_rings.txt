@@ -1,0 +1,2049 @@
+//===== Script: ===============================================================
+//= 2010 XileRO's Defense Rings Quest.
+//= By Honor/Lover Romeo
+//==============================================================================
+
+prt_gld,68,166,5	script	Lance	751,{
+	emotion 1;
+if(qpoints < 3 && HH_exp < 5000) { mes "You need at least ^0000ff3 Qp^000000(s) and ^0000ff5,000 HH Exp^000000. to be able to do this Quest."; close; }
+set .drings$,"[^ff3399 Defense Rings ^000000]";
+if(DRpart==2) { mes .drings$; mes "You already done this quest."; close; }
+
+if(DRpart==1) {
+	mes .drings$;
+	mes "Please make sure you're not overweight to gets your prize";
+	menu "-Continue",-,"-Leave",L_notready;
+	next;
+	if(ringsrandom==1) { if(countitem(3115) < 4 || countitem(2288) < 1 || countitem(7451) < 1 || countitem(949) < 100) { goto L_Talk; } }	//3115,2288
+	if(ringsrandom==2) { if(countitem(3116) < 4 || countitem(5041) < 1 || countitem(7451) < 1 || countitem(949) < 100) { goto L_Talk; } }	//3116,5041
+	if(ringsrandom==3) { if(countitem(3117) < 4 || countitem(6012) < 1 || countitem(7451) < 1 || countitem(949) < 100) { goto L_Talk; } }	//3117,6012
+	if(ringsrandom==4) { if(countitem(3118) < 4 || countitem(5100) < 1 || countitem(7451) < 1 || countitem(949) < 100) { goto L_Talk; } }	//3118,5100
+	if(ringsrandom==5) { if(countitem(3119) < 4 || countitem(2288) < 1 || countitem(7451) < 1 || countitem(949) < 100) { goto L_Talk; } }	//3119,2288
+						delitem 7451,1;
+						delitem 949,100;
+		if(ringsrandom==1) { delitem 3115,4; delitem 2288,1; getitem 23065,1; }	//Rage
+		if(ringsrandom==2) { delitem 3116,4; delitem 5041,1; getitem 23061,1; }	//Envy
+		if(ringsrandom==3) { delitem 3117,4; delitem 6012,1; getitem 23064,1; }	//Exile
+		if(ringsrandom==4) { delitem 3118,4; delitem 5100,1; getitem 23062,1; }	//Faith
+		if(ringsrandom==5) { delitem 3119,4; delitem 2288,1; getitem 23063,1; }	//Lust
+
+		mes .drings$;
+		mes "Congratulations, here's your prize !!";
+			set @r_effort,rand(1,5);
+		if(@r_effort > 4) {
+		next;
+		mes .drings$;
+		mes "You did a lot for me, you deserve another one, here you go...";
+			set @r_ring,rand(1,5);
+			if(@r_ring==1) { getitem 23065,1; }
+			if(@r_ring==2) { getitem 23061,1; }
+			if(@r_ring==3) { getitem 23064,1; }
+			if(@r_ring==4) { getitem 23062,1; }
+			if(@r_ring==5) { getitem 23063,1; }
+		}
+			set DRpart,2;
+			set defenserings$,"^0000ffDone^000000";
+			set qpoints,qpoints+1;
+		close;
+L_Talk:
+	mes .drings$;
+	mes "Talk to me when you get the items I asked for.";
+	close;
+
+L_notready:
+	close;
+}
+
+if(DRpart==0) {
+	
+	mes .drings$;
+	mes "Hi "+strcharinfo(0)+", I need help !!";
+	menu "-Help him",-,"-Leave",LCancel;
+		
+	next;
+	set defenserings$,"^ff8800In Progress^000000";
+	set DRpart,1;
+	set ringsrandom,rand(1,5);
+	mes .drings$;
+	mes "I need you to gather me these items";
+	if(ringsrandom == 1) { set dr_token$,"Creamhilt"; set dr_wings$,"Omega"; }	//3115,2288
+	if(ringsrandom == 2) { set dr_token$,"Sbanhealt"; set dr_wings$,"Alpha"; }	//3116,5041
+	if(ringsrandom == 3) { set dr_token$,"Lazrigees"; set dr_wings$,"ArchAngel"; }	//3117,6012
+	if(ringsrandom == 4) { set dr_token$,"Squagul"; set dr_wings$,"ShadowCraft"; }	//3118,5100
+	if(ringsrandom == 5) { set dr_token$,"Guindull"; set dr_wings$,"Omega"; }	//3119,2288
+	mes "4x "+dr_token$+" Token";
+	mes "1x "+dr_wings$+" Wings";
+	mes "1x  Scale of Fire Dragon";	//7451
+	mes "100x Feather";		//949
+	next;
+	mes .drings$;
+	mes "Then come and bring them back to me.";
+	mes "You've Activated -"; 
+	mes "^ff0000Defense Rings^000000 ~Quest.";
+	close;
+	
+LCancel:
+	close;
+}
+
+}//End of npc
+
+rent_ma	mapflag	nowarp
+rent_mb	mapflag	nowarp
+rent_mc	mapflag	nowarp
+rent_md	mapflag	nowarp
+rent_me	mapflag	nowarp
+rent_mf	mapflag	nowarp
+rent_mg	mapflag	nowarp
+renta1	mapflag	nowarp
+renta2	mapflag	nowarp
+renta3	mapflag	nowarp
+renta4	mapflag	nowarp
+renta5	mapflag	nowarp
+renta6	mapflag	nowarp
+renta7	mapflag	nowarp
+renta8	mapflag	nowarp
+renta9	mapflag	nowarp
+renta10	mapflag	nowarp
+renta11	mapflag	nowarp
+renta12	mapflag	nowarp
+renta13	mapflag	nowarp
+renta14	mapflag	nowarp
+renta15	mapflag	nowarp
+renta16	mapflag	nowarp
+renta17	mapflag	nowarp
+renta18	mapflag	nowarp
+renta19	mapflag	nowarp
+renta20	mapflag	nowarp
+renta21	mapflag	nowarp
+renta22	mapflag	nowarp
+rentb1	mapflag	nowarp
+rentb2	mapflag	nowarp
+rentb3	mapflag	nowarp
+rentb4	mapflag	nowarp
+rentb5	mapflag	nowarp
+rentb6	mapflag	nowarp
+rentb7	mapflag	nowarp
+rentb8	mapflag	nowarp
+rentb9	mapflag	nowarp
+rentb10	mapflag	nowarp
+rentb11	mapflag	nowarp
+rentb12	mapflag	nowarp
+rentb13	mapflag	nowarp
+rentb14	mapflag	nowarp
+rentb15	mapflag	nowarp
+rentb16	mapflag	nowarp
+rentb17	mapflag	nowarp
+rentb18	mapflag	nowarp
+rentb19	mapflag	nowarp
+rentb20	mapflag	nowarp
+rentb21	mapflag	nowarp
+rentb22	mapflag	nowarp
+rentb23	mapflag	nowarp
+rentb24	mapflag	nowarp
+rentb25	mapflag	nowarp
+rentb26	mapflag	nowarp
+rentb27	mapflag	nowarp
+rentb28	mapflag	nowarp
+rentb29	mapflag	nowarp
+rentb30	mapflag	nowarp
+rentb31	mapflag	nowarp
+rentb32	mapflag	nowarp
+rentb33	mapflag	nowarp
+rentb34	mapflag	nowarp
+rentb35	mapflag	nowarp
+rentb36	mapflag	nowarp
+rentb37	mapflag	nowarp
+rentb38	mapflag	nowarp
+rentb39	mapflag	nowarp
+rentb40	mapflag	nowarp
+rentb41	mapflag	nowarp
+rentb42	mapflag	nowarp
+rentb43	mapflag	nowarp
+rentb44	mapflag	nowarp
+rentb45	mapflag	nowarp
+rentb46	mapflag	nowarp
+rentb47	mapflag	nowarp
+rentb48	mapflag	nowarp
+rentb49	mapflag	nowarp
+rentb50	mapflag	nowarp
+rentb51	mapflag	nowarp
+rentb52	mapflag	nowarp
+rentb53	mapflag	nowarp
+rentb54	mapflag	nowarp
+rentb55	mapflag	nowarp
+rentb56	mapflag	nowarp
+rentb57	mapflag	nowarp
+rentb58	mapflag	nowarp
+rentb59	mapflag	nowarp
+rentb60	mapflag	nowarp
+rentc1	mapflag	nowarp
+rentc2	mapflag	nowarp
+rentc3	mapflag	nowarp
+rentc4	mapflag	nowarp
+rentc5	mapflag	nowarp
+rentc6	mapflag	nowarp
+rentc7	mapflag	nowarp
+rentc8	mapflag	nowarp
+rentc9	mapflag	nowarp
+rentc10	mapflag	nowarp
+rentc11	mapflag	nowarp
+rentc12	mapflag	nowarp
+rentc13	mapflag	nowarp
+rentc14	mapflag	nowarp
+rentc15	mapflag	nowarp
+rentc16	mapflag	nowarp
+rentc17	mapflag	nowarp
+rentc18	mapflag	nowarp
+rentc19	mapflag	nowarp
+rentc20	mapflag	nowarp
+rentc21	mapflag	nowarp
+rentc22	mapflag	nowarp
+rentd1	mapflag	nowarp
+rentd2	mapflag	nowarp
+rentd3	mapflag	nowarp
+rentd4	mapflag	nowarp
+rentd5	mapflag	nowarp
+rentd6	mapflag	nowarp
+rentd7	mapflag	nowarp
+rentd8	mapflag	nowarp
+rentd9	mapflag	nowarp
+rentd10	mapflag	nowarp
+rentd11	mapflag	nowarp
+rentd12	mapflag	nowarp
+rentd13	mapflag	nowarp
+rentd14	mapflag	nowarp
+rentd15	mapflag	nowarp
+rentd16	mapflag	nowarp
+rentd17	mapflag	nowarp
+rentd18	mapflag	nowarp
+rentd19	mapflag	nowarp
+rentd20	mapflag	nowarp
+rentd21	mapflag	nowarp
+rentd22	mapflag	nowarp
+rente1	mapflag	nowarp
+rente2	mapflag	nowarp
+rente3	mapflag	nowarp
+rente4	mapflag	nowarp
+rente5	mapflag	nowarp
+rente6	mapflag	nowarp
+rente7	mapflag	nowarp
+rente8	mapflag	nowarp
+rente9	mapflag	nowarp
+rente10	mapflag	nowarp
+rente11	mapflag	nowarp
+rente12	mapflag	nowarp
+rente13	mapflag	nowarp
+rente14	mapflag	nowarp
+rente15	mapflag	nowarp
+rente16	mapflag	nowarp
+rente17	mapflag	nowarp
+rente18	mapflag	nowarp
+rente19	mapflag	nowarp
+rente20	mapflag	nowarp
+rente21	mapflag	nowarp
+rente22	mapflag	nowarp
+rentf1	mapflag	nowarp
+rentf2	mapflag	nowarp
+rentf3	mapflag	nowarp
+rentf4	mapflag	nowarp
+rentf5	mapflag	nowarp
+rentf6	mapflag	nowarp
+rentf7	mapflag	nowarp
+rentf8	mapflag	nowarp
+rentf9	mapflag	nowarp
+rentf10	mapflag	nowarp
+rentf11	mapflag	nowarp
+rentf12	mapflag	nowarp
+rentf13	mapflag	nowarp
+rentf14	mapflag	nowarp
+rentf15	mapflag	nowarp
+rentf16	mapflag	nowarp
+rentf17	mapflag	nowarp
+rentf18	mapflag	nowarp
+rentf19	mapflag	nowarp
+rentf20	mapflag	nowarp
+rentf21	mapflag	nowarp
+rentf22	mapflag	nowarp
+rentg1	mapflag	nowarp
+rentg2	mapflag	nowarp
+rentg3	mapflag	nowarp
+rentg4	mapflag	nowarp
+rentg5	mapflag	nowarp
+rentg6	mapflag	nowarp
+rentg7	mapflag	nowarp
+rentg8	mapflag	nowarp
+rentg9	mapflag	nowarp
+rentg10	mapflag	nowarp
+rentg11	mapflag	nowarp
+rentg12	mapflag	nowarp
+rentg13	mapflag	nowarp
+rentg14	mapflag	nowarp
+rentg15	mapflag	nowarp
+rentg16	mapflag	nowarp
+rentg17	mapflag	nowarp
+rentg18	mapflag	nowarp
+rentg19	mapflag	nowarp
+rentg20	mapflag	nowarp
+rentg21	mapflag	nowarp
+rentg22	mapflag	nowarp
+rentina1	mapflag	nowarp
+rentina2	mapflag	nowarp
+rentina3	mapflag	nowarp
+rentina4	mapflag	nowarp
+rentina5	mapflag	nowarp
+rentina6	mapflag	nowarp
+rentina7	mapflag	nowarp
+rentina8	mapflag	nowarp
+rentina9	mapflag	nowarp
+rentina10	mapflag	nowarp
+rentina11	mapflag	nowarp
+rentina12	mapflag	nowarp
+rentina13	mapflag	nowarp
+rentina14	mapflag	nowarp
+rentina15	mapflag	nowarp
+rentina16	mapflag	nowarp
+rentina17	mapflag	nowarp
+rentina18	mapflag	nowarp
+rentina19	mapflag	nowarp
+rentina20	mapflag	nowarp
+rentina21	mapflag	nowarp
+rentina22	mapflag	nowarp
+rentinb1	mapflag	nowarp
+rentinb2	mapflag	nowarp
+rentinb3	mapflag	nowarp
+rentinb4	mapflag	nowarp
+rentinb5	mapflag	nowarp
+rentinb6	mapflag	nowarp
+rentinb7	mapflag	nowarp
+rentinb8	mapflag	nowarp
+rentinb9	mapflag	nowarp
+rentinb10	mapflag	nowarp
+rentinb11	mapflag	nowarp
+rentinb12	mapflag	nowarp
+rentinb13	mapflag	nowarp
+rentinb14	mapflag	nowarp
+rentinb15	mapflag	nowarp
+rentinb16	mapflag	nowarp
+rentinb17	mapflag	nowarp
+rentinb18	mapflag	nowarp
+rentinb19	mapflag	nowarp
+rentinb20	mapflag	nowarp
+rentinb21	mapflag	nowarp
+rentinb22	mapflag	nowarp
+rentinb23	mapflag	nowarp
+rentinb24	mapflag	nowarp
+rentinb25	mapflag	nowarp
+rentinb26	mapflag	nowarp
+rentinb27	mapflag	nowarp
+rentinb28	mapflag	nowarp
+rentinb29	mapflag	nowarp
+rentinb30	mapflag	nowarp
+rentinb31	mapflag	nowarp
+rentinb32	mapflag	nowarp
+rentinb33	mapflag	nowarp
+rentinb34	mapflag	nowarp
+rentinb35	mapflag	nowarp
+rentinb36	mapflag	nowarp
+rentinb37	mapflag	nowarp
+rentinb38	mapflag	nowarp
+rentinb39	mapflag	nowarp
+rentinb40	mapflag	nowarp
+rentinb41	mapflag	nowarp
+rentinb42	mapflag	nowarp
+rentinb43	mapflag	nowarp
+rentinb44	mapflag	nowarp
+rentinb45	mapflag	nowarp
+rentinb46	mapflag	nowarp
+rentinb47	mapflag	nowarp
+rentinb48	mapflag	nowarp
+rentinb49	mapflag	nowarp
+rentinb50	mapflag	nowarp
+rentinb51	mapflag	nowarp
+rentinb52	mapflag	nowarp
+rentinb53	mapflag	nowarp
+rentinb54	mapflag	nowarp
+rentinb55	mapflag	nowarp
+rentinb56	mapflag	nowarp
+rentinb57	mapflag	nowarp
+rentinb58	mapflag	nowarp
+rentinb59	mapflag	nowarp
+rentinb60	mapflag	nowarp
+rentinc1	mapflag	nowarp
+rentinc2	mapflag	nowarp
+rentinc3	mapflag	nowarp
+rentinc4	mapflag	nowarp
+rentinc5	mapflag	nowarp
+rentinc6	mapflag	nowarp
+rentinc7	mapflag	nowarp
+rentinc8	mapflag	nowarp
+rentinc9	mapflag	nowarp
+rentinc10	mapflag	nowarp
+rentinc11	mapflag	nowarp
+rentinc12	mapflag	nowarp
+rentinc13	mapflag	nowarp
+rentinc14	mapflag	nowarp
+rentinc15	mapflag	nowarp
+rentinc16	mapflag	nowarp
+rentinc17	mapflag	nowarp
+rentinc18	mapflag	nowarp
+rentinc19	mapflag	nowarp
+rentinc20	mapflag	nowarp
+rentinc21	mapflag	nowarp
+rentinc22	mapflag	nowarp
+rentind1	mapflag	nowarp
+rentind2	mapflag	nowarp
+rentind3	mapflag	nowarp
+rentind4	mapflag	nowarp
+rentind5	mapflag	nowarp
+rentind6	mapflag	nowarp
+rentind7	mapflag	nowarp
+rentind8	mapflag	nowarp
+rentind9	mapflag	nowarp
+rentind10	mapflag	nowarp
+rentind11	mapflag	nowarp
+rentind12	mapflag	nowarp
+rentind13	mapflag	nowarp
+rentind14	mapflag	nowarp
+rentind15	mapflag	nowarp
+rentind16	mapflag	nowarp
+rentind17	mapflag	nowarp
+rentind18	mapflag	nowarp
+rentind19	mapflag	nowarp
+rentind20	mapflag	nowarp
+rentind21	mapflag	nowarp
+rentind22	mapflag	nowarp
+rentine1	mapflag	nowarp
+rentine2	mapflag	nowarp
+rentine3	mapflag	nowarp
+rentine4	mapflag	nowarp
+rentine5	mapflag	nowarp
+rentine6	mapflag	nowarp
+rentine7	mapflag	nowarp
+rentine8	mapflag	nowarp
+rentine9	mapflag	nowarp
+rentine10	mapflag	nowarp
+rentine11	mapflag	nowarp
+rentine12	mapflag	nowarp
+rentine13	mapflag	nowarp
+rentine14	mapflag	nowarp
+rentine15	mapflag	nowarp
+rentine16	mapflag	nowarp
+rentine17	mapflag	nowarp
+rentine18	mapflag	nowarp
+rentine19	mapflag	nowarp
+rentine20	mapflag	nowarp
+rentine21	mapflag	nowarp
+rentine22	mapflag	nowarp
+rentinf1	mapflag	nowarp
+rentinf2	mapflag	nowarp
+rentinf3	mapflag	nowarp
+rentinf4	mapflag	nowarp
+rentinf5	mapflag	nowarp
+rentinf6	mapflag	nowarp
+rentinf7	mapflag	nowarp
+rentinf8	mapflag	nowarp
+rentinf9	mapflag	nowarp
+rentinf10	mapflag	nowarp
+rentinf11	mapflag	nowarp
+rentinf12	mapflag	nowarp
+rentinf13	mapflag	nowarp
+rentinf14	mapflag	nowarp
+rentinf15	mapflag	nowarp
+rentinf16	mapflag	nowarp
+rentinf17	mapflag	nowarp
+rentinf18	mapflag	nowarp
+rentinf19	mapflag	nowarp
+rentinf20	mapflag	nowarp
+rentinf21	mapflag	nowarp
+rentinf22	mapflag	nowarp
+renting1	mapflag	nowarp
+renting2	mapflag	nowarp
+renting3	mapflag	nowarp
+renting4	mapflag	nowarp
+renting5	mapflag	nowarp
+renting6	mapflag	nowarp
+renting7	mapflag	nowarp
+renting8	mapflag	nowarp
+renting9	mapflag	nowarp
+renting10	mapflag	nowarp
+renting11	mapflag	nowarp
+renting12	mapflag	nowarp
+renting13	mapflag	nowarp
+renting14	mapflag	nowarp
+renting15	mapflag	nowarp
+renting16	mapflag	nowarp
+renting17	mapflag	nowarp
+renting18	mapflag	nowarp
+renting19	mapflag	nowarp
+renting20	mapflag	nowarp
+renting21	mapflag	nowarp
+renting22	mapflag	nowarp
+
+rent_ma	mapflag	nowarpto
+rent_mb	mapflag	nowarpto
+rent_mc	mapflag	nowarpto
+rent_md	mapflag	nowarpto
+rent_me	mapflag	nowarpto
+rent_mf	mapflag	nowarpto
+rent_mg	mapflag	nowarpto
+renta1	mapflag	nowarpto
+renta2	mapflag	nowarpto
+renta3	mapflag	nowarpto
+renta4	mapflag	nowarpto
+renta5	mapflag	nowarpto
+renta6	mapflag	nowarpto
+renta7	mapflag	nowarpto
+renta8	mapflag	nowarpto
+renta9	mapflag	nowarpto
+renta10	mapflag	nowarpto
+renta11	mapflag	nowarpto
+renta12	mapflag	nowarpto
+renta13	mapflag	nowarpto
+renta14	mapflag	nowarpto
+renta15	mapflag	nowarpto
+renta16	mapflag	nowarpto
+renta17	mapflag	nowarpto
+renta18	mapflag	nowarpto
+renta19	mapflag	nowarpto
+renta20	mapflag	nowarpto
+renta21	mapflag	nowarpto
+renta22	mapflag	nowarpto
+rentb1	mapflag	nowarpto
+rentb2	mapflag	nowarpto
+rentb3	mapflag	nowarpto
+rentb4	mapflag	nowarpto
+rentb5	mapflag	nowarpto
+rentb6	mapflag	nowarpto
+rentb7	mapflag	nowarpto
+rentb8	mapflag	nowarpto
+rentb9	mapflag	nowarpto
+rentb10	mapflag	nowarpto
+rentb11	mapflag	nowarpto
+rentb12	mapflag	nowarpto
+rentb13	mapflag	nowarpto
+rentb14	mapflag	nowarpto
+rentb15	mapflag	nowarpto
+rentb16	mapflag	nowarpto
+rentb17	mapflag	nowarpto
+rentb18	mapflag	nowarpto
+rentb19	mapflag	nowarpto
+rentb20	mapflag	nowarpto
+rentb21	mapflag	nowarpto
+rentb22	mapflag	nowarpto
+rentb23	mapflag	nowarpto
+rentb24	mapflag	nowarpto
+rentb25	mapflag	nowarpto
+rentb26	mapflag	nowarpto
+rentb27	mapflag	nowarpto
+rentb28	mapflag	nowarpto
+rentb29	mapflag	nowarpto
+rentb30	mapflag	nowarpto
+rentb31	mapflag	nowarpto
+rentb32	mapflag	nowarpto
+rentb33	mapflag	nowarpto
+rentb34	mapflag	nowarpto
+rentb35	mapflag	nowarpto
+rentb36	mapflag	nowarpto
+rentb37	mapflag	nowarpto
+rentb38	mapflag	nowarpto
+rentb39	mapflag	nowarpto
+rentb40	mapflag	nowarpto
+rentb41	mapflag	nowarpto
+rentb42	mapflag	nowarpto
+rentb43	mapflag	nowarpto
+rentb44	mapflag	nowarpto
+rentb45	mapflag	nowarpto
+rentb46	mapflag	nowarpto
+rentb47	mapflag	nowarpto
+rentb48	mapflag	nowarpto
+rentb49	mapflag	nowarpto
+rentb50	mapflag	nowarpto
+rentb51	mapflag	nowarpto
+rentb52	mapflag	nowarpto
+rentb53	mapflag	nowarpto
+rentb54	mapflag	nowarpto
+rentb55	mapflag	nowarpto
+rentb56	mapflag	nowarpto
+rentb57	mapflag	nowarpto
+rentb58	mapflag	nowarpto
+rentb59	mapflag	nowarpto
+rentb60	mapflag	nowarpto
+rentc1	mapflag	nowarpto
+rentc2	mapflag	nowarpto
+rentc3	mapflag	nowarpto
+rentc4	mapflag	nowarpto
+rentc5	mapflag	nowarpto
+rentc6	mapflag	nowarpto
+rentc7	mapflag	nowarpto
+rentc8	mapflag	nowarpto
+rentc9	mapflag	nowarpto
+rentc10	mapflag	nowarpto
+rentc11	mapflag	nowarpto
+rentc12	mapflag	nowarpto
+rentc13	mapflag	nowarpto
+rentc14	mapflag	nowarpto
+rentc15	mapflag	nowarpto
+rentc16	mapflag	nowarpto
+rentc17	mapflag	nowarpto
+rentc18	mapflag	nowarpto
+rentc19	mapflag	nowarpto
+rentc20	mapflag	nowarpto
+rentc21	mapflag	nowarpto
+rentc22	mapflag	nowarpto
+rentd1	mapflag	nowarpto
+rentd2	mapflag	nowarpto
+rentd3	mapflag	nowarpto
+rentd4	mapflag	nowarpto
+rentd5	mapflag	nowarpto
+rentd6	mapflag	nowarpto
+rentd7	mapflag	nowarpto
+rentd8	mapflag	nowarpto
+rentd9	mapflag	nowarpto
+rentd10	mapflag	nowarpto
+rentd11	mapflag	nowarpto
+rentd12	mapflag	nowarpto
+rentd13	mapflag	nowarpto
+rentd14	mapflag	nowarpto
+rentd15	mapflag	nowarpto
+rentd16	mapflag	nowarpto
+rentd17	mapflag	nowarpto
+rentd18	mapflag	nowarpto
+rentd19	mapflag	nowarpto
+rentd20	mapflag	nowarpto
+rentd21	mapflag	nowarpto
+rentd22	mapflag	nowarpto
+rente1	mapflag	nowarpto
+rente2	mapflag	nowarpto
+rente3	mapflag	nowarpto
+rente4	mapflag	nowarpto
+rente5	mapflag	nowarpto
+rente6	mapflag	nowarpto
+rente7	mapflag	nowarpto
+rente8	mapflag	nowarpto
+rente9	mapflag	nowarpto
+rente10	mapflag	nowarpto
+rente11	mapflag	nowarpto
+rente12	mapflag	nowarpto
+rente13	mapflag	nowarpto
+rente14	mapflag	nowarpto
+rente15	mapflag	nowarpto
+rente16	mapflag	nowarpto
+rente17	mapflag	nowarpto
+rente18	mapflag	nowarpto
+rente19	mapflag	nowarpto
+rente20	mapflag	nowarpto
+rente21	mapflag	nowarpto
+rente22	mapflag	nowarpto
+rentf1	mapflag	nowarpto
+rentf2	mapflag	nowarpto
+rentf3	mapflag	nowarpto
+rentf4	mapflag	nowarpto
+rentf5	mapflag	nowarpto
+rentf6	mapflag	nowarpto
+rentf7	mapflag	nowarpto
+rentf8	mapflag	nowarpto
+rentf9	mapflag	nowarpto
+rentf10	mapflag	nowarpto
+rentf11	mapflag	nowarpto
+rentf12	mapflag	nowarpto
+rentf13	mapflag	nowarpto
+rentf14	mapflag	nowarpto
+rentf15	mapflag	nowarpto
+rentf16	mapflag	nowarpto
+rentf17	mapflag	nowarpto
+rentf18	mapflag	nowarpto
+rentf19	mapflag	nowarpto
+rentf20	mapflag	nowarpto
+rentf21	mapflag	nowarpto
+rentf22	mapflag	nowarpto
+rentg1	mapflag	nowarpto
+rentg2	mapflag	nowarpto
+rentg3	mapflag	nowarpto
+rentg4	mapflag	nowarpto
+rentg5	mapflag	nowarpto
+rentg6	mapflag	nowarpto
+rentg7	mapflag	nowarpto
+rentg8	mapflag	nowarpto
+rentg9	mapflag	nowarpto
+rentg10	mapflag	nowarpto
+rentg11	mapflag	nowarpto
+rentg12	mapflag	nowarpto
+rentg13	mapflag	nowarpto
+rentg14	mapflag	nowarpto
+rentg15	mapflag	nowarpto
+rentg16	mapflag	nowarpto
+rentg17	mapflag	nowarpto
+rentg18	mapflag	nowarpto
+rentg19	mapflag	nowarpto
+rentg20	mapflag	nowarpto
+rentg21	mapflag	nowarpto
+rentg22	mapflag	nowarpto
+rentina1	mapflag	nowarpto
+rentina2	mapflag	nowarpto
+rentina3	mapflag	nowarpto
+rentina4	mapflag	nowarpto
+rentina5	mapflag	nowarpto
+rentina6	mapflag	nowarpto
+rentina7	mapflag	nowarpto
+rentina8	mapflag	nowarpto
+rentina9	mapflag	nowarpto
+rentina10	mapflag	nowarpto
+rentina11	mapflag	nowarpto
+rentina12	mapflag	nowarpto
+rentina13	mapflag	nowarpto
+rentina14	mapflag	nowarpto
+rentina15	mapflag	nowarpto
+rentina16	mapflag	nowarpto
+rentina17	mapflag	nowarpto
+rentina18	mapflag	nowarpto
+rentina19	mapflag	nowarpto
+rentina20	mapflag	nowarpto
+rentina21	mapflag	nowarpto
+rentina22	mapflag	nowarpto
+rentinb1	mapflag	nowarpto
+rentinb2	mapflag	nowarpto
+rentinb3	mapflag	nowarpto
+rentinb4	mapflag	nowarpto
+rentinb5	mapflag	nowarpto
+rentinb6	mapflag	nowarpto
+rentinb7	mapflag	nowarpto
+rentinb8	mapflag	nowarpto
+rentinb9	mapflag	nowarpto
+rentinb10	mapflag	nowarpto
+rentinb11	mapflag	nowarpto
+rentinb12	mapflag	nowarpto
+rentinb13	mapflag	nowarpto
+rentinb14	mapflag	nowarpto
+rentinb15	mapflag	nowarpto
+rentinb16	mapflag	nowarpto
+rentinb17	mapflag	nowarpto
+rentinb18	mapflag	nowarpto
+rentinb19	mapflag	nowarpto
+rentinb20	mapflag	nowarpto
+rentinb21	mapflag	nowarpto
+rentinb22	mapflag	nowarpto
+rentinb23	mapflag	nowarpto
+rentinb24	mapflag	nowarpto
+rentinb25	mapflag	nowarpto
+rentinb26	mapflag	nowarpto
+rentinb27	mapflag	nowarpto
+rentinb28	mapflag	nowarpto
+rentinb29	mapflag	nowarpto
+rentinb30	mapflag	nowarpto
+rentinb31	mapflag	nowarpto
+rentinb32	mapflag	nowarpto
+rentinb33	mapflag	nowarpto
+rentinb34	mapflag	nowarpto
+rentinb35	mapflag	nowarpto
+rentinb36	mapflag	nowarpto
+rentinb37	mapflag	nowarpto
+rentinb38	mapflag	nowarpto
+rentinb39	mapflag	nowarpto
+rentinb40	mapflag	nowarpto
+rentinb41	mapflag	nowarpto
+rentinb42	mapflag	nowarpto
+rentinb43	mapflag	nowarpto
+rentinb44	mapflag	nowarpto
+rentinb45	mapflag	nowarpto
+rentinb46	mapflag	nowarpto
+rentinb47	mapflag	nowarpto
+rentinb48	mapflag	nowarpto
+rentinb49	mapflag	nowarpto
+rentinb50	mapflag	nowarpto
+rentinb51	mapflag	nowarpto
+rentinb52	mapflag	nowarpto
+rentinb53	mapflag	nowarpto
+rentinb54	mapflag	nowarpto
+rentinb55	mapflag	nowarpto
+rentinb56	mapflag	nowarpto
+rentinb57	mapflag	nowarpto
+rentinb58	mapflag	nowarpto
+rentinb59	mapflag	nowarpto
+rentinb60	mapflag	nowarpto
+rentinc1	mapflag	nowarpto
+rentinc2	mapflag	nowarpto
+rentinc3	mapflag	nowarpto
+rentinc4	mapflag	nowarpto
+rentinc5	mapflag	nowarpto
+rentinc6	mapflag	nowarpto
+rentinc7	mapflag	nowarpto
+rentinc8	mapflag	nowarpto
+rentinc9	mapflag	nowarpto
+rentinc10	mapflag	nowarpto
+rentinc11	mapflag	nowarpto
+rentinc12	mapflag	nowarpto
+rentinc13	mapflag	nowarpto
+rentinc14	mapflag	nowarpto
+rentinc15	mapflag	nowarpto
+rentinc16	mapflag	nowarpto
+rentinc17	mapflag	nowarpto
+rentinc18	mapflag	nowarpto
+rentinc19	mapflag	nowarpto
+rentinc20	mapflag	nowarpto
+rentinc21	mapflag	nowarpto
+rentinc22	mapflag	nowarpto
+rentind1	mapflag	nowarpto
+rentind2	mapflag	nowarpto
+rentind3	mapflag	nowarpto
+rentind4	mapflag	nowarpto
+rentind5	mapflag	nowarpto
+rentind6	mapflag	nowarpto
+rentind7	mapflag	nowarpto
+rentind8	mapflag	nowarpto
+rentind9	mapflag	nowarpto
+rentind10	mapflag	nowarpto
+rentind11	mapflag	nowarpto
+rentind12	mapflag	nowarpto
+rentind13	mapflag	nowarpto
+rentind14	mapflag	nowarpto
+rentind15	mapflag	nowarpto
+rentind16	mapflag	nowarpto
+rentind17	mapflag	nowarpto
+rentind18	mapflag	nowarpto
+rentind19	mapflag	nowarpto
+rentind20	mapflag	nowarpto
+rentind21	mapflag	nowarpto
+rentind22	mapflag	nowarpto
+rentine1	mapflag	nowarpto
+rentine2	mapflag	nowarpto
+rentine3	mapflag	nowarpto
+rentine4	mapflag	nowarpto
+rentine5	mapflag	nowarpto
+rentine6	mapflag	nowarpto
+rentine7	mapflag	nowarpto
+rentine8	mapflag	nowarpto
+rentine9	mapflag	nowarpto
+rentine10	mapflag	nowarpto
+rentine11	mapflag	nowarpto
+rentine12	mapflag	nowarpto
+rentine13	mapflag	nowarpto
+rentine14	mapflag	nowarpto
+rentine15	mapflag	nowarpto
+rentine16	mapflag	nowarpto
+rentine17	mapflag	nowarpto
+rentine18	mapflag	nowarpto
+rentine19	mapflag	nowarpto
+rentine20	mapflag	nowarpto
+rentine21	mapflag	nowarpto
+rentine22	mapflag	nowarpto
+rentinf1	mapflag	nowarpto
+rentinf2	mapflag	nowarpto
+rentinf3	mapflag	nowarpto
+rentinf4	mapflag	nowarpto
+rentinf5	mapflag	nowarpto
+rentinf6	mapflag	nowarpto
+rentinf7	mapflag	nowarpto
+rentinf8	mapflag	nowarpto
+rentinf9	mapflag	nowarpto
+rentinf10	mapflag	nowarpto
+rentinf11	mapflag	nowarpto
+rentinf12	mapflag	nowarpto
+rentinf13	mapflag	nowarpto
+rentinf14	mapflag	nowarpto
+rentinf15	mapflag	nowarpto
+rentinf16	mapflag	nowarpto
+rentinf17	mapflag	nowarpto
+rentinf18	mapflag	nowarpto
+rentinf19	mapflag	nowarpto
+rentinf20	mapflag	nowarpto
+rentinf21	mapflag	nowarpto
+rentinf22	mapflag	nowarpto
+renting1	mapflag	nowarpto
+renting2	mapflag	nowarpto
+renting3	mapflag	nowarpto
+renting4	mapflag	nowarpto
+renting5	mapflag	nowarpto
+renting6	mapflag	nowarpto
+renting7	mapflag	nowarpto
+renting8	mapflag	nowarpto
+renting9	mapflag	nowarpto
+renting10	mapflag	nowarpto
+renting11	mapflag	nowarpto
+renting12	mapflag	nowarpto
+renting13	mapflag	nowarpto
+renting14	mapflag	nowarpto
+renting15	mapflag	nowarpto
+renting16	mapflag	nowarpto
+renting17	mapflag	nowarpto
+renting18	mapflag	nowarpto
+renting19	mapflag	nowarpto
+renting20	mapflag	nowarpto
+renting21	mapflag	nowarpto
+renting22	mapflag	nowarpto
+
+rent_ma	mapflag	noteleport
+rent_mb	mapflag	noteleport
+rent_mc	mapflag	noteleport
+rent_md	mapflag	noteleport
+rent_me	mapflag	noteleport
+rent_mf	mapflag	noteleport
+rent_mg	mapflag	noteleport
+renta1	mapflag	noteleport
+renta2	mapflag	noteleport
+renta3	mapflag	noteleport
+renta4	mapflag	noteleport
+renta5	mapflag	noteleport
+renta6	mapflag	noteleport
+renta7	mapflag	noteleport
+renta8	mapflag	noteleport
+renta9	mapflag	noteleport
+renta10	mapflag	noteleport
+renta11	mapflag	noteleport
+renta12	mapflag	noteleport
+renta13	mapflag	noteleport
+renta14	mapflag	noteleport
+renta15	mapflag	noteleport
+renta16	mapflag	noteleport
+renta17	mapflag	noteleport
+renta18	mapflag	noteleport
+renta19	mapflag	noteleport
+renta20	mapflag	noteleport
+renta21	mapflag	noteleport
+renta22	mapflag	noteleport
+rentb1	mapflag	noteleport
+rentb2	mapflag	noteleport
+rentb3	mapflag	noteleport
+rentb4	mapflag	noteleport
+rentb5	mapflag	noteleport
+rentb6	mapflag	noteleport
+rentb7	mapflag	noteleport
+rentb8	mapflag	noteleport
+rentb9	mapflag	noteleport
+rentb10	mapflag	noteleport
+rentb11	mapflag	noteleport
+rentb12	mapflag	noteleport
+rentb13	mapflag	noteleport
+rentb14	mapflag	noteleport
+rentb15	mapflag	noteleport
+rentb16	mapflag	noteleport
+rentb17	mapflag	noteleport
+rentb18	mapflag	noteleport
+rentb19	mapflag	noteleport
+rentb20	mapflag	noteleport
+rentb21	mapflag	noteleport
+rentb22	mapflag	noteleport
+rentb23	mapflag	noteleport
+rentb24	mapflag	noteleport
+rentb25	mapflag	noteleport
+rentb26	mapflag	noteleport
+rentb27	mapflag	noteleport
+rentb28	mapflag	noteleport
+rentb29	mapflag	noteleport
+rentb30	mapflag	noteleport
+rentb31	mapflag	noteleport
+rentb32	mapflag	noteleport
+rentb33	mapflag	noteleport
+rentb34	mapflag	noteleport
+rentb35	mapflag	noteleport
+rentb36	mapflag	noteleport
+rentb37	mapflag	noteleport
+rentb38	mapflag	noteleport
+rentb39	mapflag	noteleport
+rentb40	mapflag	noteleport
+rentb41	mapflag	noteleport
+rentb42	mapflag	noteleport
+rentb43	mapflag	noteleport
+rentb44	mapflag	noteleport
+rentb45	mapflag	noteleport
+rentb46	mapflag	noteleport
+rentb47	mapflag	noteleport
+rentb48	mapflag	noteleport
+rentb49	mapflag	noteleport
+rentb50	mapflag	noteleport
+rentb51	mapflag	noteleport
+rentb52	mapflag	noteleport
+rentb53	mapflag	noteleport
+rentb54	mapflag	noteleport
+rentb55	mapflag	noteleport
+rentb56	mapflag	noteleport
+rentb57	mapflag	noteleport
+rentb58	mapflag	noteleport
+rentb59	mapflag	noteleport
+rentb60	mapflag	noteleport
+rentc1	mapflag	noteleport
+rentc2	mapflag	noteleport
+rentc3	mapflag	noteleport
+rentc4	mapflag	noteleport
+rentc5	mapflag	noteleport
+rentc6	mapflag	noteleport
+rentc7	mapflag	noteleport
+rentc8	mapflag	noteleport
+rentc9	mapflag	noteleport
+rentc10	mapflag	noteleport
+rentc11	mapflag	noteleport
+rentc12	mapflag	noteleport
+rentc13	mapflag	noteleport
+rentc14	mapflag	noteleport
+rentc15	mapflag	noteleport
+rentc16	mapflag	noteleport
+rentc17	mapflag	noteleport
+rentc18	mapflag	noteleport
+rentc19	mapflag	noteleport
+rentc20	mapflag	noteleport
+rentc21	mapflag	noteleport
+rentc22	mapflag	noteleport
+rentd1	mapflag	noteleport
+rentd2	mapflag	noteleport
+rentd3	mapflag	noteleport
+rentd4	mapflag	noteleport
+rentd5	mapflag	noteleport
+rentd6	mapflag	noteleport
+rentd7	mapflag	noteleport
+rentd8	mapflag	noteleport
+rentd9	mapflag	noteleport
+rentd10	mapflag	noteleport
+rentd11	mapflag	noteleport
+rentd12	mapflag	noteleport
+rentd13	mapflag	noteleport
+rentd14	mapflag	noteleport
+rentd15	mapflag	noteleport
+rentd16	mapflag	noteleport
+rentd17	mapflag	noteleport
+rentd18	mapflag	noteleport
+rentd19	mapflag	noteleport
+rentd20	mapflag	noteleport
+rentd21	mapflag	noteleport
+rentd22	mapflag	noteleport
+rente1	mapflag	noteleport
+rente2	mapflag	noteleport
+rente3	mapflag	noteleport
+rente4	mapflag	noteleport
+rente5	mapflag	noteleport
+rente6	mapflag	noteleport
+rente7	mapflag	noteleport
+rente8	mapflag	noteleport
+rente9	mapflag	noteleport
+rente10	mapflag	noteleport
+rente11	mapflag	noteleport
+rente12	mapflag	noteleport
+rente13	mapflag	noteleport
+rente14	mapflag	noteleport
+rente15	mapflag	noteleport
+rente16	mapflag	noteleport
+rente17	mapflag	noteleport
+rente18	mapflag	noteleport
+rente19	mapflag	noteleport
+rente20	mapflag	noteleport
+rente21	mapflag	noteleport
+rente22	mapflag	noteleport
+rentf1	mapflag	noteleport
+rentf2	mapflag	noteleport
+rentf3	mapflag	noteleport
+rentf4	mapflag	noteleport
+rentf5	mapflag	noteleport
+rentf6	mapflag	noteleport
+rentf7	mapflag	noteleport
+rentf8	mapflag	noteleport
+rentf9	mapflag	noteleport
+rentf10	mapflag	noteleport
+rentf11	mapflag	noteleport
+rentf12	mapflag	noteleport
+rentf13	mapflag	noteleport
+rentf14	mapflag	noteleport
+rentf15	mapflag	noteleport
+rentf16	mapflag	noteleport
+rentf17	mapflag	noteleport
+rentf18	mapflag	noteleport
+rentf19	mapflag	noteleport
+rentf20	mapflag	noteleport
+rentf21	mapflag	noteleport
+rentf22	mapflag	noteleport
+rentg1	mapflag	noteleport
+rentg2	mapflag	noteleport
+rentg3	mapflag	noteleport
+rentg4	mapflag	noteleport
+rentg5	mapflag	noteleport
+rentg6	mapflag	noteleport
+rentg7	mapflag	noteleport
+rentg8	mapflag	noteleport
+rentg9	mapflag	noteleport
+rentg10	mapflag	noteleport
+rentg11	mapflag	noteleport
+rentg12	mapflag	noteleport
+rentg13	mapflag	noteleport
+rentg14	mapflag	noteleport
+rentg15	mapflag	noteleport
+rentg16	mapflag	noteleport
+rentg17	mapflag	noteleport
+rentg18	mapflag	noteleport
+rentg19	mapflag	noteleport
+rentg20	mapflag	noteleport
+rentg21	mapflag	noteleport
+rentg22	mapflag	noteleport
+rentina1	mapflag	noteleport
+rentina2	mapflag	noteleport
+rentina3	mapflag	noteleport
+rentina4	mapflag	noteleport
+rentina5	mapflag	noteleport
+rentina6	mapflag	noteleport
+rentina7	mapflag	noteleport
+rentina8	mapflag	noteleport
+rentina9	mapflag	noteleport
+rentina10	mapflag	noteleport
+rentina11	mapflag	noteleport
+rentina12	mapflag	noteleport
+rentina13	mapflag	noteleport
+rentina14	mapflag	noteleport
+rentina15	mapflag	noteleport
+rentina16	mapflag	noteleport
+rentina17	mapflag	noteleport
+rentina18	mapflag	noteleport
+rentina19	mapflag	noteleport
+rentina20	mapflag	noteleport
+rentina21	mapflag	noteleport
+rentina22	mapflag	noteleport
+rentinb1	mapflag	noteleport
+rentinb2	mapflag	noteleport
+rentinb3	mapflag	noteleport
+rentinb4	mapflag	noteleport
+rentinb5	mapflag	noteleport
+rentinb6	mapflag	noteleport
+rentinb7	mapflag	noteleport
+rentinb8	mapflag	noteleport
+rentinb9	mapflag	noteleport
+rentinb10	mapflag	noteleport
+rentinb11	mapflag	noteleport
+rentinb12	mapflag	noteleport
+rentinb13	mapflag	noteleport
+rentinb14	mapflag	noteleport
+rentinb15	mapflag	noteleport
+rentinb16	mapflag	noteleport
+rentinb17	mapflag	noteleport
+rentinb18	mapflag	noteleport
+rentinb19	mapflag	noteleport
+rentinb20	mapflag	noteleport
+rentinb21	mapflag	noteleport
+rentinb22	mapflag	noteleport
+rentinb23	mapflag	noteleport
+rentinb24	mapflag	noteleport
+rentinb25	mapflag	noteleport
+rentinb26	mapflag	noteleport
+rentinb27	mapflag	noteleport
+rentinb28	mapflag	noteleport
+rentinb29	mapflag	noteleport
+rentinb30	mapflag	noteleport
+rentinb31	mapflag	noteleport
+rentinb32	mapflag	noteleport
+rentinb33	mapflag	noteleport
+rentinb34	mapflag	noteleport
+rentinb35	mapflag	noteleport
+rentinb36	mapflag	noteleport
+rentinb37	mapflag	noteleport
+rentinb38	mapflag	noteleport
+rentinb39	mapflag	noteleport
+rentinb40	mapflag	noteleport
+rentinb41	mapflag	noteleport
+rentinb42	mapflag	noteleport
+rentinb43	mapflag	noteleport
+rentinb44	mapflag	noteleport
+rentinb45	mapflag	noteleport
+rentinb46	mapflag	noteleport
+rentinb47	mapflag	noteleport
+rentinb48	mapflag	noteleport
+rentinb49	mapflag	noteleport
+rentinb50	mapflag	noteleport
+rentinb51	mapflag	noteleport
+rentinb52	mapflag	noteleport
+rentinb53	mapflag	noteleport
+rentinb54	mapflag	noteleport
+rentinb55	mapflag	noteleport
+rentinb56	mapflag	noteleport
+rentinb57	mapflag	noteleport
+rentinb58	mapflag	noteleport
+rentinb59	mapflag	noteleport
+rentinb60	mapflag	noteleport
+rentinc1	mapflag	noteleport
+rentinc2	mapflag	noteleport
+rentinc3	mapflag	noteleport
+rentinc4	mapflag	noteleport
+rentinc5	mapflag	noteleport
+rentinc6	mapflag	noteleport
+rentinc7	mapflag	noteleport
+rentinc8	mapflag	noteleport
+rentinc9	mapflag	noteleport
+rentinc10	mapflag	noteleport
+rentinc11	mapflag	noteleport
+rentinc12	mapflag	noteleport
+rentinc13	mapflag	noteleport
+rentinc14	mapflag	noteleport
+rentinc15	mapflag	noteleport
+rentinc16	mapflag	noteleport
+rentinc17	mapflag	noteleport
+rentinc18	mapflag	noteleport
+rentinc19	mapflag	noteleport
+rentinc20	mapflag	noteleport
+rentinc21	mapflag	noteleport
+rentinc22	mapflag	noteleport
+rentind1	mapflag	noteleport
+rentind2	mapflag	noteleport
+rentind3	mapflag	noteleport
+rentind4	mapflag	noteleport
+rentind5	mapflag	noteleport
+rentind6	mapflag	noteleport
+rentind7	mapflag	noteleport
+rentind8	mapflag	noteleport
+rentind9	mapflag	noteleport
+rentind10	mapflag	noteleport
+rentind11	mapflag	noteleport
+rentind12	mapflag	noteleport
+rentind13	mapflag	noteleport
+rentind14	mapflag	noteleport
+rentind15	mapflag	noteleport
+rentind16	mapflag	noteleport
+rentind17	mapflag	noteleport
+rentind18	mapflag	noteleport
+rentind19	mapflag	noteleport
+rentind20	mapflag	noteleport
+rentind21	mapflag	noteleport
+rentind22	mapflag	noteleport
+rentine1	mapflag	noteleport
+rentine2	mapflag	noteleport
+rentine3	mapflag	noteleport
+rentine4	mapflag	noteleport
+rentine5	mapflag	noteleport
+rentine6	mapflag	noteleport
+rentine7	mapflag	noteleport
+rentine8	mapflag	noteleport
+rentine9	mapflag	noteleport
+rentine10	mapflag	noteleport
+rentine11	mapflag	noteleport
+rentine12	mapflag	noteleport
+rentine13	mapflag	noteleport
+rentine14	mapflag	noteleport
+rentine15	mapflag	noteleport
+rentine16	mapflag	noteleport
+rentine17	mapflag	noteleport
+rentine18	mapflag	noteleport
+rentine19	mapflag	noteleport
+rentine20	mapflag	noteleport
+rentine21	mapflag	noteleport
+rentine22	mapflag	noteleport
+rentinf1	mapflag	noteleport
+rentinf2	mapflag	noteleport
+rentinf3	mapflag	noteleport
+rentinf4	mapflag	noteleport
+rentinf5	mapflag	noteleport
+rentinf6	mapflag	noteleport
+rentinf7	mapflag	noteleport
+rentinf8	mapflag	noteleport
+rentinf9	mapflag	noteleport
+rentinf10	mapflag	noteleport
+rentinf11	mapflag	noteleport
+rentinf12	mapflag	noteleport
+rentinf13	mapflag	noteleport
+rentinf14	mapflag	noteleport
+rentinf15	mapflag	noteleport
+rentinf16	mapflag	noteleport
+rentinf17	mapflag	noteleport
+rentinf18	mapflag	noteleport
+rentinf19	mapflag	noteleport
+rentinf20	mapflag	noteleport
+rentinf21	mapflag	noteleport
+rentinf22	mapflag	noteleport
+renting1	mapflag	noteleport
+renting2	mapflag	noteleport
+renting3	mapflag	noteleport
+renting4	mapflag	noteleport
+renting5	mapflag	noteleport
+renting6	mapflag	noteleport
+renting7	mapflag	noteleport
+renting8	mapflag	noteleport
+renting9	mapflag	noteleport
+renting10	mapflag	noteleport
+renting11	mapflag	noteleport
+renting12	mapflag	noteleport
+renting13	mapflag	noteleport
+renting14	mapflag	noteleport
+renting15	mapflag	noteleport
+renting16	mapflag	noteleport
+renting17	mapflag	noteleport
+renting18	mapflag	noteleport
+renting19	mapflag	noteleport
+renting20	mapflag	noteleport
+renting21	mapflag	noteleport
+renting22	mapflag	noteleport
+
+rent_ma	mapflag	nosave	SavePoint
+rent_mb	mapflag	nosave	SavePoint
+rent_mc	mapflag	nosave	SavePoint
+rent_md	mapflag	nosave	SavePoint
+rent_me	mapflag	nosave	SavePoint
+rent_mf	mapflag	nosave	SavePoint
+rent_mg	mapflag	nosave	SavePoint
+renta1	mapflag	nosave	SavePoint
+renta2	mapflag	nosave	SavePoint
+renta3	mapflag	nosave	SavePoint
+renta4	mapflag	nosave	SavePoint
+renta5	mapflag	nosave	SavePoint
+renta6	mapflag	nosave	SavePoint
+renta7	mapflag	nosave	SavePoint
+renta8	mapflag	nosave	SavePoint
+renta9	mapflag	nosave	SavePoint
+renta10	mapflag	nosave	SavePoint
+renta11	mapflag	nosave	SavePoint
+renta12	mapflag	nosave	SavePoint
+renta13	mapflag	nosave	SavePoint
+renta14	mapflag	nosave	SavePoint
+renta15	mapflag	nosave	SavePoint
+renta16	mapflag	nosave	SavePoint
+renta17	mapflag	nosave	SavePoint
+renta18	mapflag	nosave	SavePoint
+renta19	mapflag	nosave	SavePoint
+renta20	mapflag	nosave	SavePoint
+renta21	mapflag	nosave	SavePoint
+renta22	mapflag	nosave	SavePoint
+rentb1	mapflag	nosave	SavePoint
+rentb2	mapflag	nosave	SavePoint
+rentb3	mapflag	nosave	SavePoint
+rentb4	mapflag	nosave	SavePoint
+rentb5	mapflag	nosave	SavePoint
+rentb6	mapflag	nosave	SavePoint
+rentb7	mapflag	nosave	SavePoint
+rentb8	mapflag	nosave	SavePoint
+rentb9	mapflag	nosave	SavePoint
+rentb10	mapflag	nosave	SavePoint
+rentb11	mapflag	nosave	SavePoint
+rentb12	mapflag	nosave	SavePoint
+rentb13	mapflag	nosave	SavePoint
+rentb14	mapflag	nosave	SavePoint
+rentb15	mapflag	nosave	SavePoint
+rentb16	mapflag	nosave	SavePoint
+rentb17	mapflag	nosave	SavePoint
+rentb18	mapflag	nosave	SavePoint
+rentb19	mapflag	nosave	SavePoint
+rentb20	mapflag	nosave	SavePoint
+rentb21	mapflag	nosave	SavePoint
+rentb22	mapflag	nosave	SavePoint
+rentb23	mapflag	nosave	SavePoint
+rentb24	mapflag	nosave	SavePoint
+rentb25	mapflag	nosave	SavePoint
+rentb26	mapflag	nosave	SavePoint
+rentb27	mapflag	nosave	SavePoint
+rentb28	mapflag	nosave	SavePoint
+rentb29	mapflag	nosave	SavePoint
+rentb30	mapflag	nosave	SavePoint
+rentb31	mapflag	nosave	SavePoint
+rentb32	mapflag	nosave	SavePoint
+rentb33	mapflag	nosave	SavePoint
+rentb34	mapflag	nosave	SavePoint
+rentb35	mapflag	nosave	SavePoint
+rentb36	mapflag	nosave	SavePoint
+rentb37	mapflag	nosave	SavePoint
+rentb38	mapflag	nosave	SavePoint
+rentb39	mapflag	nosave	SavePoint
+rentb40	mapflag	nosave	SavePoint
+rentb41	mapflag	nosave	SavePoint
+rentb42	mapflag	nosave	SavePoint
+rentb43	mapflag	nosave	SavePoint
+rentb44	mapflag	nosave	SavePoint
+rentb45	mapflag	nosave	SavePoint
+rentb46	mapflag	nosave	SavePoint
+rentb47	mapflag	nosave	SavePoint
+rentb48	mapflag	nosave	SavePoint
+rentb49	mapflag	nosave	SavePoint
+rentb50	mapflag	nosave	SavePoint
+rentb51	mapflag	nosave	SavePoint
+rentb52	mapflag	nosave	SavePoint
+rentb53	mapflag	nosave	SavePoint
+rentb54	mapflag	nosave	SavePoint
+rentb55	mapflag	nosave	SavePoint
+rentb56	mapflag	nosave	SavePoint
+rentb57	mapflag	nosave	SavePoint
+rentb58	mapflag	nosave	SavePoint
+rentb59	mapflag	nosave	SavePoint
+rentb60	mapflag	nosave	SavePoint
+rentc1	mapflag	nosave	SavePoint
+rentc2	mapflag	nosave	SavePoint
+rentc3	mapflag	nosave	SavePoint
+rentc4	mapflag	nosave	SavePoint
+rentc5	mapflag	nosave	SavePoint
+rentc6	mapflag	nosave	SavePoint
+rentc7	mapflag	nosave	SavePoint
+rentc8	mapflag	nosave	SavePoint
+rentc9	mapflag	nosave	SavePoint
+rentc10	mapflag	nosave	SavePoint
+rentc11	mapflag	nosave	SavePoint
+rentc12	mapflag	nosave	SavePoint
+rentc13	mapflag	nosave	SavePoint
+rentc14	mapflag	nosave	SavePoint
+rentc15	mapflag	nosave	SavePoint
+rentc16	mapflag	nosave	SavePoint
+rentc17	mapflag	nosave	SavePoint
+rentc18	mapflag	nosave	SavePoint
+rentc19	mapflag	nosave	SavePoint
+rentc20	mapflag	nosave	SavePoint
+rentc21	mapflag	nosave	SavePoint
+rentc22	mapflag	nosave	SavePoint
+rentd1	mapflag	nosave	SavePoint
+rentd2	mapflag	nosave	SavePoint
+rentd3	mapflag	nosave	SavePoint
+rentd4	mapflag	nosave	SavePoint
+rentd5	mapflag	nosave	SavePoint
+rentd6	mapflag	nosave	SavePoint
+rentd7	mapflag	nosave	SavePoint
+rentd8	mapflag	nosave	SavePoint
+rentd9	mapflag	nosave	SavePoint
+rentd10	mapflag	nosave	SavePoint
+rentd11	mapflag	nosave	SavePoint
+rentd12	mapflag	nosave	SavePoint
+rentd13	mapflag	nosave	SavePoint
+rentd14	mapflag	nosave	SavePoint
+rentd15	mapflag	nosave	SavePoint
+rentd16	mapflag	nosave	SavePoint
+rentd17	mapflag	nosave	SavePoint
+rentd18	mapflag	nosave	SavePoint
+rentd19	mapflag	nosave	SavePoint
+rentd20	mapflag	nosave	SavePoint
+rentd21	mapflag	nosave	SavePoint
+rentd22	mapflag	nosave	SavePoint
+rente1	mapflag	nosave	SavePoint
+rente2	mapflag	nosave	SavePoint
+rente3	mapflag	nosave	SavePoint
+rente4	mapflag	nosave	SavePoint
+rente5	mapflag	nosave	SavePoint
+rente6	mapflag	nosave	SavePoint
+rente7	mapflag	nosave	SavePoint
+rente8	mapflag	nosave	SavePoint
+rente9	mapflag	nosave	SavePoint
+rente10	mapflag	nosave	SavePoint
+rente11	mapflag	nosave	SavePoint
+rente12	mapflag	nosave	SavePoint
+rente13	mapflag	nosave	SavePoint
+rente14	mapflag	nosave	SavePoint
+rente15	mapflag	nosave	SavePoint
+rente16	mapflag	nosave	SavePoint
+rente17	mapflag	nosave	SavePoint
+rente18	mapflag	nosave	SavePoint
+rente19	mapflag	nosave	SavePoint
+rente20	mapflag	nosave	SavePoint
+rente21	mapflag	nosave	SavePoint
+rente22	mapflag	nosave	SavePoint
+rentf1	mapflag	nosave	SavePoint
+rentf2	mapflag	nosave	SavePoint
+rentf3	mapflag	nosave	SavePoint
+rentf4	mapflag	nosave	SavePoint
+rentf5	mapflag	nosave	SavePoint
+rentf6	mapflag	nosave	SavePoint
+rentf7	mapflag	nosave	SavePoint
+rentf8	mapflag	nosave	SavePoint
+rentf9	mapflag	nosave	SavePoint
+rentf10	mapflag	nosave	SavePoint
+rentf11	mapflag	nosave	SavePoint
+rentf12	mapflag	nosave	SavePoint
+rentf13	mapflag	nosave	SavePoint
+rentf14	mapflag	nosave	SavePoint
+rentf15	mapflag	nosave	SavePoint
+rentf16	mapflag	nosave	SavePoint
+rentf17	mapflag	nosave	SavePoint
+rentf18	mapflag	nosave	SavePoint
+rentf19	mapflag	nosave	SavePoint
+rentf20	mapflag	nosave	SavePoint
+rentf21	mapflag	nosave	SavePoint
+rentf22	mapflag	nosave	SavePoint
+rentg1	mapflag	nosave	SavePoint
+rentg2	mapflag	nosave	SavePoint
+rentg3	mapflag	nosave	SavePoint
+rentg4	mapflag	nosave	SavePoint
+rentg5	mapflag	nosave	SavePoint
+rentg6	mapflag	nosave	SavePoint
+rentg7	mapflag	nosave	SavePoint
+rentg8	mapflag	nosave	SavePoint
+rentg9	mapflag	nosave	SavePoint
+rentg10	mapflag	nosave	SavePoint
+rentg11	mapflag	nosave	SavePoint
+rentg12	mapflag	nosave	SavePoint
+rentg13	mapflag	nosave	SavePoint
+rentg14	mapflag	nosave	SavePoint
+rentg15	mapflag	nosave	SavePoint
+rentg16	mapflag	nosave	SavePoint
+rentg17	mapflag	nosave	SavePoint
+rentg18	mapflag	nosave	SavePoint
+rentg19	mapflag	nosave	SavePoint
+rentg20	mapflag	nosave	SavePoint
+rentg21	mapflag	nosave	SavePoint
+rentg22	mapflag	nosave	SavePoint
+rentina1	mapflag	nosave	SavePoint
+rentina2	mapflag	nosave	SavePoint
+rentina3	mapflag	nosave	SavePoint
+rentina4	mapflag	nosave	SavePoint
+rentina5	mapflag	nosave	SavePoint
+rentina6	mapflag	nosave	SavePoint
+rentina7	mapflag	nosave	SavePoint
+rentina8	mapflag	nosave	SavePoint
+rentina9	mapflag	nosave	SavePoint
+rentina10	mapflag	nosave	SavePoint
+rentina11	mapflag	nosave	SavePoint
+rentina12	mapflag	nosave	SavePoint
+rentina13	mapflag	nosave	SavePoint
+rentina14	mapflag	nosave	SavePoint
+rentina15	mapflag	nosave	SavePoint
+rentina16	mapflag	nosave	SavePoint
+rentina17	mapflag	nosave	SavePoint
+rentina18	mapflag	nosave	SavePoint
+rentina19	mapflag	nosave	SavePoint
+rentina20	mapflag	nosave	SavePoint
+rentina21	mapflag	nosave	SavePoint
+rentina22	mapflag	nosave	SavePoint
+rentinb1	mapflag	nosave	SavePoint
+rentinb2	mapflag	nosave	SavePoint
+rentinb3	mapflag	nosave	SavePoint
+rentinb4	mapflag	nosave	SavePoint
+rentinb5	mapflag	nosave	SavePoint
+rentinb6	mapflag	nosave	SavePoint
+rentinb7	mapflag	nosave	SavePoint
+rentinb8	mapflag	nosave	SavePoint
+rentinb9	mapflag	nosave	SavePoint
+rentinb10	mapflag	nosave	SavePoint
+rentinb11	mapflag	nosave	SavePoint
+rentinb12	mapflag	nosave	SavePoint
+rentinb13	mapflag	nosave	SavePoint
+rentinb14	mapflag	nosave	SavePoint
+rentinb15	mapflag	nosave	SavePoint
+rentinb16	mapflag	nosave	SavePoint
+rentinb17	mapflag	nosave	SavePoint
+rentinb18	mapflag	nosave	SavePoint
+rentinb19	mapflag	nosave	SavePoint
+rentinb20	mapflag	nosave	SavePoint
+rentinb21	mapflag	nosave	SavePoint
+rentinb22	mapflag	nosave	SavePoint
+rentinb23	mapflag	nosave	SavePoint
+rentinb24	mapflag	nosave	SavePoint
+rentinb25	mapflag	nosave	SavePoint
+rentinb26	mapflag	nosave	SavePoint
+rentinb27	mapflag	nosave	SavePoint
+rentinb28	mapflag	nosave	SavePoint
+rentinb29	mapflag	nosave	SavePoint
+rentinb30	mapflag	nosave	SavePoint
+rentinb31	mapflag	nosave	SavePoint
+rentinb32	mapflag	nosave	SavePoint
+rentinb33	mapflag	nosave	SavePoint
+rentinb34	mapflag	nosave	SavePoint
+rentinb35	mapflag	nosave	SavePoint
+rentinb36	mapflag	nosave	SavePoint
+rentinb37	mapflag	nosave	SavePoint
+rentinb38	mapflag	nosave	SavePoint
+rentinb39	mapflag	nosave	SavePoint
+rentinb40	mapflag	nosave	SavePoint
+rentinb41	mapflag	nosave	SavePoint
+rentinb42	mapflag	nosave	SavePoint
+rentinb43	mapflag	nosave	SavePoint
+rentinb44	mapflag	nosave	SavePoint
+rentinb45	mapflag	nosave	SavePoint
+rentinb46	mapflag	nosave	SavePoint
+rentinb47	mapflag	nosave	SavePoint
+rentinb48	mapflag	nosave	SavePoint
+rentinb49	mapflag	nosave	SavePoint
+rentinb50	mapflag	nosave	SavePoint
+rentinb51	mapflag	nosave	SavePoint
+rentinb52	mapflag	nosave	SavePoint
+rentinb53	mapflag	nosave	SavePoint
+rentinb54	mapflag	nosave	SavePoint
+rentinb55	mapflag	nosave	SavePoint
+rentinb56	mapflag	nosave	SavePoint
+rentinb57	mapflag	nosave	SavePoint
+rentinb58	mapflag	nosave	SavePoint
+rentinb59	mapflag	nosave	SavePoint
+rentinb60	mapflag	nosave	SavePoint
+rentinc1	mapflag	nosave	SavePoint
+rentinc2	mapflag	nosave	SavePoint
+rentinc3	mapflag	nosave	SavePoint
+rentinc4	mapflag	nosave	SavePoint
+rentinc5	mapflag	nosave	SavePoint
+rentinc6	mapflag	nosave	SavePoint
+rentinc7	mapflag	nosave	SavePoint
+rentinc8	mapflag	nosave	SavePoint
+rentinc9	mapflag	nosave	SavePoint
+rentinc10	mapflag	nosave	SavePoint
+rentinc11	mapflag	nosave	SavePoint
+rentinc12	mapflag	nosave	SavePoint
+rentinc13	mapflag	nosave	SavePoint
+rentinc14	mapflag	nosave	SavePoint
+rentinc15	mapflag	nosave	SavePoint
+rentinc16	mapflag	nosave	SavePoint
+rentinc17	mapflag	nosave	SavePoint
+rentinc18	mapflag	nosave	SavePoint
+rentinc19	mapflag	nosave	SavePoint
+rentinc20	mapflag	nosave	SavePoint
+rentinc21	mapflag	nosave	SavePoint
+rentinc22	mapflag	nosave	SavePoint
+rentind1	mapflag	nosave	SavePoint
+rentind2	mapflag	nosave	SavePoint
+rentind3	mapflag	nosave	SavePoint
+rentind4	mapflag	nosave	SavePoint
+rentind5	mapflag	nosave	SavePoint
+rentind6	mapflag	nosave	SavePoint
+rentind7	mapflag	nosave	SavePoint
+rentind8	mapflag	nosave	SavePoint
+rentind9	mapflag	nosave	SavePoint
+rentind10	mapflag	nosave	SavePoint
+rentind11	mapflag	nosave	SavePoint
+rentind12	mapflag	nosave	SavePoint
+rentind13	mapflag	nosave	SavePoint
+rentind14	mapflag	nosave	SavePoint
+rentind15	mapflag	nosave	SavePoint
+rentind16	mapflag	nosave	SavePoint
+rentind17	mapflag	nosave	SavePoint
+rentind18	mapflag	nosave	SavePoint
+rentind19	mapflag	nosave	SavePoint
+rentind20	mapflag	nosave	SavePoint
+rentind21	mapflag	nosave	SavePoint
+rentind22	mapflag	nosave	SavePoint
+rentine1	mapflag	nosave	SavePoint
+rentine2	mapflag	nosave	SavePoint
+rentine3	mapflag	nosave	SavePoint
+rentine4	mapflag	nosave	SavePoint
+rentine5	mapflag	nosave	SavePoint
+rentine6	mapflag	nosave	SavePoint
+rentine7	mapflag	nosave	SavePoint
+rentine8	mapflag	nosave	SavePoint
+rentine9	mapflag	nosave	SavePoint
+rentine10	mapflag	nosave	SavePoint
+rentine11	mapflag	nosave	SavePoint
+rentine12	mapflag	nosave	SavePoint
+rentine13	mapflag	nosave	SavePoint
+rentine14	mapflag	nosave	SavePoint
+rentine15	mapflag	nosave	SavePoint
+rentine16	mapflag	nosave	SavePoint
+rentine17	mapflag	nosave	SavePoint
+rentine18	mapflag	nosave	SavePoint
+rentine19	mapflag	nosave	SavePoint
+rentine20	mapflag	nosave	SavePoint
+rentine21	mapflag	nosave	SavePoint
+rentine22	mapflag	nosave	SavePoint
+rentinf1	mapflag	nosave	SavePoint
+rentinf2	mapflag	nosave	SavePoint
+rentinf3	mapflag	nosave	SavePoint
+rentinf4	mapflag	nosave	SavePoint
+rentinf5	mapflag	nosave	SavePoint
+rentinf6	mapflag	nosave	SavePoint
+rentinf7	mapflag	nosave	SavePoint
+rentinf8	mapflag	nosave	SavePoint
+rentinf9	mapflag	nosave	SavePoint
+rentinf10	mapflag	nosave	SavePoint
+rentinf11	mapflag	nosave	SavePoint
+rentinf12	mapflag	nosave	SavePoint
+rentinf13	mapflag	nosave	SavePoint
+rentinf14	mapflag	nosave	SavePoint
+rentinf15	mapflag	nosave	SavePoint
+rentinf16	mapflag	nosave	SavePoint
+rentinf17	mapflag	nosave	SavePoint
+rentinf18	mapflag	nosave	SavePoint
+rentinf19	mapflag	nosave	SavePoint
+rentinf20	mapflag	nosave	SavePoint
+rentinf21	mapflag	nosave	SavePoint
+rentinf22	mapflag	nosave	SavePoint
+renting1	mapflag	nosave	SavePoint
+renting2	mapflag	nosave	SavePoint
+renting3	mapflag	nosave	SavePoint
+renting4	mapflag	nosave	SavePoint
+renting5	mapflag	nosave	SavePoint
+renting6	mapflag	nosave	SavePoint
+renting7	mapflag	nosave	SavePoint
+renting8	mapflag	nosave	SavePoint
+renting9	mapflag	nosave	SavePoint
+renting10	mapflag	nosave	SavePoint
+renting11	mapflag	nosave	SavePoint
+renting12	mapflag	nosave	SavePoint
+renting13	mapflag	nosave	SavePoint
+renting14	mapflag	nosave	SavePoint
+renting15	mapflag	nosave	SavePoint
+renting16	mapflag	nosave	SavePoint
+renting17	mapflag	nosave	SavePoint
+renting18	mapflag	nosave	SavePoint
+renting19	mapflag	nosave	SavePoint
+renting20	mapflag	nosave	SavePoint
+renting21	mapflag	nosave	SavePoint
+renting22	mapflag	nosave	SavePoint
+
+rent_ma	mapflag	mapflag	nomemo
+rent_mb	mapflag	mapflag	nomemo
+rent_mc	mapflag	mapflag	nomemo
+rent_md	mapflag	mapflag	nomemo
+rent_me	mapflag	mapflag	nomemo
+rent_mf	mapflag	mapflag	nomemo
+rent_mg	mapflag	mapflag	nomemo
+renta1	mapflag	mapflag	nomemo
+renta2	mapflag	mapflag	nomemo
+renta3	mapflag	mapflag	nomemo
+renta4	mapflag	mapflag	nomemo
+renta5	mapflag	mapflag	nomemo
+renta6	mapflag	mapflag	nomemo
+renta7	mapflag	mapflag	nomemo
+renta8	mapflag	mapflag	nomemo
+renta9	mapflag	mapflag	nomemo
+renta10	mapflag	mapflag	nomemo
+renta11	mapflag	mapflag	nomemo
+renta12	mapflag	mapflag	nomemo
+renta13	mapflag	mapflag	nomemo
+renta14	mapflag	mapflag	nomemo
+renta15	mapflag	mapflag	nomemo
+renta16	mapflag	mapflag	nomemo
+renta17	mapflag	mapflag	nomemo
+renta18	mapflag	mapflag	nomemo
+renta19	mapflag	mapflag	nomemo
+renta20	mapflag	mapflag	nomemo
+renta21	mapflag	mapflag	nomemo
+renta22	mapflag	mapflag	nomemo
+rentb1	mapflag	mapflag	nomemo
+rentb2	mapflag	mapflag	nomemo
+rentb3	mapflag	mapflag	nomemo
+rentb4	mapflag	mapflag	nomemo
+rentb5	mapflag	mapflag	nomemo
+rentb6	mapflag	mapflag	nomemo
+rentb7	mapflag	mapflag	nomemo
+rentb8	mapflag	mapflag	nomemo
+rentb9	mapflag	mapflag	nomemo
+rentb10	mapflag	mapflag	nomemo
+rentb11	mapflag	mapflag	nomemo
+rentb12	mapflag	mapflag	nomemo
+rentb13	mapflag	mapflag	nomemo
+rentb14	mapflag	mapflag	nomemo
+rentb15	mapflag	mapflag	nomemo
+rentb16	mapflag	mapflag	nomemo
+rentb17	mapflag	mapflag	nomemo
+rentb18	mapflag	mapflag	nomemo
+rentb19	mapflag	mapflag	nomemo
+rentb20	mapflag	mapflag	nomemo
+rentb21	mapflag	mapflag	nomemo
+rentb22	mapflag	mapflag	nomemo
+rentb23	mapflag	mapflag	nomemo
+rentb24	mapflag	mapflag	nomemo
+rentb25	mapflag	mapflag	nomemo
+rentb26	mapflag	mapflag	nomemo
+rentb27	mapflag	mapflag	nomemo
+rentb28	mapflag	mapflag	nomemo
+rentb29	mapflag	mapflag	nomemo
+rentb30	mapflag	mapflag	nomemo
+rentb31	mapflag	mapflag	nomemo
+rentb32	mapflag	mapflag	nomemo
+rentb33	mapflag	mapflag	nomemo
+rentb34	mapflag	mapflag	nomemo
+rentb35	mapflag	mapflag	nomemo
+rentb36	mapflag	mapflag	nomemo
+rentb37	mapflag	mapflag	nomemo
+rentb38	mapflag	mapflag	nomemo
+rentb39	mapflag	mapflag	nomemo
+rentb40	mapflag	mapflag	nomemo
+rentb41	mapflag	mapflag	nomemo
+rentb42	mapflag	mapflag	nomemo
+rentb43	mapflag	mapflag	nomemo
+rentb44	mapflag	mapflag	nomemo
+rentb45	mapflag	mapflag	nomemo
+rentb46	mapflag	mapflag	nomemo
+rentb47	mapflag	mapflag	nomemo
+rentb48	mapflag	mapflag	nomemo
+rentb49	mapflag	mapflag	nomemo
+rentb50	mapflag	mapflag	nomemo
+rentb51	mapflag	mapflag	nomemo
+rentb52	mapflag	mapflag	nomemo
+rentb53	mapflag	mapflag	nomemo
+rentb54	mapflag	mapflag	nomemo
+rentb55	mapflag	mapflag	nomemo
+rentb56	mapflag	mapflag	nomemo
+rentb57	mapflag	mapflag	nomemo
+rentb58	mapflag	mapflag	nomemo
+rentb59	mapflag	mapflag	nomemo
+rentb60	mapflag	mapflag	nomemo
+rentc1	mapflag	mapflag	nomemo
+rentc2	mapflag	mapflag	nomemo
+rentc3	mapflag	mapflag	nomemo
+rentc4	mapflag	mapflag	nomemo
+rentc5	mapflag	mapflag	nomemo
+rentc6	mapflag	mapflag	nomemo
+rentc7	mapflag	mapflag	nomemo
+rentc8	mapflag	mapflag	nomemo
+rentc9	mapflag	mapflag	nomemo
+rentc10	mapflag	mapflag	nomemo
+rentc11	mapflag	mapflag	nomemo
+rentc12	mapflag	mapflag	nomemo
+rentc13	mapflag	mapflag	nomemo
+rentc14	mapflag	mapflag	nomemo
+rentc15	mapflag	mapflag	nomemo
+rentc16	mapflag	mapflag	nomemo
+rentc17	mapflag	mapflag	nomemo
+rentc18	mapflag	mapflag	nomemo
+rentc19	mapflag	mapflag	nomemo
+rentc20	mapflag	mapflag	nomemo
+rentc21	mapflag	mapflag	nomemo
+rentc22	mapflag	mapflag	nomemo
+rentd1	mapflag	mapflag	nomemo
+rentd2	mapflag	mapflag	nomemo
+rentd3	mapflag	mapflag	nomemo
+rentd4	mapflag	mapflag	nomemo
+rentd5	mapflag	mapflag	nomemo
+rentd6	mapflag	mapflag	nomemo
+rentd7	mapflag	mapflag	nomemo
+rentd8	mapflag	mapflag	nomemo
+rentd9	mapflag	mapflag	nomemo
+rentd10	mapflag	mapflag	nomemo
+rentd11	mapflag	mapflag	nomemo
+rentd12	mapflag	mapflag	nomemo
+rentd13	mapflag	mapflag	nomemo
+rentd14	mapflag	mapflag	nomemo
+rentd15	mapflag	mapflag	nomemo
+rentd16	mapflag	mapflag	nomemo
+rentd17	mapflag	mapflag	nomemo
+rentd18	mapflag	mapflag	nomemo
+rentd19	mapflag	mapflag	nomemo
+rentd20	mapflag	mapflag	nomemo
+rentd21	mapflag	mapflag	nomemo
+rentd22	mapflag	mapflag	nomemo
+rente1	mapflag	mapflag	nomemo
+rente2	mapflag	mapflag	nomemo
+rente3	mapflag	mapflag	nomemo
+rente4	mapflag	mapflag	nomemo
+rente5	mapflag	mapflag	nomemo
+rente6	mapflag	mapflag	nomemo
+rente7	mapflag	mapflag	nomemo
+rente8	mapflag	mapflag	nomemo
+rente9	mapflag	mapflag	nomemo
+rente10	mapflag	mapflag	nomemo
+rente11	mapflag	mapflag	nomemo
+rente12	mapflag	mapflag	nomemo
+rente13	mapflag	mapflag	nomemo
+rente14	mapflag	mapflag	nomemo
+rente15	mapflag	mapflag	nomemo
+rente16	mapflag	mapflag	nomemo
+rente17	mapflag	mapflag	nomemo
+rente18	mapflag	mapflag	nomemo
+rente19	mapflag	mapflag	nomemo
+rente20	mapflag	mapflag	nomemo
+rente21	mapflag	mapflag	nomemo
+rente22	mapflag	mapflag	nomemo
+rentf1	mapflag	mapflag	nomemo
+rentf2	mapflag	mapflag	nomemo
+rentf3	mapflag	mapflag	nomemo
+rentf4	mapflag	mapflag	nomemo
+rentf5	mapflag	mapflag	nomemo
+rentf6	mapflag	mapflag	nomemo
+rentf7	mapflag	mapflag	nomemo
+rentf8	mapflag	mapflag	nomemo
+rentf9	mapflag	mapflag	nomemo
+rentf10	mapflag	mapflag	nomemo
+rentf11	mapflag	mapflag	nomemo
+rentf12	mapflag	mapflag	nomemo
+rentf13	mapflag	mapflag	nomemo
+rentf14	mapflag	mapflag	nomemo
+rentf15	mapflag	mapflag	nomemo
+rentf16	mapflag	mapflag	nomemo
+rentf17	mapflag	mapflag	nomemo
+rentf18	mapflag	mapflag	nomemo
+rentf19	mapflag	mapflag	nomemo
+rentf20	mapflag	mapflag	nomemo
+rentf21	mapflag	mapflag	nomemo
+rentf22	mapflag	mapflag	nomemo
+rentg1	mapflag	mapflag	nomemo
+rentg2	mapflag	mapflag	nomemo
+rentg3	mapflag	mapflag	nomemo
+rentg4	mapflag	mapflag	nomemo
+rentg5	mapflag	mapflag	nomemo
+rentg6	mapflag	mapflag	nomemo
+rentg7	mapflag	mapflag	nomemo
+rentg8	mapflag	mapflag	nomemo
+rentg9	mapflag	mapflag	nomemo
+rentg10	mapflag	mapflag	nomemo
+rentg11	mapflag	mapflag	nomemo
+rentg12	mapflag	mapflag	nomemo
+rentg13	mapflag	mapflag	nomemo
+rentg14	mapflag	mapflag	nomemo
+rentg15	mapflag	mapflag	nomemo
+rentg16	mapflag	mapflag	nomemo
+rentg17	mapflag	mapflag	nomemo
+rentg18	mapflag	mapflag	nomemo
+rentg19	mapflag	mapflag	nomemo
+rentg20	mapflag	mapflag	nomemo
+rentg21	mapflag	mapflag	nomemo
+rentg22	mapflag	mapflag	nomemo
+rentina1	mapflag	mapflag	nomemo
+rentina2	mapflag	mapflag	nomemo
+rentina3	mapflag	mapflag	nomemo
+rentina4	mapflag	mapflag	nomemo
+rentina5	mapflag	mapflag	nomemo
+rentina6	mapflag	mapflag	nomemo
+rentina7	mapflag	mapflag	nomemo
+rentina8	mapflag	mapflag	nomemo
+rentina9	mapflag	mapflag	nomemo
+rentina10	mapflag	mapflag	nomemo
+rentina11	mapflag	mapflag	nomemo
+rentina12	mapflag	mapflag	nomemo
+rentina13	mapflag	mapflag	nomemo
+rentina14	mapflag	mapflag	nomemo
+rentina15	mapflag	mapflag	nomemo
+rentina16	mapflag	mapflag	nomemo
+rentina17	mapflag	mapflag	nomemo
+rentina18	mapflag	mapflag	nomemo
+rentina19	mapflag	mapflag	nomemo
+rentina20	mapflag	mapflag	nomemo
+rentina21	mapflag	mapflag	nomemo
+rentina22	mapflag	mapflag	nomemo
+rentinb1	mapflag	mapflag	nomemo
+rentinb2	mapflag	mapflag	nomemo
+rentinb3	mapflag	mapflag	nomemo
+rentinb4	mapflag	mapflag	nomemo
+rentinb5	mapflag	mapflag	nomemo
+rentinb6	mapflag	mapflag	nomemo
+rentinb7	mapflag	mapflag	nomemo
+rentinb8	mapflag	mapflag	nomemo
+rentinb9	mapflag	mapflag	nomemo
+rentinb10	mapflag	mapflag	nomemo
+rentinb11	mapflag	mapflag	nomemo
+rentinb12	mapflag	mapflag	nomemo
+rentinb13	mapflag	mapflag	nomemo
+rentinb14	mapflag	mapflag	nomemo
+rentinb15	mapflag	mapflag	nomemo
+rentinb16	mapflag	mapflag	nomemo
+rentinb17	mapflag	mapflag	nomemo
+rentinb18	mapflag	mapflag	nomemo
+rentinb19	mapflag	mapflag	nomemo
+rentinb20	mapflag	mapflag	nomemo
+rentinb21	mapflag	mapflag	nomemo
+rentinb22	mapflag	mapflag	nomemo
+rentinb23	mapflag	mapflag	nomemo
+rentinb24	mapflag	mapflag	nomemo
+rentinb25	mapflag	mapflag	nomemo
+rentinb26	mapflag	mapflag	nomemo
+rentinb27	mapflag	mapflag	nomemo
+rentinb28	mapflag	mapflag	nomemo
+rentinb29	mapflag	mapflag	nomemo
+rentinb30	mapflag	mapflag	nomemo
+rentinb31	mapflag	mapflag	nomemo
+rentinb32	mapflag	mapflag	nomemo
+rentinb33	mapflag	mapflag	nomemo
+rentinb34	mapflag	mapflag	nomemo
+rentinb35	mapflag	mapflag	nomemo
+rentinb36	mapflag	mapflag	nomemo
+rentinb37	mapflag	mapflag	nomemo
+rentinb38	mapflag	mapflag	nomemo
+rentinb39	mapflag	mapflag	nomemo
+rentinb40	mapflag	mapflag	nomemo
+rentinb41	mapflag	mapflag	nomemo
+rentinb42	mapflag	mapflag	nomemo
+rentinb43	mapflag	mapflag	nomemo
+rentinb44	mapflag	mapflag	nomemo
+rentinb45	mapflag	mapflag	nomemo
+rentinb46	mapflag	mapflag	nomemo
+rentinb47	mapflag	mapflag	nomemo
+rentinb48	mapflag	mapflag	nomemo
+rentinb49	mapflag	mapflag	nomemo
+rentinb50	mapflag	mapflag	nomemo
+rentinb51	mapflag	mapflag	nomemo
+rentinb52	mapflag	mapflag	nomemo
+rentinb53	mapflag	mapflag	nomemo
+rentinb54	mapflag	mapflag	nomemo
+rentinb55	mapflag	mapflag	nomemo
+rentinb56	mapflag	mapflag	nomemo
+rentinb57	mapflag	mapflag	nomemo
+rentinb58	mapflag	mapflag	nomemo
+rentinb59	mapflag	mapflag	nomemo
+rentinb60	mapflag	mapflag	nomemo
+rentinc1	mapflag	mapflag	nomemo
+rentinc2	mapflag	mapflag	nomemo
+rentinc3	mapflag	mapflag	nomemo
+rentinc4	mapflag	mapflag	nomemo
+rentinc5	mapflag	mapflag	nomemo
+rentinc6	mapflag	mapflag	nomemo
+rentinc7	mapflag	mapflag	nomemo
+rentinc8	mapflag	mapflag	nomemo
+rentinc9	mapflag	mapflag	nomemo
+rentinc10	mapflag	mapflag	nomemo
+rentinc11	mapflag	mapflag	nomemo
+rentinc12	mapflag	mapflag	nomemo
+rentinc13	mapflag	mapflag	nomemo
+rentinc14	mapflag	mapflag	nomemo
+rentinc15	mapflag	mapflag	nomemo
+rentinc16	mapflag	mapflag	nomemo
+rentinc17	mapflag	mapflag	nomemo
+rentinc18	mapflag	mapflag	nomemo
+rentinc19	mapflag	mapflag	nomemo
+rentinc20	mapflag	mapflag	nomemo
+rentinc21	mapflag	mapflag	nomemo
+rentinc22	mapflag	mapflag	nomemo
+rentind1	mapflag	mapflag	nomemo
+rentind2	mapflag	mapflag	nomemo
+rentind3	mapflag	mapflag	nomemo
+rentind4	mapflag	mapflag	nomemo
+rentind5	mapflag	mapflag	nomemo
+rentind6	mapflag	mapflag	nomemo
+rentind7	mapflag	mapflag	nomemo
+rentind8	mapflag	mapflag	nomemo
+rentind9	mapflag	mapflag	nomemo
+rentind10	mapflag	mapflag	nomemo
+rentind11	mapflag	mapflag	nomemo
+rentind12	mapflag	mapflag	nomemo
+rentind13	mapflag	mapflag	nomemo
+rentind14	mapflag	mapflag	nomemo
+rentind15	mapflag	mapflag	nomemo
+rentind16	mapflag	mapflag	nomemo
+rentind17	mapflag	mapflag	nomemo
+rentind18	mapflag	mapflag	nomemo
+rentind19	mapflag	mapflag	nomemo
+rentind20	mapflag	mapflag	nomemo
+rentind21	mapflag	mapflag	nomemo
+rentind22	mapflag	mapflag	nomemo
+rentine1	mapflag	mapflag	nomemo
+rentine2	mapflag	mapflag	nomemo
+rentine3	mapflag	mapflag	nomemo
+rentine4	mapflag	mapflag	nomemo
+rentine5	mapflag	mapflag	nomemo
+rentine6	mapflag	mapflag	nomemo
+rentine7	mapflag	mapflag	nomemo
+rentine8	mapflag	mapflag	nomemo
+rentine9	mapflag	mapflag	nomemo
+rentine10	mapflag	mapflag	nomemo
+rentine11	mapflag	mapflag	nomemo
+rentine12	mapflag	mapflag	nomemo
+rentine13	mapflag	mapflag	nomemo
+rentine14	mapflag	mapflag	nomemo
+rentine15	mapflag	mapflag	nomemo
+rentine16	mapflag	mapflag	nomemo
+rentine17	mapflag	mapflag	nomemo
+rentine18	mapflag	mapflag	nomemo
+rentine19	mapflag	mapflag	nomemo
+rentine20	mapflag	mapflag	nomemo
+rentine21	mapflag	mapflag	nomemo
+rentine22	mapflag	mapflag	nomemo
+rentinf1	mapflag	mapflag	nomemo
+rentinf2	mapflag	mapflag	nomemo
+rentinf3	mapflag	mapflag	nomemo
+rentinf4	mapflag	mapflag	nomemo
+rentinf5	mapflag	mapflag	nomemo
+rentinf6	mapflag	mapflag	nomemo
+rentinf7	mapflag	mapflag	nomemo
+rentinf8	mapflag	mapflag	nomemo
+rentinf9	mapflag	mapflag	nomemo
+rentinf10	mapflag	mapflag	nomemo
+rentinf11	mapflag	mapflag	nomemo
+rentinf12	mapflag	mapflag	nomemo
+rentinf13	mapflag	mapflag	nomemo
+rentinf14	mapflag	mapflag	nomemo
+rentinf15	mapflag	mapflag	nomemo
+rentinf16	mapflag	mapflag	nomemo
+rentinf17	mapflag	mapflag	nomemo
+rentinf18	mapflag	mapflag	nomemo
+rentinf19	mapflag	mapflag	nomemo
+rentinf20	mapflag	mapflag	nomemo
+rentinf21	mapflag	mapflag	nomemo
+rentinf22	mapflag	mapflag	nomemo
+renting1	mapflag	mapflag	nomemo
+renting2	mapflag	mapflag	nomemo
+renting3	mapflag	mapflag	nomemo
+renting4	mapflag	mapflag	nomemo
+renting5	mapflag	mapflag	nomemo
+renting6	mapflag	mapflag	nomemo
+renting7	mapflag	mapflag	nomemo
+renting8	mapflag	mapflag	nomemo
+renting9	mapflag	mapflag	nomemo
+renting10	mapflag	mapflag	nomemo
+renting11	mapflag	mapflag	nomemo
+renting12	mapflag	mapflag	nomemo
+renting13	mapflag	mapflag	nomemo
+renting14	mapflag	mapflag	nomemo
+renting15	mapflag	mapflag	nomemo
+renting16	mapflag	mapflag	nomemo
+renting17	mapflag	mapflag	nomemo
+renting18	mapflag	mapflag	nomemo
+renting19	mapflag	mapflag	nomemo
+renting20	mapflag	mapflag	nomemo
+renting21	mapflag	mapflag	nomemo
+renting22	mapflag	mapflag	nomemo

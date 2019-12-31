@@ -1,0 +1,8 @@
+prontera.gat,141,169,5	script	Donations!	790,{
+	mes "Welcome to XiLeRO! We are currently accepting donations. For these donations, you can recive the most powerful items in game!!";
+	next;
+	mes "Please visit our site www.xilero.net for info on how to donate.";
+	mes "All donations will be to make the server better and better!";
+	mes "Thank you for supporting XiLeRO!!";
+	close;
+}

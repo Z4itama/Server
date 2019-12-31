@@ -1,0 +1,110 @@
+//======================== Feather Beret ================================================
+rachel,152,131,3	script	Sakjul	928,{
+
+	set .sakjul$,"[^ff1199Sakjul^000000]";
+//	set @lolumad$,"[^0000ff"+strcharinfo(0)+"^000000]";
+
+if(FBpart==2) { mes .sakjul$; mes "You already done this quest."; close; }
+if(FBpart==1) { goto Lqueststarted; }	
+
+	mes .sakjul$;
+	mes "Straighten yourself, and keep your tension!";
+	mes "Keep yourself under control, and move with integrity!";
+	mes "That's how a respectable man carry himself!";
+	mes "Young men in nowadays are too weak and tender.";
+	mes "Don't you agree with me, young adventurer?";
+	next;
+	if (select("Yes, sir!:No.") == 1) {
+		mes .sakjul$;
+		mes "Ah! I like your answer!";
+		mes "Lately, I found it very hard to see a diciplined young man like you.";
+		mes "Unfortunately, even you are not yet diciplined as well as I expect!";
+		mes "Hmm....Oh, yes, probably ^FF0000Feather Beret^000000";
+		mes "might help you to look more diciplined.";
+		next;
+		mes .sakjul$;
+		mes "I like to compliment your attitude.";
+		mes "Thus, I am willing to create Feather Beret for you";
+		mes "only if you bring me the materials to me. Understand?";
+		next;
+		mes .sakjul$;
+		mes "Materials are ^FF00001 Beret^000000, ^FF00008000 Soft Feather^000000,";
+		mes "and ^FF00001 White Dyestuffs^000000.";
+		mes "Make sure that you will remember all of them, and bring me";
+		mes "the exact amount of materials!";
+		next;
+		mes .sakjul$;
+		mes "Thank me for the offer";
+		mes "because the hat will finish your look";
+		mes "to be more majestic and elegant!";
+		mes "If you understood, go,";
+		mes "go gather the material as soon as you can!";
+		set featherberet$,"^ff8800In Progress^000000";
+		set FBpart,1;
+		close;
+	}
+	mes .sakjul$;
+	mes "I can't hear you! I don't feel any confidence from your voice!";
+	mes "How can you live this tough world with that weak attitude?";
+	mes "Put yourself together, right now!";
+	close;
+
+Lqueststarted:
+	if (countitem(5172) > 0 && countitem(7063) > 7999 && countitem(982) > 0) {
+		mes .sakjul$;
+		mes "Great, you have brought everything";
+		mes "to make ^FF0000Feather Beret^000000!";
+		mes "To reward for your labor,";
+		mes "I shall personally proceed with the hat creation.";
+		next;
+		mes .sakjul$;
+		mes "Stand next to me, and watch the creation process solemnly.";
+		mes "Keep your integrity by standing straight,";
+		mes "and looking straight forward!";
+		next;
+		mes .sakjul$;
+		mes "If you do not do what I just said,";
+		mes "^FF0000this hat creation could result in failure!";
+		mes "And, if you fail to create the hat,";
+		mes "you will lose all the materials,";
+		mes "and I am not going to take the responsibility for your mistake!^000000";
+		next;
+		mes "- THUD THUD -";
+		mes "- THUD THUD -";
+		mes "- THUD THUD -";
+		mes "- BOOM -";
+		next;
+		mes "- THUD THUD -";
+		mes "- THUD THUD -";
+		mes "- THUD THUD -";
+		mes "- BOOM -";
+		next;
+
+		delitem 5172,1; //Beret 
+		delitem 7063,8000; //Soft_Feather 
+		delitem 982,1; //White_Dyestuffs
+		getitem 5170,1; //Feather_Beret 
+		set featherberet$,"^0000ffDone^000000";
+		set FBpart,2;
+		set qpoints,qpoints+1;
+		dispbottom "You have now "+qpoints+" Quest Points [QP].";
+		mes .sakjul$;
+		mes "Great, I have made it! Look at this beautiful coordination";
+		mes "between the feather and the beret,";
+		mes "and you can feel moderation in the coordination.";
+		mes "I must say that this hat must be";
+		mes "one of the needful things for young men in nowadays.";
+		next;
+		mes .sakjul$;
+		mes "Since I have created this hat with your materials,";
+		mes "it belongs to you.";
+		mes "Keep this hat with care, and be a great, confident person.";
+		close;
+	}
+	mes .sakjul$;
+	mes "Sorry but you still don't have the items I need.";
+	close;
+
+LCancel:
+	close;
+}

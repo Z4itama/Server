@@ -1,0 +1,13 @@
+//===== eAthena Script =======================================
+//= Map flags that disable parties in pvp maps 
+//===== By: ==================================================
+//= eAthena Dev Team
+//= v 1.2
+//===== Current Version: =====================================
+
+// GvG Arenas =================
+guild_vs1	mapflag	
+guild_vs2	mapflag	
+guild_vs3	mapflag	
+guild_vs4	mapflag	
+guild_vs5	mapflag	

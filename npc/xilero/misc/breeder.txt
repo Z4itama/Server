@@ -1,0 +1,82 @@
+//===== eAthena Script ======================================= 
+//= Custom Free Breeder aka Universal Renter (not reccomended)
+//===== By: ================================================== 
+//= eAthena Team
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= eAthena 1.0 Final +
+//===== Description: ========================================= 
+//= A Free PecoPeco and Falcon Breeder
+//===== Additional Comments: ================================= 
+//FIXED checkriding/cart/falcon funcs [Lupus]
+//Added Rebirth/Advanced Class support [Mass Zero]
+//Simplified the checks of job [Silentdragon]
+//============================================================ 
+
+
+prontera,124,209,5	script	Universal Rental 3rd	402,{
+
+	set .@name$,"[Rental Service]";
+
+	mes .@name$;
+	mes "Hi, here can you get your desired Mount, Falcon or Cart for your Class.";
+	mes "So, which one should it be?";
+	next;
+	switch(select("Peco Peco:Falcon:Cart:Dragon:Gryphon:Mado")) {
+		case 1:
+			if (BaseClass == Job_Swordman && checkriding() == 0 && getskilllv("KN_RIDING") > 0 && Class == 7 || Class == 14) {
+				setriding;
+				close;
+			}else{
+				mes .@name$;
+				mes "Sorry "+strcharinfo(0)+", but you do not meet the requirements to have an Peco Peco.";
+				close;
+			}
+		case 2:
+			if (BaseClass == Job_Archer && checkfalcon() == 0 && getskilllv("HT_FALCON") > 0 && Class == 11 || Class == 4012 || Class == 4056 || Class == 4062) {
+				setfalcon;
+				close;
+			}else{
+				mes .@name$;
+				mes "Sorry "+strcharinfo(0)+", but you do not meet the requirements to have an Falcon.";
+				close;
+			}
+		case 3:
+			if((BaseClass == Job_Merchant || BaseJob == Job_SuperNovice) && checkcart() == 0 && getskilllv("MC_PUSHCART") > 0) {
+				setcart;
+				close;
+			}else{
+				mes .@name$;
+				mes "Sorry "+strcharinfo(0)+", but you do not meet the requirements to have an Cart.";
+				close;
+			}
+		case 4:
+			if (BaseClass == Job_Swordman && checkriding() == 0 && getskilllv("RK_DRAGONTRAINING") > 0 && Class == 4054 || Class == 4060) {
+				setriding;
+				close;
+			}else{
+				mes .@name$;
+				mes "Sorry "+strcharinfo(0)+", but you do not meet the requirements to have an Dragon.";
+				close;
+			}
+		case 5:
+			if (BaseClass == Job_Swordman && checkriding() == 0 && getskilllv("KN_RIDING") > 0 && Class == 4066 || Class == 4073) {
+				setriding;
+				close;
+			}else{
+				mes .@name$;
+				mes "Sorry "+strcharinfo(0)+", but you do not meet the requirements to have an Gryphon.";
+				close;
+			}
+		case 6:
+			if (BaseClass == Job_Merchant && getskilllv("NC_MADOLICENCE") > 0 && Class == 4064 || Class == 4058) {
+				atcommand "@mount";
+				close;
+			}else{
+				mes .@name$;
+				mes "Sorry "+strcharinfo(0)+", but you do not meet the requirements to have an Mado.";
+				close;
+			}
+	}
+}

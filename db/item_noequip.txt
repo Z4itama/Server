@@ -1,0 +1,396 @@
+// The equipment/items/cards restriction file 
+// here you define which items may not be used at PvP / GvG 
+// format: <item id>,<mode>
+// mode
+// 1    - restricted in normal maps
+// 2    - restricted in PVP
+// 4    - restricted in GVG
+// 8    - restricted in Battlegrounds
+// Restricted zones - they're configured by 'restricted <number>' mapflag
+// 32   - restricted in zone 1
+// 64   - restricted in zone 2
+// 128  - restricted in zone 3
+// 256  - restricted in zone 4
+// 512  - restricted in zone 5
+// 1024 - restricted in zone 6
+// 2048 - restricted in zone 7
+
+//Examples:
+//1201,1 you can't use KNIFE(ID 1201) on normal maps
+//608,4 you can't use Yggdrasil Seed(ID 608) on both GvG and WoE Castles
+//4174,6 Forbid Deviling Card in every PVP or GVG map, and during woes.
+//501,32 you can't use Red Potion on map marked as 'restricted zone 1'
+//502,64 you can't use Orange Potion on map marked as 'restricted zone 2'
+//503,128 you can't use Yellow Potion on map marked as 'restricted zone 3'
+// you can even mix modes
+//519,322 (256+64+2) you can't use Milk on PVP, and maps marked as 'restricted zone 2' and 'restricted zone 4'
+
+//PVP
+14529,2 //Greed Scroll
+
+
+//GVG
+12218,4 //LV5 Assumptio Scroll
+14529,4 //Greed Scroll
+14590,4 //Party Assumptio 5 Scroll
+22027,4
+12027,4
+
+//BATTLEGROUND
+12218,8 //LV5 Assumptio Scroll
+14590,8 //Party Assumptio 5 Scroll
+
+
+//Zone 1 - Aldebaran Turbo Track
+601,32 //Fly Wing
+605,32 //Anodyne
+506,32 //Green Potion
+525,32 //Panacea
+
+//Zone 2 - Jail
+601,64 //Fly Wing - not really needed here but ...
+602,64 //Butterfly Wing - also not needed
+12212,64 //Giant Fly Wing
+14582,64
+14583,64
+14584,64
+14585,64
+//Zone 1 - Aldebaran Turbo Track
+601,4 //Fly Wing
+506,4 //Green Potion
+525,4 //Panacea
+
+//Zone 2 - Jail
+601,8 //Fly Wing - not really needed here but ...
+602,8 //Butterfly Wing - also not needed
+12212,8 //Giant Fly Wing
+14582,8
+14583,8
+14584,8
+14585,8
+
+//Zone 3 - Izlude Battle Arena
+601,16 //Fly Wing
+
+//zone 3 [XileRO Classic mapflag] [Diego & Takuya]
+601,128 //Fly Wing - not really needed here but ...
+602,128 //Butterfly Wing - also not needed
+12212,128 //Giant Fly Wing
+14582,128
+14583,128
+14584,128
+14585,128
+//GAS
+3267,128
+3268,128
+3269,128
+//eGDA
+3330,128
+3331,128
+3332,128
+//eGBA
+3333,128
+3334,128
+3335,128
+//eGPA
+3336,128
+3337,128
+3338,128
+//Neko
+3315,128
+3316,128
+3317,128
+//Inu
+3318,128
+3319,128
+3320,128
+//Fallen
+3293,128
+3294,128
+3295,128
+//Infinity
+3286,128
+3287,128
+3288,128
+//FallenGlad
+3296,128
+3297,128
+3298,128
+//Imperial
+3200,128
+3201,128
+3202,128
+//Dds
+3280,128
+3281,128
+3282,128
+//Onyx
+3210,128
+3216,128
+3219,128
+3213,128
+//Sapphire
+3211,128
+3217,128
+3220,128
+3214,128
+//Emerald
+3212,128
+3218,128
+3221,128
+3215,128
+//Yggs
+607,128
+608,128
+610,128
+//Elementals
+23000,128
+23001,128
+23002,128
+23003,128
+23004,128
+23005,128
+23006,128
+23007,128
+23008,128
+23009,128;
+//Fury
+3519,128
+3520,128
+3521,128
+3522,128
+3523,128
+3524,128
+3525,128
+3526,128
+3527,128
+3528,128
+3529,128
+3530,128
+3531,128
+3532,128
+3533,128
+3534,128
+3535,128
+3536,128
+3537,128
+//Mythics
+3500,128
+3501,128
+3502,128
+3503,128
+3504,128
+3505,128
+3506,128
+3507,128
+3508,128
+3509,128
+3510,128
+3511,128
+3512,128
+3513,128
+3514,128
+3515,128
+3516,128
+3517,128
+3518,128
+//Helios Wings
+3346,128
+//Dead Wings
+3310,128
+//Cyber Wings
+3312,128
+//Bom Cards
+23020,128
+23021,128
+23022,128
+23023,128
+23024,128
+23025,128
+23026,128
+23027,128
+23028,128
+//MIFC
+4270,128
+//IFC
+4239,128
+//Amulets
+23050,128
+23051,128
+23052,128
+23053,128
+23054,128
+23055,128
+//Rings
+23060,128
+23061,128
+23062,128
+23063,128
+23064,128
+23065,128
+
+
+//Not useable in WoE
+502,4
+503,4
+504,4
+505,4
+506,4
+507,4
+508,4
+509,4
+511,4
+512,4
+513,4
+514,4
+515,4
+516,4
+517,4
+518,4
+519,4
+520,4
+521,4
+523,4
+524,4
+525,4
+526,4
+527,4
+528,4
+529,4
+530,4
+531,4
+532,4
+533,4
+534,4
+535,4
+536,4
+537,4
+538,4
+539,4
+540,4
+541,4
+542,4
+543,4
+544,4
+545,4
+546,4
+547,4
+548,4
+549,4
+550,4
+551,4
+552,4
+553,4
+554,4
+555,4
+556,4
+557,4
+558,4
+559,4
+560,4
+561,4
+562,4
+563,4
+564,4
+565,4
+566,4
+567,4
+568,4
+569,4
+570,4
+571,4
+572,4
+573,4
+574,4
+575,4
+576,4
+577,4
+578,4
+579,4
+580,4
+581,4
+582,4
+583,4
+584,4
+585,4
+586,4
+587,4
+588,4
+589,4
+590,4
+591,4
+592,4
+593,4
+594,4
+595,4
+596,4
+597,4
+598,4
+599,4
+610,4
+12027,4
+22027,4
+12075,4
+12074,4
+12073,4
+12072,4
+12042,4
+12045,4
+12044,4
+12043,4
+12042,4
+12041,4
+12090,4
+12089,4
+12088,4
+12087,4
+12086,4
+12060,4
+12059,4
+12058,4
+12057,4
+12056,4
+12085,4
+12084,4
+12083,4
+12082,4
+12081,4
+12055,4
+12054,4
+12053,4
+12052,4
+12051,4
+12080,4
+12079,4
+12078,4
+12077,4
+12076,4
+12050,4
+12049,4
+12048,4
+12047,4
+12046,4
+12095,4
+12094,4
+12093,4
+12092,4
+12091,4
+12065,4
+12064,4
+12063,4
+12062,4
+12061,4
+12100,4
+12099,4
+12098,4
+12097,4
+12096,4
+12070,4
+12069,4
+14568,4
+12067,4
+12066,4
+12704,4
+12970,4
+663,4
+7917,4

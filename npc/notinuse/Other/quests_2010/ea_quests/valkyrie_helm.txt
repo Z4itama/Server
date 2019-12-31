@@ -1,0 +1,368 @@
+//============================ Valkyrie Helm =====================================================
+hugel,147,130,3	script	Ghenirhemin	897,{
+
+	set .ghen$,"[^0011ffGhenirhemin^000000]";
+	if(VAMpart==6) {
+		mes .ghen$;
+		mes "You already done this quest..";
+		close;
+	}
+	
+	if (moza_valkylie == 5) {
+		set .@val2,rand(1,10);
+		if (.@val2 == 3) {
+			misceffect 348; //EF_LIGHTSPHERE
+			mes .ghen$;
+			mes "The materials are still being fused.";
+			next;
+			mes .ghen$;
+			mes "Umm?! Oh...oh?! Isn't this...";
+			mes "Isn't this...?!";
+			next;
+			misceffect 322; //EF_FORESTLIGHT2
+			mes .ghen$;
+			mes "Ah...ahahaha, we've made it! We've made it!";
+			mes "Valkyre's Helm...We've recreated Valkyre's Helm,";
+			mes "a glorious godly armor!";
+			mes "Ah...does this mean...?";
+			next;
+			mes .ghen$;
+			mes "We are writing new history!";
+			mes "Yes, we just have started writing new history.";
+			next;
+			mes .ghen$;
+			mes "Thank you so much for giving me a chance to participate in this.";
+			mes "I am sure that my ancestors in heaven will be glad";
+			mes "to see this successful recreation of Valkyre's Helm.";
+			mes "Hahahahaha!";
+			next;
+			mes .ghen$;
+			mes "Please take this helm.";
+			mes "As I promised, this is yours.";
+			mes "Please take pride in yourself, and";
+			mes "do not disgrace this Helm through evil doings.";
+			next;
+			set moza_valkylie,0;
+			set VAMpart,6;
+			set valkyriemadness$,"^0000ffDone^000000";
+			set qpoints,qpoints+1;
+			getitem 5171,1; //Valkyrie_Helm
+			mes .ghen$;
+			mes "May God bless this adventurer";
+			mes "who has written new history.";
+			mes "I, Gheirhemin pray to god for his safe journey";
+			mes "who is now heading toward the new history.";
+			dispbottom "You have now "+qpoints+" Quest Points [QP].";
+			close;
+		}
+		misceffect 348; //EF_LIGHTSPHERE
+		mes .ghen$;
+		mes "The materials are still being fused.";
+		close;
+	}
+	else if (moza_valkylie == 4) {
+		set .@val,rand(1,10);
+		if (.@val == 7) {
+			mes .ghen$;
+			mes "............";
+			next;
+			misceffect 348; //EF_LIGHTSPHERE
+			mes .ghen$;
+			mes "Oh...oh? They....they just have started being fused!";
+			mes "Look at this shining light!";
+			mes "I can't...I can't believe that";
+			mes "this is what happens in Valhala!";
+			next;
+			set moza_valkylie,5;
+			set VAMpart,5;
+			mes .ghen$;
+			mes "We are now witnessess of the God's grace...ah....";
+			close;
+		}
+		mes .ghen$;
+		mes "....Let's wait a little longer.";
+		close;
+	}
+	else if (moza_valkylie == 3) {
+		set moza_valkylie,4;
+		set VAMpart,4;
+		mes .ghen$;
+		mes "Will you stop being anxious?";
+		mes "Just relax and wait, will you?";
+		mes "In a sense, we are holding a holy rite,";
+		mes "and it is not going to happen faster,";
+		mes "only because you, a human wants it to happen faster.";
+		close;
+	}
+	else if (moza_valkylie == 2 && Zeny > 99999999 && countitem(723) > 999 && countitem(726) > 999 && countitem(721) > 999 && countitem(7510) > 2 && countitem(7511) > 1999 && countitem(7563) > 1999) {
+		mes .ghen$;
+		mes "Hmm...I am impressed that you have brought everything";
+		mes "despite of the difficulty in gathering them. It was difficult, wasn't it?";
+		mes "Haha, I can tell just by looking at your face.";
+		mes "Good job, my friend, you did a good job.";
+		next;
+		mes .ghen$;
+		mes "Now, please hand them to me.";
+		mes "If I place them together in one place,";
+		mes "I am pretty sure that they will start";
+		mes "being fused into the helm with their own mysterious powers.";
+		next;
+		if (select("Give him the items.:Don't give him the items.") == 1) {
+			mes .ghen$;
+			mes "Excellent. Now, all we have to do";
+			mes "is just waiting until they finish being fused into one.";
+			next;
+			delitem 723,1000;	//Ruby
+			delitem 726,1000;	//Sapphire
+			delitem 721,1000;	//Emerald
+			delitem 7510,3;		//Valhalla's Flower
+			delitem 7511,2000;	//Rune_Of_Darkness
+			delitem 7563,2000;	//Bloody_Rune
+			set Zeny,Zeny-100000000;
+			set moza_valkylie,3;
+			set VAMpart,3;
+			mes .ghen$;
+			mes "Now I am all nervous";
+			mes "in anticipation of a good result. Hahahaha.";
+			close;
+		}
+		mes .ghen$;
+		mes "?";
+		close;
+	}
+	else if (moza_valkylie == 2) {
+		mes .ghen$;
+		mes "Please bring me";
+		mes "^FF00003 Valhalla's Flower";
+		mes "1000 Emeralds";
+		mes "1000 Sapphires";
+		mes "1000 Rubys^000000.";
+		next;
+		mes .ghen$;
+		mes "^FF00002,000 Rune of the Darkness,";
+		mes "2,000 Bloody Rune,";
+		mes "and the helm price, 100,000,000 zeny^000000.";
+		next;
+		mes .ghen$;
+		mes "It surely is a reasonable price considering that ";
+		mes "you are about to obtain a godly power, don't you think?";
+		next;
+		set moza_valkylie,2;
+		mes .ghen$;
+		mes "Let's discuss it later";
+		mes "once you prepare the money and the items.";
+		mes "Now I am so exhausted";
+		mes "as it has been a while since the last time that I talked this much.";
+		mes "Excuse me.";
+		close;
+	}
+	else if (moza_valkylie == 1) {
+		mes .ghen$;
+		mes "You must be pretty surprised by now.";
+		mes "Yes, it is surely understandable.";
+		mes "If you have travelled many places,";
+		mes "and heard many stories, you would know what this is.";
+		mes "Yes, it is ^FF0000Valkyre's Helm^000000.";
+		next;
+		mes .ghen$;
+		mes "A legendary helm only allowed to men";
+		mes "who have transcended their limit.";
+		mes "A godly armor that is blessed with an incredible power.";
+		mes "Can you see now that my story is true?";
+		next;
+		mes .ghen$;
+		mes "It has passed so many years, and thus";
+		mes "its power has become weakened,";
+		mes "but you can still feel something holy about the helm.";
+		mes "Don't you think?";
+		next;
+		mes .ghen$;
+		mes "Well...I am not allowed to wear this helm.";
+		mes "Thus, if I find someone who is just perfect for this helm,";
+		mes "I am going to give this to him without any regret.";
+		next;
+		mes .ghen$;
+		mes "Of course, I can't give away";
+		mes "such a valuable thing for nothing in return.";
+		mes "That's how it goes, you know?";
+		mes "I maybe think about giving it to you";
+		mes "because you seem to be wealthier than others,";
+		mes "and I can sense special aura from you.";
+		next;
+		mes .ghen$;
+		mes "So, what do you say?";
+		mes "I think that I have an eye for right men.";
+		mes "I feel that you will be able to fully recreate this Valkyre's Helm";
+		mes "as well as use it to its full potential.";
+		next;
+		if (select("Sure.:No, thanks.") == 1) {
+			mes .ghen$;
+			mes "You are an ambitious young man as I expected.";
+			mes "It is surely a great advantage.";
+			mes "Okay, I will tell you what I know from now on.";
+			mes "So, listen carefully.";
+			next;
+			mes .ghen$;
+			mes "First, we have to fully restore the helm's power.";
+			mes "To do so, we must find monster cards";
+			mes "that possess mysterious powers.";
+			next;
+			mes .ghen$;
+			mes "That's not all. You know,";
+			mes "we can't just glue those monster cards";
+			mes "on the helm. Thus, we need a power that";
+			mes "enables us to fuse the cards and the helm into one.";
+			next;
+			mes .ghen$;
+			mes "Ancient runes are perfect to supply the power,";
+			mes "especially we need Rune of the Darkness, and Bloody Rune.";
+			mes "Perhaps, they were chosen because of their sealed dark power";
+			mes "and bloody sticky power? That's just my guess, hahahaha!";
+			next;
+			mes .ghen$;
+			mes "Once we successfully restore the helm's power,";
+			mes "you are expected to purchase the helm from me.";
+			mes "As I said earlier, I am not going to";
+			mes "give away such a valuable thing with nothing in return.";
+			mes "It will also demonstrate your qualification to become the helm's owner.";
+			next;
+			mes .ghen$;
+			mes "Basically, you have to bring me...";
+			mes "Ah, there are so many things that you need to bring me.";
+			mes "I suggest you to write down, and memorize them.";
+			next;
+			mes "Please bring me";
+			mes "^FF00003 Valhalla's Flower";
+			mes "1000 Emeralds";
+			mes "1000 Sapphires";
+			mes "1000 Rubys^000000.";
+			next;
+			mes .ghen$;
+			mes "^FF00002,000 Rune of the Darkness,";
+			mes "2,000 Bloody Rune,";
+			mes "and the helm price, 100,000,000 zeny^000000.";
+			next;
+			mes .ghen$;
+			mes "It surely is a reasonable price considering that ";
+			mes "you are about to obtain a godly power, don't you think?";
+			next;
+			set moza_valkylie,2;
+			set VAMpart,2;
+			mes .ghen$;
+			mes "Let's discuss it later";
+			mes "once you prepare the money and the items.";
+			mes "Now I am so exhausted";
+			mes "as it has been a while since the last time that I talked this much.";
+			mes "Excuse me.";
+			close;
+		}
+		mes .ghen$;
+		mes "Haha, I understand that";
+		mes "it is not an easy choice to make.";
+		mes "Take your time, my friend.";
+		mes "If you still don't want the helm, I respect your decision.";
+		close;
+	}
+//part 1 of quest
+	else if (Zeny > 99999999) { //need 100m
+		mes .ghen$;
+		mes "Hmm...you look like a poor-looking wanderer,";
+		mes "but you seem to have an enormous amount of money with you.";
+		mes "I guess that the old saying was right:";
+		mes "''Don't judge a book by its cover.''";
+		next;
+		mes .ghen$;
+		mes "You maybe understand my story.";
+		mes "Would you like to listen to my long story?";
+		mes "It may or may not be interesting to you,";
+		mes "but I gurantee that it will never bore you in either way.";
+		next;
+		if (select("Listen.:Don't listen.") == 1) {
+			mes .ghen$;
+			mes "Good, let me introduce myself.";
+			mes "My name is Ghenirhemin.";
+			mes "I am no different than others,";
+			mes "if I may speak of my only advantage,";
+			mes "I have little more money than them. Hahaha.";
+			next;
+			mes .ghen$;
+			mes "However, I did not earn my money,";
+			mes "but I inherited the fortune from my ancestors,";
+			mes "who were all gifted businessmen.";
+			mes "I thank to him for handing over such great fortune.";
+			next;
+			mes .ghen$;
+			mes "In fact, I am ashamed to tell you that";
+			mes "I do not know what exactly my ancestors did";
+			mes "to make this much fortune. Perhaps some would have held business,";
+			mes "some others would have been great artists...";
+			next;
+			mes .ghen$;
+			mes "Our family is just blessed enough to have";
+			mes "such great ancestors, who brought wealth to their family.";
+			mes "It would take me at least a week to list";
+			mes "every single successful ancestor of mine.";
+			next;
+			mes .ghen$;
+			mes "However, I like to tell you about one of my amazing ancestors,";
+			mes "who has become our family hero.";
+			next;
+			mes .ghen$;
+			mes "Well, actually I do not know exactly";
+			mes "what he did, but I know that";
+			mes "he brought glory and fame";
+			mes "to our family for the first time.";
+			mes "However, since it has been so long, we do not have";
+			mes "any document about him, so...";
+			next;
+			mes .ghen$;
+			mes "I clearly remember one thing about him though.";
+			mes "He was the only human who was able to";
+			mes "become close to the gods, and he demonstrated";
+			mes "his godly power to bring light to us, humans.";
+			next;
+			mes .ghen$;
+			mes "I don't know how he obtained the godly power,";
+			mes "or how he could become close to the gods.";
+			mes "I just remember these things because I was repeatedly told";
+			mes "about his amazing story ever since I was born...";
+			next;
+			mes .ghen$;
+			mes "I can show you that I am not making things up.";
+			mes "I told you that we do not have any document about him, right?";
+			mes "However, there is something that I can show you.";
+			mes "Now, take a look at this.";
+			next;
+			set moza_valkylie,1;
+			set VAMpart,1;
+			set valkyriemadness$,"^ff8800In Progress^000000";
+			mes .ghen$;
+			mes "See? This surely tells you that";
+			mes "I am not making things up!";
+			mes "This is what my ancestor used to use!";
+			close;
+		}
+		mes .ghen$;
+		mes "What a shame! However, I don't want to force you to";
+		mes "do something that you don't want to do. Hahaha.";
+		mes "Just remember, you just have made another choice for your life.";
+		close;
+	}
+//part 0 of quest
+	mes .ghen$;
+	mes "Everything has meaning and reason to exist in this world.";
+	mes "You and I, we are destined to meet with each other today.";
+	next;
+	mes .ghen$;
+	mes "Well...although I said that everything has meaning,";
+	mes "unfortunately you are not interesting to me at all.";
+	mes "Call me a money monger,";
+	mes "but I like the rich.";
+	next;
+	mes .ghen$;
+	mes "If you prove me that you are wealthy,";
+	mes "I maybe change my mind, and become interested in you.";
+	mes "But, I will decide whether or not I will be interested in you";
+	mes "when you show me your money. Hahahaha!";
+	close;
+}

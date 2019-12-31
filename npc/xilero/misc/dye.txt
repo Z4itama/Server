@@ -1,0 +1,315 @@
+prontera,170,180,3	script	High Class Stylist::superdoggystyle	803,{
+	cutin "hu_alex03.bmp",2;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "I'm the greatest(sexiest) High Class Stylist of XileRO! I can change your hair style or color! What do you wish to change?";
+	next;
+	cutin "",255;
+	menu "Hair style",Lstyle,"Hair color",Lcolor,"Cloth Color",Lcloth,"Save My Style",Lsavemystyle,"Load My Styles",Lloadmystyles,"Nothing",LCancel;
+
+OnInit:
+	setcell "izlude",0,0,300,300,CELL_NOCHAT,1;
+	setcell "prontera",0,0,300,300,CELL_NOCHAT,1;
+	end;
+Lsavemystyle:
+	cutin "hu_alex03.bmp",2;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "Choose the memory slot you want to save:";
+	next;
+	cutin "",255;
+	menu "Save to Slot[1]",Lsaveslot1,"Save to Slot[2]",Lsaveslot2,"Save to Slot[3]",Lsaveslot3,"Save to Slot[4]",Lsaveslot4,"Cancel",LCancel;
+	Lsaveslot1:
+	set lookcache1,getlook(1);
+	set lookcache2,getlook(6);
+	set lookcache3,getlook(7);
+	goto LCancel;
+	Lsaveslot2:
+	set lookcache4,getlook(1);
+	set lookcache5,getlook(6);
+	set lookcache6,getlook(7);
+	goto LCancel;
+	Lsaveslot3:
+	set lookcache7,getlook(1);
+	set lookcache8,getlook(6);
+	set lookcache9,getlook(7);
+	goto LCancel;
+	Lsaveslot4:
+	set lookcache10,getlook(1);
+	set lookcache11,getlook(6);
+	set lookcache12,getlook(7);
+	goto LCancel;
+	
+Lloadmystyles:
+	cutin "hu_alex03.bmp",2;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "Choose the memory slot you want to load:";
+	next;
+	cutin "",255;
+	menu "Load Slot[1]",Lloadslot1,"Load Slot[2]",Lloadslot2,"Load Slot[3]",Lloadslot3,"Load Slot[4]",Lloadslot4,"Cancel",LCancel;
+	Lloadslot1:
+	setlook 1,lookcache1;
+	setlook 6,lookcache2;
+	setlook 7,lookcache3;
+	goto LCancel;
+	Lloadslot2:
+	setlook 1,lookcache4;
+	setlook 6,lookcache5;
+	setlook 7,lookcache6;
+	goto LCancel;
+	Lloadslot3:
+	setlook 1,lookcache7;
+	setlook 6,lookcache8;
+	setlook 7,lookcache9;
+	goto LCancel;
+	Lloadslot4:
+	setlook 1,lookcache10;
+	setlook 6,lookcache11;
+	setlook 7,lookcache12;
+	goto LCancel;
+
+
+	Lstyle:
+	cutin "hu_alex03.bmp",2;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "Do you want to browse through the choices, or do you know what you want?";
+	next;
+	cutin "",255;
+	menu "Browse",Lbrowsesty,"I know what I want",Lwantsty;
+
+	Lwantsty:
+	cutin "hu_alex03.bmp",2;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "Great!  Now just pick a style and I'll get started!";
+ 	next;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "Please pick a style number ^0000FFbetween 0 and 50^000000.";
+	mes "Number 0, by the way, is the default style for your character.";
+ 	next;
+	cutin "",255;
+	input @sty;
+	if (@sty>50) close;
+	if (@sty<0) close;
+	setlook 1,@sty;
+	next;
+	cutin "hu_alex03.bmp",2;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "Is this good, or do you want a different style?";
+	next;
+	cutin "",255;
+	menu "This is good",-,"Different style, please",Lwantsty;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "You look great~!  Come back again, okay?";
+	close;
+
+	Lbrowsesty:
+	cutin "hu_alex03.bmp",2;
+	set @look, -1;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "Okay, here we go~!  Just stop me when you see something you like, okay?";
+	next;
+
+	Lbrowserep:
+	cutin "",255;
+	set @look,@look+1;
+	setlook 1,@look;
+	mes "This is Pallete Number^FF9009 "+@look+" ^000000!"; 
+	if(@look == 50) menu "Back To The Begin",Lbrowsesty,"I like this one",Lstop;
+	if(@look != 50) menu "Keep Going",Lbrowserep,"Go Back",L_hBack,"I like this one",Lstop;
+	L_hBack:
+	set @look,@look-1;
+	if(@look <= 0){
+	set @look,0;goto Lbrowsesty;
+	}
+	else{
+	setlook 1,@look;
+	}
+	mes "This is Pallete Number^FF9009 "+@look+" ^000000!";
+	menu "Go Back",L_hBack,"Keep Going",Lbrowserep,"I like this one",Lstop;
+
+	Lcolor:
+	cutin "hu_alex03.bmp",2;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "Do you want to browse through the choices, or do you know what you want?";
+	next;
+	cutin "",255;
+	menu "Browse",Lbrowsecolor,"I know what I want",Lwantcolor;
+
+	Lwantcolor:
+	cutin "hu_alex03.bmp",2;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "Just pick a color and we can get started.";
+	next;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "Please pick a style number ^0000FFbetween 0 and 250^000000.";
+	mes "Number 0, by the way, is the default color for your character.";
+ 	next;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "0 is default...";
+	mes "1 is blonde...";
+	mes "2 is lavender...";
+	mes "3 is brown...";
+	mes "4 is green...";
+	mes "5 is blue...";
+	mes "6 is white...";
+	mes "7 is black...";
+	mes "8 is red...";
+	mes "and 9-250 are new colors.";
+	next;
+	cutin "",255;
+	input @color;
+	if (@color>250) close;
+	if (@color<0) close;
+	setlook 6,@color;
+	next;
+	cutin "hu_alex03.bmp",2;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "Is this good, or do you want a different color?";
+	next;
+	cutin "",255;
+	menu "This is good",-,"Different color, please",Lwantcolor;
+	next;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "You look great~!  Come back again, okay?";
+	close;
+
+	Lbrowsecolor:
+	set @look, -1;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "Okay, here we go~!  Just stop me when you see something you like, okay?";
+	next;
+
+	Lbrowsecolorrep:
+	set @look,@look+1;
+	setlook 6,@look;
+	mes "This is Pallete Number^FF9009 "+@look+" ^000000!"; 
+	if(@look == 250) menu "Back To The Begin",Lbrowsecolor,"I like this one",Lstop;
+	if(@look != 250) menu "Keep going",Lbrowsecolorrep,"Go Back",L_cBack,"I like this one",Lstop;
+	L_cBack:
+	set @look,@look-1;
+	if(@look <= 0){
+	set @look,0;goto Lbrowsecolor;
+	}
+	else{
+	setlook 6,@look;
+	}
+	mes "This is Pallete Number^FF9009 "+@look+" ^000000!";
+	menu "Go Back",L_cBack,"Keep Going",Lbrowsecolorrep,"I like this one",Lstop;
+
+	Lstop:
+		mes "[^FF8000High Class Stylist^000000]";
+		mes "You look great~!  I love it~! ^_^";
+		cutin "",255;
+		close;
+
+	LCancel:
+	next;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "Well come again.";
+	cutin "",255;
+	close;
+
+	Lcloth:
+	cutin "hu_alex03.bmp",2;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "Do you want to browse through the choices, or do you know what you want?";
+	next;
+	cutin "",255;
+	menu "Browse",Lbrowsecloth,"I know what I want",Lwantcloth;
+
+	Lwantcloth:
+	cutin "hu_alex03.bmp",2;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "Great!  Now just pick a pallete and I'll get started!";
+ 	next;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "Please pick a style number ^0000FFbetween 0 and 166^000000.";
+	mes "Number 0, by the way, is the default style for your character.";
+ 	next;
+	cutin "",255;
+	input @pal;
+	if (@pal>166) close;
+	if (@pal<0) close;
+	setlook 7,@pal;
+	next;
+	cutin "hu_alex03.bmp",2;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "Is this good, or do you want a different pallet";
+	next;
+	cutin "",255;
+	menu "This is good",-,"Different pallet, please",Lwantcloth;
+	next;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "You look great~!  Come back again, okay?";
+	close;
+
+	Lbrowsecloth:
+	cutin "hu_alex03.bmp",2;
+	set @look, -1;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "Okay, here we go~!  Just stop me when you see something you like, okay?";
+	next;
+	cutin "",255;
+
+	Lbrowseclothrep:
+	set @look,@look+1;
+	setlook 7,@look;
+	mes "This is Pallete Number^FF9009 "+@look+" ^000000!"; 
+	if(@look == 166) menu "Back to the begin",Lbrowsecloth,"Go back",Lbrowback,"I like this one",Lstop;
+	if(@look != 166) menu "Keep going",Lbrowseclothrep,"Go back",Lbrowback,"I like this one",Lstop;
+
+	Llast:
+	cutin "hu_alex03.bmp",2;
+	set @look, 166;
+	mes "[^FF8000High Class Stylist^000000]";
+	mes "Okay, here we go~!  Just stop me when you see something you like, okay?";
+	next;
+	cutin "",255;
+
+	Lbrowback:
+	set @look,@look-1;
+	setlook 7,@look;
+	mes "This is Pallete Number^FF9009 "+@look+" ^000000!";
+	if(@look == 0) menu "Go to the last",Llast,"I like this one",Lstop;
+	if(@look != 166) menu "Go back",Lbrowback,"Keep Going",Lbrowseclothrep,"I like this one",Lstop;
+	if(@look == 166) menu "Back to the begin",Lbrowsecloth,"Go back",Lbrowback,"I like this one",Lstop;
+end;
+}
+
+
+
+
+rachel.gat,123,149,3	duplicate(superdoggystyle)	High Class Stylist#1	803
+alberta.gat,40,241,3	duplicate(superdoggystyle)	High Class Stylist#2	803
+aldebaran.gat,138,120,3	duplicate(superdoggystyle)	High Class Stylist#3	803
+amatsu.gat,203,100,1	duplicate(superdoggystyle)	High Class Stylist#4	803
+ayothaya.gat,157,103,3	duplicate(superdoggystyle)	High Class Stylist#5	803
+comodo.gat,203,149,3	duplicate(superdoggystyle)	High Class Stylist#6	803
+einbech.gat,81,108,3	duplicate(superdoggystyle)	High Class Stylist#7	803
+einbroch.gat,70,203,3	duplicate(superdoggystyle)	High Class Stylist#8	803
+hugel.gat,91,160,3	duplicate(superdoggystyle)	High Class Stylist#9	803
+lighthalzen.gat,155,100,3	duplicate(superdoggystyle)	High Class Stylist#10	803
+geffen.gat,129,63,3	duplicate(superdoggystyle)	High Class Stylist#11	803
+izlude.gat,126,116,3	duplicate(superdoggystyle)	High Class Stylist#12	803
+xmas.gat,151,137,3	duplicate(superdoggystyle)	High Class Stylist#13	803
+morocc.gat,160,98,3	duplicate(superdoggystyle)	High Class Stylist#14	803
+payon.gat,172,223,3	duplicate(superdoggystyle)	High Class Stylist#15	803
+yuno.gat,163,48,3	duplicate(superdoggystyle)	High Class Stylist#17	803
+moc_fild04.gat,208,332,3	duplicate(superdoggystyle)	High Class Stylist#18	803
+izlu2dun.gat,105,83,3	duplicate(superdoggystyle)	High Class Stylist#19	803
+mjolnir_02.gat,86,364,3	duplicate(superdoggystyle)	High Class Stylist#20	803
+prt_fild05.gat,274,216,3	duplicate(superdoggystyle)	High Class Stylist#21	803
+glast_01.gat,371,309,3	duplicate(superdoggystyle)	High Class Stylist#22	803
+yuno_fild03.gat,38,136,3	duplicate(superdoggystyle)	High Class Stylist#23	803
+gef_fild10.gat,72,340,3	duplicate(superdoggystyle)	High Class Stylist#24	803
+pay_arche.gat,40,136,3	duplicate(superdoggystyle)	High Class Stylist#25	803
+moc_ruins.gat,65,167,3	duplicate(superdoggystyle)	High Class Stylist#26	803
+moc_fild19.gat,107,98,3	duplicate(superdoggystyle)	High Class Stylist#27	803
+alb2trea.gat,74,102,3	duplicate(superdoggystyle)	High Class Stylist#28	803
+tur_dun01.gat,149,240,3	duplicate(superdoggystyle)	High Class Stylist#29	803
+gonryun.gat,165,123,3	duplicate(superdoggystyle)	High Class Stylist#30	803
+louyang.gat,208,99,3	duplicate(superdoggystyle)	High Class Stylist#31	803
+umbala.gat,140,166,3	duplicate(superdoggystyle)	High Class Stylist#32	803
+niflheim,27,162,3	duplicate(superdoggystyle)	High Class Stylist#33	803
+jawaii,226,210,3	duplicate(superdoggystyle)	High Class Stylist#34	803
+//Stylists
+ayothaya,141,153,3	duplicate(superdoggystyle)	High Class Stylist#36	803
+

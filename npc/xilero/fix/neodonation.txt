@@ -1,0 +1,227 @@
+ra_temsky,96,49,4	script	Neo Hats A	769,{
+
+setarray @neohats1$[0],
+"AFK Hat - 5 ubers",
+"Bright Hel - 5 ubers",
+"Miranda Hat - 5 ubers",
+"Feather Band - 5 ubers",
+"Feather Cap - 5 ubers",
+"Flaming Crown - 5 ubers",
+"Inca Hat - 5 ubers",
+"Magic Hat - 5 ubers",
+"Ribbon Wizard Hat - 5 ubers",
+"Wedding Veil - 5 ubers",
+"Majorette Hat - 5 ubers",
+"Neko Kafra Band - 5 ubers",
+"Orchid Band - 5 ubers",
+"Paper Bag Hat - 5 ubers",
+"Rose Band - 5 ubers",
+"Urahara Hat - 5 ubers",
+"Wing Cap - 5 ubers",
+"Wolf Hat - 5 ubers";
+
+setarray @neohats1p[0],5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5;
+
+setarray @neohats1[0],
+3403,
+3404,
+3405,
+3406,
+3407,
+3408,
+3409,
+3410,
+3411,
+3412,
+3413,
+3414,
+3415,
+3416,
+3417,
+3418,
+3419,
+3420;
+
+
+	set @np$,"[^555500Neo Hats A^000000]";
+	set @var$,"neohats1";
+	set @epicline$,"Neo Hats";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+
+ra_temsky,103,49,4	script	Neo Hats B	769,{
+
+setarray @neohats2$[0],
+"Tie - 5 ubers",
+"Balloon Hat - 5 ubers",
+"Bonnet Hat - 5 ubers",
+"Gold Bonnet Hat - 5 ubers",
+"Prototype Glasses - 5 ubers",
+"Happy Birthday Kyla <3 - 5 ubers",
+"Kyla Bunny <3 - 5 ubers",
+"Handing Dolls Hat - 5 ubers",
+"Fruit Fashion Hat - 5 ubers",
+"Eclipse Hood - 5 ubers",
+"Scarf - 5 ubers",
+"Santa Scarf - 5 ubers",
+"Red Scarf - 5 ubers",
+"Pink Scarf - 5 ubers",
+"Green Scarf - 5 ubers",
+"Nikki's Scarf - 5 ubers",
+"Blue Scarf - 5 ubers",
+"Black Scarf - 5 ubers";
+
+setarray @neohats2p[0],5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5;
+
+setarray @neohats2[0],
+3422,
+3423,
+3424,
+3425,
+3426,
+3427,
+3428,
+3429,
+3430,
+3431,
+3321,
+3322,
+3323,
+3324,
+3325,
+3326,
+3327,
+3328;
+
+
+	set @np$,"[^555500Neo Hats B^000000]";
+	set @var$,"neohats2";
+	set @epicline$,"Neo Hats";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+/*
+ra_temsky,96,46,4	script	Neo Hats C	769,{
+
+setarray @neohats3$[0],
+"Avalon Wings - 7 ubers",
+"Zodiac Ring - 7 ubers",
+"Butterfly Aura - 7 ubers",
+"Chakra Wings - 15 ubers",
+"Flower Ring - 7 ubers",
+"Incubus Doll - 7 ubers",
+"Loli Hat - 7 ubers",
+"Night Aura - 7 ubers",
+"Butterfly Wings - 15 ubers",
+"Heart Ring - 7 ubers",
+"Rain Cloud - 7 ubers",
+"Solar Aura - 7 ubers",
+"Valentines Hat - 7 ubers";
+
+
+setarray @neohats3p[0],7,7,7,15,7,7,7,7,15,7,7,7,7;
+
+setarray @neohats3[0],
+3432,
+3433,
+3434,
+3435,
+3436,
+3437,
+3438,
+3439,
+3440,
+3441,
+3342,
+3343,
+3344;
+
+
+
+	set @np$,"[^555500Neo Hats C^000000]";
+	set @var$,"neohats3";
+	set @epicline$,"Neo Hats";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+*/
+
+ra_temsky,96,71,4	script	Epic Trader	769,{
+
+setarray @epicset$[0],
+"Epic Neko Ears - 15 ubers",
+"Epic Neko Wings - 20 ubers",
+"Epic Neko Taurus - 20 ubers",
+"Epic Inu Ears - 15 ubers",
+"Epic Inu Wings -  20 ubers",
+"Epic Inu Taurus - 20 ubers";
+
+setarray @epicsetp[0],15,20,20,15,20,20;
+
+setarray @epicset[0],
+3315,
+3316,
+3317,
+3318,
+3319,
+3320;
+
+
+
+
+	set @np$,"[^555500Epic Trader^000000]";
+	set @var$,"epicset";
+	set @epicline$,"Epic set parts from my master";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+
+ra_temsky,103,51,5	script	Super Epic Trader	778,{
+setarray @epicsetx$[0],
+"+10 Epic Neko Ears - 25 ubers",
+"+10 Epic Neko Wings - 35 ubers",
+"+10 Epic Inu Ears - 25 ubers",
+"+10 Epic Inu Wings - 35 ubers";
+
+setarray @epicsetxp[0],25,35,25,35;
+
+setarray @epicsetx[0],
+3315,
+3316,
+3318,
+3319;
+
+	set @np$,"[^FF0000Epic Trader^000000]";
+	set @var$,"epicsetx";
+	set @epicline$,"+10 Epic Set parts";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}
+
+
+ra_temsky,103,71,5	script	The Fallen Gladiator	825,{
+setarray @fgsetf$[0],
+"+10 Fallen Gladiator Crown - 25 ubers",
+"+10 Fallen Gladiator Wings - 35 ubers",
+"Fallen Gladiator Crown - 15 ubers",
+"Fallen Gladiator Wings - 20 ubers",
+"Fallen Gladiator Aura - 20 ubers";
+
+setarray @fgsetfp[0],25,35,15,20,20;
+
+setarray @fgsetf[0],
+3296,
+3297,
+3296,
+3297,
+3298;
+	set @np$,"[^008800The Fallen Gladiator^000000]";
+	set @var$,"fgsetf";
+	set @epicline$,"The Fallen will raise..";
+	callfunc("funcdon8_1",@np$,@epicline$,@var$);
+	close;
+}

@@ -1,0 +1,138 @@
+//===== Script: ===============================================================
+//= 2010 XileRO's Mythic Rally Quest
+//= By Honor/Lover Romeo
+//==============================================================================
+einbroch,181,197,4	script	Mythikril	766,{
+if(#qpoints < 6) { mes "You need at least ^0000ff6 Qp^000000(s) to be able to do this Quest."; close; }
+set .mythr$,"[^0000ff Mythikril ^000000]";
+
+if(#MRpart==6) { mes .mythr$; mes "You already done this quest."; close; }
+if(#MRpart==5) {
+		if(#mrempbreaks > 6) {
+			mes .mythr$;
+			mes "Cool! finally you've done all the tasks";
+			mes "You now have access to play ^0000ff#xilefiesta^000000";
+			mes "And have this as prize";
+			set @r_mythic,rand(3500,3518);
+			getitem @r_mythic,1;
+			set #mythicrally$,"^0000ffDone^000000";
+			set #MRpart,6;
+			close;
+		} else {
+			mes .mythr$;
+			mes "You still need to break "+(7-mrempbreak)+" Emperiums";
+			close;
+		}
+end;
+}
+if(#MRpart==4) {
+
+	if(#cashpoints > 49) {
+			mes .mythr$;
+			mes "Great! awesome thanks for the card I really needed it";
+			delitem 31000,1;
+			next;
+			mes .mythr$;
+			mes "Here's your next Task";
+			mes "^0000ffTask No.5:^000000";
+			mes "Break 7 Emperiums in WoE (Any).";
+			set #MRpart,5;
+			close;
+	} else {
+			mes .mythr$;
+			mes "You still need "+(50-#cashpoints)+" Vote Points.";
+			close;
+	}
+
+end;
+}
+if(#MRpart==3) {
+
+		if(countitem(4128) > 0) {
+			mes .mythr$;
+			mes "Great! awesome thanks for the card I really needed it";
+			delitem 4128,1;
+			next;
+			mes .mythr$;
+			mes "Here's your next Task";
+			mes "^0000ffTask No.4:^000000";
+			mes "Gather 50 Vote Points of XileRO";
+			set #MRpart,4;
+			close;
+
+		} else {
+			mes .mythr$;
+			mes "You still need to bring me the Golden Thief Bug Card I asked for";
+			close;
+		}
+end;
+}
+
+if(#MRpart==2) {
+	if(CTF_EXP > 9999) {
+			mes .mythr$;
+			mes "Oh! Congratulations you just finished your second Rally Task";
+			next;
+			mes .mythr$;
+			mes "Here's your next task";
+			mes "^0000ffTask No.3:^000000";
+			mes "Get a Golden Thief Bug Card for me!";
+			set #MRpart,3;
+			close;
+
+	} else {
+		mes .mythr$;
+		mes "You still need ^0000ff"+(10000-CTF_EXP)+"^000000 CTF EXP";
+		close;
+	}
+end;
+}
+
+if(#MRpart==1) {
+	if(#aciduskill == 1225) {
+		mes .mythr$;
+		mes "Oh! Congratulations you just finished your first Rally Task";
+		next;
+		mes .mythr$;
+		mes "Here's your next task";
+		mes "^0000ffTask No.2:^000000";
+		mes "Get 10,000 CTF Exp.";
+		set #MRpart,2;
+		close;
+	} else {
+		mes .mythr$;
+		mes "You still gotta kill "+(1225-#aciduskill)+" Acidus Dragon to complete your first Task";
+		close;
+	}
+end;
+}
+if(#MRpart==0) {
+	mes .mythr$;
+	mes "Hello "+strcharinfo(0)+",";
+	mes "Would you like to go on a rally?";
+	menu "-Hell NO!",-,"-Hit it!",L_start;
+	close;
+
+L_start:
+	next;
+	mes .mythr$;
+	mes "So I'm gonna give you some tasks that you gotta complete";
+	mes "^0000ffTask No.1:^000000";
+	mes "Kill 1225 Gold/Blue Acidus";
+	set #MRpart,1;
+	mes "You've Activated -"; 
+	mes "^ff0000Mythic Rally^000000 ~Quest.";
+	set #mythicrally$,"^ff8800In Progress^000000";
+	close;
+}
+
+OnNPCKillEvent:
+if(#MRpart==1) {
+//=============== Gold and Blue Acidus ==============================================
+if (killedrid == 1713 || killedrid == 1716) { if(#aciduskill==1225) { end; } 
+set #aciduskill,#aciduskill+1; dispbottom "You had killed ("+#aciduskill+"/1225) Acidus Dragon(s)!"; end;
+}
+end;
+}
+
+}

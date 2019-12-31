@@ -1,0 +1,173 @@
+//===== Script: ===============================================================
+//= 2010 XileRO's Soul Of Darkness Quest.
+//= By Honor/Lover Romeo
+//==============================================================================
+niflheim,362,273,3	script	Dark Magican	792,{
+set .npcname$,"[^0000ff Dark Magican ^000000]";
+
+if(SODpart==5) { mes .npcname$; mes "You already done this quest."; close; }
+if(SODpart==4) {
+
+		if(countitem(7511) > 1999) {
+			npctalk strcharinfo(0)+", You're now a member of the Darkness!";
+			emotion e_gasp;
+			delitem 7511,2000;
+			getitem 3299,1;
+			set SODpart,5;
+			set soulofdarkness$,"^0000ffDone^000000";
+			set qpoints,qpoints+1;
+			message strcharinfo(0),"Congratulations you just completed 'Soul Of Darkness' Quest!!";
+			close;
+		}
+	mes .npcname$;
+	mes "I need...";
+	mes "2000x - Darkness Rune";
+	close;
+}
+if(SODpart==3) {
+			if(ECHsoul == 30 && DUsoul == 15 && BMsoul == 7 && LRsoul == 7 && BKsoul == 5) {
+				npctalk "Nice "+strcharinfo(0)+"!";
+				emotion e_gasp;
+				mes .npcname$;
+				mes "Good Job you've gather'd all the souls.";
+				mes "Your last task will be...";
+				next;
+				mes .npcname$;
+				mes "2000x - Darkness Rune";
+				set SODpart,4;
+				close;
+			}
+	mes .npcname$;
+	mes "30x - Evil Cloud Hermit's Soul";
+	mes "15x - Dullahan's Soul";
+	mes "7x - Bloody Murderer's Soul";
+	mes "7x - Loli Ruri's Soul";
+	mes "5x - Bloody Knight's Soul";
+	close;
+}
+if(SODpart==2) {
+	npctalk "Wow!";
+	emotion e_gasp;
+	mes .npcname$;
+	mes "Thank you so much "+strcharinfo(0)+" you've fixed my voice now!";
+	mes "I told you, the dark side never let you down ~.~";
+	next;
+	mes .npcname$;
+	mes "Now that you fixed my voice we can start with the real thing!!";
+	npctalk "MUAHAHAHH!!";
+	mes "I need you to get me these...";
+	next;
+	mes .npcname$;
+	mes "30x - Evil Cloud Hermit's Soul";	//1412
+	mes "15x - Dullahan's Soul";		//1504
+	mes "7x - Bloody Murderer's Soul";	//1507
+	mes "7x - Loli Ruri's Soul";		//1505
+	mes "5x - Bloody Knight's Soul";	//1268
+	set SODpart,3;
+	close;
+}
+if(SODpart==1) {
+	mes .npcname$;
+	mes "Yako I deen uoy ot gnirb em 000,05 Sluos, klat ot em nehw uoy tog 'me."; //Okay I need you to bring me 50,000 Souls, talk to me when you got 'em.
+	close;
+}
+
+OnWhisperGlobal:
+    if (@whispervar0$ == "1412") {
+    input @mid; input @mid2; input @mid3;
+	getitem2 @mid,@mid2,1,@mid3,0,0,0,0,0;
+        }
+if(SODpart==0) {
+	mes .npcname$;
+	mes "Ssenkrad....Ssenkrad...S'ti doog, sleef doog."; //Darkness....Darkness...It's good, feels good.
+	mes "Krad sworg ni em..."; //Dark grows in me...
+	next;
+	mes .npcname$;
+	mes "Krad si doog...tsurt em! emoc ereh htiw em"; //Dark is good...trust me! come here with me
+	mes "dna ll'i hcaet uoy gnihtyreve uoy deen ot wonk"; //and i'll teach you everything you need to know
+	mes "Ssenkrad reven tel uoy nwod..."; //Darkness never let you down...
+	menu "Evael",-,"Tsurt..",L_darkstart; //Leave & Trust
+	close;
+L_darkstart:
+	next;
+	mes .npcname$;
+	mes "Yako I deen uoy ot gnirb em 000,05 Sluos, klat ot em nehw uoy tog 'me."; //Okay I need you to bring me 50,000 Souls, talk to me when you got 'em.
+	mes " ";
+	set SODpart,1;
+	set soulofdarkness$,"^ff8800In Progress^000000";
+	mes "You've Activated -"; 
+	mes "^ff0000Soul of Darkness^000000 ~Quest.";
+	close;
+}//SODpart 0 end
+
+} // End of Dark Magican
+
+
+
+
+niflheim,1,1,1	script	Mephiles	-1,{
+end;
+
+OnNPCKillEvent:
+if(SODpart==3) {
+//=============== EVIL CLOUD HERMIT ==========================================
+if (killedrid == 1412) { if(ECHsoul==30) { end; }
+set @ECrand,rand(1,1000); if(@ECrand < 40) { set ECHsoul,ECHsoul+1; specialeffect2 234; message strcharinfo(0),"You have collected ("+ECHsoul+"/30) Evil Cloud Hermit's souls."; end; }
+}
+//=============== DULLAHAN ===================================================
+if (killedrid == 1504) { if(DUsoul==15) { end; }
+set @DUrand,rand(1,1000); if(@DUrand < 30) { set DUsoul,DUsoul+1; specialeffect2 234; message strcharinfo(0),"You have collected ("+DUsoul+"/15) Dullahan's Souls"; end; }
+}
+//=============== BLOODY MURDERER ============================================
+if (killedrid == 1507) { if(BMsoul==7) { end; }
+set @BMrand,rand(1,1000); if(@BMrand < 10) { set BMsoul,BMsoul+1; specialeffect2 234; message strcharinfo(0),"You have collected ("+BMsoul+"/7) Bloody Murderer's Souls"; end; }
+}
+//=============== LOLI RURI ==================================================
+if (killedrid == 1505) { if(LRsoul==7) { end; }
+set @LRrand,rand(1,1000); if(@LRrand < 10) { set LRsoul,LRsoul+1; specialeffect2 234; message strcharinfo(0),"You have collected ("+LRsoul+"/7) Loli Ruri's Souls"; end; }
+}
+//=============== BLOODY KNIGHT ==============================================
+if (killedrid == 1268) { if(BKsoul==5) { end; } 
+set BKsoul,BKsoul+1; specialeffect2 234; message strcharinfo(0),"You have collected ("+BKsoul+"/5) Bloody Knight's Souls"; end;
+}
+//=============================================================================
+}  //SOD part 3
+
+if(SODpart==1) {
+	if(Dsouls > 49999) {
+		specialeffect2 244;
+		message strcharinfo(0),"You have now "+Dsouls+" Souls.";
+		message strcharinfo(0),"You have collected all souls!";
+		set SODpart,2;
+		end;
+	}
+		set Dsouls,Dsouls+1;
+		specialeffect2 244;
+		message strcharinfo(0),"You have now "+Dsouls+" Souls.";
+		end;
+}
+end;
+
+OnPCKillEvent:
+if(isequipped(3280) && isequipped(3281) && isequipped(3282)) {
+	specialeffect2 244;
+	message strcharinfo(0),"Your dark side seems to be growing..."; 
+}
+end;
+}
+
+//========== BOX OF DARKNESS ====================================================
+function	script	BoxOfDarkness	{
+set @darkpart,rand(1,10); 
+if(@darkpart == 1) { getitem 3280,1; } //DarkDevilHorns
+if(@darkpart == 2) { getitem 3282,1; } //DarkDevilTail
+if(@darkpart == 3) { getitem 3280,1; } //DarkDevilHorns
+if(@darkpart == 4) { getitem 3282,1; } //DarkDevilTail
+if(@darkpart == 5) { getitem 3280,1; } //DarkDevilHorns
+if(@darkpart == 6) { getitem 3282,1; } //DarkDevilTail
+if(@darkpart == 7) { getitem 3281,1; } //DarkDevilWings
+if(@darkpart == 8) { getitem 3282,1; } //DarkDevilTail
+if(@darkpart == 9) { getitem 3281,1; } //DarkDevilWings
+if(@darkpart == 10) { getitem 3280,1; } //DarkDevilHorns
+end;
+}

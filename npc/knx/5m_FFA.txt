@@ -1,0 +1,423 @@
+// ====================================================
+// 5 Man Free for All
+// v3.0: With custom queueing system, respawn points (Knx)
+// v1.0: Coded by Teny + Knx
+// ====================================================
+
+//	Flags
+
+guild_vs1-2	mapflag	noteleport
+guild_vs1-2	mapflag	nosave	SavePoint
+guild_vs1-2	mapflag	nobranch
+guild_vs1-2	mapflag	nopenalty
+guild_vs1-2	mapflag	nomemo
+guild_vs1-2	mapflag	nowarp
+guild_vs1-2	mapflag	nowarpto
+guild_vs1-2	mapflag	noicewall
+guild_vs1-2	mapflag	noreturn
+guild_vs1-2	mapflag	pvp_noparty
+guild_vs1-2	mapflag	pvp_noguild
+guild_vs1-2	mapflag	restricted	3
+guild_vs1-2	mapflag	loadevent
+
+guild_vs1-3	mapflag	noteleport
+guild_vs1-3	mapflag	nosave	SavePoint
+guild_vs1-3	mapflag	nobranch
+guild_vs1-3	mapflag	nopenalty
+guild_vs1-3	mapflag	nomemo
+guild_vs1-3	mapflag	nowarp
+guild_vs1-3	mapflag	nowarpto
+guild_vs1-3	mapflag	noicewall
+guild_vs1-3	mapflag	noreturn
+guild_vs1-3	mapflag	pvp_noparty
+guild_vs1-3	mapflag	pvp_noguild
+guild_vs1-3	mapflag	restricted	3
+guild_vs1-3	mapflag	loadevent
+
+guild_vs1-4	mapflag	noteleport
+guild_vs1-4	mapflag	nosave	SavePoint
+guild_vs1-4	mapflag	nobranch
+guild_vs1-4	mapflag	nopenalty
+guild_vs1-4	mapflag	nomemo
+guild_vs1-4	mapflag	nowarp
+guild_vs1-4	mapflag	nowarpto
+guild_vs1-4	mapflag	noicewall
+guild_vs1-4	mapflag	noreturn
+guild_vs1-4	mapflag	pvp_noparty
+guild_vs1-4	mapflag	pvp_noguild
+guild_vs1-4	mapflag	restricted	3
+guild_vs1-4	mapflag	loadevent
+
+//-------------------------------------------------------------------------
+//
+//	Register NPC
+//
+//-------------------------------------------------------------------------
+
+arena_room,97,100,5	script	5ManFreeForAll#reg	823,{
+
+	mes "[Arena Guide]";
+	mes "Welcome to the Five Man Free For All!!!";
+	next;
+	mes "[Arena Guide]";
+	mes "Would you like to compete?";
+	next;
+	menu "Lets do it!",L_Yes, "Uhh. No thanks", L_No;
+	close;
+
+L_Yes:
+	if (BaseLevel < 250 || Class==Job_Novice || Class==Job_Baby || Class==Job_Novice_High){
+		goto L_Level;
+	}else{
+		set .@pos, arena_queue_add(1);
+
+		mes "[Arena Guide]";
+		if(.@pos==0){
+			mes "The queue is full. Please wait a while and try again.";
+		}else if(.@pos==-1){
+			mes "You already are on a waiting line...";
+		}else if(.@pos==5){
+			getmapxy(@FMANFFA_city$, @FMANFFA_x, @FMANFFA_y, 0);
+			if($@FMANFFA1_running==0){
+				set $@FMANFFA1_running, 1;
+				donpcevent "FIVEMANFFA_WINR::OnStart1";
+			}else if($@FMANFFA2_running==0){
+				set $@FMANFFA2_running, 1;
+				donpcevent "FIVEMANFFA_WINR::OnStart2";
+			}else if($@FMANFFA3_running==0){
+				set $@FMANFFA3_running, 1;
+				donpcevent "FIVEMANFFA_WINR::OnStart3";
+			}else{
+				set @FMANFFA_active,1;
+				mes "Congratulations, you are now on the waiting line for 5mFFA!";
+				mes "Your position is: ^FF0000"+(.@pos-1)+"^000000";
+				next;
+				mes "[Arena Guide]";
+				mes "^0000FFWhen it's your turn, you will be taken to the Arena even if you moved away from this map!";
+				mes "^FF0000But if you logout, you will be put out of the queue.";
+			}
+		}else{
+			getmapxy(@FMANFFA_city$, @FMANFFA_x, @FMANFFA_y, 0);
+			set @FMANFFA_active,1;
+			mes "Congratulations, you are now on the waiting line for 5mFFA!";
+			mes "Your position is: ^FF0000"+(.@pos-1)+"^000000";
+			next;
+			mes "[Arena Guide]";
+			mes "^0000FFWhen it's your turn, you will be taken to the Arena even if you moved away from this map!";
+			mes "^FF0000But if you logout, you will be put out of the queue.";
+		}
+
+	}
+	close;
+	
+L_No:
+	mes "[Arena Guide]";
+	mes "Okay, please come again!";
+	close;
+
+L_Level:
+	mes "[Arena Guide]";
+	mes "Sorry, you need to be at least level 250. No Novices allowed either.";
+	close;
+
+}
+
+izlude,118,117,5	duplicate(5ManFreeForAll#reg)	5ManFreeForAll#reg2	823
+payon, 153,233,5	duplicate(5ManFreeForAll#reg)	5ManFreeForAll#reg3	823
+
+
+//-------------------------------------------------------------------------
+//
+//	ARENA 1
+//
+//-------------------------------------------------------------------------
+
+guild_vs1-2,0,0,0	script	FIVEMANFFA_TIMR1	823,{
+
+end;
+
+//4 minutes
+OnTimer240000:
+	mapannounce "guild_vs1-2", "Everyone, you have one minute to finish this fight!!", 1;
+	end;
+
+//4.75 minutes
+OnTimer285000:
+	mapannounce "guild_vs1-2", "Attention! The round is over in 15 seconds!!", 1;
+	end;
+
+//5 minutes - Time's up (no winner)
+OnTimer300000:
+	stopnpctimer;
+	stopnpctimer "FFATimer1";
+	mapwarp "guild_vs1-2","prontera",156,173;
+	sleep 5000;
+	mapannounce "arena_room", "The 5 man free-for-all fight just ended without a winner!! :(", 1;
+	sleep 10000;
+	donpcevent "FIVEMANFFA_WINR::OnStart1";
+	end;
+
+}
+
+guild_vs1-2,1,1,1	script	FFATimer1	-1,{
+
+end;
+
+OnTimer12001:
+	if (getmapusers("guild_vs1-2") == 0 ) goto L_NoWinner;
+	if(getmapusers("guild_vs1-2") == 1 ){
+		stopnpctimer "FIVEMANFFA_TIMR1";
+		stopnpctimer;
+		goto L_Win;
+	}
+	initnpctimer;
+	end;
+
+L_Win:
+	mapwarp "guild_vs1-2","lhz_cube",65,193;
+	sleep 10000;
+	donpcevent "FIVEMANFFA_WINR::OnStart1";
+	end;
+
+L_NoWinner:
+	stopnpctimer "FIVEMANFFA_TIMR1";
+	stopnpctimer;
+	mapannounce "arena_room", "The 5 man free-for-all fight just ended without a winner!! :(", 1;
+	sleep 10000;
+	mapwarp "guild_vs1-2","prontera",156,173;
+	donpcevent "FIVEMANFFA_WINR::OnStart1";
+	end;
+}
+
+
+//-------------------------------------------------------------------------
+//
+//	ARENA 2
+//
+//-------------------------------------------------------------------------
+
+guild_vs1-3,0,0,0	script	FIVEMANFFA_TIMR2	823,{
+
+end;
+
+//4 minutes
+OnTimer240000:
+	mapannounce "guild_vs1-3", "Everyone, you have one minute to finish this fight!!", 1;
+	end;
+
+//4.75 minutes
+OnTimer285000:
+	mapannounce "guild_vs1-3", "Attention! The round is over in 15 seconds!!", 1;
+	end;
+
+//5 minutes - Time's up (no winner)
+OnTimer300000:
+	stopnpctimer;
+	stopnpctimer "FFATimer2";
+	mapwarp "guild_vs1-3","prontera",156,173;
+	sleep 5000;
+	mapannounce "arena_room", "The 5 man free-for-all fight just ended without a winner!! :(", 1;
+	sleep 10000;
+	donpcevent "FIVEMANFFA_WINR::OnStart2";
+	end;
+
+}
+
+guild_vs1-3,1,1,1	script	FFATimer2	-1,{
+
+end;
+
+OnTimer12001:
+	if (getmapusers("guild_vs1-3") == 0 ) goto L_NoWinner;
+	if(getmapusers("guild_vs1-3") == 1 ){
+		stopnpctimer "FIVEMANFFA_TIMR2";
+		stopnpctimer;
+		goto L_Win;
+	}
+	initnpctimer;
+	end;
+
+L_Win:
+	mapwarp "guild_vs1-3","lhz_cube",65,193;
+	sleep 10000;
+	donpcevent "FIVEMANFFA_WINR::OnStart2";
+	end;
+
+L_NoWinner:
+	stopnpctimer "FIVEMANFFA_TIMR2";
+	stopnpctimer;
+	mapannounce "arena_room", "The 5 man free-for-all fight just ended without a winner!! :(", 1;
+	sleep 10000;
+	mapwarp "guild_vs1-3","prontera",156,173;
+	donpcevent "FIVEMANFFA_WINR::OnStart2";
+	end;
+}
+
+
+//-------------------------------------------------------------------------
+//
+//	ARENA 3
+//
+//-------------------------------------------------------------------------
+
+guild_vs1-4,0,0,0	script	FIVEMANFFA_TIMR3	823,{
+
+end;
+
+//4 minutes
+OnTimer240000:
+	mapannounce "guild_vs1-4", "Everyone, you have one minute to finish this fight!!", 1;
+	end;
+
+//4.75 minutes
+OnTimer285000:
+	mapannounce "guild_vs1-4", "Attention! The round is over in 15 seconds!!", 1;
+	end;
+
+//5 minutes - Time's up (no winner)
+OnTimer300000:
+	stopnpctimer;
+	stopnpctimer "FFATimer3";
+	mapwarp "guild_vs1-4","prontera",156,173;
+	sleep 5000;
+	mapannounce "arena_room", "The 5 man free-for-all fight just ended without a winner!! :(", 1;
+	sleep 10000;
+	donpcevent "FIVEMANFFA_WINR::OnStart3";
+	end;
+
+}
+
+guild_vs1-4,1,1,1	script	FFATimer3	-1,{
+
+end;
+
+OnTimer12001:
+	if (getmapusers("guild_vs1-4") == 0 ) goto L_NoWinner;
+	if(getmapusers("guild_vs1-4") == 1 ){
+		stopnpctimer "FIVEMANFFA_TIMR3";
+		stopnpctimer;
+		goto L_Win;
+	}
+	initnpctimer;
+	end;
+
+L_Win:
+	mapwarp "guild_vs1-4","lhz_cube",65,193;
+	sleep 10000;
+	donpcevent "FIVEMANFFA_WINR::OnStart3";
+	end;
+
+L_NoWinner:
+	stopnpctimer "FIVEMANFFA_TIMR3";
+	stopnpctimer;
+	mapannounce "arena_room", "The 5 man free-for-all fight just ended without a winner!! :(", 1;
+	sleep 10000;
+	mapwarp "guild_vs1-4","prontera",156,173;
+	donpcevent "FIVEMANFFA_WINR::OnStart3";
+	end;
+}
+
+
+//-------------------------------------------------------------------------
+//
+//	GAME NPC
+//
+//-------------------------------------------------------------------------
+
+guild_vs1-2,1,1,1	script	FIVEMANFFA_WINR	-1,{
+
+end;
+
+OnInit:
+	mapwarp "guild_vs1-2","prontera",156,173;
+	mapwarp "guild_vs1-3","prontera",156,173;
+	mapwarp "guild_vs1-4","prontera",156,173;
+
+	set $@FMANFFA1_running, 1;
+	set $@FMANFFA2_running, 1;
+	set $@FMANFFA3_running, 1;
+
+	donpcevent "FIVEMANFFA_WINR::OnStart1";
+	donpcevent "FIVEMANFFA_WINR::OnStart2";
+	donpcevent "FIVEMANFFA_WINR::OnStart3";
+
+	end;
+
+OnStart1:
+	if(warp_arena_queue(1,0,"guild_vs1-2",0,0,5) > 0){
+		set $@FMANFFA1_running, 1;
+		initnpctimer "FIVEMANFFA_TIMR1";
+		initnpctimer "FFATimer1";
+	}else{
+		set $@FMANFFA1_running, 0;
+	}
+	end;
+
+OnStart2:
+	if(warp_arena_queue(1,0,"guild_vs1-3",0,0,5) > 0){
+		set $@FMANFFA2_running, 1;
+		initnpctimer "FIVEMANFFA_TIMR2";
+		initnpctimer "FFATimer2";
+	}else{
+		set $@FMANFFA2_running, 0;
+	}
+	end;
+
+OnStart3:
+	if(warp_arena_queue(1,0,"guild_vs1-4",0,0,5) > 0){
+		set $@FMANFFA3_running, 1;
+		initnpctimer "FIVEMANFFA_TIMR3";
+		initnpctimer "FFATimer3";
+	}else{
+		set $@FMANFFA3_running, 0;
+	}
+	end;
+
+OnPCLoadMapEvent:	//will run on 3vs3 and CTF as well
+	sc_end SC_ALL;
+	alive;
+	end;
+
+OnPCLogoutEvent:
+	if(@FMANFFA_active==1)
+		arena_queue_del(1);
+	end;
+
+OnPCDieEvent:
+	getmapxy(.@mapname$, .@mapx, .@mapy, 0);
+	if(.@mapname$=="guild_vs1-2" || .@mapname$=="guild_vs1-3" || .@mapname$=="guild_vs1-4"){
+		set @FMANFFA_active, 0;
+		if(@FMANFFA_x) warp @FMANFFA_city$,@FMANFFA_x,@FMANFFA_y;
+		else warp "prontera",156,173;
+		set @FMANFFA_city$, 0; set @FMANFFA_x, 0; set @FMANFFA_y, 0;
+		sleep2 1000;
+		alive;
+	}
+	end;
+
+}
+
+
+//
+//	Prize NPC
+//
+
+lhz_cube,67,193,3	script	winnerPrize#5m	818,2,2,{
+
+	sc_end SC_ALL;
+	
+	if(strcharinfo(0)!=""){
+		mapannounce "arena_room", "And the winner for this 5 man free-for-all fight is: "+strcharinfo(0)+"!!", 1;
+	}
+
+	mes "[Winner Prize]";
+	mes "Congratulations, you're the winner! Here's your prize ~ ";
+	next;
+	getitem 22555,1;
+	percentheal 100,100;
+	if(@FMANFFA_x) warp @FMANFFA_city$,@FMANFFA_x,@FMANFFA_y;
+	else warp "prontera",156,173;
+	set @FMANFFA_city$, 0; set @FMANFFA_x, 0; set @FMANFFA_y, 0;
+	end;
+
+}

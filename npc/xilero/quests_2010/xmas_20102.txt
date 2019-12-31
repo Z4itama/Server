@@ -1,0 +1,2663 @@
+//Devil Square Alpha
+//-----------------------------------------------
+
+prontera.gat,164,232,4	script	Devil Square Alpha	998,{
+mes "[Devil Square Alpha]";
+mes "Welcome to the entrance door to ^FF0000Devil Square^000000";
+mes "If you die, the door will be closed and you have to wait to open again";
+next;
+menu "Enter",PlayCheck1,"Info",L_info,"Cancel",L_cancel;
+
+PlayCheck1:
+if ( $@DS_entry == 0 ) goto L_error;
+if ( Baselevel < 255) goto L_req;
+if ( getmapusers("poring_w02") >= 10 ) goto L_toomany;
+
+warp "poring_w02",116,78;
+end;
+
+L_error:
+mes "[Devil Square Alpha]";
+mes "Devil Square Alpha is now closed";
+mes "It will open every 30 Minutes.";
+close;
+
+L_req:
+mes "[Devil Square Alpha]";
+mes "Minimum base level to enter is 255";
+close;
+
+L_toomany:
+mes "[Devil Square Alpha]";
+mes "I'm sorry but Devil Square Alpha is FULL";
+mes "Maximum users to enter is 10 players";
+close;
+
+L_info:
+mes "[Devil Square Alpha]";
+mes "There are 3 level's of monsters you will encounter";
+mes "Each level the enemies will grow stronger";
+mes "If you pass all 3 levels of monsters, you will get the opportunity to open Treasure Boxes with items, equips, and rare cards inside!!";
+close;
+
+L_cancel:
+mes "[Devil Square Alpha]";
+mes "See ya";
+close;
+}
+
+poring_w02.gat,116,82,4	script	Devil-Square Alpha	998,{
+mes "[Devil Square Alpha]";
+mes "Welcome to the entrance door to ^FF0000Devil Square^000000";
+mes "If you die, the door will be closed and you have to wait to open again";
+next;
+menu "Enter",PlayCheck2,"Info",L_info,"Cancel",L_cancel;
+
+PlayCheck2:
+if ( $@DS_entry == 0 ) goto L_error;
+if ( Baselevel < 255) goto L_req;
+if ( getmapusers("ordeal_1-1") >= 10 ) goto L_toomany;
+next;
+if ( getmapusers("ordeal_1-1") < 11 ) goto Start;
+
+Start:
+if ( $@DS_entry == 0 ) goto L_error;
+if ( Baselevel < 255) goto L_req;
+if ( getmapusers("ordeal_1-1") >= 10 ) goto L_toomany;
+
+mapannounce "ordeal_1-1", strcharinfo(0)+" has entered the Devil Square",0;
+percentheal 100,100;
+warp "ordeal_1-1",184,184;
+end;
+
+L_error:
+mes "[Devil Square Alpha]";
+mes "Devil Square Alpha is now closed";
+mes "It will open every 30 Minutes.";
+close;
+
+L_req:
+mes "[Devil Square Alpha]";
+mes "Minimum base level to enter is 255";
+close;
+
+L_toomany:
+mes "[Devil Square Alpha]";
+mes "I'm sorry but Devil Square Alpha is FULL";
+mes "Maximum users to enter is 10 players";
+close;
+
+L_info:
+mes "[Devil Square Alpha]";
+mes "There are 3 level's of monsters you will encounter";
+mes "Each level the enemies will grow stronger";
+mes "If you pass all 3 levels of monsters, you will get the opportunity to open Treasure Boxes with items, equips, and rare cards inside!!";
+close;
+
+L_cancel:
+mes "[Devil Square Alpha]";
+mes "See ya";
+close;
+
+OnInit:
+setarray $MVPIDs[0],1038,1039,1046,1059,1086,1087,1112,1157,1190,1251,1252,1272,1312,1373,1511,1583,1658,1685,1708,1719,1734,1751,1768,1779,1832,1647,1649,1651,1646,1650,1648;
+set $MVPSpawn, $MVPIDs[rand(getarraysize($MVPIDs[0]))];
+}
+
+ordeal_1-1,0,0,0	script	DS_HiddenNpc	-1,{
+//OnMinute00:
+//if (gettime(3) %2 == 1) end;
+OnClock0000:
+OnClock0100:
+OnClock0200:
+OnClock0300:
+OnClock0400:
+OnClock0500:
+OnClock0600:
+OnClock0700:
+OnClock0800:
+OnClock0900:
+OnClock1000:
+OnClock1100:
+OnClock1200:
+OnClock1300:
+OnClock1400:
+OnClock1500:
+OnClock1600:
+OnClock1700:
+OnClock1800:
+OnClock1900:
+OnClock2000:
+OnClock2100:
+OnClock2200:
+OnClock2300:
+OnClock0030:
+OnClock0130:
+OnClock0230:
+OnClock0330:
+OnClock0430:
+OnClock0530:
+OnClock0630:
+OnClock0730:
+OnClock0830:
+OnClock0930:
+OnClock1030:
+OnClock1130:
+OnClock1230:
+OnClock1330:
+OnClock1430:
+OnClock1530:
+OnClock1630:
+OnClock1730:
+OnClock1830:
+OnClock1930:
+OnClock2030:
+OnClock2130:
+OnClock2230:
+OnClock2330:
+set $@DS_complete,0;
+disablenpc "Exit#DS";
+mapannounce "ordeal_1-1","Devil Square Alpha is now closed",0;
+mapwarp "force_1-1","prontera",155,181;
+killmonsterall "ordeal_1-1";
+atcommand "@skillon";
+announce "1 Minute until Devil Square Alpha starts!!",0;
+set $@DS_entry,1;
+sleep 60000;
+mapannounce "ordeal_1-1","Devil Square Alpha has Begun!!",0;
+mapwarp "poring_w02","prontera",155,181;
+initnpctimer;
+set $@DS_entry,0;
+set $@moba,86;
+areamonster "ordeal_1-1",183,182,246,244,"Soldier Skeleton",1028,15,"DS_HiddenNpc::Ondevildead";
+areamonster "ordeal_1-1",183,182,246,244,"Orc Archer",1189,20,"DS_HiddenNpc::Ondevildead";
+areamonster "ordeal_1-1",183,182,246,244,"Sandman",1165,15,"DS_HiddenNpc::Ondevildead";
+areamonster "ordeal_1-1",183,182,246,244,"Archer Skeleton",1016,20,"DS_HiddenNpc::Ondevildead";
+areamonster "ordeal_1-1",183,182,246,244,"Minorous",1149,15,"DS_HiddenNpc::Ondevildead";
+areamonster "ordeal_1-1",183,182,246,244,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DS_HiddenNpc::Ondevildead";
+end;
+
+Ondevildead:
+set $@moba,$@moba - 1;
+if($@moba == 25) mapannounce "ordeal_1-1","Devil Square : 25 mobs to enter the 2nd round",0;
+if($@moba == 5) mapannounce "ordeal_1-1","Devil Square : 5 mobs to enter 2nd round",0;
+if($@moba == 0) {
+mapannounce "ordeal_1-1","Devil Square will enter the 2nd round",0;
+goto Ondevil2;
+}
+end;
+
+Ondevil2:
+set $@moba,87;
+areamonster "ordeal_1-1",183,182,246,244,"Gargoyle",1253,15,"DS_HiddenNpc::Ondevildead2";
+areamonster "ordeal_1-1",183,182,246,244,"Alarm",1193,20,"DS_HiddenNpc::Ondevildead2";
+areamonster "ordeal_1-1",183,182,246,244,"High Orc",1213,15,"DS_HiddenNpc::Ondevildead2";
+areamonster "ordeal_1-1",183,182,246,244,"Injustice",1257,20,"DS_HiddenNpc::Ondevildead2";
+areamonster "ordeal_1-1",183,182,246,244,"Wraith",1192,15,"DS_HiddenNpc::Ondevildead2";
+areamonster "ordeal_1-1",183,182,246,244,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DS_HiddenNpc::Ondevildead2";
+areamonster "ordeal_1-1",183,182,246,244,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DS_HiddenNpc::Ondevildead2";
+end;
+
+Ondevildead2:
+set $@moba,$@moba - 1;
+if($@moba == 25) mapannounce "ordeal_1-1","Devil Square : 25 mobs left to enter the 3rd round",0;
+if($@moba == 5) mapannounce "ordeal_1-1","Devil Square : 5 mobs left to enter the 3rd round",0;
+if($@moba == 0) {
+mapannounce "ordeal_1-1","Devil Square will enter the 3rd round",0;
+goto Ondevil3;
+}
+end;
+
+Ondevil3:
+set $@moba,68;
+areamonster "ordeal_1-1",183,182,246,244,"Anolian",1206,15,"DS_HiddenNpc::Ondevildead3";
+areamonster "ordeal_1-1",183,182,246,244,"Wanderer",1208,15,"DS_HiddenNpc::Ondevildead3";
+areamonster "ordeal_1-1",183,182,246,244,"Deviruchi",1109,15,"DS_HiddenNpc::Ondevildead3";
+areamonster "ordeal_1-1",183,182,246,244,"Joker",1131,20,"DS_HiddenNpc::Ondevildead3";
+areamonster "ordeal_1-1",183,182,246,244,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DS_HiddenNpc::Ondevildead3";
+areamonster "ordeal_1-1",183,182,246,244,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DS_HiddenNpc::Ondevildead3";
+areamonster "ordeal_1-1",183,182,246,244,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DS_HiddenNpc::Ondevildead3";
+end;
+
+Ondevildead3:
+set $@moba,$@moba - 1;
+if($@moba == 25) mapannounce "ordeal_1-1","Devil Square : 25 mobs left For VICTORY",0;
+if($@moba == 5) mapannounce "ordeal_1-1","Devil Square : 5 mobs left For VICTORY",0;
+if($@moba == 0) {
+mapannounce "ordeal_1-1","Devil Square : CONGRATULATIONS - 1 Treasure Box will be Yours!",0;
+killmonsterall "ordeal_1-1";
+atcommand "@skilloff";
+sleep 3000;
+goto Ondevil4;
+}
+end;
+
+Ondevil4:
+set $@DS_complete,1;
+set $@mobat,10;
+monster "ordeal_1-1",231,250,"Treasure Box",1327,1,"DS_HiddenNpc::Onboxdead";
+end;
+
+Onboxdead:
+set $@mobat,$@mobat - 1;
+if($@mobat == 0) mapwarp "ordeal_1-1","prontera",155,181;
+mapannounce "ordeal_1-1", "Devil Square : "+ strcharinfo(0) +" has opened a Treasure Box from Devil Square",0;
+monster "ordeal_1-1",231,250,"Treasure Box",1327,1,"DS_HiddenNpc::Onboxdead";
+warp "prontera",155,181;
+    switch( rand(300) ) {
+        case 0:    getitem 3340,1;    break;
+        case 1:    getitem 3341,1;    break;
+        case 2:    getitem 3342,1;    break;
+        case 3:    getitem 3343,1;    break;
+        case 4:    getitem 3344,1;    break;
+        case 5:    getitem 3345,1;    break;
+        case 6:    getitem 3347,1;    break;
+        case 7:    getitem 3348,1;    break;
+        case 8:    getitem 3349,1;    break;
+        case 9:    getitem 3350,1;    break;
+        case 10:    getitem 3351,1;    break;
+        case 11:    getitem 3352,1;    break;
+        case 12:    getitem 3353,1;    break;
+        case 13:    getitem 3354,1;    break;
+        case 14:    getitem 3355,1;    break;
+        case 15:    getitem 3307,1;    break;
+        case 16:    getitem 3306,1;    break;
+        case 17:    getitem 3403,1;    break;
+        case 18:    getitem 3404,1;    break;
+        case 19:    getitem 3405,1;    break;
+        case 20:    getitem 3406,1;    break;
+        case 21:    getitem 3407,1;    break;
+        case 22:    getitem 3408,1;    break;
+        case 23:    getitem 3409,1;    break;
+        case 24:    getitem 3410,1;    break;
+        case 25:    getitem 3411,1;    break;
+        case 26:    getitem 3412,1;    break;
+        case 27:    getitem 3413,1;    break;
+        case 28:    getitem 3414,1;    break;
+        case 29:    getitem 3415,1;    break;
+        case 30:    getitem 3416,1;    break;
+        case 31:    getitem 3417,1;    break;
+        case 32:    getitem 3418,1;    break;
+        case 33:    getitem 3419,1;    break;
+        case 34:    getitem 3420,1;    break;
+        case 35:    getitem 3421,1;    break;
+        case 36:    getitem 3422,1;    break;
+        case 37:    getitem 3423,1;    break;
+        case 38:    getitem 3424,1;    break;
+        case 39:    getitem 3425,1;    break;
+        case 40:    getitem 3426,1;    break;
+        case 41:    getitem 3427,1;    break;
+        case 42:    getitem 3428,1;    break;
+        case 43:    getitem 3429,1;    break;
+        case 44:    getitem 3430,1;    break;
+        case 45:    getitem 3431,1;    break;
+        case 46:    getitem 3432,1;    break;
+        case 47:    getitem 3433,1;    break;
+        case 48:    getitem 3434,1;    break;
+        case 49:    getitem 3435,1;    break;
+        case 50:    getitem 3436,1;    break;
+        case 51:    getitem 3437,1;    break;
+        case 52:    getitem 3438,1;    break;
+        case 53:    getitem 3439,1;    break;
+        case 54:    getitem 3321,1;    break;
+        case 55:    getitem 3441,1;    break;
+        case 56:    getitem 3442,1;    break;
+        case 57:    getitem 3443,1;    break;
+        case 58:    getitem 3444,1;    break;
+        case 59:    getitem 3322,1;    break;
+        case 60:    getitem 3323,1;    break;
+        case 61:    getitem 3324,1;    break;
+        case 62:    getitem 3325,1;    break;
+        case 63:    getitem 3326,1;    break;
+        case 64:    getitem 3327,1;    break;
+        case 65:    getitem 3328,1;    break;
+        case 66:    getitem 512,1;    break;
+        case 67:    getitem 512,1;    break;
+        case 68:    getitem 513,1;    break;
+        case 69:    getitem 513,1;    break;
+        case 70:    getitem 514,1;    break;
+        case 71:    getitem 514,1;    break;
+        case 72:    getitem 515,1;    break;
+        case 73:    getitem 515,1;    break;
+        case 74:    getitem 516,1;    break;
+        case 75:    getitem 516,1;    break;
+        case 76:    getitem 512,1;    break;
+        case 77:    getitem 512,1;    break;
+        case 78:    getitem 513,1;    break;
+        case 79:    getitem 513,1;    break;
+        case 80:    getitem 514,1;    break;
+        case 81:    getitem 514,1;    break;
+        case 82:    getitem 515,1;    break;
+        case 83:    getitem 515,1;    break;
+        case 84:    getitem 516,1;    break;
+        case 85:    getitem 516,1;    break;
+        case 86:    getitem 512,1;    break;
+        case 87:    getitem 512,1;    break;
+        case 88:    getitem 513,1;    break;
+        case 89:    getitem 513,1;    break;
+        case 90:    getitem 514,1;    break;
+        case 91:    getitem 514,1;    break;
+        case 92:    getitem 515,1;    break;
+        case 93:    getitem 515,1;    break;
+        case 94:    getitem 516,1;    break;
+        case 95:    getitem 516,1;    break;
+        case 96:    getitem 512,1;    break;
+        case 97:    getitem 512,1;    break;
+        case 98:    getitem 513,1;    break;
+        case 99:    getitem 513,1;    break;
+        case 100:    getitem 514,1;    break;
+        case 101:    getitem 514,1;    break;
+        case 102:    getitem 515,1;    break;
+        case 103:    getitem 515,1;    break;
+        case 104:    getitem 516,1;    break;
+        case 105:    getitem 516,1;    break;
+        case 106:    getitem 512,1;    break;
+        case 107:    getitem 512,1;    break;
+        case 108:    getitem 513,1;    break;
+        case 109:    getitem 513,1;    break;
+        case 110:    getitem 514,1;    break;
+        case 111:    getitem 514,1;    break;
+        case 112:    getitem 515,1;    break;
+        case 113:    getitem 515,1;    break;
+        case 114:    getitem 516,1;    break;
+        case 115:    getitem 516,1;    break;
+        case 116:    getitem 512,1;    break;
+        case 117:    getitem 512,1;    break;
+        case 118:    getitem 513,1;    break;
+        case 119:    getitem 513,1;    break;
+        case 120:    getitem 514,1;    break;
+        case 121:    getitem 514,1;    break;
+        case 122:    getitem 515,1;    break;
+        case 123:    getitem 515,1;    break;
+        case 124:    getitem 516,1;    break;
+        case 125:    getitem 516,1;    break;
+        case 126:    getitem 512,1;    break;
+        case 127:    getitem 512,1;    break;
+        case 128:    getitem 513,1;    break;
+        case 129:    getitem 513,1;    break;
+        case 130:    getitem 514,1;    break;
+        case 131:    getitem 514,1;    break;
+        case 132:    getitem 515,1;    break;
+        case 133:    getitem 515,1;    break;
+        case 134:    getitem 516,1;    break;
+        case 135:    getitem 516,1;    break;
+        case 136:    getitem 512,1;    break;
+        case 137:    getitem 512,1;    break;
+        case 138:    getitem 513,1;    break;
+        case 139:    getitem 513,1;    break;
+        case 140:    getitem 514,1;    break;
+        case 141:    getitem 514,1;    break;
+        case 142:    getitem 515,1;    break;
+        case 143:    getitem 515,1;    break;
+        case 144:    getitem 516,1;    break;
+        case 145:    getitem 516,1;    break;
+        case 146:    getitem 512,1;    break;
+        case 147:    getitem 512,1;    break;
+        case 148:    getitem 513,1;    break;
+        case 149:    getitem 513,1;    break;
+        case 150:    getitem 521,1;    break;
+        case 151:    getitem 521,1;    break;
+        case 152:    getitem 522,1;    break;
+        case 153:    getitem 522,1;    break;
+        case 154:    getitem 516,1;    break;
+        case 155:    getitem 516,1;    break;
+        case 156:    getitem 512,1;    break;
+        case 157:    getitem 512,1;    break;
+        case 158:    getitem 520,1;    break;
+        case 159:    getitem 520,1;    break;
+        case 160:    getitem 521,1;    break;
+        case 161:    getitem 521,1;    break;
+        case 162:    getitem 522,1;    break;
+        case 163:    getitem 522,1;    break;
+        case 164:    getitem 516,1;    break;
+        case 165:    getitem 516,1;    break;
+        case 166:    getitem 512,1;    break;
+        case 167:    getitem 512,1;    break;
+        case 168:    getitem 520,1;    break;
+        case 169:    getitem 520,1;    break;
+        case 170:    getitem 521,1;    break;
+        case 171:    getitem 521,1;    break;
+        case 172:    getitem 522,1;    break;
+        case 173:    getitem 522,1;    break;
+        case 174:    getitem 516,1;    break;
+        case 175:    getitem 516,1;    break;
+        case 176:    getitem 512,1;    break;
+        case 177:    getitem 512,1;    break;
+        case 178:    getitem 520,1;    break;
+        case 179:    getitem 520,1;    break;
+        case 180:    getitem 521,1;    break;
+        case 181:    getitem 521,1;    break;
+        case 182:    getitem 522,1;    break;
+        case 183:    getitem 522,1;    break;
+        case 184:    getitem 516,1;    break;
+        case 185:    getitem 516,1;    break;
+        case 186:    getitem 512,1;    break;
+        case 187:    getitem 512,1;    break;
+        case 188:    getitem 520,1;    break;
+        case 189:    getitem 520,1;    break;
+        case 190:    getitem 23000,1;    break;
+        case 191:    getitem 23001,1;    break;
+        case 192:    getitem 23002,1;    break;
+        case 193:    getitem 23063,1;    break;
+        case 194:    getitem 23064,1;    break;
+        case 195:    getitem 23065,1;    break;
+        case 196:    getitem 3200,1;    break;
+        case 197:    getitem 3201,1;    break;
+        case 198:    getitem 3202,1;    break;
+        case 199:    getitem 3273,1;    break;
+        case 200:    getitem 22564,1;    break;
+        case 201:    getitem 22565,1;    break;
+        case 202:    getitem 22566,1;    break;
+        case 203:    getitem 22567,1;    break;
+        case 204:    getitem 22568,1;    break;
+        case 205:    getitem 22569,1;    break;
+        case 206:    getitem 22570,1;    break;
+        case 207:    getitem 22571,1;    break;
+        case 208:    getitem 22572,1;    break;
+        case 209:    getitem 22573,1;    break;
+        case 210:    getitem 22574,1;    break;
+        case 211:    getitem 22575,1;    break;
+        case 212:    getitem 22576,1;    break;
+        case 213:    getitem 22577,1;    break;
+        case 214:    getitem 22578,1;    break;
+        case 215:    getitem 22579,1;    break;
+        case 216:    getitem 22580,1;    break;
+        case 217:    getitem 22581,1;    break;
+        case 218:    getitem 22582,1;    break;
+        case 219:    getitem 22583,1;    break;
+        case 220:    getitem 22584,1;    break;
+        case 221:    getitem 22585,1;    break;
+        case 222:    getitem 22586,1;    break;
+        case 223:    getitem 22587,1;    break;
+        case 224:    getitem 22588,1;    break;
+        case 225:    getitem 22589,1;    break;
+        case 226:    getitem 22590,1;    break;
+        case 227:    getitem 22591,1;    break;
+        case 228:    getitem 22592,1;    break;
+        case 229:    getitem 22593,1;    break;
+        case 230:    getitem 22594,1;    break;
+        case 231:    getitem 22595,1;    break;
+        case 232:    getitem 22596,1;    break;
+        case 233:    getitem 22597,1;    break;
+        case 234:    getitem 22598,1;    break;
+        case 235:    getitem 22599,1;    break;
+        case 236:    getitem 22600,1;    break;
+        case 237:    getitem 22601,1;    break;
+        case 238:    getitem 22602,1;    break;
+        case 239:    getitem 22603,1;    break;
+        case 240:    getitem 22604,1;    break;
+        case 241:    getitem 22605,1;    break;
+        case 242:    getitem 22606,1;    break;
+        case 243:    getitem 22607,1;    break;
+        case 244:    getitem 22608,1;    break;
+        case 245:    getitem 22609,1;    break;
+        case 246:    getitem 22610,1;    break;
+        case 247:    getitem 22611,1;    break;
+        case 248:    getitem 22612,1;    break;
+        case 249:    getitem 22613,1;    break;
+        case 250:    getitem 3436,1;    break;
+        case 251:    getitem 3437,1;    break;
+        case 252:    getitem 3438,1;    break;
+        case 253:    getitem 3439,1;    break;
+        case 254:    getitem 3321,1;    break;
+        case 255:    getitem 3441,1;    break;
+        case 256:    getitem 3442,1;    break;
+        case 257:    getitem 3443,1;    break;
+        case 258:    getitem 3444,1;    break;
+        case 259:    getitem 3322,1;    break;
+        case 260:    getitem 3323,1;    break;
+        case 261:    getitem 3324,1;    break;
+        case 262:    getitem 3325,1;    break;
+        case 263:    getitem 3326,1;    break;
+        case 264:    getitem 3327,1;    break;
+        case 265:    getitem 3328,1;    break;
+        case 266:    getitem 512,1;    break;
+        case 267:    getitem 512,1;    break;
+        case 268:    getitem 520,1;    break;
+        case 269:    getitem 520,1;    break;
+        case 270:    getitem 521,1;    break;
+        case 271:    getitem 521,1;    break;
+        case 272:    getitem 522,1;    break;
+        case 273:    getitem 522,1;    break;
+        case 274:    getitem 516,1;    break;
+        case 275:    getitem 516,1;    break;
+        case 276:    getitem 512,1;    break;
+        case 277:    getitem 512,1;    break;
+        case 278:    getitem 520,1;    break;
+        case 279:    getitem 520,1;    break;
+        case 280:    getitem 521,1;    break;
+        case 281:    getitem 521,1;    break;
+        case 282:    getitem 522,1;    break;
+        case 283:    getitem 522,1;    break;
+        case 284:    getitem 516,1;    break;
+        case 285:    getitem 516,1;    break;
+        case 286:    getitem 512,1;    break;
+        case 287:    getitem 512,1;    break;
+        case 288:    getitem 520,1;    break;
+        case 289:    getitem 520,1;    break;
+        case 290:    getitem 521,1;    break;
+        case 291:    getitem 521,1;    break;
+        case 292:    getitem 522,1;    break;
+        case 293:    getitem 522,1;    break;
+        case 294:    getitem 516,1;    break;
+        case 295:    getitem 516,1;    break;
+        case 296:    getitem 512,1;    break;
+        case 297:    getitem 512,1;    break;
+        case 298:    getitem 520,1;    break;
+        case 299:    getitem 520,1;    break;
+    }
+if ($@moba == 0) enablenpc "Exit#DS";
+end;
+
+OnTimer30000:
+if ( $@DS_complete == 1 ) {
+stopnpctimer;
+end;
+} else
+if (getmapusers("ordeal_1-1") == 0) {
+announce "All players failed to survive Devil Square",0;
+killmonsterall "ordeal_1-1";
+stopnpctimer;
+end;
+} else {
+mapannounce "ordeal_1-1",getmapusers("ordeal_1-1") +" players still survive at Devil Square",0;
+initnpctimer;
+end;
+}
+
+OnPCDieEvent:
+getmapxy(.@mapname$, .@mapx, .@mapy, 0);
+if(.@mapname$ == "ordeal_1-1") {
+sleep2 1;
+if(!Deaths) set Deaths, 0;
+set Deaths, Deaths + 1;
+if ( Deaths==1 ) {
+warp "SavePoint",0,0;
+set hp,100;
+set Deaths, 0;
+end;
+}
+if ( Deaths==2 ) {
+warp "SavePoint",0,0;
+set hp,100;
+set Deaths, 0;
+end;
+}
+}
+}
+// -- Mapflags
+ordeal_1-1	mapflag	nowarp
+ordeal_1-1	mapflag	nowarpto
+ordeal_1-1	mapflag	noteleport
+ordeal_1-1	mapflag	nosave	SavePoint
+ordeal_1-1	mapflag	nomemo
+ordeal_1-1	mapflag	nobranch
+ordeal_1-1	mapflag	nopenalty
+ordeal_1-1	mapflag	pvp	off
+ordeal_1-1	mapflag	noloot
+ordeal_1-1	mapflag	novending
+ordeal_1-1	mapflag	nochat
+poring_w02	mapflag	nowarp
+poring_w02	mapflag	nowarpto
+poring_w02	mapflag	noteleport
+poring_w02	mapflag	nosave	SavePoint
+poring_w02	mapflag	nomemo
+poring_w02	mapflag	nobranch
+poring_w02	mapflag	nopenalty
+poring_w02	mapflag	pvp	off
+poring_w02	mapflag	noloot
+poring_w02	mapflag	novending
+poring_w02	mapflag	nochat
+
+ordeal_1-1,246,245,7	script	Exit#DS	51,{
+mes "[Exit]";
+mes "See ya";
+next;
+warp "SavePoint",0,0;
+close;
+}
+
+//Devil Square Beta
+//-----------------------------------------------
+
+prontera.gat,167,229,4	script	Devil Square Beta	997,{
+mes "[Devil Square Beta]";
+mes "Welcome to the entrance door to ^FF0000Devil Square^000000";
+mes "If you die, the door will be closed and you have to wait to open again";
+next;
+menu "Enter",PlayCheck1,"Info",L_info,"Cancel",L_cancel;
+
+PlayCheck1:
+if ( $@DSB_entry == 0 ) goto L_error;
+if ( Baselevel < 255) goto L_req;
+if ( getmapusers("poring_w02") >= 10 ) goto L_toomany;
+
+warp "poring_w02",80,78;
+end;
+
+L_error:
+mes "[Devil Square Beta]";
+mes "Devil Square Beta is now closed";
+mes "It will open every 30 Minutes.";
+close;
+
+L_req:
+mes "[Devil Square Beta]";
+mes "Minimum base level to enter is 255";
+close;
+
+L_toomany:
+mes "[Devil Square Beta]";
+mes "I'm sorry but Devil Square Beta is FULL";
+mes "Maximum users to enter is 10 players";
+close;
+
+L_info:
+mes "[Devil Square Beta]";
+mes "There are 3 level's of monsters you will encounter";
+mes "Each level the enemies will grow stronger";
+mes "If you pass all 3 levels of monsters, you will get the opportunity to open Treasure Boxes with items, equips, and rare cards inside!!";
+close;
+
+L_cancel:
+mes "[Devil Square Beta]";
+mes "See ya";
+close;
+}
+
+poring_w02.gat,80,82,5	script	Devil-Square Beta	997,{
+mes "[Devil Square Beta]";
+mes "Welcome to the entrance door to ^FF0000Devil Square^000000";
+mes "If you die, the door will be closed and you have to wait to open again";
+next;
+menu "Enter",PlayCheck2,"Info",L_info,"Cancel",L_cancel;
+
+PlayCheck2:
+if ( $@DSB_entry == 0 ) goto L_error;
+if ( Baselevel < 255) goto L_req;
+if ( getmapusers("force_1-1") >= 10 ) goto L_toomany;
+next;
+if ( getmapusers("force_1-1") < 11 ) goto Start;
+
+Start:
+if ( $@DSB_entry == 0 ) goto L_error;
+if ( Baselevel < 255) goto L_req;
+if ( getmapusers("force_1-1") >= 10 ) goto L_toomany;
+
+mapannounce "force_1-1", strcharinfo(0)+" has entered the Devil Square",0;
+percentheal 100,100;
+warp "force_1-1",26,42;
+end;
+
+L_error:
+mes "[Devil Square Beta]";
+mes "Devil Square Beta is now closed";
+mes "It will open every 30 Minutes.";
+close;
+
+L_req:
+mes "[Devil Square Beta]";
+mes "Minimum base level to enter is 255";
+close;
+
+L_toomany:
+mes "[Devil Square Beta]";
+mes "I'm sorry but Devil Square Beta is FULL";
+mes "Maximum users to enter is 10 players";
+close;
+
+L_info:
+mes "[Devil Square Beta]";
+mes "There are 3 level's of monsters you will encounter";
+mes "Each level the enemies will grow stronger";
+mes "If you pass all 3 levels of monsters, you will get the opportunity to open Treasure Boxes with items, equips, and rare cards inside!!";
+close;
+
+L_cancel:
+mes "[Devil Square Beta]";
+mes "See ya";
+close;
+
+OnInit:
+setarray $MVPIDs[0],1038,1039,1046,1059,1086,1087,1112,1157,1190,1251,1252,1272,1312,1373,1511,1583,1658,1685,1708,1719,1734,1751,1768,1779,1832,1647,1649,1651,1646,1650,1648;
+set $MVPSpawn, $MVPIDs[rand(getarraysize($MVPIDs[0]))];
+}
+
+force_1-1,0,0,0	script	DSB_HiddenNpc	-1,{
+//OnMinute00:
+//if (gettime(3) %2 == 1) end;
+OnClock0015:
+OnClock0115:
+OnClock0215:
+OnClock0315:
+OnClock0415:
+OnClock0515:
+OnClock0615:
+OnClock0715:
+OnClock0815:
+OnClock0915:
+OnClock1015:
+OnClock1115:
+OnClock1215:
+OnClock1315:
+OnClock1415:
+OnClock1515:
+OnClock1615:
+OnClock1715:
+OnClock1815:
+OnClock1915:
+OnClock2015:
+OnClock2115:
+OnClock2215:
+OnClock2315:
+OnClock0045:
+OnClock0145:
+OnClock0245:
+OnClock0345:
+OnClock0445:
+OnClock0545:
+OnClock0645:
+OnClock0745:
+OnClock0845:
+OnClock0945:
+OnClock1045:
+OnClock1145:
+OnClock1245:
+OnClock1345:
+OnClock1445:
+OnClock1545:
+OnClock1645:
+OnClock1745:
+OnClock1845:
+OnClock1945:
+OnClock2045:
+OnClock2145:
+OnClock2245:
+OnClock2345:
+set $@DSB_complete,0;
+disablenpc "Exit#DSB";
+mapannounce "force_1-1","Devil Square Beta is now closed",0;
+mapwarp "force_1-1","prontera",155,181;
+killmonsterall "force_1-1";
+atcommand "@skillon";
+announce "1 Minute until Devil Square Beta starts!!",0;
+set $@DSB_entry,1;
+sleep 60000;
+mapannounce "force_1-1","Devil Square Beta has Begun!!",0;
+mapwarp "poring_w02","prontera",155,181;
+initnpctimer;
+set $@DSB_entry,0;
+set $@mobb,85;
+areamonster "force_1-1",19,26,31,26,"Soldier Skeleton",1028,15,"DSB_HiddenNpc::Ondevildead";
+areamonster "force_1-1",19,26,31,26,"Orc Archer",1189,20,"DSB_HiddenNpc::Ondevildead";
+areamonster "force_1-1",19,26,31,26,"Sandman",1165,15,"DSB_HiddenNpc::Ondevildead";
+areamonster "force_1-1",19,26,31,26,"Archer Skeleton",1016,20,"DSB_HiddenNpc::Ondevildead";
+areamonster "force_1-1",19,26,31,26,"Minorous",1149,15,"DSB_HiddenNpc::Ondevildead";
+areamonster "force_1-1",19,26,31,26,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DSB_HiddenNpc::Ondevildead";
+end;
+
+Ondevildead:
+set $@mobb,$@mobb - 1;
+if($@mobb == 25) mapannounce "force_1-1","Devil Square : 25 mobs to enter the 2nd round",0;
+if($@mobb == 5) mapannounce "force_1-1","Devil Square : 5 mobs to enter 2nd round",0;
+if($@mobb == 0) {
+mapannounce "force_1-1","Devil Square will enter the 2nd round",0;
+goto Ondevil2;
+}
+end;
+
+Ondevil2:
+set $@mobb,85;
+areamonster "force_1-1",19,26,31,26,"Gargoyle",1253,15,"DSB_HiddenNpc::Ondevildead2";
+areamonster "force_1-1",19,26,31,26,"Alarm",1193,20,"DSB_HiddenNpc::Ondevildead2";
+areamonster "force_1-1",19,26,31,26,"High Orc",1213,15,"DSB_HiddenNpc::Ondevildead2";
+areamonster "force_1-1",19,26,31,26,"Injustice",1257,20,"DSB_HiddenNpc::Ondevildead2";
+areamonster "force_1-1",19,26,31,26,"Wraith",1192,15,"DSB_HiddenNpc::Ondevildead2";
+areamonster "force_1-1",19,26,31,26,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DSB_HiddenNpc::Ondevildead2";
+areamonster "force_1-1",19,26,31,26,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DSB_HiddenNpc::Ondevildead2";
+end;
+
+Ondevildead2:
+set $@mobb,$@mobb - 1;
+if($@mobb == 25) mapannounce "force_1-1","Devil Square : 25 mobs left to enter the 3rd round",0;
+if($@mobb == 5) mapannounce "force_1-1","Devil Square : 5 mobs left to enter the 3rd round",0;
+if($@mobb == 0) {
+mapannounce "force_1-1","Devil Square will enter the 3rd round",0;
+goto Ondevil3;
+}
+end;
+
+Ondevil3:
+set $@mobb,65;
+areamonster "force_1-1",19,26,31,26,"Anolian",1206,15,"DSB_HiddenNpc::Ondevildead3";
+areamonster "force_1-1",19,26,31,26,"Wanderer",1208,15,"DSB_HiddenNpc::Ondevildead3";
+areamonster "force_1-1",19,26,31,26,"Deviruchi",1109,15,"DSB_HiddenNpc::Ondevildead3";
+areamonster "force_1-1",19,26,31,26,"Joker",1131,20,"DSB_HiddenNpc::Ondevildead3";
+areamonster "force_1-1",19,26,31,26,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DSB_HiddenNpc::Ondevildead3";
+areamonster "force_1-1",19,26,31,26,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DSB_HiddenNpc::Ondevildead3";
+areamonster "force_1-1",19,26,31,26,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DSB_HiddenNpc::Ondevildead3";
+end;
+
+Ondevildead3:
+set $@mobb,$@mobb - 1;
+if($@mobb == 25) mapannounce "force_1-1","Devil Square : 25 mobs left For VICTORY",0;
+if($@mobb == 5) mapannounce "force_1-1","Devil Square : 5 mobs left For VICTORY",0;
+if($@mobb == 0) {
+mapannounce "force_1-1","Devil Square : CONGRATULATIONS - 1 Treasure Box will be Yours!",0;
+atcommand "@skilloff";
+sleep 3000;
+killmonsterall "force_1-1";
+goto Ondevil4;
+}
+end;
+
+Ondevil4:
+set $@DSB_complete,1;
+set $@mobbt,10;
+monster "force_1-1",43,25,"Treasure Box",1327,1,"DSB_HiddenNpc::Onboxdead";
+end;
+
+Onboxdead:
+set $@mobbt,$@mobbt - 1;
+if($@mobbt == 0) mapwarp "force_1-1","prontera",155,181;
+mapannounce "force_1-1", "Devil Square : "+ strcharinfo(0) +" has opened a Treasure Box from Devil Square",0;
+monster "force_1-1",43,25,"Treasure Box",1327,1,"DSB_HiddenNpc::Onboxdead";
+warp "prontera",155,181;
+    switch( rand(300) ) {
+        case 0:    getitem 3340,1;    break;
+        case 1:    getitem 3341,1;    break;
+        case 2:    getitem 3342,1;    break;
+        case 3:    getitem 3343,1;    break;
+        case 4:    getitem 3344,1;    break;
+        case 5:    getitem 3345,1;    break;
+        case 6:    getitem 3347,1;    break;
+        case 7:    getitem 3348,1;    break;
+        case 8:    getitem 3349,1;    break;
+        case 9:    getitem 3350,1;    break;
+        case 10:    getitem 3351,1;    break;
+        case 11:    getitem 3352,1;    break;
+        case 12:    getitem 3353,1;    break;
+        case 13:    getitem 3354,1;    break;
+        case 14:    getitem 3355,1;    break;
+        case 15:    getitem 3307,1;    break;
+        case 16:    getitem 3306,1;    break;
+        case 17:    getitem 3403,1;    break;
+        case 18:    getitem 3404,1;    break;
+        case 19:    getitem 3405,1;    break;
+        case 20:    getitem 3406,1;    break;
+        case 21:    getitem 3407,1;    break;
+        case 22:    getitem 3408,1;    break;
+        case 23:    getitem 3409,1;    break;
+        case 24:    getitem 3410,1;    break;
+        case 25:    getitem 3411,1;    break;
+        case 26:    getitem 3412,1;    break;
+        case 27:    getitem 3413,1;    break;
+        case 28:    getitem 3414,1;    break;
+        case 29:    getitem 3415,1;    break;
+        case 30:    getitem 3416,1;    break;
+        case 31:    getitem 3417,1;    break;
+        case 32:    getitem 3418,1;    break;
+        case 33:    getitem 3419,1;    break;
+        case 34:    getitem 3420,1;    break;
+        case 35:    getitem 3421,1;    break;
+        case 36:    getitem 3422,1;    break;
+        case 37:    getitem 3423,1;    break;
+        case 38:    getitem 3424,1;    break;
+        case 39:    getitem 3425,1;    break;
+        case 40:    getitem 3426,1;    break;
+        case 41:    getitem 3427,1;    break;
+        case 42:    getitem 3428,1;    break;
+        case 43:    getitem 3429,1;    break;
+        case 44:    getitem 3430,1;    break;
+        case 45:    getitem 3431,1;    break;
+        case 46:    getitem 3432,1;    break;
+        case 47:    getitem 3433,1;    break;
+        case 48:    getitem 3434,1;    break;
+        case 49:    getitem 3435,1;    break;
+        case 50:    getitem 3436,1;    break;
+        case 51:    getitem 3437,1;    break;
+        case 52:    getitem 3438,1;    break;
+        case 53:    getitem 3439,1;    break;
+        case 54:    getitem 3321,1;    break;
+        case 55:    getitem 3441,1;    break;
+        case 56:    getitem 3442,1;    break;
+        case 57:    getitem 3443,1;    break;
+        case 58:    getitem 3444,1;    break;
+        case 59:    getitem 3322,1;    break;
+        case 60:    getitem 3323,1;    break;
+        case 61:    getitem 3324,1;    break;
+        case 62:    getitem 3325,1;    break;
+        case 63:    getitem 3326,1;    break;
+        case 64:    getitem 3327,1;    break;
+        case 65:    getitem 3328,1;    break;
+        case 66:    getitem 512,1;    break;
+        case 67:    getitem 512,1;    break;
+        case 68:    getitem 513,1;    break;
+        case 69:    getitem 513,1;    break;
+        case 70:    getitem 514,1;    break;
+        case 71:    getitem 514,1;    break;
+        case 72:    getitem 515,1;    break;
+        case 73:    getitem 515,1;    break;
+        case 74:    getitem 516,1;    break;
+        case 75:    getitem 516,1;    break;
+        case 76:    getitem 512,1;    break;
+        case 77:    getitem 512,1;    break;
+        case 78:    getitem 513,1;    break;
+        case 79:    getitem 513,1;    break;
+        case 80:    getitem 514,1;    break;
+        case 81:    getitem 514,1;    break;
+        case 82:    getitem 515,1;    break;
+        case 83:    getitem 515,1;    break;
+        case 84:    getitem 516,1;    break;
+        case 85:    getitem 516,1;    break;
+        case 86:    getitem 512,1;    break;
+        case 87:    getitem 512,1;    break;
+        case 88:    getitem 513,1;    break;
+        case 89:    getitem 513,1;    break;
+        case 90:    getitem 514,1;    break;
+        case 91:    getitem 514,1;    break;
+        case 92:    getitem 515,1;    break;
+        case 93:    getitem 515,1;    break;
+        case 94:    getitem 516,1;    break;
+        case 95:    getitem 516,1;    break;
+        case 96:    getitem 512,1;    break;
+        case 97:    getitem 512,1;    break;
+        case 98:    getitem 513,1;    break;
+        case 99:    getitem 513,1;    break;
+        case 100:    getitem 514,1;    break;
+        case 101:    getitem 514,1;    break;
+        case 102:    getitem 515,1;    break;
+        case 103:    getitem 515,1;    break;
+        case 104:    getitem 516,1;    break;
+        case 105:    getitem 516,1;    break;
+        case 106:    getitem 512,1;    break;
+        case 107:    getitem 512,1;    break;
+        case 108:    getitem 513,1;    break;
+        case 109:    getitem 513,1;    break;
+        case 110:    getitem 514,1;    break;
+        case 111:    getitem 514,1;    break;
+        case 112:    getitem 515,1;    break;
+        case 113:    getitem 515,1;    break;
+        case 114:    getitem 516,1;    break;
+        case 115:    getitem 516,1;    break;
+        case 116:    getitem 512,1;    break;
+        case 117:    getitem 512,1;    break;
+        case 118:    getitem 513,1;    break;
+        case 119:    getitem 513,1;    break;
+        case 120:    getitem 514,1;    break;
+        case 121:    getitem 514,1;    break;
+        case 122:    getitem 515,1;    break;
+        case 123:    getitem 515,1;    break;
+        case 124:    getitem 516,1;    break;
+        case 125:    getitem 516,1;    break;
+        case 126:    getitem 512,1;    break;
+        case 127:    getitem 512,1;    break;
+        case 128:    getitem 513,1;    break;
+        case 129:    getitem 513,1;    break;
+        case 130:    getitem 514,1;    break;
+        case 131:    getitem 514,1;    break;
+        case 132:    getitem 515,1;    break;
+        case 133:    getitem 515,1;    break;
+        case 134:    getitem 516,1;    break;
+        case 135:    getitem 516,1;    break;
+        case 136:    getitem 512,1;    break;
+        case 137:    getitem 512,1;    break;
+        case 138:    getitem 513,1;    break;
+        case 139:    getitem 513,1;    break;
+        case 140:    getitem 514,1;    break;
+        case 141:    getitem 514,1;    break;
+        case 142:    getitem 515,1;    break;
+        case 143:    getitem 515,1;    break;
+        case 144:    getitem 516,1;    break;
+        case 145:    getitem 516,1;    break;
+        case 146:    getitem 512,1;    break;
+        case 147:    getitem 512,1;    break;
+        case 148:    getitem 513,1;    break;
+        case 149:    getitem 513,1;    break;
+        case 150:    getitem 521,1;    break;
+        case 151:    getitem 521,1;    break;
+        case 152:    getitem 522,1;    break;
+        case 153:    getitem 522,1;    break;
+        case 154:    getitem 516,1;    break;
+        case 155:    getitem 516,1;    break;
+        case 156:    getitem 512,1;    break;
+        case 157:    getitem 512,1;    break;
+        case 158:    getitem 520,1;    break;
+        case 159:    getitem 520,1;    break;
+        case 160:    getitem 521,1;    break;
+        case 161:    getitem 521,1;    break;
+        case 162:    getitem 522,1;    break;
+        case 163:    getitem 522,1;    break;
+        case 164:    getitem 516,1;    break;
+        case 165:    getitem 516,1;    break;
+        case 166:    getitem 512,1;    break;
+        case 167:    getitem 512,1;    break;
+        case 168:    getitem 520,1;    break;
+        case 169:    getitem 520,1;    break;
+        case 170:    getitem 521,1;    break;
+        case 171:    getitem 521,1;    break;
+        case 172:    getitem 522,1;    break;
+        case 173:    getitem 522,1;    break;
+        case 174:    getitem 516,1;    break;
+        case 175:    getitem 516,1;    break;
+        case 176:    getitem 512,1;    break;
+        case 177:    getitem 512,1;    break;
+        case 178:    getitem 520,1;    break;
+        case 179:    getitem 520,1;    break;
+        case 180:    getitem 521,1;    break;
+        case 181:    getitem 521,1;    break;
+        case 182:    getitem 522,1;    break;
+        case 183:    getitem 522,1;    break;
+        case 184:    getitem 516,1;    break;
+        case 185:    getitem 516,1;    break;
+        case 186:    getitem 512,1;    break;
+        case 187:    getitem 512,1;    break;
+        case 188:    getitem 520,1;    break;
+        case 189:    getitem 520,1;    break;
+        case 190:    getitem 23000,1;    break;
+        case 191:    getitem 23001,1;    break;
+        case 192:    getitem 23002,1;    break;
+        case 193:    getitem 23063,1;    break;
+        case 194:    getitem 23064,1;    break;
+        case 195:    getitem 23065,1;    break;
+        case 196:    getitem 3286,1;    break;
+        case 197:    getitem 3287,1;    break;
+        case 198:    getitem 3288,1;    break;
+        case 199:    getitem 3271,1;    break;
+        case 200:    getitem 22614,1;    break;
+        case 201:    getitem 22615,1;    break;
+        case 202:    getitem 22616,1;    break;
+        case 203:    getitem 22617,1;    break;
+        case 204:    getitem 22618,1;    break;
+        case 205:    getitem 22619,1;    break;
+        case 206:    getitem 22620,1;    break;
+        case 207:    getitem 22621,1;    break;
+        case 208:    getitem 22622,1;    break;
+        case 209:    getitem 22623,1;    break;
+        case 210:    getitem 22624,1;    break;
+        case 211:    getitem 22625,1;    break;
+        case 212:    getitem 22626,1;    break;
+        case 213:    getitem 22627,1;    break;
+        case 214:    getitem 22628,1;    break;
+        case 215:    getitem 22629,1;    break;
+        case 216:    getitem 22630,1;    break;
+        case 217:    getitem 22631,1;    break;
+        case 218:    getitem 22632,1;    break;
+        case 219:    getitem 22633,1;    break;
+        case 220:    getitem 22634,1;    break;
+        case 221:    getitem 22635,1;    break;
+        case 222:    getitem 22636,1;    break;
+        case 223:    getitem 22637,1;    break;
+        case 224:    getitem 22638,1;    break;
+        case 225:    getitem 22639,1;    break;
+        case 226:    getitem 22640,1;    break;
+        case 227:    getitem 22641,1;    break;
+        case 228:    getitem 22642,1;    break;
+        case 229:    getitem 22643,1;    break;
+        case 230:    getitem 22644,1;    break;
+        case 231:    getitem 22645,1;    break;
+        case 232:    getitem 22646,1;    break;
+        case 233:    getitem 22647,1;    break;
+        case 234:    getitem 22648,1;    break;
+        case 235:    getitem 22649,1;    break;
+        case 236:    getitem 22650,1;    break;
+        case 237:    getitem 22651,1;    break;
+        case 238:    getitem 22652,1;    break;
+        case 239:    getitem 22653,1;    break;
+        case 240:    getitem 22654,1;    break;
+        case 241:    getitem 22655,1;    break;
+        case 242:    getitem 22656,1;    break;
+        case 243:    getitem 22657,1;    break;
+        case 244:    getitem 22658,1;    break;
+        case 245:    getitem 22659,1;    break;
+        case 246:    getitem 22660,1;    break;
+        case 247:    getitem 22661,1;    break;
+        case 248:    getitem 22662,1;    break;
+        case 249:    getitem 22663,1;    break;
+        case 250:    getitem 3436,1;    break;
+        case 251:    getitem 3437,1;    break;
+        case 252:    getitem 3438,1;    break;
+        case 253:    getitem 3439,1;    break;
+        case 254:    getitem 3321,1;    break;
+        case 255:    getitem 3441,1;    break;
+        case 256:    getitem 3442,1;    break;
+        case 257:    getitem 3443,1;    break;
+        case 258:    getitem 3444,1;    break;
+        case 259:    getitem 3322,1;    break;
+        case 260:    getitem 3323,1;    break;
+        case 261:    getitem 3324,1;    break;
+        case 262:    getitem 3325,1;    break;
+        case 263:    getitem 3326,1;    break;
+        case 264:    getitem 3327,1;    break;
+        case 265:    getitem 3328,1;    break;
+        case 266:    getitem 512,1;    break;
+        case 267:    getitem 512,1;    break;
+        case 268:    getitem 520,1;    break;
+        case 269:    getitem 520,1;    break;
+        case 270:    getitem 521,1;    break;
+        case 271:    getitem 521,1;    break;
+        case 272:    getitem 522,1;    break;
+        case 273:    getitem 522,1;    break;
+        case 274:    getitem 516,1;    break;
+        case 275:    getitem 516,1;    break;
+        case 276:    getitem 512,1;    break;
+        case 277:    getitem 512,1;    break;
+        case 278:    getitem 520,1;    break;
+        case 279:    getitem 520,1;    break;
+        case 280:    getitem 521,1;    break;
+        case 281:    getitem 521,1;    break;
+        case 282:    getitem 522,1;    break;
+        case 283:    getitem 522,1;    break;
+        case 284:    getitem 516,1;    break;
+        case 285:    getitem 516,1;    break;
+        case 286:    getitem 512,1;    break;
+        case 287:    getitem 512,1;    break;
+        case 288:    getitem 520,1;    break;
+        case 289:    getitem 520,1;    break;
+        case 290:    getitem 521,1;    break;
+        case 291:    getitem 521,1;    break;
+        case 292:    getitem 522,1;    break;
+        case 293:    getitem 522,1;    break;
+        case 294:    getitem 516,1;    break;
+        case 295:    getitem 516,1;    break;
+        case 296:    getitem 512,1;    break;
+        case 297:    getitem 512,1;    break;
+        case 298:    getitem 520,1;    break;
+        case 299:    getitem 520,1;    break;
+    }
+if ($@mobb == 0) enablenpc "Exit#DSB";
+end;
+
+OnTimer30000:
+if ( $@DSB_complete == 1 ) {
+stopnpctimer;
+end;
+} else
+if (getmapusers("force_1-1") == 0) {
+announce "All players failed to survive Devil Square",0;
+killmonsterall "force_1-1";
+stopnpctimer;
+end;
+} else {
+mapannounce "force_1-1",getmapusers("force_1-1") +" players still survive at Devil Square",0;
+initnpctimer;
+end;
+}
+
+OnPCDieEvent:
+getmapxy(.@mapname$, .@mapx, .@mapy, 0);
+if(.@mapname$ == "force_1-1") {
+sleep2 1;
+if(!Deaths) set Deaths, 0;
+set Deaths, Deaths + 1;
+if ( Deaths==1 ) {
+warp "SavePoint",0,0;
+set hp,100;
+set Deaths, 0;
+end;
+}
+if ( Deaths==2 ) {
+warp "SavePoint",0,0;
+set hp,100;
+set Deaths, 0;
+end;
+}
+}
+}
+// -- Mapflags
+force_1-1	mapflag	nowarp
+force_1-1	mapflag	nowarpto
+force_1-1	mapflag	noteleport
+force_1-1	mapflag	nosave	SavePoint
+force_1-1	mapflag	nomemo
+force_1-1	mapflag	nobranch
+force_1-1	mapflag	nopenalty
+force_1-1	mapflag	pvp	off
+force_1-1	mapflag	noloot
+force_1-1	mapflag	novending
+force_1-1	mapflag	nochat
+prontera	mapflag	nochat
+
+force_1-1,9,42,5	script	Exit#DSB	51,{
+mes "[Exit]";
+mes "See ya";
+next;
+warp "SavePoint",0,0;
+close;
+}
+
+//Devil Square Omega
+//-----------------------------------------------
+
+prontera.gat,144,229,5	script	Devil Square Omega	994,{
+mes "[Devil Square Omega]";
+mes "Welcome to the entrance door to ^FF0000Devil Square^000000";
+mes "If you die, the door will be closed and you have to wait to open again";
+next;
+menu "Enter",PlayCheck1,"Info",L_info,"Cancel",L_cancel;
+
+PlayCheck1:
+if ( $@DSO_entry == 0 ) goto L_error;
+if ( Baselevel < 255) goto L_req;
+if ( getmapusers("ama_test") >= 20 ) goto L_toomany;
+
+warp "ama_test",57,103;
+end;
+
+L_error:
+mes "[Devil Square Omega]";
+mes "Devil Square Omega is now closed";
+mes "It will open every 1 Hour.";
+close;
+
+L_req:
+mes "[Devil Square Omega]";
+mes "Minimum base level to enter is 255";
+close;
+
+L_toomany:
+mes "[Devil Square Omega]";
+mes "I'm sorry but Devil Square Omega is FULL";
+mes "Maximum users to enter is 15 players";
+close;
+
+L_info:
+mes "[Devil Square Omega]";
+mes "There are 4 level's of monsters you will encounter";
+mes "Each level the enemies will grow stronger";
+mes "If you pass all 4 levels of monsters, you will get the opportunity to open Treasure Boxes with items, equips, and rare cards inside!!";
+close;
+
+L_cancel:
+mes "[Devil Square Omega]";
+mes "See ya";
+close;
+}
+
+ama_test.gat,50,95,5	script	Devil-Square Omega	994,{
+mes "[Devil Square Omega]";
+mes "Welcome to the entrance door to ^FF0000Devil Square^000000";
+mes "If you die, the door will be closed and you have to wait to open again";
+next;
+menu "Enter",PlayCheck2,"Info",L_info,"Cancel",L_cancel;
+
+PlayCheck2:
+if ( $@DSO_entry == 0 ) goto L_error;
+if ( Baselevel < 255) goto L_req;
+if ( getmapusers("poring_w01") >= 20 ) goto L_toomany;
+next;
+if ( getmapusers("poring_w01") < 21 ) goto Start;
+
+Start:
+if ( $@DSO_entry == 0 ) goto L_error;
+if ( Baselevel < 255) goto L_req;
+if ( getmapusers("poring_w01") >= 20 ) goto L_toomany;
+
+mapannounce "poring_w01", strcharinfo(0)+" has entered the Devil Square",0;
+percentheal 100,100;
+warp "poring_w01",106,127;
+end;
+
+L_error:
+mes "[Devil Square Omega]";
+mes "Devil Square Omega is now closed";
+mes "It will open every 1 Hour.";
+close;
+
+L_req:
+mes "[Devil Square Omega]";
+mes "Minimum base level to enter is 255";
+close;
+
+L_toomany:
+mes "[Devil Square Omega]";
+mes "I'm sorry but Devil Square Omega is FULL";
+mes "Maximum users to enter is 15 players";
+close;
+
+L_info:
+mes "[Devil Square Omega]";
+mes "There are 4 level's of monsters you will encounter";
+mes "Each level the enemies will grow stronger";
+mes "If you pass all 4 levels of monsters, you will get the opportunity to open Treasure Boxes with items, equips, and rare cards inside!!";
+close;
+
+L_cancel:
+mes "[Devil Square Omega]";
+mes "See ya";
+close;
+
+OnInit:
+setarray $MVPIDs[0],1038,1039,1046,1059,1086,1087,1112,1157,1190,1251,1252,1272,1312,1373,1511,1583,1658,1685,1708,1719,1734,1751,1768,1779,1832,1647,1649,1651,1646,1650,1648;
+set $MVPSpawn, $MVPIDs[rand(getarraysize($MVPIDs[0]))];
+}
+
+poring_w01,0,0,0	script	DSO_HiddenNpc	-1,{
+//OnMinute00:
+//if (gettime(3) %2 == 1) end;
+OnClock0010:
+OnClock0110:
+OnClock0210:
+OnClock0310:
+OnClock0410:
+OnClock0510:
+OnClock0610:
+OnClock0710:
+OnClock0810:
+OnClock0910:
+OnClock1010:
+OnClock1110:
+OnClock1210:
+OnClock1310:
+OnClock1410:
+OnClock1510:
+OnClock1610:
+OnClock1710:
+OnClock1810:
+OnClock1910:
+OnClock2010:
+OnClock2110:
+OnClock2210:
+OnClock2310:
+set $@DSO_complete,0;
+disablenpc "Exit#DSO";
+mapannounce "poring_w01","Devil Square Omega is now closed",0;
+mapwarp "force_1-1","prontera",155,181;
+killmonsterall "poring_w01";
+atcommand "@skillon";
+announce "1 Minute until Devil Square Omega starts!!",0;
+set $@DSO_entry,1;
+sleep 60000;
+mapannounce "poring_w01","Devil Square Omega has Begun!!",0;
+mapwarp "ama_test","prontera",155,181;
+initnpctimer;
+set $@DSO_entry,0;
+set $@mobo,131;
+areamonster "poring_w01",102,103,96,103,"Soldier Skeleton",1028,30,"DSO_HiddenNpc::Ondevildead";
+areamonster "poring_w01",102,103,96,103,"Orc Archer",1189,30,"DSO_HiddenNpc::Ondevildead";
+areamonster "poring_w01",102,103,96,103,"Sandman",1165,20,"DSO_HiddenNpc::Ondevildead";
+areamonster "poring_w01",102,103,96,103,"Archer Skeleton",1016,30,"DSO_HiddenNpc::Ondevildead";
+areamonster "poring_w01",102,103,96,103,"Minorous",1149,20,"DSO_HiddenNpc::Ondevildead";
+areamonster "poring_w01",102,103,96,103,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DSO_HiddenNpc::Ondevildead";
+end;
+
+Ondevildead:
+set $@mobo,$@mobo - 1;
+if($@mobo == 25) mapannounce "poring_w01","Devil Square : 25 mobs to enter the 2nd round",0;
+if($@mobo == 5) mapannounce "poring_w01","Devil Square : 5 mobs to enter 2nd round",0;
+if($@mobo == 0) {
+mapannounce "poring_w01","Devil Square will enter the 2nd round",0;
+goto Ondevil2;
+}
+end;
+
+Ondevil2:
+set $@mobo,141;
+areamonster "poring_w01",102,103,96,103,"Gargoyle",1253,30,"DSO_HiddenNpc::Ondevildead2";
+areamonster "poring_w01",102,103,96,103,"Alarm",1193,30,"DSO_HiddenNpc::Ondevildead2";
+areamonster "poring_w01",102,103,96,103,"High Orc",1213,20,"DSO_HiddenNpc::Ondevildead2";
+areamonster "poring_w01",102,103,96,103,"Injustice",1257,30,"DSO_HiddenNpc::Ondevildead2";
+areamonster "poring_w01",102,103,96,103,"Wraith",1192,30,"DSO_HiddenNpc::Ondevildead2";
+areamonster "poring_w01",102,103,96,103,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DSO_HiddenNpc::Ondevildead2";
+areamonster "poring_w01",102,103,96,103,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],1,"DSO_HiddenNpc::Ondevildead2";
+end;
+
+Ondevildead2:
+set $@mobo,$@mobo - 1;
+if($@mobo == 25) mapannounce "poring_w01","Devil Square : 25 mobs left to enter the 3rd round",0;
+if($@mobo == 5) mapannounce "poring_w01","Devil Square : 5 mobs left to enter the 3rd round",0;
+if($@mobo == 0) {
+mapannounce "poring_w01","Devil Square will enter the 3rd round",0;
+goto Ondevil3;
+}
+end;
+
+Ondevil3:
+set $@mobo,112;
+areamonster "poring_w01",102,103,96,103,"Anolian",1206,30,"DSO_HiddenNpc::Ondevildead3";
+areamonster "poring_w01",102,103,96,103,"Wanderer",1208,20,"DSO_HiddenNpc::Ondevildead3";
+areamonster "poring_w01",102,103,96,103,"Deviruchi",1109,30,"DSO_HiddenNpc::Ondevildead3";
+areamonster "poring_w01",102,103,96,103,"Joker",1131,30,"DSO_HiddenNpc::Ondevildead3";
+areamonster "poring_w01",102,103,96,103,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DSO_HiddenNpc::Ondevildead3";
+areamonster "poring_w01",102,103,96,103,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],1,"DSO_HiddenNpc::Ondevildead3";
+areamonster "poring_w01",102,103,96,103,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],1,"DSO_HiddenNpc::Ondevildead3";
+end;
+
+Ondevildead3:
+set $@mobo,$@mobo - 1;
+if($@mobo == 25) mapannounce "poring_w01","Devil Square : 25 mobs left to enter the 4th round",0;
+if($@mobo == 5) mapannounce "poring_w01","Devil Square : 5 mobs left to enter the 4th round",0;
+if($@mobo == 0) {
+mapannounce "poring_w01","Devil Square will enter the 4th round",0;
+goto Ondevil4;
+}
+end;
+
+Ondevil4:
+set $@mobo,113;
+areamonster "poring_w01",102,103,96,103,"Anolian",1206,30,"DSO_HiddenNpc::Ondevildead4";
+areamonster "poring_w01",102,103,96,103,"Wanderer",1208,30,"DSO_HiddenNpc::Ondevildead4";
+areamonster "poring_w01",102,103,96,103,"Deviruchi",1109,30,"DSO_HiddenNpc::Ondevildead4";
+areamonster "poring_w01",102,103,96,103,"Joker",1131,20,"DSO_HiddenNpc::Ondevildead4";
+areamonster "poring_w01",102,103,96,103,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DSO_HiddenNpc::Ondevildead4";
+areamonster "poring_w01",102,103,96,103,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],1,"DSO_HiddenNpc::Ondevildead4";
+areamonster "poring_w01",102,103,96,103,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],1,"DSO_HiddenNpc::Ondevildead4";
+areamonster "poring_w01",102,103,96,103,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],1,"DSO_HiddenNpc::Ondevildead4";
+end;
+
+Ondevildead4:
+set $@mobo,$@mobo - 1;
+if($@mobo == 25) mapannounce "poring_w01","Devil Square : 25 mobs left For VICTORY",0;
+if($@mobo == 5) mapannounce "poring_w01","Devil Square : 5 mobs left For VICTORY",0;
+if($@mobo == 0) {
+mapannounce "poring_w01","Devil Square : CONGRATULATIONS - 1 Treasure Box will be Yours!",0;
+atcommand "@skilloff";
+sleep 3000;
+killmonsterall "poring_w01";
+goto Ondevil5;
+}
+end;
+
+Ondevil5:
+set $@DSO_complete,1;
+set $@mobot,15;
+monster "poring_w01",120,112,"Treasure Box",1327,1,"DSO_HiddenNpc::Onboxdead";
+end;
+
+Onboxdead:
+set $@mobot,$@mobot - 1;
+if($@mobot == 0) mapwarp "poring_w01","prontera",155,181;
+mapannounce "poring_w01", "Devil Square : "+ strcharinfo(0) +" has opened a Treasure Box from Devil Square",0;
+monster "poring_w01",120,112,"Treasure Box",1327,1,"DSO_HiddenNpc::Onboxdead";
+warp "prontera",155,181;
+    switch( rand(300) ) {
+        case 0:    getitem 3340,1;    break;
+        case 1:    getitem 3341,1;    break;
+        case 2:    getitem 3342,1;    break;
+        case 3:    getitem 3343,1;    break;
+        case 4:    getitem 3344,1;    break;
+        case 5:    getitem 3345,1;    break;
+        case 6:    getitem 3347,1;    break;
+        case 7:    getitem 3348,1;    break;
+        case 8:    getitem 3349,1;    break;
+        case 9:    getitem 3350,1;    break;
+        case 10:    getitem 3351,1;    break;
+        case 11:    getitem 3352,1;    break;
+        case 12:    getitem 3353,1;    break;
+        case 13:    getitem 3354,1;    break;
+        case 14:    getitem 3355,1;    break;
+        case 15:    getitem 3307,1;    break;
+        case 16:    getitem 3306,1;    break;
+        case 17:    getitem 3403,1;    break;
+        case 18:    getitem 3404,1;    break;
+        case 19:    getitem 3405,1;    break;
+        case 20:    getitem 3406,1;    break;
+        case 21:    getitem 3407,1;    break;
+        case 22:    getitem 3408,1;    break;
+        case 23:    getitem 3409,1;    break;
+        case 24:    getitem 3410,1;    break;
+        case 25:    getitem 3411,1;    break;
+        case 26:    getitem 3412,1;    break;
+        case 27:    getitem 3413,1;    break;
+        case 28:    getitem 3414,1;    break;
+        case 29:    getitem 3415,1;    break;
+        case 30:    getitem 3416,1;    break;
+        case 31:    getitem 3417,1;    break;
+        case 32:    getitem 3418,1;    break;
+        case 33:    getitem 3419,1;    break;
+        case 34:    getitem 3420,1;    break;
+        case 35:    getitem 3421,1;    break;
+        case 36:    getitem 3422,1;    break;
+        case 37:    getitem 3423,1;    break;
+        case 38:    getitem 3424,1;    break;
+        case 39:    getitem 3425,1;    break;
+        case 40:    getitem 3426,1;    break;
+        case 41:    getitem 3427,1;    break;
+        case 42:    getitem 3428,1;    break;
+        case 43:    getitem 3429,1;    break;
+        case 44:    getitem 3430,1;    break;
+        case 45:    getitem 3431,1;    break;
+        case 46:    getitem 3432,1;    break;
+        case 47:    getitem 3433,1;    break;
+        case 48:    getitem 3434,1;    break;
+        case 49:    getitem 3435,1;    break;
+        case 50:    getitem 3436,1;    break;
+        case 51:    getitem 3437,1;    break;
+        case 52:    getitem 3438,1;    break;
+        case 53:    getitem 3439,1;    break;
+        case 54:    getitem 3321,1;    break;
+        case 55:    getitem 3441,1;    break;
+        case 56:    getitem 3442,1;    break;
+        case 57:    getitem 3443,1;    break;
+        case 58:    getitem 3444,1;    break;
+        case 59:    getitem 3322,1;    break;
+        case 60:    getitem 3323,1;    break;
+        case 61:    getitem 3324,1;    break;
+        case 62:    getitem 3325,1;    break;
+        case 63:    getitem 3326,1;    break;
+        case 64:    getitem 3327,1;    break;
+        case 65:    getitem 3328,1;    break;
+        case 66:    getitem 512,1;    break;
+        case 67:    getitem 512,1;    break;
+        case 68:    getitem 513,1;    break;
+        case 69:    getitem 513,1;    break;
+        case 70:    getitem 514,1;    break;
+        case 71:    getitem 514,1;    break;
+        case 72:    getitem 515,1;    break;
+        case 73:    getitem 515,1;    break;
+        case 74:    getitem 516,1;    break;
+        case 75:    getitem 516,1;    break;
+        case 76:    getitem 512,1;    break;
+        case 77:    getitem 512,1;    break;
+        case 78:    getitem 513,1;    break;
+        case 79:    getitem 513,1;    break;
+        case 80:    getitem 514,1;    break;
+        case 81:    getitem 514,1;    break;
+        case 82:    getitem 515,1;    break;
+        case 83:    getitem 515,1;    break;
+        case 84:    getitem 516,1;    break;
+        case 85:    getitem 516,1;    break;
+        case 86:    getitem 512,1;    break;
+        case 87:    getitem 512,1;    break;
+        case 88:    getitem 513,1;    break;
+        case 89:    getitem 513,1;    break;
+        case 90:    getitem 514,1;    break;
+        case 91:    getitem 514,1;    break;
+        case 92:    getitem 515,1;    break;
+        case 93:    getitem 515,1;    break;
+        case 94:    getitem 516,1;    break;
+        case 95:    getitem 516,1;    break;
+        case 96:    getitem 512,1;    break;
+        case 97:    getitem 512,1;    break;
+        case 98:    getitem 513,1;    break;
+        case 99:    getitem 513,1;    break;
+        case 100:    getitem 514,1;    break;
+        case 101:    getitem 514,1;    break;
+        case 102:    getitem 515,1;    break;
+        case 103:    getitem 515,1;    break;
+        case 104:    getitem 516,1;    break;
+        case 105:    getitem 516,1;    break;
+        case 106:    getitem 512,1;    break;
+        case 107:    getitem 512,1;    break;
+        case 108:    getitem 513,1;    break;
+        case 109:    getitem 513,1;    break;
+        case 110:    getitem 514,1;    break;
+        case 111:    getitem 514,1;    break;
+        case 112:    getitem 515,1;    break;
+        case 113:    getitem 515,1;    break;
+        case 114:    getitem 516,1;    break;
+        case 115:    getitem 516,1;    break;
+        case 116:    getitem 512,1;    break;
+        case 117:    getitem 512,1;    break;
+        case 118:    getitem 513,1;    break;
+        case 119:    getitem 513,1;    break;
+        case 120:    getitem 514,1;    break;
+        case 121:    getitem 514,1;    break;
+        case 122:    getitem 515,1;    break;
+        case 123:    getitem 515,1;    break;
+        case 124:    getitem 516,1;    break;
+        case 125:    getitem 516,1;    break;
+        case 126:    getitem 512,1;    break;
+        case 127:    getitem 512,1;    break;
+        case 128:    getitem 513,1;    break;
+        case 129:    getitem 513,1;    break;
+        case 130:    getitem 514,1;    break;
+        case 131:    getitem 514,1;    break;
+        case 132:    getitem 515,1;    break;
+        case 133:    getitem 515,1;    break;
+        case 134:    getitem 516,1;    break;
+        case 135:    getitem 516,1;    break;
+        case 136:    getitem 512,1;    break;
+        case 137:    getitem 512,1;    break;
+        case 138:    getitem 513,1;    break;
+        case 139:    getitem 513,1;    break;
+        case 140:    getitem 514,1;    break;
+        case 141:    getitem 514,1;    break;
+        case 142:    getitem 515,1;    break;
+        case 143:    getitem 515,1;    break;
+        case 144:    getitem 516,1;    break;
+        case 145:    getitem 516,1;    break;
+        case 146:    getitem 512,1;    break;
+        case 147:    getitem 512,1;    break;
+        case 148:    getitem 513,1;    break;
+        case 149:    getitem 513,1;    break;
+        case 150:    getitem 514,1;    break;
+        case 151:    getitem 514,1;    break;
+        case 152:    getitem 515,1;    break;
+        case 153:    getitem 515,1;    break;
+        case 154:    getitem 516,1;    break;
+        case 155:    getitem 516,1;    break;
+        case 156:    getitem 512,1;    break;
+        case 157:    getitem 512,1;    break;
+        case 158:    getitem 513,1;    break;
+        case 159:    getitem 513,1;    break;
+        case 160:    getitem 514,1;    break;
+        case 161:    getitem 514,1;    break;
+        case 162:    getitem 515,1;    break;
+        case 163:    getitem 515,1;    break;
+        case 164:    getitem 516,1;    break;
+        case 165:    getitem 516,1;    break;
+        case 166:    getitem 512,1;    break;
+        case 167:    getitem 512,1;    break;
+        case 168:    getitem 513,1;    break;
+        case 169:    getitem 513,1;    break;
+        case 170:    getitem 514,1;    break;
+        case 171:    getitem 514,1;    break;
+        case 172:    getitem 515,1;    break;
+        case 173:    getitem 515,1;    break;
+        case 174:    getitem 516,1;    break;
+        case 175:    getitem 516,1;    break;
+        case 176:    getitem 512,1;    break;
+        case 177:    getitem 512,1;    break;
+        case 178:    getitem 513,1;    break;
+        case 179:    getitem 513,1;    break;
+        case 180:    getitem 514,1;    break;
+        case 181:    getitem 514,1;    break;
+        case 182:    getitem 515,1;    break;
+        case 183:    getitem 515,1;    break;
+        case 184:    getitem 516,1;    break;
+        case 185:    getitem 516,1;    break;
+        case 186:    getitem 512,1;    break;
+        case 187:    getitem 512,1;    break;
+        case 188:    getitem 513,1;    break;
+        case 189:    getitem 513,1;    break;
+        case 190:    getitem 23003,1;    break;
+        case 191:    getitem 23004,1;    break;
+        case 192:    getitem 23005,1;    break;
+        case 193:    getitem 23063,1;    break;
+        case 194:    getitem 23064,1;    break;
+        case 195:    getitem 23065,1;    break;
+        case 196:    getitem 3200,1;    break;
+        case 197:    getitem 3201,1;    break;
+        case 198:    getitem 3202,1;    break;
+        case 199:    getitem 3273,1;    break;
+    }
+if ($@mobo == 0) enablenpc "Exit#DSO";
+end;
+
+OnTimer30000:
+if ( $@DSO_complete == 1 ) {
+stopnpctimer;
+end;
+} else
+if (getmapusers("poring_w01") == 0) {
+announce "All players failed to survive Devil Square",0;
+killmonsterall "poring_w01";
+stopnpctimer;
+end;
+} else {
+mapannounce "poring_w01",getmapusers("poring_w01") +" players still survive at Devil Square",0;
+initnpctimer;
+end;
+}
+
+OnPCDieEvent:
+getmapxy(.@mapname$, .@mapx, .@mapy, 0);
+if(.@mapname$ == "poring_w01") {
+sleep2 1;
+if(!Deaths) set Deaths, 0;
+set Deaths, Deaths + 1;
+if ( Deaths==1 ) {
+warp "SavePoint",0,0;
+set hp,100;
+set Deaths, 0;
+end;
+}
+if ( Deaths==2 ) {
+warp "SavePoint",0,0;
+set hp,100;
+set Deaths, 0;
+end;
+}
+}
+}
+// -- Mapflags
+poring_w01	mapflag	nowarp
+poring_w01	mapflag	nowarpto
+poring_w01	mapflag	noteleport
+poring_w01	mapflag	nosave	SavePoint
+poring_w01	mapflag	nomemo
+poring_w01	mapflag	nobranch
+poring_w01	mapflag	nopenalty
+poring_w01	mapflag	pvp	off
+poring_w01	mapflag	noloot
+poring_w01	mapflag	novending
+poring_w01	mapflag	nochat
+ama_test	mapflag	nowarp
+ama_test	mapflag	nowarpto
+ama_test	mapflag	noteleport
+ama_test	mapflag	nosave	SavePoint
+ama_test	mapflag	nomemo
+ama_test	mapflag	nobranch
+ama_test	mapflag	nopenalty
+ama_test	mapflag	pvp	off
+ama_test	mapflag	noloot
+ama_test	mapflag	novending
+ama_test	mapflag	nochat
+
+poring_w01,93,122,7	script	Exit#DSO	51,{
+mes "[Exit]";
+mes "See ya";
+next;
+warp "SavePoint",0,0;
+close;
+}
+
+//Devil Square Elite
+//-----------------------------------------------
+
+prontera.gat,147,232,5	script	Devil Square Elite	965,{
+mes "[Devil Square Elite]";
+mes "Welcome to the entrance door to ^FF0000Devil Square^000000";
+mes "If you die, the door will be closed and you have to wait to open again";
+next;
+menu "Enter",PlayCheck1,"Info",L_info,"Cancel",L_cancel;
+
+PlayCheck1:
+if ( $@DSE_entry == 0 ) goto L_error;
+if ( Baselevel < 255) goto L_req;
+if ( getmapusers("guild_vs4") >= 25 ) goto L_toomany;
+
+warp "guild_vs4",50,49;
+end;
+
+L_error:
+mes "[Devil Square Elite]";
+mes "Devil Square Elite is now closed";
+mes "It will open every 2 Hours.";
+close;
+
+L_req:
+mes "[Devil Square Elite]";
+mes "Minimum base level to enter is 255";
+close;
+
+L_toomany:
+mes "[Devil Square Elite]";
+mes "I'm sorry but Devil Square Elite is FULL";
+mes "Maximum users to enter is 20 players";
+close;
+
+L_info:
+mes "[Devil Square Elite]";
+mes "There are 5 level's of monsters you will encounter";
+mes "Each level the enemies will grow stronger";
+mes "If you pass all 5 levels of monsters, you will get the opportunity to open Treasure Boxes with items, equips, and rare cards inside!!";
+close;
+
+L_cancel:
+mes "[Devil Square Elite]";
+mes "See ya";
+close;
+}
+
+guild_vs4.gat,50,56,4	script	Devil-Square Elite	965,{
+mes "[Devil Square Elite]";
+mes "Welcome to the entrance door to ^FF0000Devil Square^000000";
+mes "If you die, the door will be closed and you have to wait to open again";
+next;
+menu "Enter",PlayCheck2,"Info",L_info,"Cancel",L_cancel;
+
+PlayCheck2:
+if ( $@DSE_entry == 0 ) goto L_error;
+if ( Baselevel < 255) goto L_req;
+if ( getmapusers("06guild_01") >= 25 ) goto L_toomany;
+next;
+if ( getmapusers("06guild_01") < 26 ) goto Start;
+
+Start:
+if ( $@DSE_entry == 0 ) goto L_error;
+if ( Baselevel < 255) goto L_req;
+if ( getmapusers("06guild_01") >= 25 ) goto L_toomany;
+
+mapannounce "06guild_01", strcharinfo(0)+" has entered the Devil Square",0;
+percentheal 100,100;
+warp "06guild_01",184,184;
+end;
+
+L_error:
+mes "[Devil Square Elite]";
+mes "Devil Square Elite is now closed";
+mes "It will open every 2 Hours.";
+close;
+
+L_req:
+mes "[Devil Square Elite]";
+mes "Minimum base level to enter is 255";
+close;
+
+L_toomany:
+mes "[Devil Square Elite]";
+mes "I'm sorry but Devil Square Elite is FULL";
+mes "Maximum users to enter is 20 players";
+close;
+
+L_info:
+mes "[Devil Square Elite]";
+mes "There are 5 level's of monsters you will encounter";
+mes "Each level the enemies will grow stronger";
+mes "If you pass all 5 levels of monsters, you will get the opportunity to open Treasure Boxes with items, equips, and rare cards inside!!";
+close;
+
+L_cancel:
+mes "[Devil Square Elite]";
+mes "See ya";
+close;
+
+OnInit:
+setarray $MVPIDs[0],1038,1039,1046,1059,1086,1087,1112,1157,1190,1251,1252,1272,1312,1373,1511,1583,1658,1685,1708,1719,1734,1751,1768,1779,1832,1647,1649,1651,1646,1650,1648;
+set $MVPSpawn, $MVPIDs[rand(getarraysize($MVPIDs[0]))];
+}
+
+06guild_01,0,0,0	script	DSE_HiddenNpc	-1,{
+//OnMinute00:
+//if (gettime(3) %2 == 1) end;
+OnClock0040:
+OnClock0240:
+OnClock0440:
+OnClock0640:
+OnClock0840:
+OnClock1040:
+OnClock1240:
+OnClock1440:
+OnClock1640:
+OnClock1840:
+OnClock2040:
+OnClock2240:
+set $@DSE_complete,0;
+disablenpc "Exit#DSE";
+mapannounce "06guild_01","Devil Square Elite is now closed",0;
+mapwarp "force_1-1","prontera",155,181;
+killmonsterall "06guild_01";
+atcommand "@skillon";
+announce "1 Minute until Devil Square Elite starts!!",0;
+set $@DSE_entry,1;
+sleep 60000;
+mapannounce "06guild_01","Devil Square Elite has Begun!!",0;
+mapwarp "guild_vs4","prontera",155,181;
+initnpctimer;
+set $@DSE_entry,0;
+set $@mobe,171;
+areamonster "06guild_01",53,49,46,49,"Soldier Skeleton",1028,30,"DSE_HiddenNpc::Ondevildead";
+areamonster "06guild_01",53,49,46,49,"Orc Archer",1189,40,"DSE_HiddenNpc::Ondevildead";
+areamonster "06guild_01",53,49,46,49,"Sandman",1165,30,"DSE_HiddenNpc::Ondevildead";
+areamonster "06guild_01",53,49,46,49,"Archer Skeleton",1016,40,"DSE_HiddenNpc::Ondevildead";
+areamonster "06guild_01",53,49,46,49,"Minorous",1149,30,"DSE_HiddenNpc::Ondevildead";
+areamonster "06guild_01",53,49,46,49,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DSE_HiddenNpc::Ondevildead";
+end;
+
+Ondevildead:
+set $@mobe,$@mobe - 1;
+if($@mobe == 25) mapannounce "06guild_01","Devil Square : 25 mobs to enter the 2nd round",0;
+if($@mobe == 5) mapannounce "06guild_01","Devil Square : 5 mobs to enter 2nd round",0;
+if($@mobe == 0) {
+mapannounce "06guild_01","Devil Square will enter the 2nd round",0;
+goto Ondevil2;
+}
+end;
+
+Ondevil2:
+set $@mobe,171;
+areamonster "06guild_01",53,49,46,49,"Gargoyle",1253,30,"DSE_HiddenNpc::Ondevildead2";
+areamonster "06guild_01",53,49,46,49,"Alarm",1193,40,"DSE_HiddenNpc::Ondevildead2";
+areamonster "06guild_01",53,49,46,49,"High Orc",1213,30,"DSE_HiddenNpc::Ondevildead2";
+areamonster "06guild_01",53,49,46,49,"Injustice",1257,40,"DSE_HiddenNpc::Ondevildead2";
+areamonster "06guild_01",53,49,46,49,"Wraith",1192,30,"DSE_HiddenNpc::Ondevildead2";
+areamonster "06guild_01",53,49,46,49,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DSE_HiddenNpc::Ondevildead2";
+areamonster "06guild_01",53,49,46,49,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],1,"DSE_HiddenNpc::Ondevildead2";
+end;
+
+Ondevildead2:
+set $@mobe,$@mobe - 1;
+if($@mobe == 25) mapannounce "06guild_01","Devil Square : 25 mobs left to enter the 3rd round",0;
+if($@mobe == 5) mapannounce "06guild_01","Devil Square : 5 mobs left to enter the 3rd round",0;
+if($@mobe == 0) {
+mapannounce "06guild_01","Devil Square will enter the 3rd round",0;
+goto Ondevil3;
+}
+end;
+
+Ondevil3:
+set $@mobe,133;
+areamonster "06guild_01",53,49,46,49,"Anolian",1206,30,"DSE_HiddenNpc::Ondevildead3";
+areamonster "06guild_01",53,49,46,49,"Wanderer",1208,30,"DSE_HiddenNpc::Ondevildead3";
+areamonster "06guild_01",53,49,46,49,"Deviruchi",1109,30,"DSE_HiddenNpc::Ondevildead3";
+areamonster "06guild_01",53,49,46,49,"Joker",1131,40,"DSE_HiddenNpc::Ondevildead3";
+areamonster "06guild_01",53,49,46,49,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DSE_HiddenNpc::Ondevildead3";
+areamonster "06guild_01",53,49,46,49,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],1,"DSE_HiddenNpc::Ondevildead3";
+areamonster "06guild_01",53,49,46,49,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],1,"DSE_HiddenNpc::Ondevildead3";
+end;
+
+Ondevildead3:
+set $@mobe,$@mobe - 1;
+if($@mobe == 25) mapannounce "06guild_01","Devil Square : 25 mobs left to enter the 4th round",0;
+if($@mobe == 5) mapannounce "06guild_01","Devil Square : 5 mobs left to enter the 4th round",0;
+if($@mobe == 0) {
+mapannounce "06guild_01","Devil Square will enter the 4th round",0;
+goto Ondevil4;
+}
+end;
+
+Ondevil4:
+set $@mobe,132;
+areamonster "06guild_01",53,49,46,49,"Anolian",1206,30,"DSE_HiddenNpc::Ondevildead4";
+areamonster "06guild_01",53,49,46,49,"Wanderer",1208,30,"DSE_HiddenNpc::Ondevildead4";
+areamonster "06guild_01",53,49,46,49,"Deviruchi",1109,30,"DSE_HiddenNpc::Ondevildead4";
+areamonster "06guild_01",53,49,46,49,"Joker",1131,40,"DSE_HiddenNpc::Ondevildead4";
+areamonster "06guild_01",53,49,46,49,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],2,"DSE_HiddenNpc::Ondevildead4";
+areamonster "06guild_01",53,49,46,49,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],1,"DSE_HiddenNpc::Ondevildead4";
+areamonster "06guild_01",53,49,46,49,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],1,"DSE_HiddenNpc::Ondevildead4";
+areamonster "06guild_01",53,49,46,49,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],1,"DSE_HiddenNpc::Ondevildead4";
+end;
+
+Ondevildead4:
+set $@mobe,$@mobe - 1;
+if($@mobe == 25) mapannounce "06guild_01","Devil Square : 25 mobs left to enter the 5th round",0;
+if($@mobe == 5) mapannounce "06guild_01","Devil Square : 5 mobs left to enter the 5th round",0;
+if($@mobe == 0) {
+mapannounce "06guild_01","Devil Square will enter the 5th round",0;
+goto Ondevil5;
+}
+end;
+
+Ondevil5:
+set $@mobe,163;
+areamonster "06guild_01",53,49,46,49,"Anolian",1206,40,"DSE_HiddenNpc::Ondevildead5";
+areamonster "06guild_01",53,49,46,49,"Wanderer",1208,40,"DSE_HiddenNpc::Ondevildead5";
+areamonster "06guild_01",53,49,46,49,"Deviruchi",1109,40,"DSE_HiddenNpc::Ondevildead5";
+areamonster "06guild_01",53,49,46,49,"Joker",1131,40,"DSE_HiddenNpc::Ondevildead5";
+areamonster "06guild_01",53,49,46,49,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],1,"DSE_HiddenNpc::Ondevildead5";
+areamonster "06guild_01",53,49,46,49,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],1,"DSE_HiddenNpc::Ondevildead5";
+areamonster "06guild_01",53,49,46,49,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],1,"DSE_HiddenNpc::Ondevildead5";
+areamonster "06guild_01",53,49,46,49,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],1,"DSE_HiddenNpc::Ondevildead5";
+areamonster "06guild_01",53,49,46,49,"--Keil--", $MVPIDs[rand(getarraysize($MVPIDs[0]))],1,"DSE_HiddenNpc::Ondevildead5";
+end;
+
+Ondevildead5:
+set $@mobe,$@mobe - 1;
+if($@mobe == 25) mapannounce "06guild_01","Devil Square : 25 mobs left For VICTORY",0;
+if($@mobe == 5) mapannounce "06guild_01","Devil Square : 5 mobs left For VICTORY",0;
+if($@mobe == 0) {
+mapannounce "06guild_01","Devil Square : CONGRATULATIONS - 1 Treasure Box will be Yours!",0;
+atcommand "@skilloff";
+sleep 3000;
+killmonsterall "06guild_01";
+goto Ondevil6;
+}
+end;
+
+Ondevil6:
+set $@DSE_complete,1;
+set $@mobet,20;
+monster "06guild_01",64,65,"Treasure Box",1327,1,"DSE_HiddenNpc::Onboxdead";
+end;
+
+Onboxdead:
+set $@mobet,$@mobet - 1;
+if($@mobet == 0) mapwarp "06guild_01","prontera",155,181;
+mapannounce "06guild_01", "Devil Square : "+ strcharinfo(0) +" has opened a Treasure Box from Devil Square",0;
+monster "06guild_01",64,65,"Treasure Box",1327,1,"DSE_HiddenNpc::Onboxdead";
+warp "prontera",155,181;
+    switch( rand(300) ) {
+        case 0:    getitem 3340,1;    break;
+        case 1:    getitem 3341,1;    break;
+        case 2:    getitem 3342,1;    break;
+        case 3:    getitem 3343,1;    break;
+        case 4:    getitem 3344,1;    break;
+        case 5:    getitem 3345,1;    break;
+        case 6:    getitem 3347,1;    break;
+        case 7:    getitem 3348,1;    break;
+        case 8:    getitem 3349,1;    break;
+        case 9:    getitem 3350,1;    break;
+        case 10:    getitem 3351,1;    break;
+        case 11:    getitem 3352,1;    break;
+        case 12:    getitem 3353,1;    break;
+        case 13:    getitem 3354,1;    break;
+        case 14:    getitem 3355,1;    break;
+        case 15:    getitem 3307,1;    break;
+        case 16:    getitem 3306,1;    break;
+        case 17:    getitem 3403,1;    break;
+        case 18:    getitem 3404,1;    break;
+        case 19:    getitem 3405,1;    break;
+        case 20:    getitem 3406,1;    break;
+        case 21:    getitem 3407,1;    break;
+        case 22:    getitem 3408,1;    break;
+        case 23:    getitem 3409,1;    break;
+        case 24:    getitem 3410,1;    break;
+        case 25:    getitem 3411,1;    break;
+        case 26:    getitem 3412,1;    break;
+        case 27:    getitem 3413,1;    break;
+        case 28:    getitem 3414,1;    break;
+        case 29:    getitem 3415,1;    break;
+        case 30:    getitem 3416,1;    break;
+        case 31:    getitem 3417,1;    break;
+        case 32:    getitem 3418,1;    break;
+        case 33:    getitem 3419,1;    break;
+        case 34:    getitem 3420,1;    break;
+        case 35:    getitem 3421,1;    break;
+        case 36:    getitem 3422,1;    break;
+        case 37:    getitem 3423,1;    break;
+        case 38:    getitem 3424,1;    break;
+        case 39:    getitem 3425,1;    break;
+        case 40:    getitem 3426,1;    break;
+        case 41:    getitem 3427,1;    break;
+        case 42:    getitem 3428,1;    break;
+        case 43:    getitem 3429,1;    break;
+        case 44:    getitem 3430,1;    break;
+        case 45:    getitem 3431,1;    break;
+        case 46:    getitem 3432,1;    break;
+        case 47:    getitem 3433,1;    break;
+        case 48:    getitem 3434,1;    break;
+        case 49:    getitem 3435,1;    break;
+        case 50:    getitem 3436,1;    break;
+        case 51:    getitem 3437,1;    break;
+        case 52:    getitem 3438,1;    break;
+        case 53:    getitem 3439,1;    break;
+        case 54:    getitem 3321,1;    break;
+        case 55:    getitem 3441,1;    break;
+        case 56:    getitem 3442,1;    break;
+        case 57:    getitem 3443,1;    break;
+        case 58:    getitem 3444,1;    break;
+        case 59:    getitem 3322,1;    break;
+        case 60:    getitem 3323,1;    break;
+        case 61:    getitem 3324,1;    break;
+        case 62:    getitem 3325,1;    break;
+        case 63:    getitem 3326,1;    break;
+        case 64:    getitem 3327,1;    break;
+        case 65:    getitem 3328,1;    break;
+        case 66:    getitem 512,1;    break;
+        case 67:    getitem 512,1;    break;
+        case 68:    getitem 513,1;    break;
+        case 69:    getitem 513,1;    break;
+        case 70:    getitem 514,1;    break;
+        case 71:    getitem 514,1;    break;
+        case 72:    getitem 515,1;    break;
+        case 73:    getitem 515,1;    break;
+        case 74:    getitem 516,1;    break;
+        case 75:    getitem 516,1;    break;
+        case 76:    getitem 512,1;    break;
+        case 77:    getitem 512,1;    break;
+        case 78:    getitem 513,1;    break;
+        case 79:    getitem 513,1;    break;
+        case 80:    getitem 514,1;    break;
+        case 81:    getitem 514,1;    break;
+        case 82:    getitem 515,1;    break;
+        case 83:    getitem 515,1;    break;
+        case 84:    getitem 516,1;    break;
+        case 85:    getitem 516,1;    break;
+        case 86:    getitem 512,1;    break;
+        case 87:    getitem 512,1;    break;
+        case 88:    getitem 513,1;    break;
+        case 89:    getitem 513,1;    break;
+        case 90:    getitem 514,1;    break;
+        case 91:    getitem 514,1;    break;
+        case 92:    getitem 515,1;    break;
+        case 93:    getitem 515,1;    break;
+        case 94:    getitem 516,1;    break;
+        case 95:    getitem 516,1;    break;
+        case 96:    getitem 512,1;    break;
+        case 97:    getitem 512,1;    break;
+        case 98:    getitem 513,1;    break;
+        case 99:    getitem 513,1;    break;
+        case 100:    getitem 514,1;    break;
+        case 101:    getitem 514,1;    break;
+        case 102:    getitem 515,1;    break;
+        case 103:    getitem 515,1;    break;
+        case 104:    getitem 516,1;    break;
+        case 105:    getitem 516,1;    break;
+        case 106:    getitem 512,1;    break;
+        case 107:    getitem 512,1;    break;
+        case 108:    getitem 513,1;    break;
+        case 109:    getitem 513,1;    break;
+        case 110:    getitem 514,1;    break;
+        case 111:    getitem 514,1;    break;
+        case 112:    getitem 515,1;    break;
+        case 113:    getitem 515,1;    break;
+        case 114:    getitem 516,1;    break;
+        case 115:    getitem 516,1;    break;
+        case 116:    getitem 512,1;    break;
+        case 117:    getitem 512,1;    break;
+        case 118:    getitem 513,1;    break;
+        case 119:    getitem 513,1;    break;
+        case 120:    getitem 514,1;    break;
+        case 121:    getitem 514,1;    break;
+        case 122:    getitem 515,1;    break;
+        case 123:    getitem 515,1;    break;
+        case 124:    getitem 516,1;    break;
+        case 125:    getitem 516,1;    break;
+        case 126:    getitem 512,1;    break;
+        case 127:    getitem 512,1;    break;
+        case 128:    getitem 513,1;    break;
+        case 129:    getitem 513,1;    break;
+        case 130:    getitem 514,1;    break;
+        case 131:    getitem 514,1;    break;
+        case 132:    getitem 515,1;    break;
+        case 133:    getitem 515,1;    break;
+        case 134:    getitem 516,1;    break;
+        case 135:    getitem 516,1;    break;
+        case 136:    getitem 512,1;    break;
+        case 137:    getitem 512,1;    break;
+        case 138:    getitem 513,1;    break;
+        case 139:    getitem 513,1;    break;
+        case 140:    getitem 514,1;    break;
+        case 141:    getitem 514,1;    break;
+        case 142:    getitem 515,1;    break;
+        case 143:    getitem 515,1;    break;
+        case 144:    getitem 516,1;    break;
+        case 145:    getitem 516,1;    break;
+        case 146:    getitem 512,1;    break;
+        case 147:    getitem 512,1;    break;
+        case 148:    getitem 513,1;    break;
+        case 149:    getitem 513,1;    break;
+        case 150:    getitem 514,1;    break;
+        case 151:    getitem 514,1;    break;
+        case 152:    getitem 515,1;    break;
+        case 153:    getitem 515,1;    break;
+        case 154:    getitem 516,1;    break;
+        case 155:    getitem 516,1;    break;
+        case 156:    getitem 512,1;    break;
+        case 157:    getitem 512,1;    break;
+        case 158:    getitem 513,1;    break;
+        case 159:    getitem 513,1;    break;
+        case 160:    getitem 514,1;    break;
+        case 161:    getitem 514,1;    break;
+        case 162:    getitem 515,1;    break;
+        case 163:    getitem 515,1;    break;
+        case 164:    getitem 516,1;    break;
+        case 165:    getitem 516,1;    break;
+        case 166:    getitem 512,1;    break;
+        case 167:    getitem 512,1;    break;
+        case 168:    getitem 513,1;    break;
+        case 169:    getitem 513,1;    break;
+        case 170:    getitem 514,1;    break;
+        case 171:    getitem 514,1;    break;
+        case 172:    getitem 515,1;    break;
+        case 173:    getitem 515,1;    break;
+        case 174:    getitem 516,1;    break;
+        case 175:    getitem 516,1;    break;
+        case 176:    getitem 512,1;    break;
+        case 177:    getitem 512,1;    break;
+        case 178:    getitem 513,1;    break;
+        case 179:    getitem 513,1;    break;
+        case 180:    getitem 514,1;    break;
+        case 181:    getitem 514,1;    break;
+        case 182:    getitem 515,1;    break;
+        case 183:    getitem 515,1;    break;
+        case 184:    getitem 516,1;    break;
+        case 185:    getitem 516,1;    break;
+        case 186:    getitem 512,1;    break;
+        case 187:    getitem 512,1;    break;
+        case 188:    getitem 513,1;    break;
+        case 189:    getitem 513,1;    break;
+        case 190:    getitem 23003,1;    break;
+        case 191:    getitem 23004,1;    break;
+        case 192:    getitem 23005,1;    break;
+        case 193:    getitem 23063,1;    break;
+        case 194:    getitem 23064,1;    break;
+        case 195:    getitem 23065,1;    break;
+        case 196:    getitem 3200,1;    break;
+        case 197:    getitem 3201,1;    break;
+        case 198:    getitem 3202,1;    break;
+        case 199:    getitem 3273,1;    break;
+    }
+if ($@mobe == 0) enablenpc "Exit#DSE";
+end;
+
+OnTimer30000:
+if ( $@DSE_complete == 1 ) {
+stopnpctimer;
+end;
+} else
+if (getmapusers("06guild_01") == 0) {
+announce "All players failed to survive Devil Square",0;
+killmonsterall "06guild_01";
+stopnpctimer;
+end;
+} else {
+mapannounce "06guild_01",getmapusers("06guild_01") +" players still survive at Devil Square",0;
+initnpctimer;
+end;
+}
+
+OnPCDieEvent:
+getmapxy(.@mapname$, .@mapx, .@mapy, 0);
+if(.@mapname$ == "06guild_01") {
+sleep2 1;
+if(!Deaths) set Deaths, 0;
+set Deaths, Deaths + 1;
+if ( Deaths==1 ) {
+warp "SavePoint",0,0;
+set hp,100;
+set Deaths, 0;
+end;
+}
+if ( Deaths==2 ) {
+warp "SavePoint",0,0;
+set hp,100;
+set Deaths, 0;
+end;
+}
+}
+}
+// -- Mapflags
+06guild_01	mapflag	nowarp
+06guild_01	mapflag	nowarpto
+06guild_01	mapflag	noteleport
+06guild_01	mapflag	nosave	SavePoint
+06guild_01	mapflag	nomemo
+06guild_01	mapflag	nobranch
+06guild_01	mapflag	nopenalty
+06guild_01	mapflag	pvp	off
+06guild_01	mapflag	noloot
+06guild_01	mapflag	novending
+06guild_01	mapflag	nochat
+guild_vs4	mapflag	nowarp
+guild_vs4	mapflag	nowarpto
+guild_vs4	mapflag	noteleport
+guild_vs4	mapflag	nosave	SavePoint
+guild_vs4	mapflag	nomemo
+guild_vs4	mapflag	nobranch
+guild_vs4	mapflag	nopenalty
+guild_vs4	mapflag	pvp	off
+guild_vs4	mapflag	noloot
+guild_vs4	mapflag	novending
+guild_vs4	mapflag	nochat
+
+06guild_01,69,63,4	script	Exit#DSE	51,{
+mes "[Exit]";
+mes "See ya";
+next;
+warp "SavePoint",0,0;
+close;
+}
+
+//Devil Arena
+//-----------------------------------------------
+
+prontera.gat,141,226,5	script	Devil Arena	984,{
+mes "[Devil Arena]";
+mes "Welcome to the entrance door to ^FF0000Devil Arena^000000";
+mes "If you die, the door will be closed and you have to wait to open again";
+next;
+menu "Enter",PlayCheck1,"Info",L_info,"Cancel",L_cancel;
+
+PlayCheck1:
+if ( $@DA_entry == 0 ) goto L_error;
+if ( Baselevel < 255) goto L_req;
+if ( getmapusers("ama_test") >= 10 ) goto L_toomany;
+
+warp "ama_test",51,30;
+end;
+
+L_error:
+mes "[Devil Arena]";
+mes "Devil Arena is now closed";
+mes "It will open 25 Minutes after every Hour.";
+close;
+
+L_req:
+mes "[Devil Arena]";
+mes "Minimum base level to enter is 255";
+close;
+
+L_toomany:
+mes "[Devil Arena]";
+mes "I'm sorry but Devil Arena is FULL";
+mes "Maximum users to enter is 10 players";
+close;
+
+L_info:
+mes "[Devil Arena]";
+mes "There 10 Players in the arena who will fight to the death";
+mes "Be sure to attack the strongest players first";
+mes "If you are the last player alive, you will get to open a Treasure Box with items, equips, and rare cards inside!!";
+close;
+
+L_cancel:
+mes "[Devil Arena]";
+mes "See ya";
+close;
+}
+
+ama_test.gat,50,33,4	script	Devil-Arena	984,{
+mes "[Devil Arena]";
+mes "Welcome to the entrance door to ^FF0000Devil Arena^000000";
+mes "If you die, the door will be closed and you have to wait to open again";
+next;
+menu "Enter",PlayCheck2,"Info",L_info,"Cancel",L_cancel;
+
+PlayCheck2:
+if ( $@DA_entry == 0 ) goto L_error;
+if ( Baselevel < 255) goto L_req;
+if ( getmapusers("guild_vs1") >= 10 ) goto L_toomany;
+next;
+if ( getmapusers("guild_vs1") < 11 ) goto Start;
+
+Start:
+if ( $@DA_entry == 0 ) goto L_error;
+if ( Baselevel < 255) goto L_req;
+if ( getmapusers("guild_vs1") >= 10 ) goto L_toomany;
+
+mapannounce "guild_vs1", strcharinfo(0)+" has entered the Devil Arena",0;
+percentheal 100,100;
+warp "guild_vs1",50,50;
+end;
+
+L_error:
+mes "[Devil Arena]";
+mes "Devil Arena is now closed";
+mes "It will open 25 Minutes after every Hour.";
+close;
+
+L_req:
+mes "[Devil Arena]";
+mes "Minimum base level to enter is 255";
+close;
+
+L_toomany:
+mes "[Devil Arena]";
+mes "I'm sorry but Devil Arena is FULL";
+mes "Maximum users to enter is 10 players";
+close;
+
+L_info:
+mes "[Devil Arena]";
+mes "There 10 Players in the arena who will fight to the death";
+mes "Be sure to attack the strongest players first";
+mes "If you are the last player alive, you will get to open a Treasure Box with items, equips, and rare cards inside!!";
+close;
+
+L_cancel:
+mes "[Devil Arena]";
+mes "See ya";
+close;
+}
+
+guild_vs1,0,0,0	script	DA_HiddenNpc	-1,{
+//OnMinute00:
+//if (gettime(3) %2 == 1) end;
+OnClock0025:
+OnClock0125:
+OnClock0225:
+OnClock0325:
+OnClock0425:
+OnClock0525:
+OnClock0625:
+OnClock0725:
+OnClock0825:
+OnClock0925:
+OnClock1025:
+OnClock1125:
+OnClock1225:
+OnClock1325:
+OnClock1425:
+OnClock1525:
+OnClock1625:
+OnClock1725:
+OnClock1825:
+OnClock1925:
+OnClock2025:
+OnClock2125:
+OnClock2225:
+OnClock2325:
+set $@DA_complete,0;
+disablenpc "Exit#DA";
+mapannounce "guild_vs1","Devil Arena is now closed",0;
+mapwarp "guild_vs1","prontera",155,181;
+killmonsterall "guild_vs1";
+announce "Devil Arena is Open - 1 Minute!!",0;
+killmonsterall "guild_vs1";
+atcommand "@skilloff";
+atcommand "@pvpoff";
+set $@DA_entry,1;
+killmonsterall "guild_vs1";
+sleep 60000;
+mapannounce "guild_vs1","Devil Arena has Begun!!",0;
+mapwarp "ama_test","prontera",155,181;
+atcommand "@skillon";
+atcommand "@pvpon";
+initnpctimer;
+set $@DA_entry,0;
+end;
+
+OnPCKillEvent:
+if (getmapusers("guild_vs1") == 9) mapannounce "guild_vs1","Devil Arena : 9 Players Survive",0;
+if (getmapusers("guild_vs1") == 8) mapannounce "guild_vs1","Devil Arena : 8 Players Survive",0;
+if (getmapusers("guild_vs1") == 7) mapannounce "guild_vs1","Devil Arena : 7 Players Survive",0;
+if (getmapusers("guild_vs1") == 6) mapannounce "guild_vs1","Devil Arena : 6 Players Survive",0;
+if (getmapusers("guild_vs1") == 5) mapannounce "guild_vs1","Devil Arena : 5 Players Survive",0;
+if (getmapusers("guild_vs1") == 4) mapannounce "guild_vs1","Devil Arena : 4 Players Survive",0;
+if (getmapusers("guild_vs1") == 3) mapannounce "guild_vs1","Devil Arena : 3 Players Survive",0;
+if (getmapusers("guild_vs1") == 2) mapannounce "guild_vs1","Devil Arena : 2 Players Survive",0;
+if (getmapusers("guild_vs1") == 1) {
+mapannounce "guild_vs1","Devil Arena : CONGRATULATIONS - 1 Treasure Box will be Yours!",0;
+sleep 3000;
+goto Ondevil2;
+}
+end;
+
+Ondevil2:
+set $@DA_complete,1;
+set $@mobat,1;
+atcommand "@skilloff";
+atcommand "@pvpoff";
+monster "guild_vs1",50,50,"Treasure Box",1327,1,"DA_HiddenNpc::Onboxdead";
+end;
+
+Onboxdead:
+set $@mobat,$@mobat - 1;
+if($@mobat == 0) mapwarp "guild_vs1","prontera",155,181;
+announce "Devil Arena : "+ strcharinfo(0) +" has Won Devil Arena",0;
+warp "prontera",155,181;
+    switch( rand(142) ) {
+        case 0:    getitem 3340,1;    break;
+        case 1:    getitem 3341,1;    break;
+        case 2:    getitem 3342,1;    break;
+        case 3:    getitem 3343,1;    break;
+        case 4:    getitem 3344,1;    break;
+        case 5:    getitem 3345,1;    break;
+        case 6:    getitem 3347,1;    break;
+        case 7:    getitem 3348,1;    break;
+        case 8:    getitem 3349,1;    break;
+        case 9:    getitem 3350,1;    break;
+        case 10:    getitem 3351,1;    break;
+        case 11:    getitem 3352,1;    break;
+        case 12:    getitem 3353,1;    break;
+        case 13:    getitem 3354,1;    break;
+        case 14:    getitem 3355,1;    break;
+        case 15:    getitem 3307,1;    break;
+        case 16:    getitem 3306,1;    break;
+        case 17:    getitem 3403,1;    break;
+        case 18:    getitem 3404,1;    break;
+        case 19:    getitem 3405,1;    break;
+        case 20:    getitem 3406,1;    break;
+        case 21:    getitem 3407,1;    break;
+        case 22:    getitem 3408,1;    break;
+        case 23:    getitem 3409,1;    break;
+        case 24:    getitem 3410,1;    break;
+        case 25:    getitem 3411,1;    break;
+        case 26:    getitem 3412,1;    break;
+        case 27:    getitem 3413,1;    break;
+        case 28:    getitem 3414,1;    break;
+        case 29:    getitem 3415,1;    break;
+        case 30:    getitem 3416,1;    break;
+        case 31:    getitem 3417,1;    break;
+        case 32:    getitem 3418,1;    break;
+        case 33:    getitem 3419,1;    break;
+        case 34:    getitem 3420,1;    break;
+        case 35:    getitem 3421,1;    break;
+        case 36:    getitem 3422,1;    break;
+        case 37:    getitem 3423,1;    break;
+        case 38:    getitem 3424,1;    break;
+        case 39:    getitem 3425,1;    break;
+        case 40:    getitem 3426,1;    break;
+        case 41:    getitem 3427,1;    break;
+        case 42:    getitem 3428,1;    break;
+        case 43:    getitem 3429,1;    break;
+        case 44:    getitem 3430,1;    break;
+        case 45:    getitem 3431,1;    break;
+        case 46:    getitem 3432,1;    break;
+        case 47:    getitem 3433,1;    break;
+        case 48:    getitem 3434,1;    break;
+        case 49:    getitem 3435,1;    break;
+        case 50:    getitem 3436,1;    break;
+        case 51:    getitem 3437,1;    break;
+        case 52:    getitem 3438,1;    break;
+        case 53:    getitem 3439,1;    break;
+        case 54:    getitem 3321,1;    break;
+        case 55:    getitem 3441,1;    break;
+        case 56:    getitem 3442,1;    break;
+        case 57:    getitem 3443,1;    break;
+        case 58:    getitem 3444,1;    break;
+        case 59:    getitem 3322,1;    break;
+        case 60:    getitem 3323,1;    break;
+        case 61:    getitem 3324,1;    break;
+        case 62:    getitem 3325,1;    break;
+        case 63:    getitem 3326,1;    break;
+        case 64:    getitem 3327,1;    break;
+        case 65:    getitem 3328,1;    break;
+        case 66:    getitem 23000,1;    break;
+        case 67:    getitem 23001,1;    break;
+        case 68:    getitem 23002,1;    break;
+        case 69:    getitem 23063,1;    break;
+        case 70:    getitem 23064,1;    break;
+        case 71:    getitem 23065,1;    break;
+        case 72:    getitem 3200,1;    break;
+        case 73:    getitem 3201,1;    break;
+        case 74:    getitem 3202,1;    break;
+        case 75:    getitem 3273,1;    break;
+        case 76:    getitem 22564,1;    break;
+        case 77:    getitem 22565,1;    break;
+        case 78:    getitem 22566,1;    break;
+        case 79:    getitem 22567,1;    break;
+        case 80:    getitem 22568,1;    break;
+        case 81:    getitem 22569,1;    break;
+        case 82:    getitem 22570,1;    break;
+        case 83:    getitem 22571,1;    break;
+        case 84:    getitem 22572,1;    break;
+        case 85:    getitem 22573,1;    break;
+        case 86:    getitem 22574,1;    break;
+        case 87:    getitem 22575,1;    break;
+        case 88:    getitem 22576,1;    break;
+        case 89:    getitem 22577,1;    break;
+        case 90:    getitem 22578,1;    break;
+        case 91:    getitem 22579,1;    break;
+        case 92:    getitem 22580,1;    break;
+        case 93:    getitem 22581,1;    break;
+        case 94:    getitem 22582,1;    break;
+        case 95:    getitem 22583,1;    break;
+        case 96:    getitem 22584,1;    break;
+        case 97:    getitem 22585,1;    break;
+        case 98:    getitem 22586,1;    break;
+        case 99:    getitem 22587,1;    break;
+        case 100:    getitem 22588,1;    break;
+        case 101:    getitem 22589,1;    break;
+        case 102:    getitem 22590,1;    break;
+        case 103:    getitem 22591,1;    break;
+        case 104:    getitem 22592,1;    break;
+        case 105:    getitem 22593,1;    break;
+        case 106:    getitem 22594,1;    break;
+        case 107:    getitem 22595,1;    break;
+        case 108:    getitem 22596,1;    break;
+        case 109:    getitem 22597,1;    break;
+        case 110:    getitem 22598,1;    break;
+        case 111:    getitem 22599,1;    break;
+        case 112:    getitem 22600,1;    break;
+        case 113:    getitem 22601,1;    break;
+        case 114:    getitem 22602,1;    break;
+        case 115:    getitem 22603,1;    break;
+        case 116:    getitem 22604,1;    break;
+        case 117:    getitem 22605,1;    break;
+        case 118:    getitem 22606,1;    break;
+        case 119:    getitem 22607,1;    break;
+        case 120:    getitem 22608,1;    break;
+        case 121:    getitem 22609,1;    break;
+        case 122:    getitem 22610,1;    break;
+        case 123:    getitem 22611,1;    break;
+        case 124:    getitem 22612,1;    break;
+        case 125:    getitem 22613,1;    break;
+        case 126:    getitem 3436,1;    break;
+        case 127:    getitem 3437,1;    break;
+        case 128:    getitem 3438,1;    break;
+        case 129:    getitem 3439,1;    break;
+        case 130:    getitem 3321,1;    break;
+        case 131:    getitem 3441,1;    break;
+        case 132:    getitem 3442,1;    break;
+        case 133:    getitem 3443,1;    break;
+        case 134:    getitem 3444,1;    break;
+        case 135:    getitem 3322,1;    break;
+        case 136:    getitem 3323,1;    break;
+        case 137:    getitem 3324,1;    break;
+        case 138:    getitem 3325,1;    break;
+        case 139:    getitem 3326,1;    break;
+        case 140:    getitem 3327,1;    break;
+        case 141:    getitem 3328,1;    break;
+    }
+if (getmapusers("guild_vs1") == 1) enablenpc "Exit#DA";
+end;
+
+OnTimer15000:
+if ( $@DA_complete == 1 ) {
+stopnpctimer;
+end;
+} else
+if (getmapusers("guild_vs1") < 2) {
+stopnpctimer;
+end;
+} else {
+mapannounce "guild_vs1",getmapusers("guild_vs1") +" players still survive at Devil Arena",0;
+initnpctimer;
+end;
+}
+
+OnPCDieEvent:
+getmapxy(.@mapname$, .@mapx, .@mapy, 0);
+if(.@mapname$ == "guild_vs1") {
+sleep2 1;
+if(!Deaths) set Deaths, 0;
+set Deaths, Deaths + 1;
+if ( Deaths==1 ) {
+warp "SavePoint",0,0;
+set hp,100;
+set Deaths, 0;
+end;
+}
+if ( Deaths==2 ) {
+warp "SavePoint",0,0;
+set hp,100;
+set Deaths, 0;
+end;
+}
+}
+}
+
+// -- Mapflags
+guild_vs1	mapflag	nowarp
+guild_vs1	mapflag	nowarpto
+guild_vs1	mapflag	noteleport
+guild_vs1	mapflag	nosave	SavePoint
+guild_vs1	mapflag	nomemo
+guild_vs1	mapflag	nobranch
+guild_vs1	mapflag	nopenalty
+guild_vs1	mapflag	noloot
+guild_vs1	mapflag	novending
+guild_vs1	mapflag	nochat
+ama_test	mapflag	nowarp
+ama_test	mapflag	nowarpto
+ama_test	mapflag	noteleport
+ama_test	mapflag	nosave	SavePoint
+ama_test	mapflag	nomemo
+ama_test	mapflag	nobranch
+ama_test	mapflag	nopenalty
+ama_test	mapflag	pvp	off
+ama_test	mapflag	noloot
+ama_test	mapflag	novending
+ama_test	mapflag	nochat
+
+guild_vs1,246,245,7	script	Exit#DA	51,{
+mes "[Exit]";
+mes "See ya";
+next;
+warp "SavePoint",0,0;
+close;
+}

@@ -1,0 +1,627 @@
+//===== XileRO Script ===================================================||
+//= Grand Token Set NPC				                         ||
+//===== Written By: =====================================================||
+//= Markus - Re-Writed by Honor					         ||
+//===== Additional Comments: ============================================||
+//= Report any bugs found.				                 ||
+//===== Updates: ========================================================||
+//= 1.1 Needs to be tested					      	 ||
+//=======================================================================||
+
+prontera,154,285,5	script	Ziel	51,{
+
+set .npc$,"[^ff8800 Ziel ^000000]";
+
+	mes .npc$;
+	mes "Didn't my brother Azazel tell you we are busy?";
+	next;
+	mes .npc$;
+	mes "Seems like he didn't, I have to do everything myself... But nevermind.";
+	next;
+	mes .npc$;
+	mes "My name is Ziel, my brother Azazel always says he is a very talented crafter but to be honest, that isn't true. I have got all the talent. But our teamwork is unbeatable. My brother and I can craft the most powerful stuff you have ever seen! Well, now you know who I am and what I do, so what can I do for you?";
+	next;
+	mes .npc$;
+	mes "I have 3 hats,3 armors and 3 wings I could craft for you.";
+	mes "So what do you want?";
+	menu "-Helm/Hats",Lhelms,"-Armors",Larmors,"-Wings",Lwings;
+
+// ============== HELM/HATS ===================================================================================================
+Lhelms:
+	next;
+	mes .npc$;
+	mes "Wich one would you like to make?";
+	menu "-Onyx Dragon Helm",ODH,"-Sapphire Traveler Hat",STH,"-Emerald Dowry Hat",EDH;
+
+ODH:
+	next;
+	mes .npc$;
+	mes "Would you like to see the requirements for it or you want just to make the item?";
+	menu "-Requirements",reqODH,"-Make ODH",makeODH;
+reqODH:
+	next;
+	mes .npc$;
+	mes "1 Dragon Helm";
+	mes "5 Creamhilt Token";
+	mes "5 Sbanhilt Token";
+	mes "5 Lazrigees Token";
+	mes "5 Sqaugul Token";
+	mes "5 Guindull Token";
+	mes "3 Seal of Power";
+	mes "3 Seal of Wisdom";
+	mes "3 Seal of Spirit";
+	mes "3 Seal of Hate";
+	mes "3 Seal of Death";
+	mes "2 Scale Of Fire Dragon";
+	mes "20 Victory Badge";
+	close;
+
+makeODH:
+	next;
+	mes .npc$;
+	mes "^ff0000Onyx Dragon Helm^000000";
+	mes " ";
+	mes "Are you sure you want this item?";
+	menu "-No Thanks",LCancel,"-Yes",-;
+	if (!checkweight(3210,1)) goto overweight;
+	if (countitem(3115) < 5 ||
+	 countitem(3116) < 5 ||
+	 countitem(3117) < 5 ||
+	 countitem(3118) < 5 ||
+	 countitem(3119) < 5 ||
+	 countitem(3130) < 3 ||
+	 countitem(3131) < 3 ||
+	 countitem(3132) < 3 ||
+	 countitem(3133) < 3 ||
+	 countitem(3134) < 3 ||
+	 countitem(7451) < 2 ||
+	 countitem(2265) < 1 ||
+	 countitem(22556) < 20) goto nohave;
+	next;
+	mes .npc$;
+	mes "Hope you like it =D";
+	delitem 3115,5;
+	delitem 3116,5;
+	delitem 3117,5;
+	delitem 3118,5;
+	delitem 3119,5;
+	delitem 3130,3;
+	delitem 3131,3;
+	delitem 3132,3;
+	delitem 3133,3;
+	delitem 3134,3;
+	delitem 7451,2;
+	delitem 2265,1;
+	delitem 22556,20;
+	getitem 3210,1;
+	close;
+STH:
+	next;
+	mes .npc$;
+	mes "Would you like to see the requirements for it or you want just to make the item?";
+	menu "-Requirements",reqSTH,"-Make STH",makeSTH;
+reqSTH:
+	next;
+	mes .npc$;
+	mes "1 Traveler Hat";
+	mes "5 Creamhilt Token";
+	mes "5 Sbanhilt Token";
+	mes "5 Lazrigees Token";
+	mes "5 Sqaugul Token";
+	mes "5 Guindull Token";
+	mes "3 Seal of Power";
+	mes "3 Seal of Wisdom";
+	mes "3 Seal of Spirit";
+	mes "3 Seal of Hate";
+	mes "3 Seal of Death";
+	mes "2 Scale Of Fire Dragon";
+	mes "20 Victory Badge";
+	close;
+
+makeSTH:
+	next;
+	mes .npc$;
+	mes "^ff0000Traveler Hat^000000";
+	mes " ";
+	mes "Are you sure you want this item?";
+	menu "-No Thanks",LCancel,"-Yes",-;
+	if (!checkweight(3211,1)) goto overweight;
+	if (countitem(3115) < 5 ||
+	 countitem(3116) < 5 ||
+	 countitem(3117) < 5 ||
+	 countitem(3118) < 5 ||
+	 countitem(3119) < 5 ||
+	 countitem(3130) < 3 ||
+	 countitem(3131) < 3 ||
+	 countitem(3132) < 3 ||
+	 countitem(3133) < 3 ||
+	 countitem(3134) < 3 ||
+	 countitem(7451) < 2 ||
+	 countitem(2278) < 1 ||
+	 countitem(22556) < 20) goto nohave;
+	next;
+	mes .npc$;
+	mes "Hope you like it =D";
+	delitem 3115,5;
+	delitem 3116,5;
+	delitem 3117,5;
+	delitem 3118,5;
+	delitem 3119,5;
+	delitem 3130,3;
+	delitem 3131,3;
+	delitem 3132,3;
+	delitem 3133,3;
+	delitem 3134,3;
+	delitem 7451,2;
+	delitem 2278,1;
+	delitem 22556,20;
+	getitem 3211,1;
+	close;
+
+EDH:
+	next;
+	mes .npc$;
+	mes "Would you like to see the requirements for it or you want just to make the item?";
+	menu "-Requirements",reqEDH,"-Make EDH",makeEDH;
+reqEDH:
+	next;
+	mes .npc$;
+	mes "1 Dowry Hat";
+	mes "5 Creamhilt Token";
+	mes "5 Sbanhilt Token";
+	mes "5 Lazrigees Token";
+	mes "5 Sqaugul Token";
+	mes "5 Guindull Token";
+	mes "3 Seal of Power";
+	mes "3 Seal of Wisdom";
+	mes "3 Seal of Spirit";
+	mes "3 Seal of Hate";
+	mes "3 Seal of Death";
+	mes "2 Scale Of Fire Dragon";
+	mes "20 Victory Badge";
+	close;
+
+makeEDH:
+	next;
+	mes .npc$;
+	mes "^ff0000Emerald Dowry Hat^000000";
+	mes " ";
+	mes "Are you sure you want this item?";
+	menu "-No Thanks",LCancel,"-Yes",-;
+	if (!checkweight(3212,1)) goto overweight;
+	if (countitem(3115) < 5 ||
+	 countitem(3116) < 5 ||
+	 countitem(3117) < 5 ||
+	 countitem(3118) < 5 ||
+	 countitem(3119) < 5 ||
+	 countitem(3130) < 3 ||
+	 countitem(3131) < 3 ||
+	 countitem(3132) < 3 ||
+	 countitem(3133) < 3 ||
+	 countitem(3134) < 3 ||
+	 countitem(7451) < 2 ||
+	 countitem(5061) < 1 ||
+	 countitem(22556) < 20) goto nohave;
+	next;
+	mes .npc$;
+	mes "Hope you like it =D";
+	delitem 3115,5;
+	delitem 3116,5;
+	delitem 3117,5;
+	delitem 3118,5;
+	delitem 3119,5;
+	delitem 3130,3;
+	delitem 3131,3;
+	delitem 3132,3;
+	delitem 3133,3;
+	delitem 3134,3;
+	delitem 7451,2;
+	delitem 5061,1;
+	delitem 22556,20;
+	getitem 3212,1;
+	close;
+
+// ============== ARMORS ===================================================================================================
+Larmors:
+	next;
+	mes .npc$;
+	mes "Wich one would you like to make?";
+	menu "-Onyx Lilim Armor",OLA,"-Sapphire Renove Armor",SRA,"-Emerald Tannin Armor",ETA;
+
+OLA:
+	next;
+	mes .npc$;
+	mes "Would you like to see the requirements for it or you want just to make the item?";
+	menu "-Requirements",reqOLA,"-Make OLA",makeOLA;
+reqOLA:
+	next;
+	mes .npc$;
+	mes "1 Lilim Armor";
+	mes "8 Creamhilt Token";
+	mes "8 Sbanhilt Token";
+	mes "8 Lazrigees Token";
+	mes "8 Sqaugul Token";
+	mes "8 Guindull Token";
+	mes "1 Seal of Power";
+	mes "1 Seal of Wisdom";
+	mes "1 Seal of Spirit";
+	mes "1 Seal of Hate";
+	mes "1 Seal of Death";
+	mes "5 Victory Badge";
+	close;
+
+makeOLA:
+	next;
+	mes .npc$;
+	mes "^ff0000Onyx Lilim Armor^000000";
+	mes " ";
+	mes "Are you sure you want this item?";
+	menu "-No Thanks",LCancel,"-Yes",-;
+	if (!checkweight(3213,1)) goto overweight;
+	if (countitem(3115) < 8 ||
+	 countitem(3116) < 8 ||
+	 countitem(3117) < 8 ||
+	 countitem(3118) < 8 ||
+	 countitem(3119) < 8 ||
+	 countitem(3130) < 1 ||
+	 countitem(3131) < 1 ||
+	 countitem(3132) < 1 ||
+	 countitem(3133) < 1 ||
+	 countitem(3134) < 1 ||
+	 countitem(3002) < 1 ||
+	 countitem(22556) < 5) goto nohave;
+	next;
+	mes .npc$;
+	mes "Hope you like it =D";
+	delitem 3115,8;
+	delitem 3116,8;
+	delitem 3117,8;
+	delitem 3118,8;
+	delitem 3119,8;
+	delitem 3130,1;
+	delitem 3131,1;
+	delitem 3132,1;
+	delitem 3133,1;
+	delitem 3134,1;
+	delitem 3002,1;
+	delitem 22556,5;
+	getitem 3213,1;
+	close;
+
+SRA:
+	next;
+	mes .npc$;
+	mes "Would you like to see the requirements for it or you want just to make the item?";
+	menu "-Requirements",reqSRA,"-Make SRA",makeSRA;
+reqSRA:
+	next;
+	mes .npc$;
+	mes "1 Renove Armor";
+	mes "8 Creamhilt Token";
+	mes "8 Sbanhilt Token";
+	mes "8 Lazrigees Token";
+	mes "8 Sqaugul Token";
+	mes "8 Guindull Token";
+	mes "1 Seal of Power";
+	mes "1 Seal of Wisdom";
+	mes "1 Seal of Spirit";
+	mes "1 Seal of Hate";
+	mes "1 Seal of Death";
+	mes "5 Victory Badge";
+	close;
+
+makeSRA:
+	next;
+	mes .npc$;
+	mes "^ff0000Sapphire Renove Armor^000000";
+	mes " ";
+	mes "Are you sure you want this item?";
+	menu "-No Thanks",LCancel,"-Yes",-;
+	if (!checkweight(3214,1)) goto overweight;
+	if (countitem(3115) < 8 ||
+	 countitem(3116) < 8 ||
+	 countitem(3117) < 8 ||
+	 countitem(3118) < 8 ||
+	 countitem(3119) < 8 ||
+	 countitem(3130) < 1 ||
+	 countitem(3131) < 1 ||
+	 countitem(3132) < 1 ||
+	 countitem(3133) < 1 ||
+	 countitem(3134) < 1 ||
+	 countitem(3000) < 1 ||
+	 countitem(22556) < 5) goto nohave;
+	next;
+	mes .npc$;
+	mes "Hope you like it =D";
+	delitem 3115,8;
+	delitem 3116,8;
+	delitem 3117,8;
+	delitem 3118,8;
+	delitem 3119,8;
+	delitem 3130,1;
+	delitem 3131,1;
+	delitem 3132,1;
+	delitem 3133,1;
+	delitem 3134,1;
+	delitem 3000,1;
+	delitem 22556,5;
+	getitem 3214,1;
+	close;
+
+ETA:
+	next;
+	mes .npc$;
+	mes "Would you like to see the requirements for it or you want just to make the item?";
+	menu "-Requirements",reqETA,"-Make ETA",makeETA;
+reqETA:
+	next;
+	mes .npc$;
+	mes "1 Tannin Armor";
+	mes "8 Creamhilt Token";
+	mes "8 Sbanhilt Token";
+	mes "8 Lazrigees Token";
+	mes "8 Sqaugul Token";
+	mes "8 Guindull Token";
+	mes "1 Seal of Power";
+	mes "1 Seal of Wisdom";
+	mes "1 Seal of Spirit";
+	mes "1 Seal of Hate";
+	mes "1 Seal of Death";
+	mes "5 Victory Badge";
+	close;
+
+makeETA:
+	next;
+	mes .npc$;
+	mes "^ff0000Emerald Tannin Armor^000000";
+	mes " ";
+	mes "Are you sure you want this item?";
+	menu "-No Thanks",LCancel,"-Yes",-;
+	if (!checkweight(3215,1)) goto overweight;
+	if (countitem(3115) < 8 ||
+	 countitem(3116) < 8 ||
+	 countitem(3117) < 8 ||
+	 countitem(3118) < 8 ||
+	 countitem(3119) < 8 ||
+	 countitem(3130) < 1 ||
+	 countitem(3131) < 1 ||
+	 countitem(3132) < 1 ||
+	 countitem(3133) < 1 ||
+	 countitem(3134) < 1 ||
+	 countitem(3001) < 1 ||
+	 countitem(22556) < 5) goto nohave;
+	next;
+	mes .npc$;
+	mes "Hope you like it =D";
+	delitem 3115,8;
+	delitem 3116,8;
+	delitem 3117,8;
+	delitem 3118,8;
+	delitem 3119,8;
+	delitem 3130,1;
+	delitem 3131,1;
+	delitem 3132,1;
+	delitem 3133,1;
+	delitem 3134,1;
+	delitem 3001,1;
+	delitem 22556,5;
+	getitem 3215,1;
+	close;
+
+// ============== WINGS ===================================================================================================
+Lwings:
+	next;
+	mes .npc$;
+	mes "Wich one would you like to make?";
+	menu "-Onyx Dark Wings",ODW,"-Sapphire Phychic Wings",SPW,"-Emerald Enchanted Wings",EEW;
+
+ODW:
+	next;
+	mes .npc$;
+	mes "Would you like to see the requirements for it or you want just to make the item?";
+	menu "-Requirements",reqODW,"-Make ODW",makeODW;
+reqODW:
+	next;
+	mes .npc$;
+	mes "3 Deviling Wings";
+	mes "3 Creamhilt Token";
+	mes "3 Sbanhilt Token";
+	mes "3 Lazrigees Token";
+	mes "3 Sqaugul Token";
+	mes "3 Guindull Token";
+	mes "10 Seal of Power";
+	mes "10 Seal of Wisdom";
+	mes "10 Seal of Spirit";
+	mes "10 Seal of Hate";
+	mes "10 Seal of Death";
+	mes "30 Victory Badge";
+	mes "30 BoM Badge";
+	close;
+
+makeODW:
+	next;
+	mes .npc$;
+	mes "^ff0000Onyx Dark Wings^000000";
+	mes " ";
+	mes "Are you sure you want this item?";
+	menu "-No Thanks",LCancel,"-Yes",-;
+	if (!checkweight(3216,1)) goto overweight;
+	if (countitem(3115) < 3 ||
+	 countitem(3116) < 3 ||
+	 countitem(3117) < 3 ||
+	 countitem(3118) < 3 ||
+	 countitem(3119) < 3 ||
+	 countitem(3130) < 10 ||
+	 countitem(3131) < 10 ||
+	 countitem(3132) < 10 ||
+	 countitem(3133) < 10 ||
+	 countitem(3134) < 10 ||
+	 countitem(5089) < 3 ||
+	 countitem(22557) < 30 ||
+	 countitem(22556) < 30) goto nohave;
+	next;
+	mes .npc$;
+	mes "Hope you like it =D";
+	delitem 3115,3;
+	delitem 3116,3;
+	delitem 3117,3;
+	delitem 3118,3;
+	delitem 3119,3;
+	delitem 3130,10;
+	delitem 3131,10;
+	delitem 3132,10;
+	delitem 3133,10;
+	delitem 3134,10;
+	delitem 5089,3;
+	delitem 22556,30;
+	delitem 22557,30;
+	getitem 3216,1;
+	close;
+
+SPW:
+	next;
+	mes .npc$;
+	mes "Would you like to see the requirements for it or you want just to make the item?";
+	menu "-Requirements",reqSPW,"-Make SPW",makeSPW;
+reqSPW:
+	next;
+	mes .npc$;
+	mes "3 Deviling Wings";
+	mes "3 Creamhilt Token";
+	mes "3 Sbanhilt Token";
+	mes "3 Lazrigees Token";
+	mes "3 Sqaugul Token";
+	mes "3 Guindull Token";
+	mes "10 Seal of Power";
+	mes "10 Seal of Wisdom";
+	mes "10 Seal of Spirit";
+	mes "10 Seal of Hate";
+	mes "10 Seal of Death";
+	mes "175 Sapphires";
+	mes "30 Victory Badge";
+	mes "30 BoM Badge";
+	close;
+
+makeSPW:
+	next;
+	mes .npc$;
+	mes "^ff0000Sapphire Phychic Wings^000000";
+	mes " ";
+	mes "Are you sure you want this item?";
+	menu "-No Thanks",LCancel,"-Yes",-;
+	if (!checkweight(3217,1)) goto overweight;
+	if (countitem(3115) < 3 ||
+	 countitem(3116) < 3 ||
+	 countitem(3117) < 3 ||
+	 countitem(3118) < 3 ||
+	 countitem(3119) < 3 ||
+	 countitem(3130) < 10 ||
+	 countitem(3131) < 10 ||
+	 countitem(3132) < 10 ||
+	 countitem(3133) < 10 ||
+	 countitem(3134) < 10 ||
+	 countitem(726) < 175 ||
+	 countitem(5089) < 3 ||
+	 countitem(22557) < 30 ||
+	 countitem(22556) < 30) goto nohave;
+	next;
+	mes .npc$;
+	mes "Hope you like it =D";
+	delitem 3115,3;
+	delitem 3116,3;
+	delitem 3117,3;
+	delitem 3118,3;
+	delitem 3119,3;
+	delitem 3130,10;
+	delitem 3131,10;
+	delitem 3132,10;
+	delitem 3133,10;
+	delitem 3134,10;
+	delitem 726,175;
+	delitem 5089,3;
+	delitem 22556,30;
+	delitem 22557,30;
+	getitem 3217,1;
+	close;
+
+EEW:
+	next;
+	mes .npc$;
+	mes "Would you like to see the requirements for it or you want just to make the item?";
+	menu "-Requirements",reqEEW,"-Make EEW",makeEEW;
+reqEEW:
+	next;
+	mes .npc$;
+	mes "3 Deviling Wings";
+	mes "3 Creamhilt Token";
+	mes "3 Sbanhilt Token";
+	mes "3 Lazrigees Token";
+	mes "3 Sqaugul Token";
+	mes "3 Guindull Token";
+	mes "10 Seal of Power";
+	mes "10 Seal of Wisdom";
+	mes "10 Seal of Spirit";
+	mes "10 Seal of Hate";
+	mes "10 Seal of Death";
+	mes "175 Emeralds";
+	mes "30 Victory Badge";
+	mes "30 BoM Badge";
+	close;
+
+makeEEW:
+	next;
+	mes .npc$;
+	mes "^ff0000Emerald Enchanted Wings^000000";
+	mes " ";
+	mes "Are you sure you want this item?";
+	menu "-No Thanks",LCancel,"-Yes",-;
+	if (!checkweight(3217,1)) goto overweight;
+	if (countitem(3115) < 3 ||
+	 countitem(3116) < 3 ||
+	 countitem(3117) < 3 ||
+	 countitem(3118) < 3 ||
+	 countitem(3119) < 3 ||
+	 countitem(3130) < 10 ||
+	 countitem(3131) < 10 ||
+	 countitem(3132) < 10 ||
+	 countitem(3133) < 10 ||
+	 countitem(3134) < 10 ||
+	 countitem(721) < 175 ||
+	 countitem(5089) < 3 ||
+	 countitem(22557) < 30 ||
+	 countitem(22556) < 30) goto nohave;
+	next;
+	mes .npc$;
+	mes "Hope you like it =D";
+	delitem 3115,3;
+	delitem 3116,3;
+	delitem 3117,3;
+	delitem 3118,3;
+	delitem 3119,3;
+	delitem 3130,10;
+	delitem 3131,10;
+	delitem 3132,10;
+	delitem 3133,10;
+	delitem 3134,10;
+	delitem 721,175;
+	delitem 5089,3;
+	delitem 22556,30;
+	delitem 22557,30;
+	getitem 3218,1;
+	close;
+
+// ========================================================================================================================
+LCancel:
+	close;
+nohave:
+	next;
+	mes .npc$;
+	mes "Sorry but you don't have the requirements needed.";
+	close;
+overweight:
+	next;
+	mes .npc$;
+	mes "Sorry but you can't carry this";
+	dispbottom "[Ziel] You should Storage some items.";
+	close;
+}

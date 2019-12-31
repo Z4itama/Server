@@ -1,0 +1,1384 @@
+//===== Script: ===============================================================
+//= 2010 XileRO's Quest Center
+//= By Honor/Lover Romeo
+//==============================================================================
+prt_are01	mapflag	nowarpto
+
+// WARPS TO THE ROOM
+prontera,165,167,0	warp	warper-1	2,2,prt_in,283,125
+prt_in,283,122,0	warp	warper-2	2,2,prontera,162,167
+
+//Quest Center
+prt_in,289,135,4	script	Quest Center	832,{
+
+OnQuest:
+set .npcname$,"[^ff8800 Quest Center ^000000]";
+
+	if(getgmlevel() >= 99) {
+	L_BACK:
+		message strcharinfo(0),"Welcome to XileRO's Quest Admin Panel.";
+		emotion e_gasp;
+		menu "-Normal Menu",normalmenu,
+		"-^777777Quest Administration^000000",Ladmin,
+		"-Cancel",LCancel;
+
+Ladmin:
+		menu "-^777777Go Back^000000",L_BACK,
+		"-Quests Reset",Lqreset,
+		"-Activate/Deactive Quest",Lqactive,
+		"-Cancel",LCancel;
+
+Lqactive:
+		menu "-^777777Go Back^000000",L_BACK,
+		"-Kismet's Call",A_q3,
+		"-Activate CTF Antibot",A_antibot;
+
+			A_q3:
+				if($KMCactive==0) { set $KMCactive,1; } else { set $KMCactive,0; }
+				close;
+
+			A_antibot:
+				if($@antibot_active==0) { set $@antibot_active,1; } else { set $@antibot_active,0; }
+				dispbottom "Value is: "+$@antibot_active+".";
+				close;
+Lqreset:
+	message strcharinfo(0),"Which Quest do you want to Reset?";
+		menu "-A Little Favour",R_q1,
+		"-Christmas 2010",R_q2,
+		"-Defense Rings",R_q3,
+		"-Feather Beret",R_q4,
+		"-Golden Shell",R_q5,
+		"-Kismet's Call",R_q6,
+		"-Mystic Adventure",R_q7,
+		"-Soul Of Darkness",R_q8,
+		"-Soul Of Darkness II",R_q9,
+		"-Valkyrie Madness",R_q10;
+
+			R_q1:
+				set ALFpart,0;
+				set guardtimes,0;
+				set inpris,0;
+				close;
+			R_q2:
+				set FBpart,0;
+				close;
+			R_q6:
+				set KMQpart,0;
+				set DanielleBra,0;
+				close;
+			R_q4:
+				set MMApart,0;
+				close;
+			R_q5:
+				set SODpart,0;
+				set Dsouls,0;
+				close;
+			R_q3:
+			R_q7:
+			R_q9:
+			R_q10:
+				set VAMpart,0;
+				set moza_valkylie,0;
+				close;
+
+LCancel:
+	close;
+}
+
+normalmenu:
+	emotion e_gasp;
+	mes .npcname$;
+	mes "Hi ^003399"+strcharinfo(0)+"^000000 how can I help you?";
+	menu "-Quests [QP ^0000ff"+qpoints+"^000000]",Lquests,
+	"-^777777News^000000",L_news,
+	"-^ff0000Quit^000000",-;
+	next;
+	mes .npcname$;
+	mes "Have a nice day ^003399"+strcharinfo(0)+"^000000.";
+	close;
+
+L_news:
+	next;
+	mes .npcname$;
+	mes "Coming soon...";
+	mes "-Soul Of Darkness II";
+	mes "-Christmas 2010";
+	next;
+	mes .npcname$;
+	mes "~Quest Center 2011~";
+	mes "-Endomixer";
+	mes "-A New World";
+	close;
+
+//A-B-C-D-E-F-G-H-I-J-K-M-L-N-O-P-Q-R-S-T-U-V-W-X-Y-Z
+Lquests:
+if(ALFpart==0) { set alittlefavour$,"^ff0000No Progress^000000"; } 	//A Little Favour
+if(XMASpart==0) { set xmasten$,"^ff0000No Progress^000000"; } 		//Christmas 2010
+if(DRpart==0) { set defenserings$,"^ff0000No Progress^000000"; } 	//Defense Rings
+if(FBpart==0) { set featherberet$,"^ff0000No Progress^000000"; }	//Feather Beret
+if(GSpart==0) { set goldenshell$,"^ff0000No Progress^000000"; } 	//Golden Shell
+if(KMQpart==0) { set kismetcall$,"^ff0000No Progress^000000"; } 	//Kismet's Call
+if(MMApart==0) { set mysticadventure$,"^ff0000No Progress^000000"; } 	//Mystic Adventure
+if(SODpart==0) { set soulofdarkness$,"^ff0000No Progress^000000"; }	//Soul Of Darkness
+if(SOD2part==0) { set soulofdarkness2$,"^ff0000No Progress^000000"; }	//Soul Of Darkness II
+if(VAMpart==0) { set valkyriemadness$,"^ff0000No Progress^000000"; }	//Valkyrie Madness
+
+	next;
+	mes .npcname$;
+	mes "Choose a quest!";
+	menu "-A Little Favour ["+alittlefavour$+"]",alittlefavour,	// Jirachi Card
+	"-Christmas 2010 ["+xmasten$+"]",xmas2010,			// Chritmas Gift
+	"-Defense Rings ["+defenserings$+"]",defenserings,		// Defense Rings
+	"-Feather Beret ["+featherberet$+"]",featherberet,		// Feather Beret
+	"-Golden Shell ["+goldenshell$+"]",goldenshell,			// Golden Bug Card
+	"-Kismet's Call ["+kismetcall$+"]",kismetcall,			// Nikki Hat
+	"-Mystic Adventure ["+mysticadventure$+"]",mysticadventure,	// Mystic Maya Card
+	"-Soul Of Darkness ["+soulofdarkness$+"]",soulofdarkness,	// Box Of Darkness
+	"-Soul Of Darkness II ["+soulofdarkness2$+"]",soulofdarkness2,	// Box Of Darkness+10
+	"-Valkyrie Madness ["+valkyriemadness$+"]",vamadness;		// Valkyrie Helm
+
+//q1
+alittlefavour:
+mes "A Little Favour ~Quest";
+mes alittlefavour$;
+mes "Prize: ^0000ff' Jirachi Card '^000000";
+mes "^ff0088~ 1 Qp(s)^000000.";
+if(ALFpart==0) { message strcharinfo(0),"You can Start this quest by finding Vincent somewhere in Yuno."; close; }
+if(ALFpart==1) { message strcharinfo(0),"You need to find Roan somewhere in Louyang."; close; }
+if(ALFpart==2) { message strcharinfo(0),"Roan needs you to find a Jeweler at the Jewelery store in lighthalzen."; close; }
+if(ALFpart==3) { message strcharinfo(0),"The Jeweler asked you for: 150x Candy, 200x pieces of cake and 100x well baked cookies."; close; }
+if(ALFpart==4) { message strcharinfo(0),"You must kill monsters in one or two of geffen's dungeons until you find the Jewel Pieces ("+(Roajewel+Roajewel2)+"/ 2)."; close; }
+if(ALFpart==5) { message strcharinfo(0),"You should go back and talk with the jeweler assistant in lighthalzen (Jewel Story)."; close; }
+if(ALFpart==6) { message strcharinfo(0),"Go back with Roan and give him the ring so he can give you vince's money..."; close; }
+if(ALFpart==7) { message strcharinfo(0),"Go back with Vince and give him his money..."; close; }
+if(ALFpart==8) { message strcharinfo(0),"You already done this quest."; close; }
+	close;
+
+//q2
+xmas2010:
+mes "Christmas 2010 ~Quest";
+mes xmasten$;
+mes "Prize: ^0000ff' Christmas Cracker '^000000";
+mes "^ff0088~ 1 Qp(s)^000000.";
+if(XMASpart==0) { message strcharinfo(0),"Coming soon... (15-21/12/10)"; close; }
+	close;
+
+//q3
+defenserings:
+mes "Defense Rings ~Quest";
+mes defenserings$;
+mes "Prize: ^0000ff' Unknown Defense Ring '^000000";
+mes "^ff0088~ 1 Qp(s)^000000.";
+if(qpoints < 3 && HH_exp < 5000) { message strcharinfo(0),"You need at least 5 Qp(s) and 5,000 HH Exp. to be able to do this Quest."; close; }
+if(DRpart==0) { message strcharinfo(0),"You can Start this quest by talking with Lance in Prontera's castles Map."; close; }
+if(DRpart==1) { message strcharinfo(0),dr_token$+" Token [4] | "+dr_wings$+" Wings [1] | ScaleOfFireDragon [1] | Feathers [100]"; close; }
+if(DRpart==2) { message strcharinfo(0),"You already done this quest."; close; }
+	close;
+
+//q4
+featherberet:
+mes "Feather Beret ~Quest";
+mes featherberet$;
+mes "Prize: ^0000ff' Feather Beret '^000000";
+mes "^ff0088~ 1 Qp(s)^000000.";
+if(FBpart==0) { message strcharinfo(0),"You can Start this quest by talking to Sakjul in Rachel."; close; }
+if(FBpart==1) { message strcharinfo(0),"You need to bring 1 Beret, 8k SoftFeathers and 1 White Dyestuff to Sakjul."; close; }
+if(FBpart==2) { message strcharinfo(0),"You already done this quest."; close; }
+	close;
+
+//q5
+goldenshell:
+mes "Golden Shell ~Quest";
+mes goldenshell$;
+mes "Prize: ^0000ff' GoldenThief Bug Card '^000000";
+mes "^ff0088~ 2 Qp(s)^000000.";
+if(qpoints < 5) { message strcharinfo(0),"You need at least 5 Qp(s) to be able to do this Quest."; close; }
+if(GSpart==0) { message strcharinfo(0),"You can Start this quest by talking to the Bug Collector somewhere in prt_fild08."; close; }
+if(GSpart==1) { message strcharinfo(0),"Kill: Thiefbug Larvas ("+buglarvas+"/300) || Thiefbug Female ("+bugfemale+"/250) || Thiefbug Male ("+bugmale+"/200)."; close; }
+if(GSpart==2) { message strcharinfo(0),"Get a GoldenShell from The Golden ThiefBug ("+GetGS+"/1)"; close; }
+if(GSpart==3) { message strcharinfo(0),"You already done this quest."; close; }
+	close;
+
+//q6
+kismetcall:
+mes "Kismet's Call ~Quest";
+mes kismetcall$;
+mes "^0000ff' Louise's Santa Hat + 20 Santa Bags '^000000";
+mes "^ff0088~ 2 Qp(s)^000000.";
+if($KMCactive==0) { message strcharinfo(0),"This quest is only available 10th - 11th"; close; }
+if(KMQpart==0) { message strcharinfo(0),"You can start this quest by talking with Danielle in Gonryun."; close; }
+if(KMQpart==1) { message strcharinfo(0),"You need to get 1111 Poring Card, 111 Honey and 111 Christmas Card/Red Envelope."; close; }
+if(KMQpart==2 || KMQpart==4) { message strcharinfo(0),"Speak with Danielle again."; close; }
+if(KMQpart==3) { message strcharinfo(0),"You need to get Danielle's bracelet, she lost it near where Wild Hell Poodle's are."; close; }
+if(KMQpart==5) { message strcharinfo(0),"Go to find rob! but first you gotta get "+(1000-HH_exp)+" Head Hunters EXP."; close; }
+if(KMQpart==6) { message strcharinfo(0),"You already done this quest."; close; }
+	close;
+
+//q7
+mysticadventure:
+mes "Mystic Adventure ~Quest";
+mes mysticadventure$;
+mes "^0000ff' Mystic Maya Card '^000000";
+mes "^ff0088~ 2 Qp(s)^000000.";
+if(qpoints < 3) { message strcharinfo(0),"You need at least 3 Qp(s) to be able to do this Quest."; close; }
+if(MMApart==0) { message strcharinfo(0),"--> East Prontera."; close; }
+if(MMApart==1) { message strcharinfo(0),"Kill: Piere ("+antpiere+"/500) || Deniro ("+antdeniro+"/400) || Andre ("+antandre+"/200) || Vitata ("+antvitata+"/100)."; close; }
+if(MMApart==2) { message strcharinfo(0),"Kill: Ant Egg ("+antegg+"/30)."; close; }
+if(MMApart==3) { message strcharinfo(0),"Kill: Maya Purple ("+antmaya+"/2)."; close; }
+if(MMApart==4) { message strcharinfo(0),"You already done this quest."; close; }
+	close;
+
+//q8
+soulofdarkness:
+mes "Soul Of Darkness ~Quest";
+mes soulofdarkness$;
+mes "Prize: ^0000ff' Box Of Darkness '^000000";
+mes "^ff0088~ 1 Qp(s)^000000.";
+if(SODpart==0) { message strcharinfo(0),"Uoy nac trats siht tseuq yb gniklat ot krad naicigam ni Miehlfin."; close; } //You can Start this quest by talking to Dark Magician in Niflheim.
+if(SODpart==1) { message strcharinfo(0),"Uoy deen ot gnirb k05 sluos ot eht Krad Naicigam."; close; } //You need to bring 50k souls to the Dark Magician.
+if(SODpart==2) { message strcharinfo(0),"Uoy evah won k05 sluos, og kcab ot eht Krad Naicigam."; close; } //You have now 50k souls, go back to the Dark Magician.
+if(SODpart==3) { dispbottom "("+ECHsoul+"/30) Evil Cloud Hermit's Souls"; dispbottom "("+DUsoul+"/15) Dullahan's Souls"; dispbottom "("+BMsoul+"/7) Bloody Murderer's Souls";
+		dispbottom "("+LRsoul+"/7) Loli Ruri's Souls"; dispbottom "("+BKsoul+"/5) Bloody Knight's Souls";
+		message strcharinfo(0),"Once you get 'em all go back and talk with the Dark Magician."; 
+		close; }
+if(SODpart==4) { message strcharinfo(0),"You need to gather 2000 Darkness Rune and give 'em to the Dark Magician."; close; }
+if(SODpart==5) { message strcharinfo(0),"You already done this quest."; close; }
+	close;
+
+//q9
+soulofdarkness2:
+mes "Soul Of Darkness II ~Quest";
+mes soulofdarkness2$;
+mes "Prize: ^0000ff' Box Of Darkness '^000000";
+mes "^ff0088~ 4 Qp(s)^000000.";
+if(SOD2part==0) { message strcharinfo(0),"Coming soon... (24-31/12/10)"; close; }
+
+//q10
+vamadness:
+mes "Valkyrie Madness ~Quest";
+mes valkyriemadness$;
+mes "Prize: ^0000ff' Valkyrie Helmet '^000000";
+mes "^ff0088~ 1 Qp(s)^000000.";
+if(VAMpart==0) { message strcharinfo(0),"You can Start this quest by talking with Ghenirhemin somewhere in Hugel."; close; }
+if(VAMpart==1 || VAMpart == 3) { message strcharinfo(0),"Talk to Ghenirhemin."; close; }
+if(VAMpart==2) { message strcharinfo(0),"Seem that you need to bring the items that Ghenirhemin asked you."; close; }
+if(VAMpart==4 || VAMpart == 5) { message strcharinfo(0),"Keep talking to Ghenirhemin."; close; }
+if(VAMpart==6) { message strcharinfo(0),"You already done this quest."; close; }
+	close;
+}
+
+//===== eAthena Script =======================================
+//= Full job changer
+//===== By: ==================================================
+//= Cathaldus/Tom
+//===== Current Version: =====================================
+//= 2.0
+//===== Compatible With: =====================================
+//= eAthena SVN / 3ceam
+//===== Description: =========================================
+//= Full job changer including quest skills
+//===== Additional Comments: =================================
+//= 1.0 Only Acolyte Classes
+//= 2.0 Full Job changer - Please report any bugs!
+//============================================================
+
+prontera,147,172,5	script	3rdJobMaster#jm1::job1	868,{
+	callfunc "myjobchange";
+	end;
+}
+
+morocc.gat,169,85,6	script	3rdJobMaster#jm2::job2	868,{
+	callfunc "myjobchange";
+	end;
+}
+
+geffen.gat,115,71,6	script	3rdJobMaster#jm3::job3	868,{
+	callfunc "myjobchange";
+	end;
+}
+
+payon.gat,162,228,6	script	3rdJobMaster#jm4::job4	868,{
+	callfunc "myjobchange";
+	end;
+}
+ayothaya,160,150,3	script	3rdJobMaster#jm5::job5	868,{
+	callfunc "myjobchange";
+	end;
+}
+// ------------------------------ Start ------------------------------
+function	script	myjobchange	{
+// Variable Setup
+	cutin "kafra_01",2;
+	set @MinimumJB, 40; //Minimum job level for changing between 2nd and advance Class (Default : 40)
+	set @GivePlat, 1; //Give Platinum skills on Jobchange (Default : 1-yes)
+	set @SupNovM, 45; //Base Level to change into Super Novice (Default : 45)
+	set @babyNovM, 99;//base level to change to baby
+	set @thirdblevel, 255; //base level to change to third class
+	set @bthirdjlevel, 70; //job level to change to third class
+// Check Jobtype
+	if(Class == Job_Novice) goto L_novice;
+	if(JobLevel <10) goto L_notEn;
+	if(Class == 4054) goto L_max;
+	if(Class == 4055) goto L_max;
+	if(Class == 4056) goto L_max;
+	if(Class == 4057) goto L_max;
+	if(Class == 4058) goto L_max;
+	if(Class == 4059) goto L_max;
+	if(Class == 4060) goto L_max;
+	if(Class == 4061) goto L_max;
+	if(Class == 4062) goto L_max;
+	if(Class == 4063) goto L_max;
+	if(Class == 4064) goto L_max;
+	if(Class == 4065) goto L_max;
+	if(Class == 4066) goto L_max;
+	if(Class == 4067) goto L_max;
+	if(Class == 4068) goto L_max;
+	if(Class == 4069) goto L_max;
+	if(Class == 4070) goto L_max;
+	if(Class == 4071) goto L_max;
+	if(Class == 4072) goto L_max;
+	if(Class == 4073) goto L_max;
+	if(Class == 4074) goto L_max;
+	if(Class == 4075) goto L_max;
+	if(Class == 4076) goto L_max;
+	if(Class == 4077) goto L_max;
+	if(Class == 4078) goto L_max;
+	if(Class == 4079) goto L_max;
+	if(Class == 4096) goto L_max;
+	if(Class == 4097) goto L_max;
+	if(Class == 4098) goto L_max;
+	if(Class == 4099) goto L_max;
+	if(Class == 4100) goto L_max;
+	if(Class == 4101) goto L_max;
+	if(Class == 4102) goto L_max;
+	if(Class == 4103) goto L_max;
+	if(Class == 4104) goto L_max;
+	if(Class == 4105) goto L_max;
+	if(Class == 4106) goto L_max;
+	if(Class == 4107) goto L_max;
+	if(Class == 4108) goto L_max;
+	if(Class == 4081) goto L_max;
+	if(Class == 4082) goto L_max;
+	if(Class == 4083) goto L_max;
+	if(Class == 4084) goto L_max;
+	if(Class == 4085) goto L_max;
+	if(Class == 4086) goto L_max;
+	if(Class == 4087) goto L_max;
+	if(Class == Job_Lord_Knight) goto L_RuneKnight; //Lord Knight
+	if(Class == Job_High_Priest) goto L_ArchBishop; //High Priest
+	if(Class == Job_High_Wizard) goto L_Warlock; //High Wizard
+	if(Class == Job_Whitesmith) goto L_Mechanic; //Whitesmith
+	if(Class == Job_Sniper) goto L_Ranger; //Sniper
+	if(Class == Job_Assassin_Cross) goto L_GuillotineCross; //Assassin Cross
+	if(Class == 4014) goto L_Peco; //Remove Peco
+	if(Class == Job_Paladin) goto L_RoyalGuard; //Paladin
+	if(Class == Job_Champion) goto L_Sura; //Champion
+	if(Class == Job_Professor) goto L_Sorcerer; //Professor
+	if(Class == Job_Stalker) goto L_ShadowChaser; //Stalker
+	if(Class == Job_Creator) goto L_Genetic; //Creator
+	if(Class == Job_Clown) goto L_Minstrel; //Clown
+	if(Class == Job_Gypsy) goto L_Wanderer; //Gypsy
+	if(Class == 4022) goto L_Peco; //Remove Peco
+	if(Class == Job_Baby) goto L_baby;
+	if((Class ==Job_Novice_High) && ((lastJob ==Job_Knight) || (lastJob ==Job_Crusader))) goto L_cHsword;
+	if((Class ==Job_Novice_High) && ((lastJob ==Job_Wizard) || (lastJob ==Job_Sage))) goto L_cHmage;
+	if((Class ==Job_Novice_High) && ((lastJob ==Job_Hunter) || (lastJob ==Job_Bard) || (lastJob ==Job_Dancer))) goto L_cHarcher;
+	if((Class ==Job_Novice_High) && ((lastJob ==Job_Priest) || (lastJob ==Job_Monk))) goto L_cHacolyte;
+	if((Class ==Job_Novice_High) && ((lastJob ==Job_Blacksmith) || (lastJob ==Job_Alchem))) goto L_cHmerchant;
+	if((Class ==Job_Novice_High) && ((lastJob ==Job_Assassin) || (lastJob ==Job_Rogue))) goto L_cHthief;
+	if(Class == Job_Novice_High && lastJob == Job_SuperNovice) goto L_taekwon;
+	if(JobLevel <@MinimumJB) goto L_notEn;
+	if(Class == Job_Baby_Swordman) goto L_ibSword;
+	if(Class == Job_Baby_Mage) goto L_ibMage;
+	if(Class == Job_Baby_Archer) goto L_ibArcher;
+	if(Class == Job_Baby_Acolyte) goto L_ibAco;
+	if(Class == Job_Baby_Merchant) goto L_ibMerc;
+	if(Class == Job_Baby_Thief) goto L_ibThief;
+	if(Class ==Job_Swordman) goto L_iSword;
+	if(Class ==Job_Mage) goto L_iMage;
+	if(Class ==Job_Archer) goto L_iArcher;
+	if(Class ==Job_Acolyte) goto L_iAcolyte;
+	if(Class ==Job_Merchant) goto L_iMerchant;
+	if(Class ==Job_Thief) goto L_iThief;
+	if(Class ==Job_Taekwon) goto L_iTaekwon;
+	if(lastJob ==Job_Knight) goto L_iKnight;
+	if(lastJob ==Job_Priest) goto L_iPriest;
+	if(lastJob ==Job_Wizard) goto L_iWizard;
+	if(lastJob ==Job_Blacksmith) goto L_iBlacksmith;
+	if(lastJob ==Job_Hunter && Class != Job_Gunslinger && Class != Job_Sniper) goto L_iHunter;
+	if(lastJob ==Job_Assassin && Class != Job_Ninja) goto L_iAssassin;
+	if(lastJob ==Job_Crusader) goto L_iCrusader;
+	if(lastJob ==Job_Monk) goto L_iMonk;
+	if(lastJob ==Job_Sage) goto L_iSage;
+	if(lastJob ==Job_Rogue && Class != Job_Ninja) goto L_iRogue;
+	if(lastJob ==Job_Alchem) goto L_iAlchemist;
+	if(lastJob ==Job_Bard && Class != Job_Gunslinger) goto L_iBard;
+	if(lastJob ==Job_Dancer && Class != Job_Gunslinger) goto L_iDancer;
+	if(Class == Job_SuperNovice) goto L_SNrebirth;
+	if((Class >=Job_Knight) && (Class <=Job_Dancer)) goto L_rebirth;
+	if(JobLevel <@bthirdjlevel || BaseLevel <@thirdblevel) goto L_notLevel;
+	if(checkfalcon() || checkcart()) goto L_remove;
+	cutin "kafra_01",255;
+	close;
+
+	L_baby:
+		if(JobLevel<10) goto L_notEn;
+		mes "^ff0000[Job Master]^000000";
+		mes "Welcome, please select the job you wish to change into";
+		menu "Baby Swordsman",L_bsword,"Baby Mage",L_bmage,"Baby Archer",L_barcher,"Baby Acolyte",L_bacolyte,"Baby Merchant",L_bmerchant,"Baby Thief",L_bthief,"Super Baby",L_bsuper;//nuhuh
+
+// Change to baby Swordsman
+			L_bsword:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Baby_Swordman;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to baby Mage
+			L_bmage:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Baby_Mage;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to baby Archer
+			L_barcher:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Baby_Archer;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to baby Acolyte
+			L_bacolyte:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Baby_Acolyte;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to baby Merchant
+			L_bmerchant:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Baby_Merchant;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to baby Thief
+			L_bthief:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Baby_Thief;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to Super baby
+			L_bsuper:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				if(BaseLevel<@SupNovM) goto L_notSup;
+				jobchange Job_Super_Baby;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;	
+
+// Novice
+	L_novice:
+		skill 142,1,0;
+		skill 143,1,0;
+		if(JobLevel<10) goto L_notEn;
+		mes "^ff0000[Job Master]^000000";
+		mes "Welcome, please select the job you wish to change into";
+		menu "Swordsman",L_sword,"Mage",L_mage,"Archer",L_archer,"Acolyte",L_acolyte,"Merchant",L_merchant,"Thief",L_thief,"Super Novice",L_superN,"Baby Novice",L_babyNov;//nuhuh
+// Change to Swordsman
+			L_sword:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Swordman;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to Mage
+			L_mage:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Mage;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to Archer
+			L_archer:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Archer;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to Acolyte
+			L_acolyte:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Acolyte;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to Merchant
+			L_merchant:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Merchant;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to Thief
+			L_thief:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Thief;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to Super Novice
+			L_superN:
+				mes "To turn into a Super Novice you must be at least level " + @SupNovM + ".";
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				if(BaseLevel<@SupNovM) goto L_notSup;
+				jobchange Job_SuperNovice;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to Taekwon
+			L_taekwon:
+				mes "Are you sure you want to turn into a Taekwon?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Taekwon;
+				callfunc "F_ClearJobVar";
+				cutin "kafra_01",255;
+				close;
+// Change to Gunslinger
+			L_gun:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Gunslinger;
+				callfunc "F_ClearJobVar";
+				cutin "kafra_01",255;
+				close;
+// Change to Ninja
+			L_ninja:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Ninja;
+				callfunc "F_ClearJobVar";
+				cutin "kafra_01",255;
+				close;
+// change to baby novice
+			L_babyNov:
+				mes "You must be at least level " + @babyNovM + " to change into a Baby Novice.";
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				if(BaseLevel<@babyNovM) goto L_notSup;
+				jobchange Job_Baby;
+				resetlvl(1);
+				skill 142,1,0;
+				skill 143,1,0;
+				ResetStatus;
+				cutin "kafra_01",255;
+				close;
+	
+	
+// Change to Knight/Crusader
+	L_ibSword:
+		mes "^ff0000[Job Master]^000000";
+		mes "Welcome, please select the job you wish to change into";
+		menu "Baby Knight",L_bknight,"Baby Crusader",L_bcrusader;
+			L_bknight:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Baby_Knight;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+			L_bcrusader:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Baby_Crusader;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to baby Wizard/Sage
+	L_ibMage:
+		mes "^ff0000[Job Master]^000000";
+		mes "Welcome, please select the job you wish to change into";
+		menu "Baby Wizard",L_bwizard,"Baby Sage",L_bsage;
+			L_bwizard:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Baby_Wizard;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+			L_bsage:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Baby_Sage;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to baby Hunter/Bard/Dancer
+	L_ibArcher:
+		mes "^ff0000[Job Master]^000000";
+		mes "Welcome, please select the job you wish to change into";
+		menu "Baby Hunter",L_bhunter,"Baby Bard/Dancer",L_bbandd;
+			L_bhunter:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Baby_Hunter;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+			L_bbandd:
+				if(sex==0) goto L_bdancer;
+				if(sex==1) goto L_bbard;
+				L_bbard:
+					mes "Are you SURE?";
+					menu "No",L_quit,"Yes",-;
+					jobchange Job_Baby_Bard;
+					if(@GivePlat) goto L_GivePlat;
+					cutin "kafra_01",255;
+					close;
+				L_bdancer:
+					mes "Are you SURE?";
+					menu "No",L_quit,"Yes",-;
+					jobchange Job_Baby_Dancer;
+					if(@GivePlat) goto L_GivePlat;
+					cutin "kafra_01",255;
+					close;
+// Change to baby Priest/Monk
+	L_ibAco:
+		mes "^ff0000[Job Master]^000000";
+		mes "Welcome, please select the job you wish to change into";
+		menu "Baby Priest",L_bpriest,"Baby Monk",L_bmonk;
+			L_bpriest:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Baby_Priest;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+			L_bmonk:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Baby_Monk;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to baby Blacksmith/Alchemist
+	L_ibMerc:
+		mes "^ff0000[Job Master]^000000";
+		mes "Welcome, please select the job you wish to change into";
+		menu "Baby Blacksmith",L_bblacksmith,"Baby Alchemist",L_balchemist;
+			L_bblacksmith:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Baby_Blacksmith;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+			L_balchemist:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Baby_Alchem;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to baby Assassin/Rogue
+	L_ibThief:
+		mes "^ff0000[Job Master]^000000";
+		mes "Welcome, please select the job you wish to change into";
+		menu "Baby Assassin",L_bassassin,"Baby Rogue",L_brogue;
+			L_bassassin:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Baby_Assassin;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+			L_brogue:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Baby_Rogue;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;	
+				
+// Change to Knight/Crusader
+	L_iSword:
+		mes "^ff0000[Job Master]^000000";
+		mes "Welcome, please select the job you wish to change into";
+		menu "Knight",L_knight,"Crusader",L_crusader;
+			L_knight:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Knight;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+			L_crusader:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Crusader;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to Wizard/Sage
+	L_iMage:
+		mes "^ff0000[Job Master]^000000";
+		mes "Welcome, please select the job you wish to change into";
+		menu "Wizard",L_wizard,"Sage",L_sage;
+			L_wizard:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Wizard;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+			L_sage:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Sage;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to Hunter/Bard/Dancer
+	L_iArcher:
+		mes "^ff0000[Job Master]^000000";
+		mes "Welcome, please select the job you wish to change into";
+		menu "Hunter",L_hunter,"Bard/Dancer",L_bandd;
+			L_hunter:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Hunter;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+			L_bandd:
+				if(sex==0) goto L_dancer;
+				if(sex==1) goto L_bard;
+				L_bard:
+					mes "Are you SURE?";
+					menu "No",L_quit,"Yes",-;
+					jobchange Job_Bard;
+					if(@GivePlat) goto L_GivePlat;
+					cutin "kafra_01",255;
+					close;
+				L_dancer:
+					mes "Are you SURE?";
+					menu "No",L_quit,"Yes",-;
+					jobchange Job_Dancer;
+					if(@GivePlat) goto L_GivePlat;
+					cutin "kafra_01",255;
+					close;
+// Change to Priest/Monk
+	L_iAcolyte:
+		mes "^ff0000[Job Master]^000000";
+		mes "Welcome, please select the job you wish to change into";
+		menu "Priest",L_priest,"Monk",L_monk;
+			L_priest:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Priest;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+			L_monk:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Monk;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to Blacksmith/Alchemist
+	L_iMerchant:
+		mes "^ff0000[Job Master]^000000";
+		mes "Welcome, please select the job you wish to change into";
+		menu "Blacksmith",L_blacksmith,"Alchemist",L_alchemist;
+			L_blacksmith:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Blacksmith;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+			L_alchemist:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Alchem;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to Assassin/Rogue
+	L_iThief:
+		mes "^ff0000[Job Master]^000000";
+		mes "Welcome, please select the job you wish to change into";
+		menu "Assassin",L_assassin,"Rogue",L_rogue;
+			L_assassin:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Assassin;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+			L_rogue:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Rogue;
+				if(@GivePlat) goto L_GivePlat;
+				cutin "kafra_01",255;
+				close;
+// Change to Star Gladiator/Soul Linker
+	L_iTaekwon:
+		mes "^ff0000[Job Master]^000000";
+		mes "Welcome, please select the job you wish to change into";
+		menu "Star Gladiator",L_SG,"Soul Linker",L_SL;
+			L_SG:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Star_Gladiator;
+				callfunc "F_ClearJobVar";
+				cutin "kafra_01",255;
+				close;
+			L_SL:
+				mes "Are you SURE?";
+				menu "No",L_quit,"Yes",-;
+				jobchange Job_Soul_Linker;
+				callfunc "F_ClearJobVar";
+				cutin "kafra_01",255;
+				close;
+// Rebirth
+	L_SNrebirth:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to start your path as a Taekwon?";
+		next;
+		mes "Are you SURE?";
+		menu "No",L_quit,"Yes",-;
+		if ((BaseLevel < 99) || (JobLevel < 50)) goto L_cantCh;
+		set lastJob, readparam(19);
+		jobchange Job_Novice_High;
+		resetlvl(1);
+		skill 142,1,0;
+		skill 143,1,0;
+		mes "^ff0000[Job Master]^000000";
+		mes "You are now reborn.";
+		mes "Please come again soon.";
+		cutin "kafra_01",255;
+		close;
+	L_rebirth:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to reborn?";
+		next;
+		mes "Are you SURE?";
+		menu "No",L_quit,"Yes",-;
+		if ((BaseLevel < 99) || (JobLevel < 50)) goto L_cantCh;
+		set lastJob, readparam(19);
+		jobchange Job_Novice_High;
+		resetlvl(1);
+		skill 142,1,0;
+		skill 143,1,0;
+		mes "^ff0000[Job Master]^000000";
+		mes "You are now reborn.";
+		mes "Please come again soon.";
+		cutin "kafra_01",255;
+		close;
+	L_cHsword:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a High Swordsman?";
+		next;
+		menu "No",L_quit,"Yes",-;
+		jobchange Job_Swordman_High;
+		mes "^ff0000[Job Master]^000000";
+		mes "Thank you, please come again soon!";
+		cutin "kafra_01",255;
+		close;
+	L_cHmage:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a High Mage?";
+		next;
+		menu "No",L_quit,"Yes",-;
+		jobchange Job_Mage_High;
+		mes "^ff0000[Job Master]^000000";
+		mes "Thank you, please come again soon!";
+		cutin "kafra_01",255;
+		close;
+	L_cHarcher:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a High Archer or Gunslinger?";
+		next;
+		menu "Highe Archer",-,"Gunslinger",L_gun,"Cancel",L_quit;
+		mes "Are you SURE?";
+		menu "No",L_quit,"Yes",-;
+		jobchange Job_Archer_High;
+		mes "^ff0000[Job Master]^000000";
+		mes "Thank you, please come again soon!";
+		cutin "kafra_01",255;
+		close;
+	L_cHacolyte:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a High Acolyte?";
+		next;
+		menu "No",L_quit,"Yes",-;
+		jobchange Job_Acolyte_High;
+		mes "^ff0000[Job Master]^000000";
+		mes "Thank you, please come again soon!";
+		cutin "kafra_01",255;
+		close;
+	L_cHmerchant:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a High Merchant?";
+		next;
+		menu "No",L_quit,"Yes",-;
+		jobchange Job_Merchant_High;
+		mes "^ff0000[Job Master]^000000";
+		mes "Thank you, please come again soon!";
+		cutin "kafra_01",255;
+		close;
+	L_cHthief:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a High Thief or Ninja?";
+		next;
+		menu "High Thief",-,"Ninja",L_ninja,"Cancel",L_quit;
+		mes "Are you SURE?";
+		menu "No",L_quit,"Yes",-;
+		jobchange Job_Thief_High;
+		mes "^ff0000[Job Master]^000000";
+		mes "Thank you, please come again soon!";
+		cutin "kafra_01",255;
+		close;	
+// Change to Lord Knight
+	L_iKnight:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Lord Knight?";
+		menu "No",L_quit,"Yes",-;
+			jobchange Job_Lord_Knight;
+			if(@GivePlat) goto L_GivePlat;
+			cutin "kafra_01",255;
+			close;
+// Change to Paladin
+	L_iCrusader:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Paladin?";
+		menu "No",L_quit,"Yes",-;
+			jobchange Job_Paladin;
+			if(@GivePlat) goto L_GivePlat;
+			cutin "kafra_01",255;
+			close;
+// Change to High Priest
+	L_iPriest:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a High Priest?";
+		menu "No",L_quit,"Yes",-;
+			jobchange Job_High_Priest;
+			if(@GivePlat) goto L_GivePlat;
+			cutin "kafra_01",255;
+			close;
+// Change to Champion
+	L_iMonk:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Champion?";
+		menu "No",L_quit,"Yes",-;
+			jobchange Job_Champion;
+			if(@GivePlat) goto L_GivePlat;
+			cutin "kafra_01",255;
+			close;
+// Change to Whitesmith
+	L_iBlacksmith:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Whitesmith?";
+		menu "No",L_quit,"Yes",-;
+			jobchange Job_Whitesmith;
+			if(@GivePlat) goto L_GivePlat;
+			cutin "kafra_01",255;
+			close;
+// Change to Creator
+	L_iAlchemist:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Creator?";
+		menu "No",L_quit,"Yes",-;
+			jobchange Job_Creator;
+			if(@GivePlat) goto L_GivePlat;
+			cutin "kafra_01",255;
+			close;
+// Change to High Wizard
+	L_iWizard:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a High Wizard?";
+		menu "No",L_quit,"Yes",-;
+			jobchange Job_High_Wizard;
+			if(@GivePlat) goto L_GivePlat;
+			cutin "kafra_01",255;
+			close;
+// Change to Professor
+	L_iSage:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Professor?";
+		menu "No",L_quit,"Yes",-;
+			jobchange Job_Professor;
+			if(@GivePlat) goto L_GivePlat;
+			cutin "kafra_01",255;
+			close;
+// Change to Sniper
+	L_iHunter:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Sniper?";
+		menu "No",L_quit,"Yes",-;
+			jobchange Job_Sniper;
+			if(@GivePlat) goto L_GivePlat;
+			cutin "kafra_01",255;
+			close;
+// Change to Clown
+	L_iBard:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Clown?";
+		menu "No",L_quit,"Yes",-;
+			jobchange Job_Clown;
+			if(@GivePlat) goto L_GivePlat;
+			cutin "kafra_01",255;
+			close;
+// Change to Gypsy
+	L_iDancer:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Gypsy?";
+		menu "No",L_quit,"Yes",-;
+			jobchange Job_Gypsy;
+			if(@GivePlat) goto L_GivePlat;
+			cutin "kafra_01",255;
+			close;
+// Change to Assassin Cross
+	L_iAssassin:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into an Assassin Cross?";
+		menu "No",L_quit,"Yes",-;
+			jobchange Job_Assassin_Cross;
+			if(@GivePlat) goto L_GivePlat;
+			cutin "kafra_01",255;
+			close;
+// Change to Stalker
+	L_iRogue:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Stalker?";
+		menu "No",L_quit,"Yes",-;
+			jobchange Job_Stalker;
+			if(@GivePlat) goto L_GivePlat;
+			cutin "kafra_01",255;
+			close;
+// Change to Rune Knight
+	L_RuneKnight:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Rune Knight?";
+		menu "No",L_quit,"Yes",-;
+			jobchange 4060;
+			set BaseLevel,200;
+			ResetSkill;
+			set SkillPoint,158;
+			cutin "kafra_01",255;
+			close;	
+// Change to Arch Bishop
+	L_ArchBishop:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into an Arch Bishop?";
+		menu "No",L_quit,"Yes",-;
+			jobchange 4063;
+			set BaseLevel,200;
+			ResetSkill;
+			set SkillPoint,158;
+			cutin "kafra_01",255;
+			close;	
+// Change to Warlock
+	L_Warlock:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Warlock?";
+		menu "No",L_quit,"Yes",-;
+			jobchange 4061;
+			set BaseLevel,200;
+			ResetSkill;
+			set SkillPoint,158;
+			cutin "kafra_01",255;
+			close;	
+// Change to Mechanic			
+	L_Mechanic:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Mechanic?";
+		menu "No",L_quit,"Yes",-;
+			jobchange 4064;
+			set BaseLevel,200;
+			ResetSkill;
+			set SkillPoint,158;
+			cutin "kafra_01",255;
+			close;	
+// Change to Ranger			
+	L_Ranger:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Ranger?";
+		menu "No",L_quit,"Yes",-;
+			jobchange 4062;
+			set BaseLevel,200;
+			ResetSkill;
+			set SkillPoint,158;
+			cutin "kafra_01",255;
+			close;
+// Change to Guillotine Cross			
+	L_GuillotineCross:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Guillotine Cross?";
+		menu "No",L_quit,"Yes",-;
+			jobchange 4065;
+			set BaseLevel,200;
+			ResetSkill;
+			set SkillPoint,158;
+			cutin "kafra_01",255;
+			close;	
+// Change to Royal Guard		
+	L_RoyalGuard:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Royal Guard?";
+		menu "No",L_quit,"Yes",-;
+			jobchange 4073;
+			set BaseLevel,200;
+			ResetSkill;
+			set SkillPoint,158;
+			cutin "kafra_01",255;
+			close;	
+// Change to Sura			
+	L_Sura:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Sura?";
+		menu "No",L_quit,"Yes",-;
+			jobchange 4077;
+			set BaseLevel,200;
+			ResetSkill;
+			set SkillPoint,158;
+			cutin "kafra_01",255;
+			close;	
+// Change Sorcerer			
+	L_Sorcerer:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Sorcerer?";
+		menu "No",L_quit,"Yes",-;
+			jobchange 4074;
+			set BaseLevel,200;
+			ResetSkill;
+			set SkillPoint,158;
+			cutin "kafra_01",255;
+			close;
+// Change to Shadow Chaser			
+	L_ShadowChaser:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Shadow Chaser?";
+		menu "No",L_quit,"Yes",-;
+			jobchange 4079;
+			set BaseLevel,200;
+			ResetSkill;
+			set SkillPoint,158;
+			cutin "kafra_01",255;
+			close;
+// Change to Genetic
+	L_Genetic:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Genetic?";
+		menu "No",L_quit,"Yes",-;
+			jobchange 4078;
+			set BaseLevel,200;
+			ResetSkill;
+			set SkillPoint,158;
+			cutin "kafra_01",255;
+			close;	
+// Change to Minstrel			
+	L_Minstrel:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Minstrel?";
+		menu "No",L_quit,"Yes",-;
+			jobchange 4075;
+			set BaseLevel,200;
+			ResetSkill;
+			set SkillPoint,158;
+			cutin "kafra_01",255;
+			close;	
+// Change to Wanderer			
+	L_Wanderer:
+		mes "^ff0000[Job Master]^000000";
+		mes "Do you want to change into a Wanderer?";
+		menu "No",L_quit,"Yes",-;
+			jobchange 4076;
+			set BaseLevel,200;
+			ResetSkill;
+			set SkillPoint,158;
+			cutin "kafra_01",255;
+			close;
+// Giving Platinum Skills
+	L_GivePlat:
+		if (BaseClass==Job_SuperNovice||Class==Job_Super_Baby) goto L_sSuperN;
+		if (BaseClass==Job_Swordman) goto L_sSword;
+		if (BaseClass==Job_Mage) goto L_sMage;
+		if (BaseClass==Job_Archer) goto L_sArcher;
+		if (BaseClass==Job_Acolyte) goto L_sAcolyte;
+		if (BaseClass==Job_Merchant) goto L_sMerchant;
+		if (BaseClass==Job_Thief) goto L_sThief;
+			cutin "kafra_01",255;
+			close;
+		L_sSuperN:
+			skill 142,1,0;
+			cutin "kafra_01",255;
+			close;
+		L_sSword:
+			skill 142,1,0;
+			//skill 144,1,0;
+			//skill 145,1,0;
+			//skill 146,1,0;
+			cutin "kafra_01",255;
+			close;
+		L_sMage:
+			skill 142,1,0;
+			//skill 157,1,0;
+			cutin "kafra_01",255;
+			close;
+		L_sArcher:
+			skill 142,1,0;
+			//skill 147,1,0;
+			//skill 148,1,0;
+			cutin "kafra_01",255;
+			close;
+		L_sAcolyte:
+			skill 142,1,0;
+			//skill 156,1,0;
+			cutin "kafra_01",255;
+			close;
+		L_sMerchant:
+			skill 142,1,0;
+			//skill 153,1,0;
+			skill 154,1,0;
+			//skill 155,1,0;
+			cutin "kafra_01",255;
+			close;
+		L_sThief:
+			skill 142,1,0;
+			//skill 149,1,0;
+			//skill 150,1,0;
+			skill 151,1,0;
+			skill 152,1,0;
+			cutin "kafra_01",255;
+			close;
+	L_quit:
+		cutin "kafra_01",255;
+		close;
+// Errors
+	L_Peco:
+		mes "^ff0000[Job Master]^000000";
+		mes "Please remove your Peco Peco in case you want to change to Rune Knight";
+		mes "Please come back when you meet the requirements";
+		cutin "kafra_01",255;
+		close;
+	L_notLevel:
+		mes "^ff0000[Job Master]^000000";
+		mes "I am sorry but you don't have the required level to change";
+		mes "Your level needs to be 255/70 to change";
+		mes "Please come back when you meet the requirements";
+		cutin "kafra_01",255;
+		close;
+	L_cantCh:
+		mes "^ff0000[Job Master]^000000";
+		mes "I'm sorry, you do not meet the requirements to change";
+		mes "Please come again soon!";
+		cutin "kafra_01",255;
+		close;
+	L_max:
+		mes "^ff0000[Job Master]^000000";
+		mes "You can no longer change Jobs";
+		cutin "kafra_01",255;
+		close;
+	L_skillUsed:
+		mes "^ff0000[Job Master]^000000";
+		mes "I'm sorry, please use up all your skill points before changing jobs";
+		mes "Please come again soon!";
+		cutin "kafra_01",255;
+		close;
+	L_notEn:
+		mes "^ff0000[Job Master]^000000";
+		mes "I'm sorry, you do not seem to have enough Job Levels";
+		mes "Please come again soon!";
+		cutin "kafra_01",255;
+		close;
+	L_notSup:
+		mes "^ff0000[Job Master]^000000";
+		mes "I'm sorry, you do not seem to have enough Base Levels";
+		mes "Please come again soon!";
+		cutin "kafra_01",255;
+		close;
+	L_remove:
+		mes "^ff0000[Job Master]^000000";
+		mes "Please remove your cart,falcon or peco";
+		mes "Please come again soon!";
+		cutin "kafra_01",255;
+		close;
+}
+
+//============================================================
+//= Preview Item Script
+//===== Description: =========================================
+//= A method to allow headgear sprites to be previewed without
+//= being 'stolen'
+//=   -Modified so it dynamically gets npc name for the timer
+
+ra_temsky,101,34,5	script	PreviewStuff	813,{
+
+    //save current look for later
+    set @bottomview, getlook(3);
+    set @topview, getlook(4);
+    set @midview, getlook(5);
+
+    //doesn't actually execute until just before a 'close' statement, or when the char leaves the npc's control
+    addtimer 1000, strnpcinfo(3)+"::On_Leave";
+
+INTRO:
+
+    mes "Welcome to the preview NPC";
+
+    mes "Please input an itemID you would like to preview";
+
+    input @itemid;
+
+    //modifies char's look based on item
+    set @equip, getiteminfo(@itemid, 5);
+    set @view, getiteminfo(@itemid, 11);
+
+    if(@equip != -1 && @view > 0) {
+            //note: yes...i'm using atcommand here cause for some reason 
+            //      'setlook' has permanent effects...last time i checked at least
+            if(@equip & 1)
+		atcommand "@changelook 3 " + @view;
+            if(@equip & 256)
+                atcommand "@changelook 1 " + @view;
+            if(@equip & 512) 
+		atcommand "@changelook 2 " + @view;
+    }
+
+    next;
+    mes "Would to like to preview something else?";
+    if(select("Yes", "No") == 1) {
+        goto INTRO;
+    }
+        
+    //*preview wears off automatically here due to delayed timer*//
+
+    close;   
+
+
+
+On_Leave:
+    atcommand "@changelook 1 " + @topview;
+    atcommand "@changelook 2 " + @midview;
+    atcommand "@changelook 3 " + @bottomview;
+    close;
+}

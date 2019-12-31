@@ -1,0 +1,472 @@
+//=================eAthena Script============================
+// Written by: Kikuko
+//=================Script Name===============================
+// quests - for XileRO
+//=================Script Defenition=========================
+// Quest NPCs for different things
+//=================Version History===========================
+//1.0 - Done. Still needs to be tested.
+
+function	script	TrueWalkNPC	{
+	set $@_SNS, getarg(0);
+	set $@_ZNS, rand(1,3);
+	if ($@_ZNS == 1) set $@_SNS, $@_SNS + rand(2,5);
+	if ($@_ZNS == 2) set $@_SNS, $@_SNS - rand(2,5);
+	if ($@_SNS < 0) set $@_SNS, $@_SNS + rand(2,5);
+	if ($@_SNS > 300) set $@_SNS, $@_SNS - rand(2,5);
+	return $@_SNS;
+}
+
+gef_fild07.gat,263,290,3	script	Kallias	5251,{
+
+	lookatplayer;
+	mes $@npcname_miq$;
+	mes "Ah, it's nice and peaceful here...one can think about many things...while staring out into the water.";
+	next;
+	if( quest_iscomplete( $@questid_miq ) )
+	{
+		mes $@npcname_miq$;
+		mes "Oh, it's you! You let an old man rest...in peace...";
+		next;
+		goto L_leave;
+	}
+	else if( quest_isactive( $@questid_miq ) )
+	{
+		menu "I have the regements.",L_complete,"Who are you?",-,"I'll just leave you alone.",L_leave;
+	}
+	else
+	{
+		menu "Who are you?",-,"I'll just leave you alone.",L_leave;
+	}
+	mes $@npcname_miq$;
+	mes "One could wonder what lies below the waves. What secerts the depths hide...";
+	mes "Oh!";
+	mes "Sorry, I didn't see you there, I was in deep thought.";
+	next;
+	mes $@npcname_miq$;
+	mes "Yes, yes...who am I?.";
+	mes "How does one begin to answer such a question?";
+	mes "If my profession is a suitable answer, then I am a wizard that has traveled to many places.";
+	mes "I have seen many things on my travels, and yet I feel as if there is something I left unfinished...";
+	mes "Water seems never ending. In and out, the rythmic motion of waves...";
+	next;
+	menu "Unfinished?",-,"...okay...",L_leave;
+	mes $@npcname_miq$;
+	mes "...oh, you're still here? Hmm, yes unfinished...I spent my life trying to find a way to protect against magic.";
+	mes "I traveled many lands, studying many kinds of magics. I was searching for a way to shield myself from the magics of rivial wizards.";
+	next;
+	mes $@npcname_miq$;
+	mes "I came close a few years ago, I was able to enpower a card...oh but if you're here for that...I'm afraid you're to late.";
+	mes "I sold all I made years ago, and I've been unable to make anymore. I've grown to old and lost my youth.";
+	mes "I couldn't gather what was needed anymore, I fear I'm no match for such a journey.";
+	next;
+	mes $@npcname_miq$;
+	mes "So I just sit here outside the city...looking at the water and what lies beneath...the ruins beneath the waves...";
+	mes "I wonder what used to be...what the ruins used to be...the waves have claim to them now...";
+	next;
+	menu "Magic card?",-,"...okay...",L_leave;
+	mes $@npcname_miq$;
+	mes "...card? Oh, yes the cards I enpowered. If I could only finish what I started years ago...you...say, could you help an old man?";
+	mes "I would like to try and finally put this behind me...this unfinished feeling.";
+	next;
+	menu "What do you need of me?",-,"I don't have time for an old man.",L_leave;
+	mes $@npcname_miq$;
+	mes "My power has faded with time...just as the ground will fade to the water...I...I suppose if you could gather a few of my old cards...I could finish it.";
+	mes "I could draw on the power I empowered the cards with, to finish one of the cards...but.";
+	mes "But, I have been thinking...thinking these years...";
+	mes "To truely finish my work I need more then just the card, I would need some regements to finish my spell of empowerment.";
+	next;
+	mes $@npcname_miq$;
+	mes "I've had time to think about a few regements I overlooked in my youth.";
+	mes "I'm afraid I don't remember where the regements are located.";
+	next;
+	mes $@npcname_miq$;
+	mes "But, I remember traveling and coming across an Elder. It drawed its power from a flame above its head.";
+	mes "If you could collect some Elder's Soul Flames...but thats not enough.";
+	next;
+	mes $@npcname_miq$;		
+	mes "I also came across an Evil Nymph...an old book I've read mentioned their hair held a great power.";
+	mes "...but the combination of such powers would be unstable, uncontrolable...just like the waves...waves, such power of crashing water...water...";
+	next; 
+	mes $@npcname_miq$;		
+	mes "...sorry...yes completing the empowerment spell.";
+	mes "Such powers as mentioned before could not be controled...unless...in my youth I once came across an Evil Druid.";
+	mes "The Druid as able to control great powers...powers it bound with its tome...the Dominion Tome.";
+	next;
+	mes $@npcname_miq$;		
+	mes "If you could bring me these regements, I suppose I could finish my work, and finally be at ease.";
+	next;
+	menu "I'll find the regements.",-,"I don't have time for this.",L_leave;
+	set @qreturn,quest_add($@questid_miq);
+	mes $@npcname_miq$;
+	switch( @qreturn )
+	{
+		case 0:			
+			mes "Thank you for helping an old man find peace.";
+			mes "I suppose three of my old cards would be enough.";
+			mes "As well as twenty five Soul Flames.";
+			mes "Five Locks of Evil Nymph Hair would work...";
+			mes "And a Dominion Tome...yes that should do...";
+			mes "I await your return...return...the waves always return...";
+		break;
+		case 1:
+			mes "...you...you, yes I remember you. You already agreed...";
+		break;
+		default:
+			mes "...it seems you can't help...";
+		break;
+	}	
+	close;
+	
+L_leave:
+ 	mes $@npcname_miq$;
+ 	mes "Ah, yes. Gazing off into the water...";
+ 	close;
+
+L_complete:
+	mes $@npcname_miq$;
+	mes "...regements?...oh, oh yes.";
+	mes "You're the one that wanted to help an old man find peace in the world.";
+	mes "Yes, well lets see what you have...";
+	next;
+	set @qreturn,quest_complete($@questid_miq);
+	mes $@npcname_miq$;
+	switch( @qreturn )
+	{
+		case 0:
+			mes "...you don't have everything...not all here...";
+			mes "The waves carried it all away?";
+			mes "Carried off to beneath the waves...";
+			mes "Maybe you forgot?";
+			next;
+			mes $@npcname_miq$;		
+			mes "I suppose three of my old cards would be enough.";
+			mes "As well as twenty five Soul Flames.";
+			mes "Five Locks of Evil Nymph Hair would work...";
+			mes "And a Dominion Tome...yes that should do...";
+		break;
+		case 1:			
+			mes "Ah, yes...this is all that is needed.";
+			mes "...I will finally beable to complete my life's work...";
+			mes "I will draw apoun the power of all that has been gathered here...before the waters and the ruins beneath...";
+			next;
+			mes $@npcname_miq$;	
+			mes "This power...I...I can feel it flowing through me into the card...";
+			mes "*sighs heavily* Finally, I can rest in peace...my work is done...the spell of empowerment worked.";
+			mes "I hope this power will help you...just as you have helped me...";
+			next;
+			mes $@npcname_miq$;
+			mes "I feel calm...like the waters...like what lies beneath...ruins of old...forgotten...like me...";
+			getitem 31000,1;			
+		break;
+		default:
+			mes "...you...I can't see anything that you have done...";
+		break;
+	}	
+	close;
+
+OnInit:
+	set $@npcname_miq$, "^4000C0[Kallias]^000000";
+	set $@questid_miq,1;
+	npcsit 1;
+
+}
+
+yuno_in04.gat,110,106,1	script	Razvan	5252,{
+
+	lookatplayer;
+	set $@npcinuse_mpq, 1;
+	set $@npcusetime_mpq,0;
+	mes $@npcname_mpq$;
+	mes "Hmm, yes I see. If one was to take the couplence power from rizion gems and...";
+	mes "Yes, well what is it? Can't you see I'm busy?";
+	next;
+	set $@npcusetime_mpq,0;
+	
+	if( quest_iscomplete( $@questid_mpq1 ) )
+	{
+		goto L_mpq2;
+	}
+	
+	if( quest_isactive( $@questid_mpq1 ) )
+	{
+		menu "I have the Soul Gemstone.",L_complete1,"Busy with what?",-,"I'll leave you alone then.",L_leave;
+	}
+	else
+	{
+		menu "Busy with what?",-,"I'll leave you alone then.",L_leave;
+	}		
+	mes $@npcname_mpq$;
+	mes "Are you brain dead? Obviously I'm doing research for the State.";
+	mes "The better question would be why are you here...well I guess that doesn't really matter now.";
+	mes "It seems you came to bother me at a very convenient time.";
+	next;
+	set $@npcusetime_mpq,0;
+	mes $@npcname_mpq$;
+	mes "As you can see I'm very busy and have little to no time to leave my research.";
+	mes "Thats where you come in. I could use you to test out my newest theory.";
+	mes "Of course you would be given something for you time, not like your time is worth as much as mine though.";
+	next;
+	menu "Use me for what?",-,"Umm, arn't you rude.",L_leave;
+	set $@npcusetime_mpq,0;
+	mes $@npcname_mpq$;	
+	mes "Well you see, I was instructed to find something to act as a catalyst for a new machine that was created.";
+	mes "The current energy needs are just to much with what we currently use.";
+	mes "However I was able to find some references to a Soul Gemstone.";
+	next;
+	set $@npcusetime_mpq,0;
+	mes $@npcname_mpq$;	
+	mes "We could use the gemstone as a catalyst to power the machine.";
+	mes "I'm still not sure if the Soul Gemstone would work for our needs however. But, I'm willing to send out someone as expendable as yourself to find out.";
+	next;
+	menu "So, I am to collect this?",-,"Whoa, I'm not expendable.",L_leave;
+	set $@npcusetime_mpq,0;
+	mes $@npcname_mpq$;		
+	mes "Arn't you a bright one. Of course you are, why else would I have wasted my time talking to you?";
+	mes "Now, I don't know the full details. The sources I have to go off are pretty old.";
+	next;
+	set $@npcusetime_mpq,0;
+	mes $@npcname_mpq$;	
+	mes "All I know is the Soul Gemstone was used in the past for many things, most of which have been forgotten.";
+	mes "However, there were some rummors that Soul Gemstones were used to speed up the incubation time at the Bio Labs; before those idiots lost control.";
+	mes "You might beable to collect a Soul Gemstone from the left over filth that still roams around down there.";
+	next;
+	set $@npcusetime_mpq,0;
+	mes $@npcname_mpq$;
+	mes "Your best chance is to find those magic user clones. Most likely those fools at the labs messed up and let those clones absorb to much energy.";
+	mes "If that is the case, then the power the clones themselves generated would have increased. Which hopefully led to some of the clones not fully using up their Soul Gemstones.";
+	next;
+	set $@npcusetime_mpq,0;
+	mes $@npcname_mpq$;
+	mes "Once you have the Soul Gemstone, bring it back. I will have to inspect it to make sure it will work with the machine.";
+	mes "So, I assume you will help. If not you truely are stupid...wasting my time like this.";
+	next;
+	menu "Yes, I'll help.",-,"You need to work on your people skills.",L_leave;
+	set $@npcusetime_mpq,0;
+	mes $@npcname_mpq$;	
+	set @qreturn,quest_add($@questid_mpq1);
+	switch( @qreturn )
+	{
+		case 0:			
+			mes "Ok then, to summerize for such a slow witted person.";
+			mes "You need to get a Soul Gemstone, look around the failed Bio Labs for the magic user clones.";
+			mes "I trust this wont take long, I don't have all day.";
+		break;
+		case 1:
+			mes "Stop wasting my time and bring me that Soul Gemstone.";
+		break;
+		default:
+			mes "You are one big waste of time arn't you?";
+		break;
+	}		 
+	close;
+
+L_leave:
+	mes $@npcname_mpq$;
+	mes "Yes, yes stop wasting my time then.";
+	close;
+
+L_complete1:
+	mes $@npcname_mpq$;
+	mes "Yes, I'll be the judge of that.";
+	mes "Lets see what a dimwit like yourself was able to do.";
+	next;
+	set $@npcusetime_mpq,0;
+	set @qreturn,quest_complete($@questid_mpq1);
+	mes $@npcname_mpq$;
+	switch( @qreturn )
+	{
+		case 0:
+			mes "As I thought, useless. Maybe this task was to hard for someone of your...quality.";
+			mes "You need to get a Soul Gemstone, look around the failed Bio Labs for the magic user clones.";
+			mes "I trust you can remember it this time around.";
+		break;
+		case 1:			
+			mes "Yes, this is a Soul Gemstone, but It seems different then how the books discribe it.";
+			mes "Maybe..Yes that's whats different.";
+			next;
+			set $@npcusetime_mpq,0;
+			mes $@npcname_mpq$;
+			goto L_mpq2d;
+		break;
+		default:
+			mes "You are the biggest waste of time I have ever seen.";
+		break;
+	}	
+	close;
+
+L_mpq2:
+
+	if( quest_iscomplete( $@questid_mpq2 ) )
+	{
+		mes $@npcname_mpq$;
+		mes "Oh, you're the one that helped prove my theory. If you just came around to bug me again, stop wasting my time.";
+		mes "If I need you to run more errands again I'll let you know.";
+		close;
+	}
+	else if( quest_isactive( $@questid_mpq2 ) )
+	{
+		menu "I have a charged Soul Gemstone.",L_complete2,"Still busy?",-,"I'll leave you alone then.",L_leave;
+	}
+	else
+	{
+		menu "Still busy?",-,"I'll leave you alone then.",L_leave;
+	}
+	mes $@npcname_mpq$;
+	mes "Were you dropped on your head as a child? I already told you, the Soul Gemstone was not enough.";
+	mes "I guess I need to remind you of the situation.";
+	next;
+	set $@npcusetime_mpq,0;
+	mes $@npcname_mpq$;
+L_mpq2d:
+	mes "It seems the Soul Gemstone is in a dormant state, meaning it's useless.";
+	mes "I was able to read more aobut Soul Gemstones while you were gone.";
+	next;
+	set $@npcusetime_mpq,0;
+	mes $@npcname_mpq$;	
+	mes "The true purpose of the Soul Gemstone is to collect the energy from things as they die.";
+	mes "As something dies, the Soul Gemstone collects what energy is released and stores it.";		
+	next;
+	set $@npcusetime_mpq,0;
+	mes $@npcname_mpq$;	
+	mes "With a fully charged Soul Gemstone as a catalyst the machine's power useage should drop considerably.";
+	mes "The only problem is what kind of energy to store in it.";
+	mes "Running around killing anything just wont work. Only the energy emitted from certain things will work.";
+	next;
+	set $@npcusetime_mpq,0;
+	mes $@npcname_mpq$;	
+	mes "Luckicly I was able to find out what kind of energy would work. Specificly only the energy from a Maya Purple will work.";
+	mes "Nothing else will give off the right kinds of energy to resonate with the machine.";
+	mes "And as I have said before, this is just a theory and I'm to busy to run out and do this myself.";	
+	next;
+	menu "Count me in.",-,"To busy...yeah right.",L_leave;	
+	set $@npcusetime_mpq,0;
+	mes $@npcname_mpq$;
+	mes "Execlent!";
+	mes "I'm afraid I can't help you locate a Maya Purple, the books around here fail to mention where one can be found.";
+	mes "So in short you're on your own with finding a Maya Purple. Most likely more energy then what a single Maya Purple gives off will be needed.";
+	mes "Hmm, lets see using a Talyor constant...Now if I take that and run it through Stoke's theory...";
+	next;
+	set $@npcusetime_mpq,0;
+	mes $@npcname_mpq$;	
+	mes "...Seems like fifty Maya Purples will be needed. I might have to up your reward if this is true.";
+	mes "Anyways, I assume you will help, if not you are one huge waste of time.";
+	next;
+	menu "I'll help",-,"I don't like all your insults.",L_leave;
+	set $@npcusetime_mpq,0;
+	mes $@npcname_mpq$;	
+	set @qreturn,quest_add($@questid_mpq2);
+	switch( @qreturn )
+	{
+		case 0:			
+			mes "Ok then, to summerize.";
+			mes "You need to charge up the Soul Gemstone with the deaths of fifty Maya Purples.";
+			mes "Once you have a charged Soul Gemstone bring it back to me so I can test out my theory.";
+			mes "Oh, and your reward will be a useful card. The symbols engraved in it will let you see hidden people.";
+			mes "I trust this wont take long, I don't have all day.";
+		break;
+		case 1:
+			mes "Stop wasting my time and go charge up the Soul Gemstone.";
+		break;
+		default:
+			mes "You are one big waste of time arn't you?";
+		break;
+	}		 
+	close;
+
+L_complete2:
+	mes $@npcname_mpq$;
+	mes "Yes, I'll be the judge of that.";
+	mes "Lets see if the Soul Gemstone is charged enough.";
+	next;
+	set $@npcusetime_mpq,0;
+	set @qreturn,quest_complete($@questid_mpq2);
+	mes $@npcname_mpq$;
+	switch( @qreturn )
+	{
+		case 0:
+			mes "As I thought, useless. This Soul Gemstone is not nearly charged enough.";
+			mes "You need to charge up the Soul Gemstone with the deaths of fifty Maya Purples.";
+			mes "Once you have a charged Soul Gemstone bring it back to me so I can test out my theory.";
+			mes "Oh, and your reward will be a useful card. The symbols engraved in it will let you see hidden people.";
+			mes "I trust you can remember it this time around.";
+		break;
+		case 1:
+			mes "Hmm, well it seems you did fully charge up the Soul Gemstone.";
+			mes "As promised here is your reward.";
+			mes "For someone as lowely as yourself that should be more then a reasonable reward.";
+			getitem 4198,1;	
+			next;
+			set $@npcusetime_mpq,0;		
+			mes $@npcname_mpq$;			
+			mes "Now I can see if it is compatible with the machine.";
+			mes "...";
+			mes "...";
+			next;
+			set $@npcusetime_mpq,0;		
+			mes $@npcname_mpq$;
+			mes "...Yes this seems to do nicely. It resonates well with the testing device I have.";
+			mes "This proves my theory was correct, sometimes my brilliance even amazes myself.";
+			next;
+			set $@npcusetime_mpq,0;		
+			mes $@npcname_mpq$;
+			mes "And what are you still doing here? Shouldn't run along now?";
+			mes "Maybe you can learn how not to waste someones time.";
+		break;
+		default:
+			mes "You are the biggest waste of time I have ever seen.";
+		break;
+	}	
+	close;
+
+OnTimer1800:
+	set $@npcusetime_mpq,$@npcusetime_mpq+1;
+	if( $@npcusetime_mpq > 20 )
+	{
+		set $@npcusetime_mpq, 0;
+		set $@npcinuse_mpq, 0;
+	}
+	if( $@npcinuse_mpq )
+	{
+		initnpctimer;
+		end;
+	}
+	if ($@_mpq_CNT == $@_mpq_MAXCNT) set $@_mpq_FLAG, 1; // Set Flag to return mode
+	if ($@_mpq_FLAG == 1) goto TrueWalkReturn;
+
+	set $@_mpq_X, callfunc("TrueWalkNPC", $@_mpq_ARRX[$@_mpq_CNT]);
+	set $@_mpq_Y, callfunc("TrueWalkNPC", $@_mpq_ARRY[$@_mpq_CNT]);
+	
+	set $@_mpq_CNT, $@_mpq_CNT + 1;  //Step Counter
+	set $@_mpq_ARRX[$@_mpq_CNT], $@_mpq_X; // Save step X for return
+	set $@_mpq_ARRY[$@_mpq_CNT], $@_mpq_Y; // Save step Y for return
+	goto Walk;
+	
+TrueWalkReturn:
+	set $@_mpq_ARRX[$@_mpq_CNT], 0;
+	set $@_mpq_ARRY[$@_mpq_CNT], 0;
+	set $@_mpq_CNT, $@_mpq_CNT - 1; // Downstep Counter
+	set $@_mpq_X, $@_mpq_ARRX[$@_mpq_CNT]; // Restore Saved coords
+	set $@_mpq_Y, $@_mpq_ARRY[$@_mpq_CNT];
+	if ($@_mpq_CNT == 0) set $@_mpq_FLAG, 0; // Set Flag to forward
+
+Walk:
+	npcwalkto $@_mpq_X, $@_mpq_Y;
+	initnpctimer;
+	end;
+
+OnInit:
+	set $@npcname_mpq$, "^4000C0[Razvan]^000000";
+	set $@questid_mpq1,2;
+	set $@questid_mpq2,3;
+	set $@npcinuse_mpq,0;
+	set $@npcusetime_mpq,0;
+	set $@_mpq_ARRX[0], 110; // Set initial coord X - NPC Position X
+	set $@_mpq_ARRY[0], 106; // Set initial coord Y - NPC Position Y
+	set $@_mpq_CNT,0; // Don't change
+	set $@_mpq_FLAG,0; // Don't change
+	set $@_mpq_MAXCNT,25; // Max Movements
+	npcspeed 250; // Set Walk Speed 100=Faster 200=Slower
+	initnpctimer;
+	end;
+}

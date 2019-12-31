@@ -1,0 +1,261 @@
+//===== Script: ===============================================================
+//= 2010 XileRO's XcR System (XileRO-Credits).
+//= By Honor/Lover Romeo
+//==============================================================================
+jawaii,210,292,4	script	GuessTheNumber	756,{
+	if(.guessactive == 1) {
+		mes "[^0000ffGuessTheNumber^000000]";
+		mes "Guess the Correct Number!";
+		mes " ";
+		mes .guessrand;
+		mes "^ff3399HappyBirhtday Nikki~*^000000";
+		mes "^ff339917 <3^000000";
+		input @guess_it;
+		if(@guess_it == .guessrand) {
+			set .@winner_g$,strcharinfo(0);
+			stopnpctimer;
+			close2;
+			mapannounce "jawaii","I think we got a winner!", 1;
+			sleep2 3000;
+			mapannounce "jawaii","Congratulations to "+.@winner_g$+" <3", 1;
+			getitem 22556,11;
+			set .guessactive,0;
+			set .guess1_1,0;
+			set .guess2_2,0;
+			set .guess_1,0;
+			set .guess_2,0;
+			set .guessrand,0;
+			end;			
+		}
+		next;
+		mes "[^0000ffGuessTheNumber^000000]";
+		mes "Im Sorry try again =P";
+		close;
+	} else {
+L_repeat:
+	set .guess1_1,rand(1,5);
+	if(.guess1_1 == 1) { set .guess_1,100; }
+	if(.guess1_1 == 2) { set .guess_1,500; }
+	if(.guess1_1 == 3) { set .guess_1,1000; }
+	if(.guess1_1 == 4) { set .guess_1,2000; }
+	if(.guess1_1 == 5) { set .guess_1,5000; }
+
+	set .guess2_2,rand(1,5);
+	if(.guess2_2 == 1) { set .guess_2,1000; }
+	if(.guess2_2 == 2) { set .guess_2,3000; }
+	if(.guess2_2 == 3) { set .guess_2,4000; }
+	if(.guess2_2 == 4) { set .guess_2,5000; }
+	if(.guess2_2 == 5) { set .guess_2,8000; }
+		if(.guess_1 >= .guess_2) { goto L_repeat; }
+	set .guessrand,rand(.guess_1,.guess_2);
+	set .guessactive,1;
+	mapannounce "jawaii", "GuessTheNumber Between ~ ("+.guess_1+"~"+.guess_2+").", 1;
+	initnpctimer;
+}
+end;
+
+//17 seconds
+OnTimer17001:
+	if(.guessactive==0) { end; }
+	mapannounce "jawaii", "GuessTheNumber Between ~ ("+.guess_1+"~"+.guess_2+").", 1;
+	initnpctimer;
+	end;
+}
+cmd_fild02,198,153,1	script	NikkiTeAmo	45,1,1,{
+
+	warp "jawaii",203,291;
+	end;
+}
+jawaii,204,296,1	script	NikkiTeAmo2	45,1,1,{
+
+	warp "cmd_fild02",198,148;
+	end;
+}
+
+jawaii,199,290,5	script	Martin	909,{
+	npctalk "HappyBirthday Nicole Cabana~!!";
+	night;
+	specialeffect2 342;
+	specialeffect2 342;
+	specialeffect2 347;
+	specialeffect2 297;
+	specialeffect2 301;
+	close;
+}
+cmd_fild02,194,154,5	script	HappyB-Day Nikki#N1-1::HappyB-Day Nikki	909,{
+	npctalk "HappyBirthday Nicole Cabana~!!";
+	night;
+	specialeffect2 342;
+	specialeffect2 342;
+	specialeffect2 347;
+	specialeffect2 297;
+	specialeffect2 301;
+	close;
+}
+cmd_fild02,202,154,5	script	HappyB-Day Nikki2#N2-0::HappyB-Day Nikki2	909,{
+	npctalk "HappyBirthday Nicole Cabana~!!";
+	night;
+	specialeffect2 342;
+	specialeffect2 342;
+	specialeffect2 347;
+	specialeffect2 297;
+	specialeffect2 301;
+	close;
+}
+//============= H ========================
+cmd_fild02,187,145,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-2	909
+cmd_fild02,187,144,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-3	909
+cmd_fild02,187,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-4	909
+cmd_fild02,187,142,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-5	909
+cmd_fild02,187,141,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-6	909
+
+cmd_fild02,188,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-7	909
+cmd_fild02,189,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-8	909
+
+cmd_fild02,190,145,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-9	909
+cmd_fild02,190,144,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-10	909
+cmd_fild02,190,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-11	909
+cmd_fild02,190,142,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-12	909
+cmd_fild02,190,141,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-13	909
+
+//============== A ==========================
+cmd_fild02,192,144,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-14	909
+cmd_fild02,192,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-15	909
+cmd_fild02,192,142,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-16	909
+cmd_fild02,192,141,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-17	909
+
+cmd_fild02,193,145,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-18	909
+cmd_fild02,194,145,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-19	909
+
+cmd_fild02,193,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-20	909
+cmd_fild02,194,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-21	909
+
+cmd_fild02,195,144,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-22	909
+cmd_fild02,195,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-23	909
+cmd_fild02,195,142,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-24	909
+cmd_fild02,195,141,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-25	909
+
+//============== P ==========================
+cmd_fild02,197,145,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-26	909
+cmd_fild02,197,144,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-27	909
+cmd_fild02,197,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-28	909
+cmd_fild02,197,142,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-29	909
+cmd_fild02,197,141,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-30	909
+
+cmd_fild02,198,145,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-31	909
+cmd_fild02,199,145,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-32	909
+cmd_fild02,200,144,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-33	909
+
+cmd_fild02,199,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-34	909
+cmd_fild02,198,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-35	909
+cmd_fild02,200,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-36	909
+cmd_fild02,200,145,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-37	909
+
+//============== P ==========================
+cmd_fild02,202,145,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-38	909
+cmd_fild02,202,144,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-39	909
+cmd_fild02,202,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-40	909
+cmd_fild02,202,142,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-41	909
+cmd_fild02,202,141,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-42	909
+
+cmd_fild02,203,145,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-43	909
+cmd_fild02,204,145,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-44	909
+cmd_fild02,205,145,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-45	909
+
+cmd_fild02,205,144,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-46	909
+cmd_fild02,205,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-47	909
+
+cmd_fild02,204,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-48	909
+cmd_fild02,203,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-49	909
+
+//============== Y ==========================
+cmd_fild02,207,145,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-50	909
+cmd_fild02,207,144,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-51	909
+cmd_fild02,207,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-52	909
+
+cmd_fild02,208,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-53	909
+cmd_fild02,209,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-54	909
+
+cmd_fild02,210,145,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-55	909
+cmd_fild02,210,144,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-56	909
+cmd_fild02,210,143,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-57	909
+
+cmd_fild02,210,142,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-58	909
+cmd_fild02,210,141,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-59	909
+cmd_fild02,209,141,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-60	909
+cmd_fild02,208,141,4	duplicate(HappyB-Day Nikki)	HappyB-Day Nikki#N1-61	909
+
+//============== B ==========================
+cmd_fild02,187,139,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-1	909
+cmd_fild02,187,138,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-2	909
+cmd_fild02,187,137,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-3	909
+cmd_fild02,187,136,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-4	909
+cmd_fild02,187,135,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-5	909
+
+cmd_fild02,188,139,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-6	909
+cmd_fild02,189,139,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-7	909
+cmd_fild02,190,138,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-8	909
+
+cmd_fild02,189,137,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-9	909
+cmd_fild02,188,137,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-10	909
+
+cmd_fild02,190,136,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-11	909
+cmd_fild02,189,135,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-12	909
+cmd_fild02,188,135,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-13	909
+
+//============== - ==========================
+cmd_fild02,192,137,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-14	909
+cmd_fild02,193,137,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-15	909
+cmd_fild02,194,137,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-16	909
+cmd_fild02,195,137,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-17	909
+
+//============== D ==========================
+cmd_fild02,197,139,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-18	909
+cmd_fild02,197,138,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-19	909
+cmd_fild02,197,137,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-20	909
+cmd_fild02,197,136,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-21	909
+cmd_fild02,197,135,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-22	909
+
+cmd_fild02,198,139,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-23	909
+cmd_fild02,199,139,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-24	909
+
+cmd_fild02,200,138,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-25	909
+cmd_fild02,200,137,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-26	909
+cmd_fild02,200,136,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-27	909
+
+cmd_fild02,199,135,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-28	909
+cmd_fild02,198,135,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-29	909
+
+//============== A ==========================
+cmd_fild02,202,138,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-30	909
+cmd_fild02,202,137,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-31	909
+cmd_fild02,202,136,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-32	909
+cmd_fild02,202,135,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-33	909
+
+cmd_fild02,203,139,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-34	909
+cmd_fild02,204,139,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-35	909
+
+cmd_fild02,203,137,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-36	909
+cmd_fild02,204,137,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-37	909
+
+cmd_fild02,205,138,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-38	909
+cmd_fild02,205,137,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-39	909
+cmd_fild02,205,136,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-40	909
+cmd_fild02,205,135,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-41	909
+
+//============== Y ==========================
+cmd_fild02,207,139,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-42	909
+cmd_fild02,207,138,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-43	909
+cmd_fild02,207,137,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-44	909
+
+cmd_fild02,208,137,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-45	909
+cmd_fild02,209,137,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-46	909
+
+cmd_fild02,210,139,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-47	909
+cmd_fild02,210,138,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-48	909
+cmd_fild02,210,137,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-49	909
+cmd_fild02,210,136,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-50	909
+cmd_fild02,210,135,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-51	909
+
+cmd_fild02,209,135,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-52	909
+cmd_fild02,208,135,4	duplicate(HappyB-Day Nikki2)	HappyB-Day Nikki#N2-53	909

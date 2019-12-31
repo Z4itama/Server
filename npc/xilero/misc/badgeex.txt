@@ -1,0 +1,949 @@
+arena_room.gat,112,96,4	script	Badge Exchange	874,{
+
+	set $@npcname_miq$, "^4000C0[Badge Exchange]^000000";
+	mes $@npcname_mpq$;
+	mes "So, you've finally earned some wings eh? Well, take those pretty badges you got, and trade them for somethin useful!";
+	next;
+	menu "Rookie Badge",L_BadgeEx0,"Victory Badge",L_BadgeEx1,"Boots of Guidance",L_BadgeEx3,"Hero Plate Armor",L_BadgeEx4,"Rally Plate Armor",L_BadgeEx5,"Mithril Armor",L_BadgeEx6,"Grand Gaiters",L_BadgeEx7,"Clothes of Brilliance",L_BadgeEx8,"Scarlet Angel Helm",L_BadgeEx9,"Scarlet Angel Ears",L_BadgeEx10,"Scarlet Angel Wings",L_BadgeEx11,"Emperor's Helm",L_BadgeEx12,"Emperor's Shoulders",L_BadgeEx13,"Emperor's Wings",L_BadgeEx14,"Little Devil Horns",L_BadgeEx15,"Little Devil Tails",L_BadgeEx16,"Little Devil Wings",L_BadgeEx17,"Godly Staff of Ages",L_BadgeEx18,"Godly Soul Seeker",L_BadgeEx19,"Godly Holy Flail",L_BadgeEx20,"Godly Oblivion Blade",L_BadgeEx21,"Godly Frenzic",L_BadgeEx22,"Godly Katar Of Chaos",L_BadgeEx23,"Godly Reaper",L_BadgeEx24,"Godly Wind Weaver",L_BadgeEx25,"Godly Dark Defier",L_BadgeEx26,"Godly Phoenix Wing",L_BadgeEx27,"Godly Retribution",L_BadgeEx28,"Godly Raging Mic",L_BadgeEx29,"Godly Fuuma Shuriken",L_BadgeEx30,"Godly Garrison",L_BadgeEx31,"Godly Cyclone",L_BadgeEx32,"Godly Soul Butcher",L_BadgeEx33,"Godly Destroyer",L_BadgeEx34,"Godly Legacy Of Dragon",L_BadgeEx35,"Godly Gate_Keeper",L_BadgeEx36,"Cancel",L_Exit;
+
+L_BadgeEx0:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "1x - Victory Badge = 45x Rookie Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	mes "There is a fee of 100m zeny";
+	next; 
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(Zeny < 100000000) goto LNozeny;
+	if(countitem(22556) < 1) goto LNotEnough;
+		delitem 22556,1;
+	mes "Woahh, you have all of them?! Kk then, this is all yours.";
+		getitem 22555,45;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+
+L_BadgeEx1:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "45x - Rookie Badge = 1x Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	next; 
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22555) < 45) goto LNotEnough;
+		delitem 22555,45;
+	mes "Woahh, you have all of them?! Kk then, this is all yours.";
+		getitem 22556,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+
+L_BadgeEx3:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "2x - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 2) goto LNotEnough;
+		delitem 22556,2;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3163,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+
+L_BadgeEx4:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "2x - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 2) goto LNotEnough;
+		delitem 22556,2;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3164,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	specialeffect2 241;
+	close;
+
+L_BadgeEx5:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "2x - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 2) goto LNotEnough;
+		delitem 22556,2;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3165,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+
+L_BadgeEx6:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "2x - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 2) goto LNotEnough;
+		delitem 22556,2;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3166,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+
+L_BadgeEx7:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "2x - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 2) goto LNotEnough;
+		delitem 22556,2;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3167,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+
+L_BadgeEx8:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "2x - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 2) goto LNotEnough;
+		delitem 22556,2;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3168,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+
+L_BadgeEx9:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "5x - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 5) goto LNotEnough;
+		delitem 22556,5;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3170,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+
+L_BadgeEx10:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "5x - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 5) goto LNotEnough;
+		delitem 22556,5;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3172,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+
+L_BadgeEx11:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "12x - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 12) goto LNotEnough;
+		delitem 22556,12;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3171,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+
+L_BadgeEx12:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "5x - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 5) goto LNotEnough;
+		delitem 22556,5;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3173,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+
+L_BadgeEx13:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "5x - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 5) goto LNotEnough;
+		delitem 22556,5;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3175,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+
+L_BadgeEx14:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "12x - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 12) goto LNotEnough;
+		delitem 22556,12;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3174,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx15:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "7x - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 7) goto LNotEnough;
+		delitem 22556,7;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3176,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx16:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "7x - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 7) goto LNotEnough;
+		delitem 22556,7;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3178,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx17:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "17x - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 17) goto LNotEnough;
+		delitem 22556,17;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3177,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx18:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "6 - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 6) goto LNotEnough;
+		delitem 22556,6;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3180,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx19:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "6 - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 6) goto LNotEnough;
+		delitem 22556,6;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3199,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx20:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "6 - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 6) goto LNotEnough;
+		delitem 22556,6;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3182,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx21:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "6 - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 6) goto LNotEnough;
+		delitem 22556,6;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3183,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx22:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "6 - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 6) goto LNotEnough;
+		delitem 22556,6;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3184,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx23:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "6 - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 6) goto LNotEnough;
+		delitem 22556,6;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3185,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx24:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "6 - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 6) goto LNotEnough;
+		delitem 22556,6;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3186,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx25:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "6 - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 6) goto LNotEnough;
+		delitem 22556,6;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3187,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx26:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "6 - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 6) goto LNotEnough;
+		delitem 22556,6;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3188,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx27:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "6 - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 6) goto LNotEnough;
+		delitem 22556,6;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3189,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx28:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "6 - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 6) goto LNotEnough;
+		delitem 22556,6;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3190,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx29:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "6 - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 6) goto LNotEnough;
+		delitem 22556,6;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3191,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx30:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "6 - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 6) goto LNotEnough;
+		delitem 22556,6;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3192,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx31:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "6 - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 6) goto LNotEnough;
+		delitem 22556,6;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3193,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx32:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "6 - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 6) goto LNotEnough;
+		delitem 22556,6;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3194,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx33:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "6 - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 6) goto LNotEnough;
+		delitem 22556,6;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3195,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx34:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "6 - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 6) goto LNotEnough;
+		delitem 22556,6;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3196,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx35:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "6 - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 6) goto LNotEnough;
+		delitem 22556,6;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3197,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+L_BadgeEx36:
+	mes $@npcname_mpq$;
+	mes "Just give me the badges listed, and you can have it!";
+	next;
+	mes "6 - Victory Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease forgive me, I'm noob y-y!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22556) < 6) goto LNotEnough;
+		delitem 22556,6;
+	mes "Waohh, you have all of them?! Kk then, is all yours.";
+		getitem 3198,1;
+	mes ". . .";
+	mes "Gratz! Hope you kill lotz more nubs. Rawr!";
+	close;
+	
+LNotEnough:
+	mes "You don't have enough badges.";
+	mes "Go take your wek azz back to PvP. GoGo!";
+	close;
+
+LNozeny:
+	mes "You don't have enough zeny's";
+	close;
+
+LNada:
+	mes "Wtf, come back when you got the goods! Frekin nub..";
+	close;
+L_Exit:
+	close;
+}
+
+// BoM NPC
+
+ra_temsky.gat,107,94,4	script	Battle of Masters	874,{
+
+	set $@npcname_mpq$, "^4000C0[BoM Badge Exchange]^000000";
+	mes $@npcname_mpq$;
+	mes "I recently have gained an interest in MvP monsters. Each and every MvP drops BoM Badges. Also! Your entire 5man party has a chance of getting a badge for each MvP they help kill. In exchange for these badges I'll give you goood stuffs! So team up and kill these ebil monsters. I'll have new items and more events for you soon!";
+	next;
+	menu "What Stats Do They Give?",L_Stats,"Obsessed Greed Card",L_BadgeEx1,"Vengeful Envy Card",L_BadgeEx3,"Endless Faith Card",L_BadgeEx4,"Blood Lust Card",L_BadgeEx5,"Master Exile Card",L_BadgeEx6,"Hercule Belt",L_BadgeEx7,"Cancel",L_Exit;
+
+L_BadgeEx1:
+	mes $@npcname_mpq$;
+	mes "I'll need these badges in order for you to have this beautiful card!";
+	next;
+	mes "20x - BoM Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Gimme Nao <3!",-,"Nevermind, I are the wek..",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22557) < 20) goto LNotEnough;
+		delitem 22557,20;
+	mes "Well done!! I am very impressed. Here is your reward!";
+		getitem 23020,1;
+	mes ". . .";
+	mes "Gratz! Kill lotz more MvPs!";
+	specialeffect2 241;
+	close;
+
+L_BadgeEx3:
+	mes $@npcname_mpq$;
+	mes "I'll need these badges in order for you to have this beautiful card!";
+	next;
+	mes "20x - BoM Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Gimme Nao <3!",-,"Nevermind, I are the wek..",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22557) < 20) goto LNotEnough;
+		delitem 22557,20;
+	mes "Well done!! I am very impressed. Here is your reward!";
+		getitem 23021,1;
+	mes ". . .";
+	mes "Gratz! Kill lotz more MvPs!";
+	specialeffect2 241;
+	close;
+
+L_BadgeEx4:
+	mes $@npcname_mpq$;
+	mes "I'll need these badges in order for you to have this beautiful card!";
+	next;
+	mes "20x - BoM Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Gimme Nao <3!",-,"Nevermind, I are the wek..",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22557) < 20) goto LNotEnough;
+		delitem 22557,20;
+	mes "Well done!! I am very impressed. Here is your reward!";
+		getitem 23022,1;
+	mes ". . .";
+	mes "Gratz! Kill lotz more MvPs!";
+	specialeffect2 241;
+	close;
+
+L_BadgeEx5:
+	mes $@npcname_mpq$;
+	mes "I'll need these badges in order for you to have this beautiful card!";
+	next;
+	mes "20x - BoM Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Gimme Nao <3!",-,"Nevermind, I are the wek..",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22557) < 20) goto LNotEnough;
+		delitem 22557,20;
+	mes "Well done!! I am very impressed. Here is your reward!";
+		getitem 23023,1;
+	mes ". . .";
+	mes "Gratz! Kill lotz more MvPs!";
+	specialeffect2 241;
+	close;
+
+L_BadgeEx6:
+	mes $@npcname_mpq$;
+	mes "I'll need these badges in order for you to have this beautiful card!";
+	next;
+	mes "20x - BoM Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Gimme Nao <3!",-,"Nevermind, I are the wek..",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22557) < 20) goto LNotEnough;
+		delitem 22557,20;
+	mes "Well done!! I am very impressed. Here is your reward!";
+		getitem 23024,1;
+	mes ". . .";
+	mes "Gratz! Kill lotz more MvPs!";
+	specialeffect2 241;
+	close;
+
+L_BadgeEx7:
+	mes $@npcname_mpq$;
+	mes "I'll need these badges in order for you to have this beautiful card!";
+	next;
+	mes "20x - BoM Badge";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you wan it or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Gimme Nao <3!",-,"Nevermind, I are the wek..",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22557) < 20) goto LNotEnough;
+		delitem 22557,20;
+	mes "Well done!! I am very impressed. Here is your reward!";
+		getitem 23025,1;
+	mes ". . .";
+	mes "Gratz! Kill lotz more MvPs!";
+	specialeffect2 241;
+	close;
+L_Stats:
+	mes $@npcname_mpq$;
+	mes "Here are the Stats!";
+	mes "Master Exile Card - Accessory 30 dex, 10luk, 15k HP";
+	mes "Endless Faith Card - Accessory 30 int, 10 vit, 15k HP";
+	mes "Vengeful Envy Card - Accessory 30 agi, 5luk, 5vit, 15k HP";
+	mes "Blood Lust Card - Accessory 30 luk, 10 int, 15k HP";
+	mes "Obsessed Greed Card - Accessory 25 vit, 15 int, 15k HP";
+	mes "Hercule Belt - Accessory 40 str, MDef 10, 15k HP";
+	close;
+
+LNotEnough:
+	mes "You don't have enough badges.";
+	mes "Go take your wek azz n' kill more MvPs. GoGo!";
+	close;
+
+LNada:
+	mes "Wtf, come back when you got the goods! Weirdo..";
+	close;
+L_Exit:
+	close;
+}

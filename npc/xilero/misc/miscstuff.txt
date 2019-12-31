@@ -1,0 +1,26 @@
+//=================eAthena Script============================
+// Written by: Kikuko
+//=================Script Name===============================
+// just stuff - for XileRO
+//=================Script Defenition=========================
+// random stuff
+//=================Version History===========================
+//1.0 - Done. Still needs to be tested.
+
+
+//warp dead players out
+-	script	DeadPlayerWarp	-1,{
+
+OnTimer300000:
+warpdeadplayers 87,84,70,180;
+warpdeadplayers 423,84,70,180;
+warpdeadplayers 372,84,70,180;
+warpdeadplayers 309,84,70,180;
+warpdeadplayers 86,84,70,180;
+initnpctimer;
+end;
+
+OnInit:
+initnpctimer;
+end;
+}

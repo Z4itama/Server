@@ -1,0 +1,100 @@
+//===== eAthena Script =======================================
+//= Name change NPC
+//===== By: ==================================================
+//= Yumi for XileRO
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= eAthena SVN
+//===== Version History: =====================================
+//= 1.0
+//============================================================
+
+ra_temsky,99,59,4	script	Renamer	894,{
+
+set .@npcname$,"[ ^002f77Renamer^000000 ]";
+
+
+	mes .@npcname$;
+	mes "Welcome ^ff0000"+strcharinfo(0)+"^000000";
+	mes "What may I help you with today?";
+	next;
+	switch(select("Buy Renameing:Nothing")) {
+
+		case 1:
+		mes .@npcname$;
+		mes "Are you sure you want to buy a name change for 10 uber points?";
+		next;
+		switch(select("Yes!:No, I am not")) {
+			
+			case 1:
+				mes .@npcname$;
+				mes "You really want to rename your character?";
+				next;
+				switch(select("Yes:No")) {
+
+					case 1:
+						query_sql "SELECT `uberpoints` FROM `donationlog` WHERE `account_id` = ='"+getcharid(3)+"'",@uberpoints;
+						if(@uberpoints >= 10) {
+						mes .@npcname$;
+						mes "Name ^ff0000You don't have enough uber points!^000000";
+						close;}		
+	
+						if(getcharid(2) > 0 || getcharid(1) > 0) {
+						mes .@npcname$;
+						mes "You should leave your guild or party before changing your name.";
+						close;}
+						
+						mes .@npcname$;
+						mes "Please input the new name you want for you character.";
+						input .@newname$;
+						if(getstrlen(.@newname$) > 22) { mes "Name is too long, im sorry"; close; }
+						if(getstrlen(.@newname$) < 2) { mes "Name is too short, im sorry"; close; }
+						next;
+						mes .@npcname$;
+						mes "is this name alright?";
+						mes "^0000ff "+.@newname$+" ^000000";
+						menu "No",LCancel,"Yes",-;
+						next;
+						// Checks if the name is available
+						query_sql "SELECT `account_id` FROM `char` WHERE `name` = '"+escape_sql(.@newname$)+"'",.@name_exists;
+						if(.@name_exists) {
+						mes .@npcname$;
+						mes "Name ^ff0000Not Available^000000";
+						close;}
+						
+						else {
+						mes .@npcname$;
+						query_sql "UPDATE `donationlog` SET `uberpoints`=`uberpoints`-10 WHERE `account_id`='"+getcharid(3)+"'";
+						query_sql "UPDATE `char` SET name = '"+escape_sql(.@newname$)+"' WHERE char_id = "+getcharid(0)+";";
+						mes "Your name ^ff0000"+strcharinfo(0)+"^000000 has changed into ^ff0000"+.@newname$+"^000000.";
+						close2;
+						atcommand "@kick "+strcharinfo(0);
+						end;} // The players name has been changed.
+		
+						LCancel:
+						close;
+
+					case 2:
+						mes .@npcname$;
+						mes "Good Bye Then ^ff0000"+strcharinfo(0)+"^000000.";
+						close;
+				}
+			
+
+
+			case 2:
+				mes .@npcname$;
+				mes "Good Bye Then ^ff0000"+strcharinfo(0)+"^000000.";
+				close;
+		}
+
+
+		case 2:
+		mes .@npcname$;
+		mes "Good Bye Then ^ff0000"+strcharinfo(0)+"^000000.";
+		close;
+
+
+}
+}

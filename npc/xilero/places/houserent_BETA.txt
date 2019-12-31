@@ -1,0 +1,631 @@
+
+//===== eAthena Script ======================================= 
+//= House BETA V1
+//===== By: ================================================== 
+//= Honor
+//===== Description: ========================================= 
+//= House System (WaR)
+//===== Additional Comments: ================================= 
+//= 1.1 BETA House (testing).
+//============================================================ 
+
+ra_in01	mapflag	nowarp
+ra_in01	mapflag	nowarpto
+ra_in01	mapflag	indoors
+ra_in01	mapflag	noteleport
+ra_in01	mapflag	nomemo
+ra_in01	mapflag	nobranch
+
+//rachel,103,240,0	warp	rachel06	1,1,ra_in01,343,193
+//ra_in01,339,193,0	warp	rachel42	1,1,rachel,98,238
+
+rachel,58,259,0	script	EnterHouse	45,1,1,{
+	if($House1Owner$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($House1Char1$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($House1Char2$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($House1Char3$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($House1Char4$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($House1Char5$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($@houseinvite1_1$ == strcharinfo(0)) { goto L_AllowPass; } if($@houseinvite1_16$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($@houseinvite1_2$ == strcharinfo(0)) { goto L_AllowPass; } if($@houseinvite1_17$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($@houseinvite1_3$ == strcharinfo(0)) { goto L_AllowPass; } if($@houseinvite1_18$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($@houseinvite1_4$ == strcharinfo(0)) { goto L_AllowPass; } if($@houseinvite1_19$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($@houseinvite1_5$ == strcharinfo(0)) { goto L_AllowPass; } if($@houseinvite1_20$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($@houseinvite1_6$ == strcharinfo(0)) { goto L_AllowPass; } if($@houseinvite1_21$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($@houseinvite1_7$ == strcharinfo(0)) { goto L_AllowPass; } if($@houseinvite1_22$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($@houseinvite1_8$ == strcharinfo(0)) { goto L_AllowPass; } if($@houseinvite1_23$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($@houseinvite1_9$ == strcharinfo(0)) { goto L_AllowPass; } if($@houseinvite1_24$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($@houseinvite1_10$ == strcharinfo(0)) { goto L_AllowPass; } if($@houseinvite1_25$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($@houseinvite1_11$ == strcharinfo(0)) { goto L_AllowPass; } if($@houseinvite1_26$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($@houseinvite1_12$ == strcharinfo(0)) { goto L_AllowPass; } if($@houseinvite1_27$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($@houseinvite1_13$ == strcharinfo(0)) { goto L_AllowPass; } if($@houseinvite1_28$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($@houseinvite1_14$ == strcharinfo(0)) { goto L_AllowPass; } if($@houseinvite1_29$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($@houseinvite1_15$ == strcharinfo(0)) { goto L_AllowPass; } if($@houseinvite1_30$ == strcharinfo(0)) { goto L_AllowPass; }
+	if($@house1allow == 1) { goto L_AllowPass; }
+	message strcharinfo(0),"You can't enter to this house!!"; end;
+
+L_AllowPass:
+	set @welcomehouse,1;
+	warp "ra_in01",343,193;
+	end;
+}
+ra_in01,339,193,0	script	ExitHouse	45,1,1,{
+	warp "rachel",58,255;
+	end;
+}
+
+rachel,58,208,5	script	Perl's Seller	109,{
+set .perls$,"[ ^ff0044~ Perl's Seller ~^000000 ]";
+	if(getgmlevel() >= 99) {
+	L_BACK:
+		message strcharinfo(0),"Welcome to XileRO's House Sytem";
+		emotion e_gasp;
+		menu "-Normal Menu",normalmenu,
+		"-^777777Houses Admin.^000000",Ladmin,
+		"-Cancel",LCancel;
+Ladmin:
+		menu "-^777777Go Back^000000",L_BACK,
+		"-Reset Houses Owners",LresetHO,
+		"-Set NameChanger ["+$@electedchar$+"]",Lnamechanger,
+		"-Delete RareBoxes",Lrarebox,
+		"-Cancel",LCancel;
+
+Lnamechanger:
+	input .@electedchar$;
+	set $@electedchar$,.@electedchar$;
+	close;
+
+Lrarebox:
+	if($rareboxdelete==0) { set $rareboxdelete,1; } else { set $rareboxdelete,0; }
+	dispbottom "Variable is now ("+$rareboxdelete+") 0 = deactive, 1 = active";
+	close;
+LresetHO:
+	set $House1,0;
+	set $House1Owner$,"";
+	message strcharinfo(0),"Houses Reseted!!";
+	close;
+LCancel:
+	close;
+}
+
+normalmenu:
+	mes .perls$;
+if(Sex == 1) { 	mes "Hi Mr. ^ff0000"+strcharinfo(0)+"^000000, how can I help you?"; } else { mes "Hi Mrs. ^ff0000"+strcharinfo(0)+"^000000, how can I help you?"; }
+	menu "^0000ff>^000000 I'd like to Buy a House",L_BuyHouse,
+	"^0000ff>^000000 I'd like to edit my House Registration",L_EditReg,
+	"^0000ff>^000000 I'd like to see my House Settings",L_Hsettings;
+
+L_Hsettings:
+	if($House1Owner$ != strcharinfo(0)) { next; mes .perls$; mes "You don't own any house"; close; } else {
+	next;	
+	mes .perls$;
+	mes "^0000ffHouse Name^000000: "+$House1Name$;
+	mes "^0000ffHouse Owner^000000:  "+$House1Owner$;
+	mes "^0000ffHouse Member^000000:  "+$House1Char1$;
+	if($House1Char2$ != "") { mes "^0000ffHouse Member^000000:  "+$House1Char2$; }
+	if($House1Char3$ != "") { mes "^0000ffHouse Member^000000:  "+$House1Char3$; }
+	if($House1Char4$ != "") { mes "^0000ffHouse Member^000000:  "+$House1Char4$; }
+	if($House1Char5$ != "") { mes "^0000ffHouse Member^000000:  "+$House1Char5$; }
+	close;
+}
+L_BuyHouse:
+	next;
+	if($House1 == 1) {
+			mes .perls$;
+			mes "Somebody already bought this house...";
+			close;
+	}
+	mes .perls$;
+	mes "To proceed in this process you must pay 900,000,000^0000ffz^000000.";
+	mes "Would you like to proceed?";
+	menu "^0000ff>^000000 No thanks...",-,
+	"^0000ff>^000000 Yes please...",L_proceed;
+	close;
+L_proceed:
+	if($House1Owner$ == strcharinfo(0)) { next; mes .perls$; mes "You already own a house."; close; }
+	if(Zeny < 900000000) { next; mes .perls$; mes "To proceed in this process you must pay 900,000,000^0000ffz^000000."; close; }
+	next;
+	set Zeny,Zeny-900000000;
+	mes .perls$;
+	mes "Okay Im going to need some personal info.";
+	next;
+	mes .perls$;
+	mes "^0000ff>^000000 House Name";
+	input @Hname$;
+	set $House1Name$,@Hname$;
+L_ResetFmHere:
+	next;
+	set $House1Owner$,strcharinfo(0); // SET HOUSE OWNER
+	mes .perls$;
+	mes "^0000ff>^000000 CharNames of the people that will live in the house ^0000ff[^000000Max: 5^0000ff]^000000.";
+	input @CharNameHouse1$;
+	set $House1Char1$,@CharNameHouse1$;
+	mes "^0000ffHouse Member^000000:  "+$House1Char1$;
+	menu "^0000ff>^000000 Add Another CharName",-,"^0000ff>^000000 That's all",L_Thats_All;
+	input @CharNameHouse2$;
+	set $House1Char2$,@CharNameHouse2$;
+	mes "^0000ffHouse Member^000000:  "+$House1Char2$;
+	menu "^0000ff>^000000 Add Another CharName",-,"^0000ff>^000000 That's all",L_Thats_All;
+	input @CharNameHouse3$;
+	set $House1Char3$,@CharNameHouse3$;
+	mes "^0000ffHouse Member^000000:  "+$House1Char3$;
+	menu "^0000ff>^000000 Add Another CharName",-,"^0000ff>^000000 That's all",L_Thats_All;
+	input @CharNameHouse4$;
+	set $House1Char4$,@CharNameHouse4$;
+	mes "^0000ffHouse Member^000000:  "+$House1Char4$;
+	menu "^0000ff>^000000 Add Another CharName",-,"^0000ff>^000000 That's all",L_Thats_All;
+	input @CharNameHouse5$;
+	set $House1Char5$,@CharNameHouse5$;
+	mes "^0000ffHouse Member^000000:  "+$House1Char5$;
+L_MenuHouseReset:
+	menu "^0000ff>^000000 Reset House Members Again!",L_ResetFmem,
+	"^0000ff>^000000 Done!",L_Thats_All;
+	close;
+
+L_ResetFmem:
+	menu "^0000ff>^000000 Yes! ~",-,
+	"^0000ff>^000000 No! ~",L_MenuHouseReset;
+	set $House1Char1$,"";
+	set $House1Char2$,"";
+	set $House1Char3$,"";
+	set $House1Char4$,"";
+	set $House1Char5$,"";
+	goto L_ResetFmHere;
+	end;
+
+L_Thats_All:
+	next;
+	mes .perls$;
+	mes "^0000ffHouse Name^000000: "+$House1Name$;
+	mes "^0000ffHouse Owner^000000:  "+$House1Owner$;
+	mes "^0000ffHouse Member^000000:  "+$House1Char1$;
+	if($House1Char2$ != "") { mes "^0000ffHouse Member^000000:  "+$House1Char2$; }
+	if($House1Char3$ != "") { mes "^0000ffHouse Member^000000:  "+$House1Char3$; }
+	if($House1Char4$ != "") { mes "^0000ffHouse Member^000000:  "+$House1Char4$; }
+	if($House1Char5$ != "") { mes "^0000ffHouse Member^000000:  "+$House1Char5$; }
+	set $House1,1;
+	close;
+
+L_EditReg:
+	if($House1Owner$ == strcharinfo(0)) {
+		mes .perls$;
+		mes "Do you want to proceed?";
+		menu "~No",LCancel2,"~Yes",-;
+		goto L_ResetFmHere; 
+		end;
+	}
+LCancel2:
+	close;
+}
+
+ra_in01,343,196,4	script	Maid	53,0,3,{
+end;
+
+OnTouch:
+	if(@welcomehouse != 1) { end; }
+	set @welcomehouse,0;
+	if(Sex == 1) { set @mrmrs$,"Mr."; } else { set @mrmrs$,"Mrs."; } 					// Check SEX for MR. or MRS.
+	if($House1Owner$ == strcharinfo(0)) { npctalk "Welcome Back Home "+@mrmrs$+" "+$House1Owner$+"."; }
+	else if($House1Char1$ == strcharinfo(0)) { npctalk "Welcome Back Home "+@mrmrs$+" "+$House1Char1$+"."; }
+	else if($House1Char2$ == strcharinfo(0)) { npctalk "Welcome Back Home "+@mrmrs$+" "+$House1Char2$+"."; }
+	else if($House1Char3$ == strcharinfo(0)) { npctalk "Welcome Back Home "+@mrmrs$+" "+$House1Char3$+"."; }
+	else if($House1Char4$ == strcharinfo(0)) { npctalk "Welcome Back Home "+@mrmrs$+" "+$House1Char4$+"."; }
+	else if($House1Char5$ == strcharinfo(0)) { npctalk "Welcome Back Home "+@mrmrs$+" "+$House1Char5$+"."; } else { npctalk "Welcome to "+$House1Name$+"'s Home"; }
+	end;
+}
+
+ra_in01,356,177,1	script	House Manager	814,{
+set .housemanager$,"[ ^ff9944~ House Manager ~^000000 ]";
+	if($House1Owner$ == strcharinfo(0)) { goto L_HouseManager; }
+	if($House1Char1$ == strcharinfo(0)) { goto L_HouseManager; }
+	if($House1Char2$ == strcharinfo(0)) { goto L_HouseManager; }
+	if($House1Char3$ == strcharinfo(0)) { goto L_HouseManager; }
+	if($House1Char4$ == strcharinfo(0)) { goto L_HouseManager; }
+	if($House1Char5$ == strcharinfo(0)) { goto L_HouseManager; }
+	end;
+
+L_HouseManager:
+if(Sex == 1) { set @mrmrs$,"Mr."; } else { set @mrmrs$,"Mrs."; } 					// Check SEX for MR. or MRS.
+	mes .housemanager$;
+	mes "Hi "+@mrmrs$+" "+strcharinfo(0)+" How can I help you?";
+	if($@house1allow == 1) {
+	menu "^0000ff>^000000 Invite Friends ("+$@house1friends+"/30)",L_InvFriends,
+	"^0000ff>^000000 See Guests",L_See_Guests,
+	"^0000ff>^000000 Reset Guests",L_Reset_Guests,
+	"^0000ff>^000000 Expell Everyone",L_Expell_Everyone,
+	"^0000ff>^000000 Disallow Everyone to enter",L_Disallow,
+	"^0000ff>^000000 Make an Announcement",L_Announcement,
+	"^0000ff>^000000 Rename a Character",L_renamechar,
+	"^0000ff>^000000 Call My Guild",L_callguild,
+	"^0000ff>^000000 Throw a Party",L_Throw_Party; 
+	} else {
+	menu "^0000ff>^000000 Invite Friends ("+$@house1friends+"/30)",L_InvFriends,
+	"^0000ff>^000000 See Guests",L_See_Guests,
+	"^0000ff>^000000 Reset Guests",L_Reset_Guests,
+	"^0000ff>^000000 Expell Everyone",L_Expell_Everyone,
+	"^0000ff>^000000 Allow Everyone to enter",L_Allow_Everyone,
+	"^0000ff>^000000 Make an Announcement",L_Announcement,
+	"^0000ff>^000000 Rename a Character",L_renamechar,
+	"^0000ff>^000000 Call My Guild",L_callguild,
+	"^0000ff>^000000 Throw a Party",L_Throw_Party;
+	}
+
+L_InvFriends:
+	next;
+	mes .housemanager$;
+	mes "Please write exactly the character name that you want to invite!";
+L_AddGuest: 
+	if ($@house1invite >= 30) { next; mes .housemanager$; mes "You have reached the MAX amount of guests"; close; }
+	input @charnameH$;										//Model: set $@houseinvite1_1$,@charnameH$;
+	set $@house1invite,$@house1invite+1;
+	set $@house1friends,$@house1friends+1;
+	setd "$@houseinvite1_"+$@house1invite+"$",@charnameH$;
+	mes "^0000ffHouse Guest^000000:  "+(getd("$@houseinvite1_"+$@house1invite+"$"));
+	menu "^0000ff>^000000 Add Another Guest",L_AddGuest,"^0000ff>^000000 That's all",-;
+	close;
+L_See_Guests:
+	next;
+	mes .housemanager$;
+	mes $@houseinvite1_1$; mes $@houseinvite1_2$; mes $@houseinvite1_3$; mes $@houseinvite1_4$; mes $@houseinvite1_5$;
+	mes $@houseinvite1_6$; mes $@houseinvite1_7$; mes $@houseinvite1_8$; mes $@houseinvite1_9$; mes $@houseinvite1_10$;
+	mes "^0000ff.........^000000";
+	next;
+	mes .housemanager$;
+	mes $@houseinvite1_11$; mes $@houseinvite1_12$; mes $@houseinvite1_13$; mes $@houseinvite1_14$; mes $@houseinvite1_15$;
+	mes $@houseinvite1_16$; mes $@houseinvite1_17$; mes $@houseinvite1_18$; mes $@houseinvite1_19$; mes $@houseinvite1_20$;
+	mes "^0000ff.........^000000";
+	next;
+	mes .housemanager$;
+	mes $@houseinvite1_21$; mes $@houseinvite1_22$; mes $@houseinvite1_23$; mes $@houseinvite1_24$; mes $@houseinvite1_25$;
+	mes $@houseinvite1_26$; mes $@houseinvite1_27$; mes $@houseinvite1_28$; mes $@houseinvite1_29$; mes $@houseinvite1_30$;
+	mes "^0000ff.........^000000";
+	close;
+L_Reset_Guests:
+	next;
+	mes .housemanager$;
+	mes "All Guests has been reseted.";
+	set $@house1invite,0;
+	set $@house1friends,0;
+	set $@houseinvite1_1$,""; set $@houseinvite1_16$,"";
+	set $@houseinvite1_2$,""; set $@houseinvite1_17$,"";
+	set $@houseinvite1_3$,""; set $@houseinvite1_18$,"";
+	set $@houseinvite1_4$,""; set $@houseinvite1_19$,"";
+	set $@houseinvite1_5$,""; set $@houseinvite1_20$,"";
+	set $@houseinvite1_6$,""; set $@houseinvite1_21$,"";
+	set $@houseinvite1_7$,""; set $@houseinvite1_22$,"";
+	set $@houseinvite1_8$,""; set $@houseinvite1_23$,"";
+	set $@houseinvite1_9$,""; set $@houseinvite1_24$,"";
+	set $@houseinvite1_10$,""; set $@houseinvite1_25$,"";
+	set $@houseinvite1_11$,""; set $@houseinvite1_26$,"";
+	set $@houseinvite1_12$,""; set $@houseinvite1_27$,"";
+	set $@houseinvite1_13$,""; set $@houseinvite1_28$,"";
+	set $@houseinvite1_14$,""; set $@houseinvite1_29$,"";
+	set $@houseinvite1_15$,""; set $@houseinvite1_30$,"";
+	close;
+L_Expell_Everyone:
+	next;
+	mes .housemanager$;
+	mes "Close this to expell everyone.";
+	close2;
+	mapwarp "ra_in01","prontera",156,176;
+	end;
+	
+L_Disallow:
+	next;
+	set $@house1allow,0;
+	mes .housemanager$;
+	mes "You now disallowed everyone to enter to your house";
+	close;
+L_Allow_Everyone:
+	next;
+	set $@house1allow,1;
+	mes .housemanager$;
+	mes "You now allowed everyone to enter to your house";
+	close;
+L_Announcement:
+	next;
+	mes .housemanager$;
+	mes "Please write the announcement you want to make";
+	input @announcehouse1$;
+	set .announcement1$,@announcehouse1$;
+	mes "Your announcement is:";
+	mes .announcement1$;
+	menu "^0000ff>^000000 Okay...",-,
+	"^0000ff>^000000 Cancel...",LCancel;
+	close2;
+	announce .announcement1$,bc_area|bc_blue;
+	end;
+
+L_renamechar:
+	next;
+
+			if(getcharid(2) > 0 || getcharid(1) > 0) {
+				mes .housemanager$;
+				mes "You should leave your guild or party before changing your name.";
+				close;
+			}
+		mes .housemanager$;
+		mes "Please input the new name you want for you character.";
+			input .@newname$;
+				if(getstrlen(.@newname$) > 22) { mes "Name is too long, im sorry"; close; }
+				if(getstrlen(.@newname$) < 2) { mes "Name is too short, im sorry"; close; }
+		next;
+		mes .housemanager$;
+		mes "is this name alright?";
+		mes "^0000ff "+.@newname$+" ^000000";
+		menu "No",LCancel,"Yes",-;
+		next;
+		// Checks if the name is available
+		query_sql "SELECT `account_id` FROM `char` WHERE `name` = '"+escape_sql(.@newname$)+"'",.@name_exists;
+		if(.@name_exists) {
+			mes .housemanager$;
+			mes "Name ^ff0000Not Available^000000";
+			close;
+		} else {
+			mes .housemanager$;
+			query_sql "UPDATE `char` SET name = '"+escape_sql(.@newname$)+"' WHERE char_id = "+getcharid(0)+";";
+			mes "Your name ^ff0000"+strcharinfo(0)+"^000000 has changed into ^ff0000"+.@newname$+"^000000.";
+			close2;
+			atcommand "@kick "+strcharinfo(0);
+			end;
+		} // The players name has been changed.
+ 		close;
+
+
+L_callguild:
+	warpguild "rachel",58,242,getcharid(2);
+	message strcharinfo(0),"Your Guild has been called to Rachel - 58, 242";
+	close;
+LCancel:
+	close;
+L_Throw_Party:
+	next;
+	mes .housemanager$;
+	mes "Coming soon...";
+	close;
+
+//=========================== IF SOMEONE LOGS IN HOUSE =======================================//
+OnPCLoginEvent:
+	getmapxy(@mapname$,.mapx,.mapy,0);
+	sleep2 8000; 				//this to avoid ' SCREEN FREEZE WHEN LOGGING '
+	if(@mapname$ == "ra_in01") { 
+		if($House1Owner$ == strcharinfo(0)) { end; } if($House1Char1$ == strcharinfo(0)) { end; } if($House1Char2$ == strcharinfo(0)) { end; }
+		if($House1Char3$ == strcharinfo(0)) { end; } if($House1Char4$ == strcharinfo(0)) { end; } if($House1Char5$ == strcharinfo(0)) { end; }
+		warp getsavepoint(0),getsavepoint(1),getsavepoint(2); end; 
+	}
+//============================================================================================//
+} // End House Manager
+
+//Savepoint in house
+ra_in01,354,179,7	script	Kafra Nikki::kaf_casa	117,{
+	if($House1Owner$ == strcharinfo(0)) { goto L_HouseSave; }
+	if($House1Char1$ == strcharinfo(0)) { goto L_HouseSave; }
+	if($House1Char2$ == strcharinfo(0)) { goto L_HouseSave; }
+	if($House1Char3$ == strcharinfo(0)) { goto L_HouseSave; }
+	if($House1Char4$ == strcharinfo(0)) { goto L_HouseSave; }
+	if($House1Char5$ == strcharinfo(0)) { goto L_HouseSave; }
+	close;
+
+L_HouseSave:
+	cutin "kafra_01",2;
+	cleararray @wrpC$[0],"",getarraysize(@wrpC$);
+	setarray @wrpD$[0], "Geffen", "Prontera", "Morroc", "Al De Baran";
+	setarray @wrpP[0], 1200, 1200, 1200, 1800;
+	set @wrpC$[0], @wrpD$[0]+" -> "+@wrpP[0];
+	set @wrpC$[1], @wrpD$[1]+" -> "+@wrpP[1];
+	set @wrpC$[2], @wrpD$[2]+" -> "+@wrpP[2];
+	set @wrpC$[3], @wrpD$[3]+" -> "+@wrpP[3];
+	set @wrpC$[4], "Cancel";
+	callfunc "F_Kafra",0,0,1;
+
+	M_Save:
+		savepoint "ra_in01",364,179;
+		callfunc "F_KafEnd",0,1;
+}
+//Stylists
+ra_in01,371,175,5	duplicate(superdoggystyle)	Nikki's Stylist#35	803
+//Repairman
+ra_in01,371,182,5	script	Nikki's Repairman#08	86,{
+	set @name$,"Repairman";
+	callfunc "repairmain";
+	end;
+}
+
+//Elevator floor1
+ra_in01,342,186,5	script	House Elevator#01	723,{
+	menu "Second Floor",L_2_floor,
+	"Games Room",L_gamesroom,
+	"Third Floor",L_3_floor,
+	"Cancel",-;
+	close;
+L_2_floor:
+	warp "ra_in01",373,267;
+	close;
+L_gamesroom:
+	warp "ra_in01",320,297;
+	close;
+L_3_floor:
+	warp "ra_in01",381,320;
+	close;
+}
+//Elevator floor2
+ra_in01,370,269,5	script	House Elevator#02	723,{
+	menu "First Floor",L_1_floor,
+	"Games Room",L_gamesroom,
+	"Third Floor",L_3_floor,
+	"Cancel",-;
+	close;
+L_1_floor:
+	warp "ra_in01",364,192;
+	close;
+L_gamesroom:
+	warp "ra_in01",320,297;
+	close;
+L_3_floor:
+	warp "ra_in01",381,320;
+	close;
+}
+//Elevator floor2 games room
+ra_in01,312,302,5	script	House Elevator#03	723,{
+	menu "First Floor",L_1_floor,
+	"Second Floor",L_2_floor,
+	"Third Floor",L_3_floor,
+	"Cancel",-;
+	close;
+L_1_floor:
+	warp "ra_in01",364,192;
+	close;
+L_2_floor:
+	warp "ra_in01",373,267;
+L_3_floor:
+	warp "ra_in01",381,320;
+	close;
+}
+//Elevator floor4
+ra_in01,381,310,5	script	House Elevator#04	723,{
+	menu "First Floor",L_1_floor,
+	"Second Floor",L_2_floor,
+	"Games Room",L_gamesroom,
+	"Cancel",-;
+	close;
+L_1_floor:
+	warp "ra_in01",364,192;
+	close;
+L_2_floor:
+	warp "ra_in01",373,267;
+L_gamesroom:
+	warp "ra_in01",320,297;
+	close;
+}
+
+//Announce
+rachel,61,256,4	script	M&N	837,{
+
+	mes "[^0000ffSignPost^000000]";
+	mes "> "+$House1Name$+"'s Property.";
+	close;
+}
+
+//shinning plant
+rachel,47,255,4	script	Plant#p1-1::Plant	1083,1,1,{
+OnTouch:
+	npctalk "Don't step on the garden !!";
+	end;
+OnClick: end;
+}
+rachel,47,254,4	duplicate(Plant)	Plant#p1-2	1083,1,1
+rachel,47,253,4	duplicate(Plant)	Plant#p1-3	1083,1,1
+rachel,47,252,4	duplicate(Plant)	Plant#p1-4	1083,1,1
+rachel,47,251,4	duplicate(Plant)	Plant#p1-5	1083,1,1
+rachel,48,251,4	duplicate(Plant)	Plant#p1-6	1083,1,1
+rachel,49,251,4	duplicate(Plant)	Plant#p1-7	1083,1,1
+rachel,50,251,4	duplicate(Plant)	Plant#p1-8	1083,1,1
+rachel,51,251,4	duplicate(Plant)	Plant#p1-9	1083,1,1
+rachel,52,251,4	duplicate(Plant)	Plant#p1-10	1083,1,1
+rachel,53,251,4	duplicate(Plant)	Plant#p1-11	1083,1,1
+rachel,53,250,4	duplicate(Plant)	Plant#p1-12	1083,1,1
+rachel,53,249,4	duplicate(Plant)	Plant#p1-13	1083,1,1
+rachel,53,248,4	duplicate(Plant)	Plant#p1-14	1083,1,1
+rachel,53,247,4	duplicate(Plant)	Plant#p1-15	1083,1,1
+rachel,54,247,4	duplicate(Plant)	Plant#p1-16	1083,1,1
+rachel,55,247,4	duplicate(Plant)	Plant#p1-17	1083,1,1
+rachel,60,247,4	duplicate(Plant)	Plant#p1-18	1083,1,1
+rachel,61,247,4	duplicate(Plant)	Plant#p1-19	1083,1,1
+rachel,62,247,4	duplicate(Plant)	Plant#p1-20	1083,1,1
+rachel,62,248,4	duplicate(Plant)	Plant#p1-21	1083,1,1
+rachel,62,249,4	duplicate(Plant)	Plant#p1-22	1083,1,1
+rachel,62,250,4	duplicate(Plant)	Plant#p1-23	1083,1,1
+rachel,62,251,4	duplicate(Plant)	Plant#p1-24	1083,1,1
+rachel,63,251,4	duplicate(Plant)	Plant#p1-25	1083,1,1
+rachel,64,251,4	duplicate(Plant)	Plant#p1-26	1083,1,1
+rachel,65,251,4	duplicate(Plant)	Plant#p1-27	1083,1,1
+rachel,66,251,4	duplicate(Plant)	Plant#p1-28	1083,1,1
+rachel,67,251,4	duplicate(Plant)	Plant#p1-29	1083,1,1
+rachel,68,251,4	duplicate(Plant)	Plant#p1-30	1083,1,1
+rachel,68,252,4	duplicate(Plant)	Plant#p1-31	1083,1,1
+rachel,68,253,4	duplicate(Plant)	Plant#p1-32	1083,1,1
+rachel,68,254,4	duplicate(Plant)	Plant#p1-33	1083,1,1
+rachel,68,255,4	duplicate(Plant)	Plant#p1-34	1083,1,1
+rachel,55,246,4	duplicate(Plant)	Plant#p1-35	1083,1,1
+rachel,60,246,4	duplicate(Plant)	Plant#p1-36	1083,1,1
+
+function	script	TrueWalkPet	{
+	set $@_SNS, getarg(0);
+	set $@_ZNS, rand(1,3);
+	if ($@_ZNS == 1) set $@_SNS, $@_SNS + rand(2,5);
+	if ($@_ZNS == 2) set $@_SNS, $@_SNS - rand(2,5);
+	if ($@_SNS < 0) set $@_SNS, $@_SNS + rand(2,5);
+	if ($@_SNS > 300) set $@_SNS, $@_SNS - rand(2,5);
+	return $@_SNS;
+}
+
+
+ra_in01,370,190,4	script	Kismet Jr.	1866,1,1,{
+OnClick:
+OnTouch:
+	if($House1Owner$ == strcharinfo(0)) { npctalk "purrrr purr !!"; emotion 30; }
+	else if($House1Char1$ == strcharinfo(0)) { npctalk "purrrr purr !!"; emotion 30; }
+	else if($House1Char2$ == strcharinfo(0)) { npctalk "purrrr purr !!"; emotion 30; }
+	else if($House1Char3$ == strcharinfo(0)) { npctalk "purrrr purr !!"; emotion 30; }
+	else if($House1Char4$ == strcharinfo(0)) { npctalk "purrrr purr !!"; emotion 30; }
+	else if($House1Char5$ == strcharinfo(0)) { npctalk "purrrr purr !!"; emotion 30; } else { npctalk "Rawwrrr !!"; emotion 32; }
+	end;
+
+OnTimer1800:
+	set $@npcusetime_petgtb,$@npcusetime_petgtb+1;
+	if( $@npcusetime_petgtb > 20 )
+	{
+		set $@npcusetime_petgtb, 0;
+		set $@npcinuse_petgtb,0;
+	}
+	if( $@npcinuse_petgtb )
+	{
+		initnpctimer;
+		end;	
+	}
+	
+	if ($@_petgtb_CNT == $@_petgtb_MAXCNT) set $@_petgtb_FLAG, 1; // Set Flag to return mode
+	if ($@_petgtb_FLAG == 1) goto TrueWalkReturn;
+
+	set $@_petgtb_X, callfunc("TrueWalkPet", $@_petgtb_ARRX[$@_petgtb_CNT]);
+	set $@_petgtb_Y, callfunc("TrueWalkPet", $@_petgtb_ARRY[$@_petgtb_CNT]);
+	
+	set $@_petgtb_CNT, $@_petgtb_CNT + 1;  //Step Counter
+	set $@_petgtb_ARRX[$@_petgtb_CNT], $@_petgtb_X; // Save step X for return
+	set $@_petgtb_ARRY[$@_petgtb_CNT], $@_petgtb_Y; // Save step Y for return
+	goto Walk;
+	
+TrueWalkReturn:
+	set $@_petgtb_ARRX[$@_petgtb_CNT], 0;
+	set $@_petgtb_ARRY[$@_petgtb_CNT], 0;
+	set $@_petgtb_CNT, $@_petgtb_CNT - 1; // Downstep Counter
+	set $@_petgtb_X, $@_petgtb_ARRX[$@_petgtb_CNT]; // Restore Saved coords
+	set $@_petgtb_Y, $@_petgtb_ARRY[$@_petgtb_CNT];
+	if ($@_petgtb_CNT == 0) set $@_petgtb_FLAG, 0; // Set Flag to forward
+
+Walk:
+	npcwalkto $@_petgtb_X, $@_petgtb_Y;
+	initnpctimer;
+	end;
+
+OnInit:
+	set $@npcusetime_petgtb,0;
+	set $@npcinuse_petgtb,0;
+	set $@_petgtb_ARRX[0], 370; // Set initial coord X - NPC Position X
+	set $@_petgtb_ARRY[0], 190; // Set initial coord Y - NPC Position Y
+	set $@_petgtb_CNT,0; // Don't change
+	set $@_petgtb_FLAG,0; // Don't change
+	set $@_petgtb_MAXCNT,50; // Max Movements
+	npcspeed 250; // Set Walk Speed 100=Faster 200=Slower
+	initnpctimer;
+	end;
+}
+
+//Decarder
+ra_in01,359,185,4	duplicate(DECARD)	Decarder#6	846
+//Reset Girl
+ra_in01,359,183,4	duplicate(rs1)	Reset Girl#1	124
+//Kitty Girl
+ra_in01,359,177,4	duplicate(kittyheal1)	Kitty Girl#heal6	725
+//Gamesroom
+ra_in01,326,291,4	duplicate(kittyheal1)	Kitty Girl#heal7	725

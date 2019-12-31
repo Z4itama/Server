@@ -1,0 +1,256 @@
+//===== Edited by =============================
+//= Honor
+//===== Current Elemental Set =================
+//= Ice Elemental
+//=============================================
+
+
+izlude,118,112,5	script	Celly	719,{
+set .infomes$,"^ff0000Note^000000: ^0000ffElemental Set^000000 Now available! (Monthly Changed)."; //Information
+set .xileweb$,"^b23ca6http://xilero.net^000000";    //XileRO website
+
+	mes "["+$VOTE_NPC_NAME$+"]";
+	mes "Hi ^b23ca6"+strcharinfo(0)+"^000000,  I'm ^FF8800Celly^000000 the ^0000ffVote NPC^000000. How can I help you?";
+	mes "  ";
+	mes .infomes$;
+	next;
+	switch(select("^0000FFExchange my Vote points to hats!^000000", "Get Vote points!"))
+	{
+		case 1:
+			mes "["+$VOTE_NPC_NAME$+"]";
+			mes "You currently have ^FF9900"+#cashpoints+"^000000 vote points.";
+			mes .infomes$;
+			next;
+			if(getarraysize($VOTE_GEAR_ID) > 0)
+			{
+				set @vote_temp, select($VOTE_OPTIONS$);
+				next;
+				mes "["+$VOTE_NPC_NAME$+"]";
+				mes "Are you sure that you want to take ^0000FF"+getitemname($VOTE_GEAR_ID[@vote_temp - 1])+"?";
+				next;
+				set @vote_temp2, select("I've changed my mind", "Yes, I'll take it");
+				
+				// Desist obtaining the item
+				if(@vote_temp2 == 1)
+					break;
+				
+				// Call the item exchanging function, and note the return value
+				set @vote_temp2, callfunc("exchange_vote_points", $VOTE_GEAR_ID[@vote_temp - 1], $VOTE_GEAR_COST[@vote_temp - 1]);
+				
+				// Deal with the return value as needed
+				mes "["+$VOTE_NPC_NAME$+"]";
+				if(@vote_temp2 == 1)
+				{
+					mes "Here's your headgear, thank you for voting!";
+					announce "Celly : "+strcharinfo(0)+" has obtained '"+getitemname($VOTE_GEAR_ID[@vote_temp - 1])+"' by voting. Thank you! Please continue supporting us by voting",0;
+				}
+				else
+				{
+					mes "Sorry, you don't have enough vote points.";
+					mes "Please vote more!";
+				}
+			}
+			else
+			{
+				// This won't happen unless the item list arrays are empty
+				mes "["+$VOTE_NPC_NAME$+"]";
+				mes "No items are available at this time.";
+			}
+			
+			break;
+		
+		case 2:
+			mes "["+$VOTE_NPC_NAME$+"]";
+			mes "You can get vote points at ^FF0000Our Website!^000000, or through the Patcher!";
+			mes "_________________________";
+			mes .xileweb$;
+	}
+	
+	next;
+	mes "["+$VOTE_NPC_NAME$+"]";
+	mes "Talk to me again whenever you want, Okay? See you!";
+	close;
+	
+	
+	// Initialisations
+	end;
+	OnInit:
+		set $VOTE_NPC_NAME$, "^440099Celly^000000";
+		
+		// Make sure they line up properly
+		setarray $VOTE_GEAR_ID, 
+			22680,	22681,	22682,	22683,	22684,	22685,	22686,	22687,	
+			22032,	22033,	22555,	5089,	23002,	23000,	23001,	23005,
+			23003,	23002,	23008,	23006,	23007;
+
+// Honor - 23005, 23003, 23004 = Ice Ele. Set [Current Month Set] (January).
+		
+		setarray $VOTE_GEAR_COST, 
+			300,		300,		300,		350,		350,		350,		400,		400,		
+			500,		500,		100,		8000,		9000,		12000,		15000,		9000,		12000,		15000,		9000,		12000,		15000;
+		
+		set $VOTE_OPTIONS$, "";
+		
+		// Creates the menu options as a single string
+		if(getarraysize($VOTE_GEAR_ID) > 0)
+		{
+			for(set $@i, 0; $@i < getarraysize($VOTE_GEAR_ID); set $@i, $@i + 1)
+			{
+				if($@i == 0)
+				{
+					set $VOTE_OPTIONS$, getitemname($VOTE_GEAR_ID[$@i])+"-"+$VOTE_GEAR_COST[$@i];
+				}
+				else
+				{
+					set $VOTE_OPTIONS$, $VOTE_OPTIONS$+":"+getitemname($VOTE_GEAR_ID[$@i])+"-"+$VOTE_GEAR_COST[$@i];
+				}
+			}
+		}
+		
+		set $VOTE_OPTIONS$, "^0000FF"+$VOTE_OPTIONS$+"^000000";
+}
+
+function	script	exchange_vote_points	{
+// Will exchange the player's voting points with the item they request
+// arg 0 = item id
+// arg 1 = point cost
+	
+	// Not enough vote points
+	if(#cashpoints < getarg(1))
+		return 0;
+	
+	set #cashpoints,(#cashpoints - getarg(1));
+	getitem getarg(0), 1;
+	
+	// Getting item was successful
+	return 1;
+	end;
+}
+
+//===== Edited by =============================
+//= Roko and Jon
+
+
+izlude,121,112,4	script	Zack	402,{
+set .infomes$,"^ff0000Note^000000: ^0000ff3rd job items^000000 Now available!."; //Information
+set .xileweb$,"^b23ca6http://xilero.net^000000";    //XileRO website
+
+	mes "["+$VOTE_NPC_NAMEZ$+"]";
+	mes "Hi ^b23ca6"+strcharinfo(0)+"^000000,  I'm ^FF8800Zack^000000 the ^0000ffVote NPC^000000. How can I help you?";
+	mes "  ";
+	mes .infomes$;
+	next;
+	switch(select("^0000FFExchange my Vote points to items!^000000", "Get Vote points!"))
+	{
+		case 1:
+			mes "["+$VOTE_NPC_NAMEZ$+"]";
+			mes "You currently have ^FF9900"+#cashpoints+"^000000 vote points.";
+			mes .infomes$;
+			next;
+			if(getarraysize($VOTE_GEAR_IDZ) > 0)
+			{
+				set @vote_tempz, select($VOTE_OPTIONZ$);
+				next;
+				mes "["+$VOTE_NPC_NAMEZ$+"]";
+				mes "Are you sure that you want to take ^0000FF"+getitemname($VOTE_GEAR_IDZ[@vote_tempz - 1])+"?";
+				next;
+				set @vote_tempz2, select("I've changed my mind", "Yes, I'll take it");
+				
+				// Desist obtaining the item
+				if(@vote_tempz2 == 1)
+					break;
+				
+				// Call the item exchanging function, and note the return value
+				set @vote_tempz2, callfunc("exchange_vote_points", $VOTE_GEAR_IDZ[@vote_tempz - 1], $VOTE_GEAR_COSTZ[@vote_tempz - 1]);
+				
+				// Deal with the return value as needed
+				mes "["+$VOTE_NPC_NAMEZ$+"]";
+				if(@vote_tempz2 == 1)
+				{
+					mes "Here's your headgear, thank you for voting!";
+				}
+				else
+				{
+					mes "Sorry, you don't have enough vote points.";
+					mes "Please vote more!";
+				}
+			}
+			else
+			{
+				// This won't happen unless the item list arrays are empty
+				mes "["+$VOTE_NPC_NAMEZ$+"]";
+				mes "No items are available at this time.";
+			}
+			
+			break;
+		
+		case 2:
+			mes "["+$VOTE_NPC_NAMEZ$+"]";
+			mes "You can get vote points at ^FF0000Our Website!^000000, or through the Patcher!";
+			mes "_________________________";
+			mes .xileweb$;
+	}
+	
+	next;
+	mes "["+$VOTE_NPC_NAMEZ$+"]";
+	mes "Talk to me again whenever you want, Okay? See you!";
+	close;
+	
+	
+	// Initialisations
+	end;
+	OnInit:
+		set $VOTE_NPC_NAMEZ$, "^440099Zack^000000";
+		
+		// Make sure they line up properly
+		setarray $VOTE_GEAR_IDZ, 
+			6124,	7940,	11513,	6144,	6145,	6147,	6146,	6210,	
+			6211,	6212,	7135,	6217,	6128, 6123,	6120,	6122,
+			18000;
+
+// Item Count wich will be given
+		
+		setarray $VOTE_GEAR_COSTZ, 
+			20,		2,		2,		2,		2,		2,		2,		2,		
+			2,		2,		2,		2,		2,		2,		2,		2,		2,		2,		2,		2,		2;
+		
+		set $VOTE_OPTIONZ$, "";
+		
+		// Creates the menu OPTIONZ as a single string
+		if(getarraysize($VOTE_GEAR_IDZ) > 0)
+		{
+			for(set $@i, 0; $@i < getarraysize($VOTE_GEAR_IDZ); set $@i, $@i + 1)
+			{
+				if($@i == 0)
+				{
+					set $VOTE_OPTIONZ$, getitemname($VOTE_GEAR_IDZ[$@i])+"-"+$VOTE_GEAR_COSTZ[$@i];
+				}
+				else
+				{
+					set $VOTE_OPTIONZ$, $VOTE_OPTIONZ$+":"+getitemname($VOTE_GEAR_IDZ[$@i])+"-"+$VOTE_GEAR_COSTZ[$@i];
+				}
+			}
+		}
+		
+		set $VOTE_OPTIONZ$, "^0000FF"+$VOTE_OPTIONZ$+"^000000";
+}
+
+function	script	exchange_vote_points	{
+// Will exchange the player's voting points with the item they request
+// arg 0 = item id
+// arg 1 = point cost
+	
+	// Not enough vote points
+	if(#cashpoints < getarg(1))
+		return 0;
+	
+	set #cashpoints,(#cashpoints - getarg(1));
+	getitem getarg(0), 1;
+	
+	// Getting item was successful
+	return 1;
+}
+
+new_1-1 mapflag pvp
+new_1-1 mapflag pvpon
+new_1-1 mapflag pvp	on

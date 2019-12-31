@@ -1,0 +1,710 @@
+//===== Script: ===============================================================
+//= 2010 Custom Castle Drops XiLeRO!
+//= By Honor/Lover Romeo
+//==============================================================================
+prtg_cas02,199,232,5	script	Neo CastleDrops#C1-1::Neo CastleDrops	704,{
+
+//GM MENU
+	if(getgmlevel() >= 99) {
+		mes "[ Admin. Panel ]";
+		mes "Please choose which castle economy you want to reset";
+		menu "Kriemhild",L_cas1,
+		"Swanhild",L_cas2,
+		"Fadhgrid",L_cas3,
+		"Skoegul",L_cas4,
+		"Gondul",L_cas5;
+
+		L_cas1:
+			set $eco_neocastle01,0;
+			dispbottom "Kriemhild Economy is now ["+$eco_neocastle01+"]";
+			close;
+		L_cas2:
+			set $eco_neocastle02,0;
+			dispbottom "Swanhild Economy is now ["+$eco_neocastle02+"]";
+			close;
+		L_cas3:
+			set $eco_neocastle03,0;
+			dispbottom "Fadhgrid Economy is now ["+$eco_neocastle03+"]";
+			close;
+		L_cas4:
+			set $eco_neocastle04,0;
+			dispbottom "Skoegul Economy is now ["+$eco_neocastle04+"]";
+			close;
+		L_cas5:
+			set $eco_neocastle05,0;
+			dispbottom "Gondul Economy is now ["+$eco_neocastle05+"]";
+			close;
+	}
+
+getmapxy(@mapname$,.x,.y,0);
+set @castlenameneo$,getcastlename(@mapname$);
+set @npcname$,"[^208777 "+@castlenameneo$+" ^000000]";
+set @guildname$,getguildname(strcharinfo(2));
+
+	set @GID,getcharid(2);
+        if(@GID==0) goto L_NoGuild;
+        if(strcharinfo(0)==getguildmaster(@GID)) goto L_GuildMaster;
+	close;
+L_NoGuild:
+	mes "Sorry you are not in a guild!";
+        close;
+
+L_GuildMaster:
+
+if(gettime(4) != $NeoDropsDay01 && gettime(4) != $NeoDrops1_Day01)  { callfunc "NeoCastle_Day","Castle_01"; }
+if(gettime(4) != $NeoDropsDay02 && gettime(4) != $NeoDrops2_Day02)  { callfunc "NeoCastle_Day","Castle_02"; }
+if(gettime(4) != $NeoDropsDay03 && gettime(4) != $NeoDrops3_Day03)  { callfunc "NeoCastle_Day","Castle_03"; }
+if(gettime(4) != $NeoDropsDay04 && gettime(4) != $NeoDrops4_Day04)  { callfunc "NeoCastle_Day","Castle_04"; }
+if(gettime(4) != $NeoDropsDay05 && gettime(4) != $NeoDrops5_Day05)  { callfunc "NeoCastle_Day","Castle_05"; }
+
+	mes @npcname$;
+	mes "Welcome guild master of "+getguildname(@GID);
+	mes "What would you like to do?";
+	menu getguildname(@GID)+"'s Economy",L_economy,
+	"Drops Investment",L_DropsIn,
+	"Get a Neo Castle Box",L_GNCB;
+
+L_economy:
+	next;
+	mes @npcname$;
+	mes "Your Guild's Castle Economy is:";
+	if(@mapname$ == "prtg_cas01") { mes "|| ^58bccb"+$eco_neocastle01+"^000000 ||"; }
+	if(@mapname$ == "prtg_cas02") { mes "|| ^58bccb"+$eco_neocastle02+"^000000 ||"; }
+	if(@mapname$ == "prtg_cas03") { mes "|| ^58bccb"+$eco_neocastle03+"^000000 ||"; }
+	if(@mapname$ == "prtg_cas04") { mes "|| ^58bccb"+$eco_neocastle04+"^000000 ||"; }
+	if(@mapname$ == "prtg_cas05") { mes "|| ^58bccb"+$eco_neocastle05+"^000000 ||"; }
+	mes "~~~~~~~~~~~~~~~~~~~~~~";
+	mes "More feats. coming soon <3!";
+	close;
+
+L_DropsIn:
+if(@mapname$ == "prtg_cas01") { 
+if($eco_neocastle01 < 6) { set $@cas01payment,20000000; }
+else if($eco_neocastle01 < 11) { set $@cas01payment,20000000; }		//20m
+else if($eco_neocastle01 < 16) { set $@cas01payment,40000000; }		//40m
+else if($eco_neocastle01 < 21) { set $@cas01payment,60000000; }		//60m
+else if($eco_neocastle01 < 26) { set $@cas01payment,80000000; }		//80m
+else if($eco_neocastle01 < 31) { set $@cas01payment,100000000; }	//100m
+else if($eco_neocastle01 < 36) { set $@cas01payment,120000000; }	//120m
+else if($eco_neocastle01 < 41) { set $@cas01payment,140000000; }	//140m	
+else if($eco_neocastle01 < 46) { set $@cas01payment,160000000; }	//160m
+else if($eco_neocastle01 < 51) { set $@cas01payment,180000000; }	//180m
+else if($eco_neocastle01 < 56) { set $@cas01payment,200000000; }	//200m
+else if($eco_neocastle01 < 61) { set $@cas01payment,400000000; }	//400m
+else if($eco_neocastle01 < 66) { set $@cas01payment,450000000; }	//450m
+else if($eco_neocastle01 < 71) { set $@cas01payment,480000000; }	//480m
+else if($eco_neocastle01 < 76) { set $@cas01payment,500000000; }	//500m
+else if($eco_neocastle01 < 81) { set $@cas01payment,600000000; }	//600m
+else if($eco_neocastle01 < 86) { set $@cas01payment,700000000; }	//700m
+else if($eco_neocastle01 < 91) { set $@cas01payment,800000000; }	//800m
+else if($eco_neocastle01 < 96) { set $@cas01payment,900000000; }	//900m
+else if($eco_neocastle01 <= 100) { set $@cas01payment,950000000; }	//950m
+} // PAYMENT CASTLE 01
+if(@mapname$ == "prtg_cas02") { 
+if($eco_neocastle02 < 6) { set $@cas02payment,20000000; }
+else if($eco_neocastle02 < 11) { set $@cas02payment,20000000; }		//20m
+else if($eco_neocastle02 < 16) { set $@cas02payment,40000000; }		//40m
+else if($eco_neocastle02 < 21) { set $@cas02payment,60000000; }		//60m
+else if($eco_neocastle02 < 26) { set $@cas02payment,80000000; }		//80m
+else if($eco_neocastle02 < 31) { set $@cas02payment,100000000; }	//100m
+else if($eco_neocastle02 < 36) { set $@cas02payment,120000000; }	//120m
+else if($eco_neocastle02 < 41) { set $@cas02payment,140000000; }	//140m	
+else if($eco_neocastle02 < 46) { set $@cas02payment,160000000; }	//160m
+else if($eco_neocastle02 < 51) { set $@cas02payment,180000000; }	//180m
+else if($eco_neocastle02 < 56) { set $@cas02payment,200000000; }	//200m
+else if($eco_neocastle02 < 61) { set $@cas02payment,400000000; }	//400m
+else if($eco_neocastle02 < 66) { set $@cas02payment,450000000; }	//450m
+else if($eco_neocastle02 < 71) { set $@cas02payment,480000000; }	//480m
+else if($eco_neocastle02 < 76) { set $@cas02payment,500000000; }	//500m
+else if($eco_neocastle02 < 81) { set $@cas02payment,600000000; }	//600m
+else if($eco_neocastle02 < 86) { set $@cas02payment,700000000; }	//700m
+else if($eco_neocastle02 < 91) { set $@cas02payment,800000000; }	//800m
+else if($eco_neocastle02 < 96) { set $@cas02payment,900000000; }	//900m
+else if($eco_neocastle02 <= 100) { set $@cas02payment,950000000; }	//950m
+} // PAYMENT CASTLE 02
+if(@mapname$ == "prtg_cas03") { 
+if($eco_neocastle03 < 6) { set $@cas03payment,20000000; }
+else if($eco_neocastle03 < 11) { set $@cas03payment,20000000; }		//20m
+else if($eco_neocastle03 < 16) { set $@cas03payment,40000000; }		//40m
+else if($eco_neocastle03 < 21) { set $@cas03payment,60000000; }		//60m
+else if($eco_neocastle03 < 26) { set $@cas03payment,80000000; }		//80m
+else if($eco_neocastle03 < 31) { set $@cas03payment,100000000; }	//100m
+else if($eco_neocastle03 < 36) { set $@cas03payment,120000000; }	//120m
+else if($eco_neocastle03 < 41) { set $@cas03payment,140000000; }	//140m	
+else if($eco_neocastle03 < 46) { set $@cas03payment,160000000; }	//160m
+else if($eco_neocastle03 < 51) { set $@cas03payment,180000000; }	//180m
+else if($eco_neocastle03 < 56) { set $@cas03payment,200000000; }	//200m
+else if($eco_neocastle03 < 61) { set $@cas03payment,400000000; }	//400m
+else if($eco_neocastle03 < 66) { set $@cas03payment,450000000; }	//450m
+else if($eco_neocastle03 < 71) { set $@cas03payment,480000000; }	//480m
+else if($eco_neocastle03 < 76) { set $@cas03payment,500000000; }	//500m
+else if($eco_neocastle03 < 81) { set $@cas03payment,600000000; }	//600m
+else if($eco_neocastle03 < 86) { set $@cas03payment,700000000; }	//700m
+else if($eco_neocastle03 < 91) { set $@cas03payment,800000000; }	//800m
+else if($eco_neocastle03 < 96) { set $@cas03payment,900000000; }	//900m
+else if($eco_neocastle03 <= 100) { set $@cas03payment,950000000; }	//950m
+} // PAYMENT CASTLE 03
+if(@mapname$ == "prtg_cas04") { 
+if($eco_neocastle04 < 6) { set $@cas04payment,20000000; }
+else if($eco_neocastle04 < 11) { set $@cas04payment,20000000; }		//20m
+else if($eco_neocastle04 < 16) { set $@cas04payment,40000000; }		//40m
+else if($eco_neocastle04 < 21) { set $@cas04payment,60000000; }		//60m
+else if($eco_neocastle04 < 26) { set $@cas04payment,80000000; }		//80m
+else if($eco_neocastle04 < 31) { set $@cas04payment,100000000; }	//100m
+else if($eco_neocastle04 < 36) { set $@cas04payment,120000000; }	//120m
+else if($eco_neocastle04 < 41) { set $@cas04payment,140000000; }	//140m	
+else if($eco_neocastle04 < 46) { set $@cas04payment,160000000; }	//160m
+else if($eco_neocastle04 < 51) { set $@cas04payment,180000000; }	//180m
+else if($eco_neocastle04 < 56) { set $@cas04payment,200000000; }	//200m
+else if($eco_neocastle04 < 61) { set $@cas04payment,400000000; }	//400m
+else if($eco_neocastle04 < 66) { set $@cas04payment,450000000; }	//450m
+else if($eco_neocastle04 < 71) { set $@cas04payment,480000000; }	//480m
+else if($eco_neocastle04 < 76) { set $@cas04payment,500000000; }	//500m
+else if($eco_neocastle04 < 81) { set $@cas04payment,600000000; }	//600m
+else if($eco_neocastle04 < 86) { set $@cas04payment,700000000; }	//700m
+else if($eco_neocastle04 < 91) { set $@cas04payment,800000000; }	//800m
+else if($eco_neocastle04 < 96) { set $@cas04payment,900000000; }	//900m
+else if($eco_neocastle04 <= 100) { set $@cas04payment,950000000; }	//950m
+} // PAYMENT CASTLE 04
+if(@mapname$ == "prtg_cas05") { 
+if($eco_neocastle05 < 6) { set $@cas05payment,20000000; }
+else if($eco_neocastle05 < 11) { set $@cas05payment,20000000; }		//20m
+else if($eco_neocastle05 < 16) { set $@cas05payment,40000000; }		//40m
+else if($eco_neocastle05 < 21) { set $@cas05payment,60000000; }		//60m
+else if($eco_neocastle05 < 26) { set $@cas05payment,80000000; }		//80m
+else if($eco_neocastle05 < 31) { set $@cas05payment,100000000; }	//100m
+else if($eco_neocastle05 < 36) { set $@cas05payment,120000000; }	//120m
+else if($eco_neocastle05 < 41) { set $@cas05payment,140000000; }	//140m	
+else if($eco_neocastle05 < 46) { set $@cas05payment,160000000; }	//160m
+else if($eco_neocastle05 < 51) { set $@cas05payment,180000000; }	//180m
+else if($eco_neocastle05 < 56) { set $@cas05payment,200000000; }	//200m
+else if($eco_neocastle05 < 61) { set $@cas05payment,400000000; }	//400m
+else if($eco_neocastle05 < 66) { set $@cas05payment,450000000; }	//450m
+else if($eco_neocastle05 < 71) { set $@cas05payment,480000000; }	//480m
+else if($eco_neocastle05 < 76) { set $@cas05payment,500000000; }	//500m
+else if($eco_neocastle05 < 81) { set $@cas05payment,600000000; }	//600m
+else if($eco_neocastle05 < 86) { set $@cas05payment,700000000; }	//700m
+else if($eco_neocastle05 < 91) { set $@cas05payment,800000000; }	//800m
+else if($eco_neocastle05 < 96) { set $@cas05payment,900000000; }	//900m
+else if($eco_neocastle05 <= 100) { set $@cas05payment,950000000; }	//950m
+} // PAYMENT CASTLE 05
+	next;
+	mes @npcname$;
+	mes "Do you want to invest in Neo Castle Drops?";
+if(@mapname$ == "prtg_cas01") { mes "You need ^0000ff"+$@cas01payment+"^000000 Zeny to Invest"; }
+if(@mapname$ == "prtg_cas02") { mes "You need ^0000ff"+$@cas02payment+"^000000 Zeny to Invest"; }
+if(@mapname$ == "prtg_cas03") { mes "You need ^0000ff"+$@cas03payment+"^000000 Zeny to Invest"; }
+if(@mapname$ == "prtg_cas04") { mes "You need ^0000ff"+$@cas04payment+"^000000 Zeny to Invest"; }
+if(@mapname$ == "prtg_cas05") { mes "You need ^0000ff"+$@cas05payment+"^000000 Zeny to Invest"; }
+	mes "Do you still want to do it?";
+	menu "No",-,"Yes",L_yes;
+	close;
+L_yes:
+	next;
+	mes @npcname$;
+
+	if(@mapname$ == "prtg_cas01") {
+		if($castle01inv == 1) { mes "^0088ffSomeone already Invested in this castle [Today]^000000..."; goto L_Neohere; }
+		if($eco_neocastle01 > 99) { mes "Your Castle has reached the MAX Economy Points."; goto L_Neohere; }
+		if(Zeny > $@cas01payment) { set Zeny,Zeny-$@cas01payment; set $eco_neocastle01,$eco_neocastle01+5;
+			mes "You just invested ^0000ff"+$@cas01payment+"^000000 Zenys for "+@guildname$; set $castle01inv,1; set $NeoDropsDay01,gettime(4);
+	} else { mes "You can't afford the investment..."; } }
+
+	if(@mapname$ == "prtg_cas02") { 
+		if($castle02inv == 1) { mes "^0088ffSomeone already Invested in this castle [Today]^000000..."; goto L_Neohere; }
+		if($eco_neocastle02 > 99) { mes "Your Castle has reached the MAX Economy Points."; goto L_Neohere; }
+		if(Zeny > $@cas02payment) { set Zeny,Zeny-$@cas02payment; set $eco_neocastle02,$eco_neocastle02+5;
+			mes "You just invested ^0000ff"+$@cas02payment+"^000000 Zenys for "+@guildname$; set $castle02inv,1; set $NeoDropsDay02,gettime(4);
+	} else { mes "You can't afford the investment..."; } }
+
+	if(@mapname$ == "prtg_cas03") { 
+		if($castle03inv == 1) { mes "^0088ffSomeone already Invested in this castle [Today]^000000..."; goto L_Neohere; }
+		if($eco_neocastle03 > 99) { mes "Your Castle has reached the MAX Economy Points."; goto L_Neohere; }
+		if(Zeny > $@cas03payment) { set Zeny,Zeny-$@cas03payment; set $eco_neocastle03,$eco_neocastle03+5;
+			mes "You just invested ^0000ff"+$@cas03payment+"^000000 Zenys for "+@guildname$; set $castle03inv,1; set $NeoDropsDay03,gettime(4);
+	} else { mes "You can't afford the investment..."; } }
+
+	if(@mapname$ == "prtg_cas04") { 
+		if($castle04inv == 1) { mes "^0088ffSomeone already Invested in this castle [Today]^000000..."; goto L_Neohere; }
+		if($eco_neocastle04 > 99) { mes "Your Castle has reached the MAX Economy Points."; goto L_Neohere; }
+		if(Zeny > $@cas04payment) { set Zeny,Zeny-$@cas04payment; set $eco_neocastle04,$eco_neocastle04+5;
+			mes "You just invested ^0000ff"+$@cas04payment+"^000000 Zenys for "+@guildname$; set $castle04inv,1; set $NeoDropsDay04,gettime(4);
+	} else { mes "You can't afford the investment..."; } }
+
+	if(@mapname$ == "prtg_cas05") { 
+		if($castle05inv == 1) { mes "^0088ffSomeone already Invested in this castle [Today]^000000..."; goto L_Neohere; }
+		if($eco_neocastle05 > 99) { mes "Your Castle has reached the MAX Economy Points."; goto L_Neohere; }
+		if(Zeny > $@cas05payment) { set Zeny,Zeny-$@cas05payment; set $eco_neocastle05,$eco_neocastle05+5;
+			mes "You just invested ^0000ff"+$@cas05payment+"^000000 Zenys for "+@guildname$; set $castle05inv,1; set $NeoDropsDay05,gettime(4);
+	} else { mes "You can't afford the investment..."; } }
+
+L_Neohere:
+	mes "^ff0000Note^000000: You can not invest more than once per day...";
+	close;
+
+L_GNCB:
+		getmapxy(@mapname$,.x,.y,0);
+set $@neoboxobtainable,0;
+if(@mapname$ == "prtg_cas01") {
+if($gotneobox01==1) { goto LGNCBcontinue; }
+set $@neorare_1,0;
+if($eco_neocastle01 > 99) { set $@neorare_1,1; set $@neoboxobtainable,rand(3,5); goto LGNCBcontinue; }
+if($eco_neocastle01 > 79) { set $@neorare_1,1; set $@neoboxobtainable,rand(2,3); goto LGNCBcontinue; }
+if($eco_neocastle01 > 71) { set $@neoboxobtainable,rand(2,3); goto LGNCBcontinue; }
+if($eco_neocastle01 > 61) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle01 > 51) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle01 > 41) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle01 > 31) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle01 > 21) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle01 > 11) { set $@neoboxobtainable,1; goto LGNCBcontinue; }
+if($eco_neocastle01 > 5) { set $@neoboxobtainable,1; goto LGNCBcontinue; }
+} //KRIEM
+if(@mapname$ == "prtg_cas02") {
+if($gotneobox02==1) { goto LGNCBcontinue; }
+set $@neorare_2,0;
+if($eco_neocastle02 > 99) { set $@neorare_2,1; set $@neoboxobtainable,rand(3,5); goto LGNCBcontinue; }
+if($eco_neocastle02 > 79) { set $@neorare_2,1; set $@neoboxobtainable,rand(2,3); goto LGNCBcontinue; }
+if($eco_neocastle02 > 71) { set $@neoboxobtainable,rand(2,3); goto LGNCBcontinue; }
+if($eco_neocastle02 > 61) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle02 > 51) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle02 > 41) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle02 > 31) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle02 > 21) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle02 > 11) { set $@neoboxobtainable,1; goto LGNCBcontinue; }
+if($eco_neocastle02 > 5) { set $@neoboxobtainable,1; goto LGNCBcontinue; }
+} //SWAN
+if(@mapname$ == "prtg_cas03") {
+if($gotneobox03==1) { goto LGNCBcontinue; }
+set $@neorare_3,0;
+if($eco_neocastle03 > 99) { set $@neorare_3,1; set $@neoboxobtainable,rand(3,5); goto LGNCBcontinue; }
+if($eco_neocastle03 > 79) { set $@neorare_3,1; set $@neoboxobtainable,rand(2,3); goto LGNCBcontinue; }
+if($eco_neocastle03 > 71) { set $@neoboxobtainable,rand(2,3); goto LGNCBcontinue; }
+if($eco_neocastle03 > 61) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle03 > 51) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle03 > 41) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle03 > 31) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle03 > 21) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle03 > 11) { set $@neoboxobtainable,1; goto LGNCBcontinue; }
+if($eco_neocastle03 > 5) { set $@neoboxobtainable,1; goto LGNCBcontinue; }
+} //FAD
+if(@mapname$ == "prtg_cas04") {
+if($gotneobox04==1) { goto LGNCBcontinue; }
+set $@neorare_4,0;
+if($eco_neocastle04 > 99) { set $@neorare_4,1; set $@neoboxobtainable,rand(3,5); goto LGNCBcontinue; }
+if($eco_neocastle04 > 79) { set $@neorare_4,1; set $@neoboxobtainable,rand(2,3); goto LGNCBcontinue; }
+if($eco_neocastle04 > 71) { set $@neoboxobtainable,rand(2,3); goto LGNCBcontinue; }
+if($eco_neocastle04 > 61) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle04 > 51) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle04 > 41) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle04 > 31) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle04 > 21) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle04 > 11) { set $@neoboxobtainable,1; goto LGNCBcontinue; }
+if($eco_neocastle04 > 5) { set $@neoboxobtainable,1; goto LGNCBcontinue; }
+} //SKOE
+if(@mapname$ == "prtg_cas05") {
+if($gotneobox05==1) { goto LGNCBcontinue; }
+set $@neorare_5,0;
+if($eco_neocastle05 > 99) { set $@neorare_5,1; set $@neoboxobtainable,rand(3,5); goto LGNCBcontinue; }
+if($eco_neocastle05 > 79) { set $@neorare_5,1; set $@neoboxobtainable,rand(2,3); goto LGNCBcontinue; }
+if($eco_neocastle05 > 71) { set $@neoboxobtainable,rand(2,3); goto LGNCBcontinue; }
+if($eco_neocastle05 > 61) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle05 > 51) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle05 > 41) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle05 > 31) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle05 > 21) { set $@neoboxobtainable,rand(1,2); goto LGNCBcontinue; }
+if($eco_neocastle05 > 11) { set $@neoboxobtainable,1; goto LGNCBcontinue; }
+if($eco_neocastle05 > 5) { set $@neoboxobtainable,1; goto LGNCBcontinue; }
+} //GON
+
+LGNCBcontinue:
+	next;
+	mes @npcname$;
+	mes "*^468b3a NeoCastle Box^000000 = 100%";
+	mes "*^ec5e00 Rare NeoCastle Box^000000 = Eco. 80+";
+	mes "-----------------------";
+if(@mapname$ == "prtg_cas01") { if($gotneobox01==1) { mes "You already took the NeoBoxes"; close; } else { goto L_boxob; } }
+if(@mapname$ == "prtg_cas02") { if($gotneobox02==1) { mes "You already took the NeoBoxes"; close; } else { goto L_boxob; } }
+if(@mapname$ == "prtg_cas03") { if($gotneobox03==1) { mes "You already took the NeoBoxes"; close; } else { goto L_boxob; } }
+if(@mapname$ == "prtg_cas04") { if($gotneobox04==1) { mes "You already took the NeoBoxes"; close; } else { goto L_boxob; } }
+if(@mapname$ == "prtg_cas05") { if($gotneobox05==1) { mes "You already took the NeoBoxes"; close; } else { goto L_boxob; } }
+
+L_boxob:
+	mes "You have ^0000ff"+$@neoboxobtainable+"^000000 NeoBoxes available to take!";
+	mes "Do you take them or not?";
+	menu "No thanks...",-,"Yes",L_takeyes;
+	close;
+
+L_takeyes:
+	next;
+	if(@mapname$ == "prtg_cas01") { if($@neorare_1==1) { getitem 3301,$@neoboxobtainable; } else { getitem 3300,$@neoboxobtainable; } set $gotneobox01,1; set $NeoDrops1_Day01,gettime(4); }
+	if(@mapname$ == "prtg_cas02") { if($@neorare_2==1) { getitem 3301,$@neoboxobtainable; } else { getitem 3300,$@neoboxobtainable; } set $gotneobox02,1; set $NeoDrops2_Day02,gettime(4); }
+	if(@mapname$ == "prtg_cas03") { if($@neorare_3==1) { getitem 3301,$@neoboxobtainable; } else { getitem 3300,$@neoboxobtainable; } set $gotneobox03,1; set $NeoDrops3_Day03,gettime(4); }
+	if(@mapname$ == "prtg_cas04") { if($@neorare_4==1) { getitem 3301,$@neoboxobtainable; } else { getitem 3300,$@neoboxobtainable; } set $gotneobox04,1; set $NeoDrops4_Day04,gettime(4); }
+	if(@mapname$ == "prtg_cas05") { if($@neorare_5==1) { getitem 3301,$@neoboxobtainable; } else { getitem 3300,$@neoboxobtainable; } set $gotneobox05,1; set $NeoDrops5_Day05,gettime(4); }
+	mes @npcname$;
+	mes "Have fun ^_^!";
+	close;
+
+}
+
+//Kriemhild = prtg_cas01,7,212,5
+//Swanhild = prtg_cas02,199,232,5
+//Fadhgrid = prtg_cas03,185,135,5
+//Skoegul = prtg_cas04,267,166,5
+//Gondul = prtg_cas05,273,182,5
+prtg_cas01,7,212,5	duplicate(Neo CastleDrops)	Neo CastleDrops#C1-2	704
+prtg_cas03,185,135,5	duplicate(Neo CastleDrops)	Neo CastleDrops#C1-3	704
+prtg_cas04,267,166,5	duplicate(Neo CastleDrops)	Neo CastleDrops#C1-4	704
+prtg_cas05,273,182,5	duplicate(Neo CastleDrops)	Neo CastleDrops#C1-5	704
+
+function	script	NeoCastle	{ 
+	if(getarg(0)=="OnBreak") {
+		getmapxy(@mapname$,.x,.y,0);
+			if(@mapname$ == "prtg_cas01") { set $eco_neocastle01,$eco_neocastle01-rand(4,6); if($eco_neocastle01 < 0) { set $eco_neocastle01,rand(1,3); } }	//Kriemhild
+			if(@mapname$ == "prtg_cas02") { set $eco_neocastle02,$eco_neocastle02-rand(4,7); if($eco_neocastle02 < 0) { set $eco_neocastle02,rand(1,3); } }	//Swanhild
+			if(@mapname$ == "prtg_cas03") { set $eco_neocastle03,$eco_neocastle03-rand(4,8); if($eco_neocastle03 < 0) { set $eco_neocastle03,rand(1,3); } }	//Fadhgridh
+			if(@mapname$ == "prtg_cas04") { set $eco_neocastle04,$eco_neocastle04-rand(4,9); if($eco_neocastle04 < 0) { set $eco_neocastle04,rand(1,3); } }	//Skoegul
+			if(@mapname$ == "prtg_cas05") { set $eco_neocastle05,$eco_neocastle05-rand(4,10); if($eco_neocastle05 < 0) { set $eco_neocastle05,rand(1,3); } }	//Gondul
+		return;				
+	}
+		end;
+}//end;
+
+function	script	NeoCastle_Day	{ 
+
+if(getarg(0)=="Castle_01") { set $castle01inv,0; set $gotneobox01,0; return; }
+if(getarg(0)=="Castle_02") { set $castle02inv,0; set $gotneobox02,0; return; }
+if(getarg(0)=="Castle_03") { set $castle03inv,0; set $gotneobox03,0; return; }
+if(getarg(0)=="Castle_04") { set $castle04inv,0; set $gotneobox04,0; return; }
+if(getarg(0)=="Castle_05") { set $castle05inv,0; set $gotneobox05,0; return; }
+return;
+} //End of function
+
+function	script	NeoCastleBox_F	{ 
+// NORMAL BOX
+	if(getarg(0)=="Normal") {
+				// TURN VARIBALES INTO 0
+				set @neoloweco1,0;
+				set @neoloweco2,0;
+				set @neoloweco3,0;
+				set @neoloweco4,0;
+				set @neoloweco5,0;
+				set @neoloweco6,0;
+				set @neoloweco7,0;
+				set @neoloweco8,0;			
+				set @oldwings,0;
+				set @oldheadgear,0;
+				set @badgestier1,0;
+				set @elitewep,0;
+				set @elitegear,0;
+				set @tokenitem,0;
+				set @sealitem,0;
+				set @xilehatsitem,0;
+				// ITEMS FOR DEFAULT OBTAINABLE
+				set @rbsdrop,22555;
+				if(!checkweight(@rbsdrop,172)) goto overweight;
+				set @sleip,2410;
+				if(!checkweight(@sleip,1)) goto overweight;
+				set @megs,2629;
+				if(!checkweight(@megs,1)) goto overweight;
+
+				set @neoloweco1,rand(7);
+				set @neoloweco2,rand(7);
+				set @neoloweco3,rand(2);
+				set @neoloweco4,rand(5);
+				set @neoloweco5,rand(7);
+				set @neoloweco6,rand(2);
+				set @neoloweco7,rand(2);
+				set @neoloweco8,rand(7);
+
+			if(@neoloweco1 < 3) {
+				//OLD XILERO WINGS PACK
+				set @oldwingrand,rand(1,4);
+				if(@oldwingrand==1) { set @oldwings,2288; } if(@oldwingrand==2) { set @oldwings,5041; }	//OmegaWings, AlphaWings
+				if(@oldwingrand==3) { set @oldwings,6012; } if(@oldwingrand==4) { set @oldwings,5100; }	//ArchAngelWings, ShadowCraftWings
+				if(!checkweight(@oldwings,1)) goto overweight;
+			}
+			if(@neoloweco2 < 3) {
+
+				//OLD XILERO HEADGEARS PACK
+				set @oldgearrand,rand(1,3);
+				if(@oldgearrand==1) { set @oldheadgear,5037; } if(@oldgearrand==2) { set @oldheadgear,5013; }	//LordKaho, Equality Wings
+				if(@oldgearrand==3) { set @oldheadgear,5088; }							//BlackHelm
+				if(!checkweight(@oldheadgear,1)) goto overweight;
+			}
+			if(@neoloweco3 < 2) {
+				//BADGES PACK tier 1
+				set @badgerand,rand(1,2);
+				if(@badgerand==1) { set @badgestier1,22556; } if(@badgerand==2) { set @badgestier1,22557; }	//VictoryBadge, BoM Badge
+				if(!checkweight(@badgestier1,3)) goto overweight;
+			}
+			if(@neoloweco4 < 3) {
+				//Elite Weapons
+				set @elitewepsrand,rand(1,12);
+				if(@elitewepsrand==1) { set @elitewep,3150; } if(@elitewepsrand==7) { set @elitewep,3158; }	//Elite Weapons
+				if(@elitewepsrand==2) { set @elitewep,3151; } if(@elitewepsrand==8) { set @elitewep,3159; }	//Elite Weapons
+				if(@elitewepsrand==3) { set @elitewep,3152; } if(@elitewepsrand==9) { set @elitewep,3160; }	//Elite Weapons
+				if(@elitewepsrand==4) { set @elitewep,3153; } if(@elitewepsrand==10) { set @elitewep,3161; }	//Elite Weapons
+				if(@elitewepsrand==5) { set @elitewep,3154; } if(@elitewepsrand==11) { set @elitewep,3155; }	//Elite Weapons
+				if(@elitewepsrand==6) { set @elitewep,3156; } if(@elitewepsrand==12) { set @elitewep,3157; }	//Elite Weapons
+				if(!checkweight(@elitewep,1)) goto overweight;
+			}
+			if(@neoloweco5 < 3) {
+
+				//XILERO'S ELITE GEARS
+				set @elitegrand,rand(1,7);
+				if(@elitegrand==1) { set @elitegear,3163; } if(@elitegrand==5) { set @elitegear,3165; }	//Elite Gears&Equipment
+				if(@elitegrand==2) { set @elitegear,3164; } if(@elitegrand==6) { set @elitegear,3166; }	//Elite Gears&Equipment
+				if(@elitegrand==3) { set @elitegear,3167; } if(@elitegrand==7) { set @elitegear,3168; }	//Elite Gears&Equipment
+				if(@elitegrand==4) { set @elitegear,3169; }
+				if(!checkweight(@elitegear,1)) goto overweight;
+			}
+
+			if(@neoloweco6 < 2) {
+				getmapxy(@prtcastle_token$,.@x,.@y,0);
+					if(@prtcastle_token$ == "prtg_cas01") { set @tokenitem,3115; }	//Kriemhild
+					if(@prtcastle_token$ == "prtg_cas02") { set @tokenitem,3116; }	//Swanhild
+					if(@prtcastle_token$ == "prtg_cas03") { set @tokenitem,3117; }	//Fadhgridh
+					if(@prtcastle_token$ == "prtg_cas04") { set @tokenitem,3118; }	//Skoegul
+					if(@prtcastle_token$ == "prtg_cas05") { set @tokenitem,3119; }	//Gondul
+				if(!checkweight(@tokenitem,1)) goto overweight;
+			}
+
+			if(@neoloweco7 < 2) {
+				//SEALS PACK
+				set @sealsrand,rand(1,5);
+				if(@sealsrand==1) { set @sealitem,3130; } if(@sealsrand==2) { set @sealitem,3131; }	//Seals Pack
+				if(@sealsrand==3) { set @sealitem,3132; } if(@sealsrand==4) { set @sealitem,3133; }	//Seals Pack
+				if(@sealsrand==5) { set @sealitem,3134; } //Seals Pack
+				if(!checkweight(@sealitem,1)) goto overweight;
+			}
+			if(@neoloweco8 < 3) {
+				//XILERO HATS PACK
+				set @xilehatsitem,rand(22564,22692);	//XILERO HATS
+				if (@xilehatsitem == 22610 || @xilehatsitem == 22609) { set @xilehatsitem,rand(22564,22608); }
+				if(!checkweight(@xilehatsitem,1)) goto overweight;
+			}
+
+				//GET ITEM AFTER CHECKING WEIGHT
+				getmapxy(@mapname$,@mapx,@mapy,0);
+				makeitem @rbsdrop,100,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @megs,1,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @sleip,1,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @oldheadgear,1,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @oldwings,1,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @badgestier1,3,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @elitewep,1,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @elitegear,1,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @tokenitem,1,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @sealitem,1,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @xilehatsitem,1,@mapname$,(@mapx+1),(@mapy+1);
+				end;
+
+				overweight:
+				message strcharinfo(0),"You are overweight!!";
+				getitem 3300,1;
+				end;
+				
+//			}			
+
+		end;
+	} //getarg - normal
+
+// RARE BOX
+	if(getarg(0)=="Rare") {
+				// TURN VARIBALES INTO 0
+				set @neohigheco1,0;
+				set @neohigheco2,0;
+				set @neohigheco3,0;
+				set @neohigheco4,0;
+				set @neohigheco5,0;
+				set @neohigheco6,0;
+				set @neohigheco7,0;
+				set @neohigheco8,0;	
+				set @neorareprize1,0; //Imp
+				set @neorareprize2,0; //Onyx
+				set @neorareprize3,0; //Sapphire
+				set @neorareprize4,0; //Emerald
+				set @neorareprize5,0; //Infinity
+				set @neorareprize6,0; //Fallen	
+				set @mithcoin,0;
+				set @oldwings,0;
+				set @badgestier1,0;
+				set @godlywep,0;
+				set @elitegear,0;
+				set @tokenitem,0;
+				set @sealitem,0;
+				set @xilehatsitem,0;
+				set @imp_part,0;
+				set @onyx_part,0;
+				set @sap_part,0;
+				set @eme_part,0;
+				set @inf_part,0;
+				set @fall_part,0;	
+
+				// ITEMS FOR DEFAULT OBTAINABLE
+				set @rbsdrop,22555;
+				if(!checkweight(@rbsdrop,230)) goto overweightrare;
+				set @pdb,678;
+				if(!checkweight(@pdb,100)) goto overweightrare;
+				set @bot,22028;
+				if(!checkweight(@bot,50)) goto overweightrare;
+
+
+				set @neohigheco1,rand(7);
+				set @neohigheco2,rand(3);
+				set @neohigheco3,rand(2);
+				set @neohigheco4,rand(5);
+				set @neohigheco5,rand(5);
+				set @neohigheco6,rand(2);
+				set @neohigheco7,rand(2);
+				set @neohigheco8,rand(5);
+
+				//Rare Prizes
+				set @neorareprize1,rand(270); //Imp
+				set @neorareprize2,rand(250); //Onyx
+				set @neorareprize3,rand(250); //Sapphire
+				set @neorareprize4,rand(250); //Emerald
+				set @neorareprize5,rand(350); //Infinity
+				set @neorareprize6,rand(370); //Fallen
+
+			if(@neorareprize1 < 11) {
+				//IMP PARTS
+				set @imp_r,rand(1,3);
+				if(@imp_r==1) { set @imp_part,3200; } if(@imp_r==2) { set @imp_part,3201; }	//ImpCrown, ImpWings
+				if(@imp_r==3) { set @imp_part,3202; }							//ImpTiara
+				if(!checkweight(@imp_part,1)) goto overweightrare;
+			}
+			if(@neorareprize2 < 11) {
+				//ONYX PARTS
+				set @onyx_r,rand(1,3);
+				if(@onyx_r==1) { set @onyx_part,3210; } if(@onyx_r==2) { set @onyx_part,3213; }	//ODH, OLA
+				if(@onyx_r==3) { set @onyx_part,3216; }						//ODW
+				if(!checkweight(@onyx_part,1)) goto overweightrare;
+			}
+			if(@neorareprize3 < 11) {
+				//SAP PARTS
+				set @sap_r,rand(1,3);
+				if(@sap_r==1) { set @sap_part,3211; } if(@sap_r==2) { set @sap_part,3214; }	//hat, armor
+				if(@sap_r==3) { set @sap_part,3217; }						//wings
+				if(!checkweight(@sap_part,1)) goto overweightrare;
+			}
+			if(@neorareprize4 < 11) {
+				//EME PARTS
+				set @eme_r,rand(1,3);
+				if(@eme_r==1) { set @eme_part,3212; } if(@eme_r==2) { set @eme_part,3215; }	//hat, armor
+				if(@eme_r==3) { set @eme_part,3218; }						//wings
+				if(!checkweight(@eme_part,1)) goto overweightrare;
+			}
+			if(@neorareprize5 < 11) {
+				//INF PARTS
+				set @inf_r,rand(1,2);
+				if(@inf_r==1) { set @inf_part,3286; } if(@inf_r==2) { set @inf_part,3287; }	//hat, wings
+				if(!checkweight(@inf_part,1)) goto overweightrare;
+			}
+			if(@neorareprize6 < 11) {
+				//FALLEN PARTS
+				set @fall_r,rand(1,2);
+				if(@fall_r==1) { set @fall_part,3293; } if(@fall_r==2) { set @fall_part,3294; }	//hat, wings
+				if(!checkweight(@fall_part,1)) goto overweightrare;
+			}
+
+			if(@neohigheco1 < 3) {
+				//OLD XILERO WINGS PACK
+				set @oldwingrand,rand(1,4);
+				if(@oldwingrand==1) { set @oldwings,2288; } if(@oldwingrand==2) { set @oldwings,5041; }	//OmegaWings, AlphaWings
+				if(@oldwingrand==3) { set @oldwings,6012; } if(@oldwingrand==4) { set @oldwings,5100; }	//ArchAngelWings, ShadowCraftWings
+				if(!checkweight(@oldwings,1)) goto overweightrare;
+			}
+			if(@neohigheco2 < 2) {
+
+				//OLD XILERO HEADGEARS PACK
+				set @r_mithcoin,rand(1,3);
+				if(@r_mithcoin==3) { set @mithcoin,22554; }							//BlackHelm
+				if(!checkweight(@mithcoin,1)) goto overweightrare;
+			}
+			if(@neohigheco3 < 2) {
+				//BADGES PACK tier 2
+				set @badgerand,rand(1,2);
+				if(@badgerand==1) { set @badgestier1,22556; } if(@badgerand==2) { set @badgestier1,22557; }	//VictoryBadge, BoM Badge
+				if(!checkweight(@badgestier1,5)) goto overweightrare;
+			}
+			if(@neohigheco4 < 3) {
+				//Elite Weapons
+				set @godlywepsrand,rand(1,15);
+				if(@godlywepsrand==1) { set @godlywep,3180; } if(@godlywepsrand==7) { set @godlywep,3188; }	//Elite Weapons
+				if(@godlywepsrand==2) { set @godlywep,3199; } if(@godlywepsrand==8) { set @godlywep,3189; }	//Elite Weapons
+				if(@godlywepsrand==3) { set @godlywep,3182; } if(@godlywepsrand==9) { set @godlywep,3190; }	//Elite Weapons
+				if(@godlywepsrand==4) { set @godlywep,3183; } if(@godlywepsrand==10) { set @godlywep,3191; }	//Elite Weapons
+				if(@godlywepsrand==5) { set @godlywep,3184; } if(@godlywepsrand==11) { set @godlywep,3194; }	//Elite Weapons
+				if(@godlywepsrand==6) { set @godlywep,3186; } if(@godlywepsrand==12) { set @godlywep,3195; }	//Elite Weapons
+				if(@godlywepsrand==13) { set @godlywep,3196; } if(@godlywepsrand==14) { set @godlywep,3197; }	//Elite Weapons
+				if(@godlywepsrand==15) { set @godlywep,3198; }							//Elite Weapons
+				if(!checkweight(@godlywep,1)) goto overweightrare;
+			}
+			if(@neohigheco5 < 3) {
+
+				//XILERO'S ELITE GEARS
+				set @elitegrand,rand(1,7);
+				if(@elitegrand==1) { set @elitegear,3163; } if(@elitegrand==5) { set @elitegear,3165; }	//Elite Gears&Equipment
+				if(@elitegrand==2) { set @elitegear,3164; } if(@elitegrand==6) { set @elitegear,3166; }	//Elite Gears&Equipment
+				if(@elitegrand==3) { set @elitegear,3167; } if(@elitegrand==7) { set @elitegear,3168; }	//Elite Gears&Equipment
+				if(@elitegrand==4) { set @elitegear,3169; }
+				if(!checkweight(@elitegear,1)) goto overweightrare;
+			}
+
+			if(@neohigheco6 < 2) {
+				getmapxy(@prtcastle_token$,.@x,.@y,0);
+					if(@prtcastle_token$ == "prtg_cas01") { set @tokenitem,3115; }	//Kriemhild
+					if(@prtcastle_token$ == "prtg_cas02") { set @tokenitem,3116; }	//Swanhild
+					if(@prtcastle_token$ == "prtg_cas03") { set @tokenitem,3117; }	//Fadhgridh
+					if(@prtcastle_token$ == "prtg_cas04") { set @tokenitem,3118; }	//Skoegul
+					if(@prtcastle_token$ == "prtg_cas05") { set @tokenitem,3119; }	//Gondul
+				if(!checkweight(@tokenitem,1)) goto overweightrare;
+			}
+
+			if(@neohigheco7 < 2) {
+				//SEALS PACK
+				set @sealsrand,rand(1,5);
+				if(@sealsrand==1) { set @sealitem,3130; } if(@sealsrand==2) { set @sealitem,3131; }	//Seals Pack
+				if(@sealsrand==3) { set @sealitem,3132; } if(@sealsrand==4) { set @sealitem,3133; }	//Seals Pack
+				if(@sealsrand==5) { set @sealitem,3134; } //Seals Pack
+				if(!checkweight(@sealitem,1)) goto overweightrare;
+			}
+			if(@neohigheco8 < 3) {
+				//XILERO HATS PACK
+				set @xilehatsitem,rand(22564,22692);	//XILERO HATS
+				if (@xilehatsitem == 22610 || @xilehatsitem == 22609) { set @xilehatsitem,rand(22564,22608); }
+				if(!checkweight(@xilehatsitem,1)) goto overweightrare;
+			}
+
+				//GET ITEM AFTER CHECKING WEIGHT
+				getmapxy(@mapname$,@mapx,@mapy,0);
+				makeitem @rbsdrop,230,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @pdb,100,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @bot,50,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @mithcoin,1,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @oldwings,1,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @badgestier1,5,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @godlywep,1,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @elitegear,1,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @tokenitem,2,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @sealitem,1,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @xilehatsitem,1,@mapname$,(@mapx+1),(@mapy+1);
+				makeitem @imp_part,1,@mapname$,(@mapx+2),(@mapy+1);
+				makeitem @onyx_part,1,@mapname$,(@mapx+2),(@mapy+1);
+				makeitem @sap_part,1,@mapname$,(@mapx+2),(@mapy+1);
+				makeitem @eme_part,1,@mapname$,(@mapx+2),(@mapy+1);
+				makeitem @inf_part,1,@mapname$,(@mapx+2),(@mapy+1);
+				makeitem @fall_part,1,@mapname$,(@mapx+2),(@mapy+1);
+				end;
+
+				overweightrare:
+				message strcharinfo(0),"You are overweight!!";
+				getitem 3301,1;
+				end;
+	} //getarg - Rare
+
+} //end function
+	
+

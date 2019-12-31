@@ -1,0 +1,42 @@
+izlude.gat,135,118,4	script	Unholy Path	5011,{
+	set @cost, 50000;
+	mes "[Unholy Path]";
+	mes "This is where the fun really begins. I suggest you bring friends!! Do you really think you are ready?";
+	next;
+	menu "I'm super high level, and can take on anything!",yes,"Do u think I'm an idiot?",no;
+	close;
+	yes:
+	mes "[Unholy Path]";
+	mes "I will not send you for free.";
+	mes "I need to make a living.";
+	mes "The cost of my service is " + @cost + " zeny";
+	mes "Still wish to enter?";
+	menu "Yes here is your fee.",-,"I wont pay that...",no;
+	if (getmapusers("job_thief1.gat") > 30) goto Luserin;
+	if (Zeny < @cost) goto Lnomoney;
+	set Zeny, Zeny-@cost;	
+	warp "job_thief1.gat",180,24;
+	end;
+
+	no:
+	close;
+Lnomoney:
+	next;
+	mes "[Unholy Path]";
+	mes "You do not have enough money...don't waste my time.";
+	close;
+
+Luserin:
+	mes "[Unholy Path]";
+	mes "Im sorry but there are over 30 warriors wandering the unholy path. Don't worrie, they won't last long.";
+	mes "Try agin in a few minutes.";
+	close;
+OnTimer450000:
+	killmonsterall "job_thief1.gat";
+	initnpctimer;
+	end;
+OnInit:
+	initnpctimer;
+	end;
+}
+

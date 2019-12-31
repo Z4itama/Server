@@ -1,0 +1,81 @@
+//=================eAthena Script============================
+// Written by: DeathAnge11
+//=================Script Name===============================
+// Lord Baldur - for XileRO
+//=================Script Defenition=========================
+// Quest NPC for the one-handed sword Mysteltainn
+//=================Version History===========================
+//1.0 - Done. Still needs to be tested.
+//=================Server Info===============================
+// eAthena SVN vrs. 1583, havent tested yet
+//===========================================================
+
+prt_in.gat,72,105,4	script	Lord Baldur	733,{
+
+mes "[Lord Baldur]";
+mes "So you have succeeded in finding me young one.";
+next;
+mes "[Lord Baldur]";
+mes "What would the likes of you want with me";
+menu "What is it that you do excactly?",Myst_Descript,"umm...nevermind, you are scary.",Myst_Done;
+
+Myst_Descript:
+mes "[Lord Baldur]";
+mes "I am the legendary Lord Baldur ";
+mes "I am known by everyone far and wide as a legendary forger.";
+mes "What would you have me do";
+menu "Can you make an Mysteltainn for me",Myst_Make,"What items do I need",Myst_Need,"umm...nevermind, you are wierd",Myst_Done;
+
+Myst_Done:
+mes "[Lord Baldur]";
+mes "How dare you speak to me that way!";
+mes "Be gone before I lose my temper";
+close;
+
+Myst_Fail:
+mes "[Lord Baldur]";
+mes "Hmm...to bad, you dont have what I need to complete the sword.";
+mes "I am sorry but I cant help you.";
+close;
+
+Myst_Need:
+mes "[Lord Baldur]";
+mes "HAHAHA";
+mes "How dare you come to me unprepared!";
+mes "I guess it cant be helped, o well.";
+next;
+mes "[Lord Baldur]";
+mes "For me to make you the best sword that I can,";
+mes "I will need :";
+next;
+mes "^FF0000Tsurugi[2] : 1^000000";
+mes "^FF0000Young Twig : 10^000000";
+mes "^FF0000Loki's Whispers : 15^000000";
+mes "and 1000000 zeny";
+next;
+mes "[Lord Baldur]";
+mes "So, do you want me to make you an Mysteltainn";
+menu "Yes",Myst_Make,"No...leave me alone",Myst_Done;
+
+
+Myst_Make:
+mes "[Lord Baldur]";
+mes "Let me see if you possess the items needed for my work.";
+next;
+// Tsurugi[2](1120) - 1, young twig(7018) - 5, Loki's Whispers(7019) - 10      
+if (Zeny < 1000000) goto Myst_Fail;
+if (countitem(1120) < 1) goto Myst_Fail;
+if (countitem(7018) < 10) goto Myst_Fail;
+if (countitem(7019) < 15) goto Myst_Fail;
+mes "[Lord Baldur]";
+mes "Hmm, you are strong young one, and this sword will make you even stronger.";
+getitem 1138,1;
+delitem 1120,1;
+delitem 7018,5;
+delitem 7019,10;
+set Zeny, Zeny-1000000;
+next;
+mes "[Lord Baldur]";
+mes "Good Bye young one, may that sword treat you well.";
+close;
+}

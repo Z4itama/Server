@@ -1,0 +1,42 @@
+// ====================================================
+// 3 vs 3 Party Script
+// v4.0: 3v3 Advanced, Anti Cheat System Update and queue Remake (Taku)
+// v3.0: New Winner detecting system, anti-partycheat, spawn and respawn points (Knx)
+// v2.0: With custom queueing system (Knx)
+// v1.0: Coded by Teny + Knx
+// ====================================================
+//	Flags
+
+guild_vs1.gat	mapflag	noteleport
+guild_vs1.gat	mapflag	nomemo
+guild_vs1.gat	mapflag	nowarp
+guild_vs1.gat	mapflag	nowarpto
+guild_vs1.gat	mapflag	noicewall
+guild_vs1.gat	mapflag	noreturn
+guild_vs1.gat	mapflag	nosave	SavePoint
+guild_vs1.gat	mapflag	nopenalty
+guild_vs1.gat	mapflag	noexp
+guild_vs1.gat	mapflag	nobranch
+guild_vs1.gat	mapflag	pvp_noguild
+guild_vs1.gat	mapflag	restricted	3
+guild_vs1.gat	mapflag	partylock
+guild_vs1.gat	mapflag	loadevent
+
+guild_vs1-1.gat	mapflag	noteleport
+guild_vs1-1.gat	mapflag	nomemo
+guild_vs1-1.gat	mapflag	nowarp
+guild_vs1-1.gat	mapflag	nowarpto
+guild_vs1-1.gat	mapflag	noicewall
+guild_vs1-1.gat	mapflag	noreturn
+guild_vs1-1.gat	mapflag	nosave	SavePoint
+guild_vs1-1.gat	mapflag	nopenalty
+guild_vs1-1.gat	mapflag	noexp
+guild_vs1-1.gat	mapflag	nobranch
+guild_vs1-1.gat	mapflag	pvp_noguild
+guild_vs1-1.gat	mapflag	restricted	3
+guild_vs1-1.gat	mapflag	partylock
+guild_vs1-1.gat	mapflag	loadevent
+
+arena_room	mapflag	nochat
+
+arena_room,102,100,5	script	3vs3Party	822,{

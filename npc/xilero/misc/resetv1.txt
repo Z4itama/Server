@@ -1,0 +1,420 @@
+//===== XileRO Script ===================================================||
+//= Stat Reset and Build saver			                         ||
+//===== Written By: =====================================================||
+//= Honor/Lover Romeo						         ||
+//===== Additional Comments: ============================================||
+//= Report any bugs found.				                 ||
+//===== Updates: ========================================================||
+//= 1.1 Needs to be tested					      	 ||
+//=======================================================================||
+prontera,144,198,4	script	Reset Girl::rs1	124,{
+	callfunc "_reset_";
+	end;
+}
+
+morocc,151,108,4	script	Reset Girl::rs2	124,{
+	callfunc "_reset_";
+	end;
+}
+
+geffen,116,75,4	script	Reset Girl::rs3	124,{
+	callfunc "_reset_";
+	end;
+}
+
+payon,149,225,4	script	Reset Girl::rs4	124,{
+	callfunc "_reset_";
+	end;
+}
+ayothaya,160,153,3	script	Reset Girl::rs5	124,{
+	callfunc "_reset_";
+	end;
+}
+
+// ------------------------------ Start ------------------------------
+function	script	_reset_	{
+set .resetname$,"[^0000ffReset Girl^000000]";
+	mes .resetname$;
+	mes "I am a Reset Girl.";
+	mes "Reset Stats: 5,000z";
+	mes "Reset Skills: 5,000z";
+	mes "Reset Both: 9,000z";
+	mes "Please select the service you want:";
+	next;
+	menu "^FF3355Reset Skills",L0,"Reset Stats",L1,"Reset Both^000000",L2,"Quit",LEnd;
+	
+L0:
+	mes .resetname$;
+	if (Zeny < 5000) goto NeedZenys;
+	mes "Alright, here we go now.. Remember, changes won't take effect until you log back on!";
+	set Zeny,zeny-5000;
+	ResetSkill;
+	close;
+L1:
+	next;
+	mes .resetname$;
+	mes "What do you want to do?";
+	menu "^FF3355Reset Stats^000000",-,"^0000FFBuilds^000000",Lbuilds;
+
+	next;
+	mes .resetname$;
+	if (Zeny < 5000) goto NeedZenys;
+	mes "Alright, here we go now.. Remember, changes won't take effect until you log back on!";
+	set Zeny,zeny-5000;
+	ResetStatus;
+	close;
+
+Lbuilds:
+if(Class == Job_Taekwon) { goto menubuild; }
+if(Class == Job_Soul_Linker) { goto menubuild; }
+if(Class == Job_Gunslinger) { goto menubuild; }
+if(Class == Job_Star_Gladiator) { goto menubuild; }
+if(Class == Job_Ninja) { goto menubuild; }
+if(Upper != 1) {
+	next;
+	mes .resetname$;
+	mes "You still can't use this feature.";
+	close;
+
+}
+menubuild:
+if(BaseLevel != 255) {
+	next;
+	mes .resetname$;
+	mes "You still can't use this feature.";
+	close;
+
+}
+if(build1$=="") { set build1$,"Build (1/5)"; }
+if(build2$=="") { set build2$,"Build (2/5)"; }
+if(build3$=="") { set build3$,"Build (3/5)"; }
+if(build4$=="") { set build4$,"Build (4/5)"; }
+if(build5$=="") { set build5$,"Build (5/5)"; }
+	next;
+	mes .resetname$;
+	mes "Builds CP";
+	menu build1$,Lb1,
+	build2$,Lb2,
+	build3$,Lb3,
+	build4$,Lb4,
+	build5$,Lb5;
+
+Lb1:
+	next;
+	mes .resetname$;
+	mes "Save Build (50k) || Use Build (5k)";
+	menu "Save Build",-,"Use this Build",Lusebuild1;
+
+	if (Zeny < 50000) goto NeedZenys;
+	set Zeny,zeny-50000;
+
+if(readparam(bStr) > 255) { close; } //Prevent Haxed stats
+if(readparam(bAgi) > 255) { close; } //Prevent Haxed stats
+if(readparam(bVit) > 255) { close; } //Prevent Haxed stats
+if(readparam(bInt) > 255) { close; } //Prevent Haxed stats
+if(readparam(bDex) > 255) { close; } //Prevent Haxed stats
+if(readparam(bLuk) > 255) { close; } //Prevent Haxed stats
+
+	mes "Please - Name Your Build (1).";
+	input @build1$;
+		set build1$,@build1$;
+		set statpts1,readparam(9);
+		set bstr1,readparam(bStr);
+		set bagi1,readparam(bAgi);
+		set bvit1,readparam(bVit);
+		set bint1,readparam(bInt);
+		set bdex1,readparam(bDex);
+		set bluk1,readparam(bLuk);
+		set build_1,1;
+	next;
+	mes .resetname$;
+	mes "Name: ^0000ff"+build1$+"^000000.";
+	mes "Str: ^ff0000"+bstr1+"^000000.";
+	mes "Agi: ^ff0000"+bagi1+"^000000.";
+	mes "Vit: ^ff0000"+bvit1+"^000000.";
+	mes "Int: ^ff0000"+bint1+"^000000.";
+	mes "Dex: ^ff0000"+bdex1+"^000000.";
+	mes "Luk: ^ff0000"+bluk1+"^000000.";
+	mes "Build (1) - Save process complete!";
+	close;
+
+Lusebuild1:
+	if(build_1 != 1) { 
+		next;
+		mes .resetname$;
+		mes "You haven't save any build here.";
+		close;
+	}
+	if (Zeny < 5000) goto NeedZenys;
+	set Zeny,zeny-5000;
+	ResetStatus;
+	sleep2 10;
+		statusup2 bStr,bstr1 -1;
+		statusup2 bAgi,bagi1 -1;
+		statusup2 bVit,bvit1 -1;
+		statusup2 bInt,bint1 -1;
+		statusup2 bDex,bdex1 -1;
+		statusup2 bLuk,bluk1 -1;
+	set StatusPoint,statpts1;
+	message strcharinfo(0),"You changed your Build to "+build1$+" Build.";
+	close;
+
+Lb2:
+	next;
+	mes .resetname$;
+	mes "Save Build (50k) || Use Build (5k)";
+	menu "Save Build",-,"Use this Build",Lusebuild2;
+
+	if (Zeny < 50000) goto NeedZenys;
+	set Zeny,zeny-50000;
+
+if(readparam(bStr) > 255) { close; } //Prevent Haxed stats
+if(readparam(bAgi) > 255) { close; } //Prevent Haxed stats
+if(readparam(bVit) > 255) { close; } //Prevent Haxed stats
+if(readparam(bInt) > 255) { close; } //Prevent Haxed stats
+if(readparam(bDex) > 255) { close; } //Prevent Haxed stats
+if(readparam(bLuk) > 255) { close; } //Prevent Haxed stats
+
+	mes "Please - Name Your Build (2).";
+	input @build2$;
+		set build2$,@build2$;
+		set statpts2,readparam(9);
+		set bstr2,readparam(bStr);
+		set bagi2,readparam(bAgi);
+		set bvit2,readparam(bVit);
+		set bint2,readparam(bInt);
+		set bdex2,readparam(bDex);
+		set bluk2,readparam(bLuk);
+		set build_2,1;
+	next;
+	mes .resetname$;
+	mes "Name: ^0000ff"+build2$+"^000000.";
+	mes "Str: ^ff0000"+bstr2+"^000000.";
+	mes "Agi: ^ff0000"+bagi2+"^000000.";
+	mes "Vit: ^ff0000"+bvit2+"^000000.";
+	mes "Int: ^ff0000"+bint2+"^000000.";
+	mes "Dex: ^ff0000"+bdex2+"^000000.";
+	mes "Luk: ^ff0000"+bluk2+"^000000.";
+	mes "Build (2) - Save process complete!";
+	close;
+
+Lusebuild2:
+	if(build_2 != 1) { 
+		next;
+		mes .resetname$;
+		mes "You haven't save any build here.";
+		close;
+	}
+	if (Zeny < 5000) goto NeedZenys;
+	set Zeny,zeny-5000;
+	ResetStatus;
+	sleep2 10;
+		statusup2 bStr,bstr2 -1;
+		statusup2 bAgi,bagi2 -1;
+		statusup2 bVit,bvit2 -1;
+		statusup2 bInt,bint2 -1;
+		statusup2 bDex,bdex2 -1;
+		statusup2 bLuk,bluk2 -1;
+	set StatusPoint,statpts2;
+	message strcharinfo(0),"You changed your Build to "+build2$+" Build.";
+	close;
+
+Lb3:
+	next;
+	mes .resetname$;
+	mes "Save Build (50k) || Use Build (5k)";
+	menu "Save Build",-,"Use this Build",Lusebuild3;
+
+	if (Zeny < 50000) goto NeedZenys;
+	set Zeny,zeny-50000;
+
+if(readparam(bStr) > 255) { close; } //Prevent Haxed stats
+if(readparam(bAgi) > 255) { close; } //Prevent Haxed stats
+if(readparam(bVit) > 255) { close; } //Prevent Haxed stats
+if(readparam(bInt) > 255) { close; } //Prevent Haxed stats
+if(readparam(bDex) > 255) { close; } //Prevent Haxed stats
+if(readparam(bLuk) > 255) { close; } //Prevent Haxed stats
+
+	mes "Please - Name Your Build (3).";
+	input @build3$;
+		set build3$,@build3$;
+		set statpts3,readparam(9);
+		set bstr3,readparam(bStr);
+		set bagi3,readparam(bAgi);
+		set bvit3,readparam(bVit);
+		set bint3,readparam(bInt);
+		set bdex3,readparam(bDex);
+		set bluk3,readparam(bLuk);
+		set build_3,1;
+	next;
+	mes .resetname$;
+	mes "Name: ^0000ff"+build3$+"^000000.";
+	mes "Str: ^ff0000"+bstr3+"^000000.";
+	mes "Agi: ^ff0000"+bagi3+"^000000.";
+	mes "Vit: ^ff0000"+bvit3+"^000000.";
+	mes "Int: ^ff0000"+bint3+"^000000.";
+	mes "Dex: ^ff0000"+bdex3+"^000000.";
+	mes "Luk: ^ff0000"+bluk3+"^000000.";
+	mes "Build (3) - Save process complete!";
+	close;
+
+Lusebuild3:
+	if(build_3 != 1) { 
+		next;
+		mes .resetname$;
+		mes "You haven't save any build here.";
+		close;
+	}
+	if (Zeny < 5000) goto NeedZenys;
+	set Zeny,zeny-5000;
+	ResetStatus;
+	sleep2 10;
+		statusup2 bStr,bstr3 -1;
+		statusup2 bAgi,bagi3 -1;
+		statusup2 bVit,bvit3 -1;
+		statusup2 bInt,bint3 -1;
+		statusup2 bDex,bdex3 -1;
+		statusup2 bLuk,bluk3 -1;
+	set StatusPoint,statpts3;
+	message strcharinfo(0),"You changed your Build to "+build3$+" Build.";
+	close;
+
+Lb4:
+	next;
+	mes .resetname$;
+	mes "Save Build (50k) || Use Build (5k)";
+	menu "Save Build",-,"Use this Build",Lusebuild4;
+
+	if (Zeny < 50000) goto NeedZenys;
+	set Zeny,zeny-50000;
+
+if(readparam(bStr) > 255) { close; } //Prevent Haxed stats
+if(readparam(bAgi) > 255) { close; } //Prevent Haxed stats
+if(readparam(bVit) > 255) { close; } //Prevent Haxed stats
+if(readparam(bInt) > 255) { close; } //Prevent Haxed stats
+if(readparam(bDex) > 255) { close; } //Prevent Haxed stats
+if(readparam(bLuk) > 255) { close; } //Prevent Haxed stats
+
+	mes "Please - Name Your Build (4).";
+	input @build4$;
+		set build4$,@build4$;
+		set statpts4,readparam(9);
+		set bstr4,readparam(bStr);
+		set bagi4,readparam(bAgi);
+		set bvit4,readparam(bVit);
+		set bint4,readparam(bInt);
+		set bdex4,readparam(bDex);
+		set bluk4,readparam(bLuk);
+		set build_4,1;
+	next;
+	mes .resetname$;
+	mes "Name: ^0000ff"+build4$+"^000000.";
+	mes "Str: ^ff0000"+bstr4+"^000000.";
+	mes "Agi: ^ff0000"+bagi4+"^000000.";
+	mes "Vit: ^ff0000"+bvit4+"^000000.";
+	mes "Int: ^ff0000"+bint4+"^000000.";
+	mes "Dex: ^ff0000"+bdex4+"^000000.";
+	mes "Luk: ^ff0000"+bluk4+"^000000.";
+	mes "Build (4) - Save process complete!";
+	close;
+
+Lusebuild4:
+	if(build_4 != 1) { 
+		next;
+		mes .resetname$;
+		mes "You haven't save any build here.";
+		close;
+	}
+	if (Zeny < 5000) goto NeedZenys;
+	set Zeny,zeny-5000;
+	ResetStatus;
+	sleep2 10;
+		statusup2 bStr,bstr4 -1;
+		statusup2 bAgi,bagi4 -1;
+		statusup2 bVit,bvit4 -1;
+		statusup2 bInt,bint4 -1;
+		statusup2 bDex,bdex4 -1;
+		statusup2 bLuk,bluk4 -1;
+	set StatusPoint,statpts4;
+	message strcharinfo(0),"You changed your Build to "+build4$+" Build.";
+	close;
+
+Lb5:
+	next;
+	mes .resetname$;
+	mes "Save Build (50k) || Use Build (5k)";
+	menu "Save Build",-,"Use this Build",Lusebuild5;
+
+	if (Zeny < 50000) goto NeedZenys;
+	set Zeny,zeny-50000;
+
+if(readparam(bStr) > 255) { close; } //Prevent Haxed stats
+if(readparam(bAgi) > 255) { close; } //Prevent Haxed stats
+if(readparam(bVit) > 255) { close; } //Prevent Haxed stats
+if(readparam(bInt) > 255) { close; } //Prevent Haxed stats
+if(readparam(bDex) > 255) { close; } //Prevent Haxed stats
+if(readparam(bLuk) > 255) { close; } //Prevent Haxed stats
+
+	mes "Please - Name Your Build (5).";
+	input @build5$;
+		set build5$,@build5$;
+		set statpts5,readparam(9);
+		set bstr5,readparam(bStr);
+		set bagi5,readparam(bAgi);
+		set bvit5,readparam(bVit);
+		set bint5,readparam(bInt);
+		set bdex5,readparam(bDex);
+		set bluk5,readparam(bLuk);
+		set build_5,1;
+	next;
+	mes .resetname$;
+	mes "Name: ^0000ff"+build5$+"^000000.";
+	mes "Str: ^ff0000"+bstr5+"^000000.";
+	mes "Agi: ^ff0000"+bagi5+"^000000.";
+	mes "Vit: ^ff0000"+bvit5+"^000000.";
+	mes "Int: ^ff0000"+bint5+"^000000.";
+	mes "Dex: ^ff0000"+bdex5+"^000000.";
+	mes "Luk: ^ff0000"+bluk5+"^000000.";
+	mes "Build (5) - Save process complete!";
+	close;
+
+Lusebuild5:
+	if(build_5 != 1) { 
+		next;
+		mes .resetname$;
+		mes "You haven't save any build here.";
+		close;
+	}
+	if (Zeny < 5000) goto NeedZenys;
+	set Zeny,zeny-5000;
+	ResetStatus;
+	sleep2 10;
+		statusup2 bStr,bstr5 -1;
+		statusup2 bAgi,bagi5 -1;
+		statusup2 bVit,bvit5 -1;
+		statusup2 bInt,bint5 -1;
+		statusup2 bDex,bdex5 -1;
+		statusup2 bLuk,bluk5 -1;
+	set StatusPoint,statpts5;
+	message strcharinfo(0),"You changed your Build to "+build5$+" Build.";
+	close;
+
+
+L2:
+	mes .resetname$;
+	if (Zeny < 9000) goto NeedZenys;
+	mes "Alright, here we go now.. Remember, changes won't take effect until you log back on!";
+	set Zeny,zeny-9000;
+	ResetSkill;
+	ResetStatus;
+	close;
+
+NeedZenys:
+	next;
+	mes .resetname$;
+	mes "Sorry, you don't have enough Zeny.";
+	close;
+
+LEnd:
+	close;	
+}

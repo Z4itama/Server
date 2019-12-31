@@ -1,0 +1,565 @@
+prontera.gat,164,164,4	script	Syri	920,{
+
+	set $@npcname_mpq$, "^4000C0[Syri]^000000";
+	mes $@npcname_mpq$;
+	mes "Hey nub, want some Elixors that make you SHINEY?? Well what you waiting for?! What ones you want!";
+	next;
+	menu "Couples Heart Elixor",L_Elixor1,"Red Aura Elixor",L_Elixor2,"Black Aura Elixor",L_Elixor3,"Green Aura Elixor",L_Elixor4,"Green Shield Elixor",L_Elixor5,"Blue Shield Elixor",L_Elixor6,"Small Green Aura Elixor",L_Elixor7,"Heavens Light Elixor",L_Elixor8,"Red Aura Elixor",L_Elixor9,"Blue Bubble Elixor",L_Elixor10,"Winged Heart Elixor",L_Elixor11,"Red Glow Elixor",L_Elixor12,"Crazy Psycho Elixor",L_Elixor13,"Red Bubble Elixor",L_Elixor14,"Rainbow Elixor",L_Elixor15,"Decapitation Elixor",L_Elixor16,"Topsy Turny Elixor",L_Elixor17,"Red Lightning Elixor",L_Elixor18,"Vibrance Aura Elixor",L_Elixor19,"Size 1 Aura Elixor",L_Elixor20,"Blue Twister Elixor",L_Elixor21,"Cancel",L_Exit;
+
+L_Elixor1:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Countermagic Crystal";
+	mes "1x - Ice Powder";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22562) < 1 || countitem(22558) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22562,1;
+		delitem 22558,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22509,2;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 343;
+	close;
+
+L_Elixor2:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Countermagic Crystal";
+	mes "1x - Red-coloured Gem";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22562) < 1 || countitem(22559) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22562,1;
+		delitem 22559,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22512,2;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 239;
+	close;
+
+L_Elixor3:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Countermagic Crystal";
+	mes "1x - Red-coloured Gem";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22562) < 1 || countitem(22560) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22562,1;
+		delitem 22560,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22513,2;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 240;
+	close;
+
+L_Elixor4:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Countermagic Crystal";
+	mes "1x - Yellow-coloured Gem";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22562) < 1 || countitem(22561) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22562,1;
+		delitem 22561,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22514,2;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 241;
+	close;
+
+L_Elixor5:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Countermagic Crystal";
+	mes "1x - Ice Powder";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22562) < 1 || countitem(22558) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22562,1;
+		delitem 22558,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22523,2;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 280;
+	close;
+
+L_Elixor6:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Countermagic Crystal";
+	mes "1x - Red-coloured Gem";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22562) < 1 || countitem(22559) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22562,1;
+		delitem 22559,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22525,2;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 285;
+	close;
+
+L_Elixor7:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Countermagic Crystal";
+	mes "1x - Red-coloured Gem";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22562) < 1 || countitem(22560) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22562,1;
+		delitem 22560,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22528,2;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 292;
+	close;
+
+L_Elixor8:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Countermagic Crystal";
+	mes "1x - Yellow-coloured Gem";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22562) < 1 || countitem(22561) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22562,1;
+		delitem 22561,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22531,2;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 307;
+	close;
+
+L_Elixor9:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Countermagic Crystal";
+	mes "1x - Ice Powder";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22562) < 1 || countitem(22558) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22562,1;
+		delitem 22558,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22535,2;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 342;
+	close;
+
+L_Elixor10:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Countermagic Crystal";
+	mes "1x - Red-coloured Gem";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22562) < 1 || countitem(22559) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22562,1;
+		delitem 22559,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22536,2;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 346;
+	close;
+
+L_Elixor11:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Jewel of Destruction";
+	mes "1x - Red-coloured Gem";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22563) < 1 || countitem(22560) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22563,1;
+		delitem 22560,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22537,5;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 363;
+	close;
+
+L_Elixor12:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Jewel of Destruction";
+	mes "1x - Yellow-coloured Gem";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22563) < 1 || countitem(22561) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22563,1;
+		delitem 22561,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22538,2;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 368;
+	close;
+
+L_Elixor13:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Jewel of Destruction";
+	mes "1x - Ice Powder";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22563) < 1 || countitem(22558) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22563,1;
+		delitem 22558,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22540,5;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 387;
+	close;
+
+L_Elixor14:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Jewel of Destruction";
+	mes "1x - Red-coloured Gem";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22563) < 1 || countitem(22559) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22563,1;
+		delitem 22559,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22541,2;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 394;
+	close;
+
+L_Elixor15:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Jewel of Destruction";
+	mes "1x - Red-coloured Gem";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22563) < 1 || countitem(22560) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22563,1;
+		delitem 22560,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22544,3;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 410;
+	close;
+
+L_Elixor16:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Jewel of Destruction";
+	mes "1x - Yellow-coloured Gem";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22563) < 1 || countitem(22561) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22563,1;
+		delitem 22561,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22545,5;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 413;
+	close;
+
+L_Elixor17:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Jewel of Destruction";
+	mes "1x - Red-coloured Gem";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22563) < 1 || countitem(22560) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22563,1;
+		delitem 22560,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22546,5;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 414;
+	close;
+
+L_Elixor18:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Jewel of Destruction";
+	mes "1x - Ice Powder";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22563) < 1 || countitem(22558) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22563,1;
+		delitem 22558,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22547,2;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 418;
+	close;
+
+L_Elixor19:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Jewel of Destruction";
+	mes "1x - Red-coloured Gem";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22563) < 1 || countitem(22559) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22563,1;
+		delitem 22559,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22548,2;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 419;
+	close;
+
+L_Elixor20:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Jewel of Destruction";
+	mes "1x - Yellow-coloured Gem";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22563) < 1 || countitem(22561) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22563,1;
+		delitem 22561,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22549,2;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 420;
+	close;
+
+L_Elixor21:
+	mes $@npcname_mpq$;
+	mes "These are the items I request to make these Elixors!";
+	next;
+	mes "1x - Jewel of Destruction";
+	mes "1x - Red-coloured Gem";
+	mes "and 25000 Zeny";
+	next;
+	mes $@npcname_mpq$;
+	mes "So, you want thems or not?";
+	next;
+	mes $@npcname_mpq$;
+	menu "Sure, Gimme!",-,"No.. pease dont hurt me!",LNada;
+
+	mes $@npcname_mpq$;
+	if(countitem(22563) < 1 || countitem(22560) < 1 || Zeny < 25000) goto LNotEnough;
+		delitem 22563,1;
+		delitem 22560,1;
+		set Zeny,Zeny-25000;
+	mes "Wheww, you have all of it?! Kk then, here you go.";
+		getitem 22550,5;
+	mes ". . .";
+	mes "Thank you sweety. Dont drink too much! hic.";
+	specialeffect2 435;
+	close;
+
+LNotEnough:
+	mes "You don't have enough stuffs.";
+	mes "Come back when you are actually ready. Now gtfo!";
+	close;
+
+LNada:
+	mes "Wtf, come back when you got the goods! Frekin nub..";
+	close;
+L_Exit:
+	close;
+}

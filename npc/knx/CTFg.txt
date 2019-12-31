@@ -1,0 +1,1142 @@
+//TODO:	
+//	-arena_room winner announcement
+//	-all chars loggoff until no new ones can join -> draw
+//	-creating a party name that already exists (but is offline)
+//	-kick afk chars
+
+// Mapflags
+//==============================================================
+
+pvp_n_1-1	mapflag	noteleport
+pvp_n_1-1	mapflag	nomemo
+pvp_n_1-1	mapflag	nowarp
+pvp_n_1-1	mapflag	nowarpto
+pvp_n_1-1	mapflag	noicewall
+pvp_n_1-1	mapflag	noreturn
+pvp_n_1-1	mapflag	nosave	SavePoint
+pvp_n_1-1	mapflag	nopenalty
+pvp_n_1-1	mapflag	noexp
+pvp_n_1-1	mapflag	nobranch
+pvp_n_1-1	mapflag	pvp_noguild
+pvp_n_1-1	mapflag	restricted	4
+pvp_n_1-1	mapflag	partylock
+pvp_n_1-1	mapflag	loadevent
+
+pvp_n_2-1	mapflag	noteleport
+pvp_n_2-1	mapflag	nomemo
+pvp_n_2-1	mapflag	nowarp
+pvp_n_2-1	mapflag	nowarpto
+pvp_n_2-1	mapflag	noicewall
+pvp_n_2-1	mapflag	noreturn
+pvp_n_2-1	mapflag	nosave	SavePoint
+pvp_n_2-1	mapflag	nopenalty
+pvp_n_2-1	mapflag	noexp
+pvp_n_2-1	mapflag	nobranch
+pvp_n_2-1	mapflag	pvp_noguild
+pvp_n_2-1	mapflag	restricted	4
+pvp_n_2-1	mapflag	partylock
+pvp_n_2-1	mapflag	loadevent
+
+pvp_n_3-1	mapflag	noteleport
+pvp_n_3-1	mapflag	nomemo
+pvp_n_3-1	mapflag	nowarp
+pvp_n_3-1	mapflag	nowarpto
+pvp_n_3-1	mapflag	noicewall
+pvp_n_3-1	mapflag	noreturn
+pvp_n_3-1	mapflag	nosave	SavePoint
+pvp_n_3-1	mapflag	nopenalty
+pvp_n_3-1	mapflag	noexp
+pvp_n_3-1	mapflag	nobranch
+pvp_n_3-1	mapflag	pvp_noguild
+pvp_n_3-1	mapflag	restricted	4
+pvp_n_3-1	mapflag	partylock
+pvp_n_3-1	mapflag	loadevent
+
+
+// Register NPC
+//==============================================================
+
+prontera,156,184,5	script	CaptureTheFlag#reg	828,{
+
+	mes "[Arena Guide]";
+	mes "Welcome to Capture the flag!!!";
+	next;
+	mes "[Arena Guide]";
+	mes "Would you like to compete?";
+	next;
+	menu "Lets do it!",L_Yes, "Uhh. No thanks", L_No;
+	close;
+
+L_Yes:
+	if (BaseLevel < 255 || Class==Job_Novice || Class==Job_Baby || Class==Job_Novice_High){
+		goto L_Level;
+	}else{
+		set @CTF_flag, 0;
+		set @CTF_team, 0;
+		set @CTF_arena, 0;
+		set .@pos, arena_queue_add(3);
+
+		mes "[Arena Guide]";
+		if(.@pos==0){
+			mes "The queue is full. Please wait a while and try again.";
+		}else if(.@pos==-1){
+			mes "You already are on a waiting line...";
+		}else if(.@pos==10){
+			getmapxy(@CTF_city$, @CTF_x, @CTF_y, 0);
+			if($@CTF1_running==0){
+				set $@CTF1_running, 1;
+				donpcevent "CTF_Engine::OnRestart1";
+			}else if($@CTF2_running==0){
+				set $@CTF2_running, 1;
+				donpcevent "CTF_Engine::OnRestart2";
+			}else if($@CTF3_running==0){
+				set $@CTF3_running, 1;
+				donpcevent "CTF_Engine::OnRestart3";
+			}else{
+				set @CTF_active,1;
+				mes "Congratulations, you are now on the waiting line for Capture the flag!";
+				mes "Your position is: ^FF0000"+(.@pos-1)+"^000000";
+				next;
+				mes "[Arena Guide]";
+				mes "^0000FFWhen it's your turn, you will be taken to the Arena even if you moved away from this map!";
+				mes "^FF0000But if you logout, you will be put out of the queue.";
+			}
+		}else{
+			getmapxy(@CTF_city$, @CTF_x, @CTF_y, 0);
+			set @CTF_active,1;
+			mes "Congratulations, you are now on the waiting line for Capture the flag!";
+			mes "Your position is: ^FF0000"+(.@pos-1)+"^000000";
+			next;
+			mes "[Arena Guide]";
+			mes "^0000FFWhen it's your turn, you will be taken to the Arena even if you moved away from this map!";
+			mes "^FF0000But if you logout, you will be put out of the queue.";
+		}
+
+	}
+	close;
+	
+L_No:
+	mes "[Arena Guide]";
+	mes "Okay, please come again!";
+	close;
+
+L_Level:
+	mes "[Arena Guide]";
+	mes "Sorry, you need to be at least level 200. No Novices allowed either.";
+	close;
+
+}
+
+izlude,132,108,4	duplicate(CaptureTheFlag#reg)	CaptureTheFlag#reg2	823
+payon, 164,230,4	duplicate(CaptureTheFlag#reg)	CaptureTheFlag#reg3	823
+
+
+//NPC + Flag drop
+//==============================================================
+
+pvp_n_1-1,0,0,0	script	CTF_Engine	-1,{
+
+end;
+
+OnInit:
+	ctf_init(0);
+	ctf_init(1);
+	ctf_init(2);
+
+	set $@CTF_msgA$[0], "Light Team dropped a flag!";
+	set $@CTF_msgA$[1], "Light Team's flag is back to its base!";
+	set $@CTF_msgA$[2], "Light Team's flag has been taken!";
+	set $@CTF_msgA$[3], "Light Team scored a point!";
+	set $@CTF_msgA$[4], "Light Team won!";
+
+	set $@CTF_msgB$[0], "Dark Team dropped a flag!";
+	set $@CTF_msgB$[1], "Dark Team's flag is back to its base!";
+	set $@CTF_msgB$[2], "Dark Team's flag has been taken!";
+	set $@CTF_msgB$[3], "Dark Team scored a point!";
+	set $@CTF_msgB$[4], "Dark Team won!";
+
+	donpcevent "CTF_Engine::OnRestart1";
+	donpcevent "CTF_Engine::OnRestart2";
+	donpcevent "CTF_Engine::OnRestart3";
+	end;
+
+OnRestart1:
+	set $@CTF_matchover[0], 1;
+	mapwarp "pvp_n_1-1","prontera",156,173;
+
+	donpcevent "Light Flag#1_1::OnInit"; donpcevent "Dark Flag#1_1::OnInit";
+	donpcevent "Light Flag#1_2::OnInit"; donpcevent "Dark Flag#1_2::OnInit";
+	donpcevent "Light Flag#1_3::OnInit"; donpcevent "Dark Flag#1_3::OnInit";
+
+	set $CTF_teamA_score[0], 0;
+	set $CTF_teamB_score[0], 0;
+
+	party_break($CTF_teamA_id[0]);
+	party_break($CTF_teamB_id[0]);
+
+	set $CTF_teamA_id[0], 0; set $CTF1_teamA_leader, 0;
+	set $CTF_teamB_id[0], 0; set $CTF1_teamB_leader, 0;
+
+	set $@CTF_times_30s[0], 0;
+	set $@CTF_matchover[0], 0;
+	set $@CTF_suddendeath[0], 0;
+
+	ctf_init(0);
+	if(warp_arena_queue(3,0,"pvp_n_1-1",0,0,10) > 0){
+		set $@CTF1_running, 1;
+		initnpctimer "CTF1_TIMER";
+	}else{
+		set $@CTF1_running, 0;
+	}
+	end;
+
+OnRestart2:
+	set $@CTF_matchover[1], 1;
+	mapwarp "pvp_n_2-1","prontera",156,173;
+
+	donpcevent "Light Flag#2_1::OnInit"; donpcevent "Dark Flag#2_1::OnInit";
+	donpcevent "Light Flag#2_2::OnInit"; donpcevent "Dark Flag#2_2::OnInit";
+	donpcevent "Light Flag#2_3::OnInit"; donpcevent "Dark Flag#2_3::OnInit";
+
+	set $CTF_teamA_score[1], 0;
+	set $CTF_teamB_score[1], 0;
+
+	party_break($CTF_teamA_id[1]);
+	party_break($CTF_teamB_id[1]);
+
+	set $CTF_teamA_id[1], 0; set $CTF2_teamA_leader, 0;
+	set $CTF_teamB_id[1], 0; set $CTF2_teamB_leader, 0;
+
+	set $@CTF_times_30s[1], 0;
+	set $@CTF_matchover[1], 0;
+	set $@CTF_suddendeath[1], 0;
+
+	ctf_init(1);
+	if(warp_arena_queue(3,1,"pvp_n_2-1",0,0,10) > 0){
+		set $@CTF2_running, 1;
+		initnpctimer "CTF2_TIMER";
+	}else{
+		set $@CTF2_running, 0;
+	}
+	end;
+
+OnRestart3:
+	set $@CTF_matchover[2], 1;
+	mapwarp "pvp_n_3-1","prontera",156,173;
+
+	donpcevent "Light Flag#3_1::OnInit"; donpcevent "Dark Flag#3_1::OnInit";
+	donpcevent "Light Flag#3_2::OnInit"; donpcevent "Dark Flag#3_2::OnInit";
+	donpcevent "Light Flag#3_3::OnInit"; donpcevent "Dark Flag#3_3::OnInit";
+
+	set $CTF_teamA_score[2], 0;
+	set $CTF_teamB_score[2], 0;
+
+	party_break($CTF_teamA_id[2]);
+	party_break($CTF_teamB_id[2]);
+
+	set $CTF_teamA_id[2], 0; set $CTF3_teamA_leader, 0;
+	set $CTF_teamB_id[2], 0; set $CTF3_teamB_leader, 0;
+
+	set $@CTF_times_30s[2], 0;
+	set $@CTF_matchover[2], 0;
+	set $@CTF_suddendeath[2], 0;
+
+	ctf_init(2);
+	if(warp_arena_queue(3,2,"pvp_n_3-1",0,0,10) > 0){
+		set $@CTF3_running, 1;
+		initnpctimer "CTF3_TIMER";
+	}else{
+		set $@CTF3_running, 0;
+	}
+	end;
+
+OnFlagCarryEfx:
+	if(@CTF_flag){
+		if(@CTF_team==1) 
+			specialeffect2 502;
+		else
+			specialeffect2 500;
+		addtimer 3000, "CTF_Engine::OnFlagCarryEfx";
+		if(sc_get(SC_QUAGMIRE)==0) sc_start SC_QUAGMIRE,600000,0;
+	}
+	end;
+
+OnPCDieEvent:
+	if(@CTF_team){
+		getmapxy(.@mapname$, .@mapx, .@mapy, 0);
+
+		if(@CTF_team==1){
+			warp .@mapname$,95,180;
+			if(@CTF_flag) mapannounce .@mapname$, $@CTF_msgA$[0], 0;
+		}else if(@CTF_team==2){
+			warp .@mapname$,94,15;
+			if(@CTF_flag) mapannounce .@mapname$, $@CTF_msgB$[0], 0;
+		}
+
+		switch(@CTF_flag){
+			case 1:	set .@flagname$, "Light Flag#"; set .@flagnum$, "_1";
+				ctf_unlockflag(@CTF_arena,1,1); 
+				break;
+			case 2:	set .@flagname$, "Light Flag#"; set .@flagnum$, "_2";
+				ctf_unlockflag(@CTF_arena,1,2); 
+				break;
+			case 3:	set .@flagname$, "Light Flag#"; set .@flagnum$, "_3";
+				ctf_unlockflag(@CTF_arena,1,3); 
+				break;
+			case 4:	set .@flagname$, "Dark Flag#"; set .@flagnum$, "_1";
+				ctf_unlockflag(@CTF_arena,2,1); 
+				break;
+			case 5:	set .@flagname$, "Dark Flag#"; set .@flagnum$, "_2";
+				ctf_unlockflag(@CTF_arena,2,2); 
+				break;
+			case 6:	set .@flagname$, "Dark Flag#"; set .@flagnum$, "_3";
+				ctf_unlockflag(@CTF_arena,2,3); 
+				break;
+			default:
+		}
+
+		if(@CTF_flag){
+			set .@flagdisplayname$, .@flagname$+(@CTF_arena+1)+.@flagnum$;
+			movenpc .@flagdisplayname$, .@mapx, .@mapy;
+			set @CTF_flag, 0;
+		}
+
+		sleep2 1000;
+		alive;
+		sc_end SC_QUAGMIRE;
+	}
+	end;
+
+OnPCLogoutEvent:
+	if(@CTF_active==1)
+		arena_queue_del(3);
+
+OnPCLeaveCTF: //do NOT change this label! (used in the source when player warps away)
+
+	if(@CTF_team!=0 && $@CTF_matchover[@CTF_arena]==0){
+		getmapxy(.@mapname$, .@mapx, .@mapy, 0);
+
+		//if player already left the map?
+		if(.@mapname$!="pvp_n_1-1" && .@mapname$!="pvp_n_2-1" && .@mapname$!="pvp_n_3-1"){
+			set .@mapx, 106;
+			set .@mapy, 96;
+		}
+
+		switch(@CTF_arena){
+			case 0: set .@mapname$, "pvp_n_1-1"; break;
+			case 1: set .@mapname$, "pvp_n_2-1"; break;
+			case 2: set .@mapname$, "pvp_n_3-1"; break;
+		}
+
+		if(@CTF_flag && @CTF_team==1){
+			mapannounce .@mapname$, $@CTF_msgA$[0], 0;
+		}else if(@CTF_flag && @CTF_team==2){
+			mapannounce .@mapname$, $@CTF_msgB$[0], 0;
+		}
+
+		switch(@CTF_flag){
+			case 1:	set .@flagname$, "Light Flag#"; set .@flagnum$, "_1";
+				ctf_unlockflag(@CTF_arena,1,1); 
+				break;
+			case 2:	set .@flagname$, "Light Flag#"; set .@flagnum$, "_2";
+				ctf_unlockflag(@CTF_arena,1,2); 
+				break;
+			case 3:	set .@flagname$, "Light Flag#"; set .@flagnum$, "_3";
+				ctf_unlockflag(@CTF_arena,1,3); 
+				break;
+			case 4:	set .@flagname$, "Dark Flag#"; set .@flagnum$, "_1";
+				ctf_unlockflag(@CTF_arena,2,1); 
+				break;
+			case 5:	set .@flagname$, "Dark Flag#"; set .@flagnum$, "_2";
+				ctf_unlockflag(@CTF_arena,2,2); 
+				break;
+			case 6:	set .@flagname$, "Dark Flag#"; set .@flagnum$, "_3";
+				ctf_unlockflag(@CTF_arena,2,3); 
+				break;
+			default:
+		}
+
+		if(@CTF_flag){
+			set .@flagdisplayname$, .@flagname$+(@CTF_arena+1)+.@flagnum$;
+			movenpc .@flagdisplayname$, .@mapx, .@mapy;
+			set @CTF_flag, 0;
+		}
+
+		//get a new member to replace this one
+		if(@CTF_team==1)
+			warp_arena_queue(3,@CTF_arena,.@mapname$,94,176,-getcharid(1));
+		else
+			warp_arena_queue(3,@CTF_arena,.@mapname$,94,22,-getcharid(1));
+
+		//safely leave party (changing leadership if necessary)
+		party_leave(1);
+
+	}
+
+	//clean variables (in case they are warping away)
+	set @CTF_team, 0;
+	set @CTF_flag, 0;
+	set @CTF_arena, 0;
+
+	sc_end SC_ALL;
+
+	end;
+
+OnDetectAfk:
+	getmapxy(.@mapname$, .@mapx, .@mapy, 0);
+	if(@CTF_away<3){
+		set @CTF_away, @CTF_away+1;
+		if(.@mapname$==@CTF_mapname$ && .@mapx==@CTF_mapx && .@mapy==@CTF_mapy) set @CTF_afk, @CTF_afk+1;
+		if(@CTF_away<3) addtimer 10000, "CTF_Engine::OnDetectAfk";
+	}
+
+	//if player didnt move during the 3 checks
+	if(@CTF_away>=3){
+		if(@CTF_afk>=3){
+			warp "prontera",156,173;
+			dispbottom "Capture the Flag: you were kicked for inactivity. Another player will take your spot.";
+		}
+		set @CTF_mapname$, 0; set @CTF_mapx, 0; set @CTF_mapy, 0;
+		set @CTF_away, 0; set @CTF_afk, 0;
+	}
+	end;
+
+OnPCLoadMapEvent:
+	if(@CTF_team==1 && getcharid(1)==0){
+		switch(@CTF_arena){
+		case 0: if($CTF_teamA_id[0]==0) set $CTF_teamA_id[0], party_join("leader",$CTF1_teamA_leader);
+			else party_join("party",$CTF_teamA_id[0]);
+			break;
+		case 1: if($CTF_teamA_id[1]==0) set $CTF_teamA_id[1], party_join("leader",$CTF2_teamA_leader);
+			else party_join("party",$CTF_teamA_id[1]);
+			break;
+		case 2: if($CTF_teamA_id[2]==0) set $CTF_teamA_id[2], party_join("leader",$CTF3_teamA_leader);
+			else party_join("party",$CTF_teamA_id[2]);
+			break;
+		}
+	}else if(@CTF_team==2 && getcharid(1)==0){
+		switch(@CTF_arena){
+		case 0: if($CTF_teamB_id[0]==0) set $CTF_teamB_id[0], party_join("leader",$CTF1_teamB_leader);
+			else party_join("party",$CTF_teamB_id[0]);
+			break;
+		case 1: if($CTF_teamB_id[1]==0) set $CTF_teamB_id[1], party_join("leader",$CTF2_teamB_leader);
+			else party_join("party",$CTF_teamB_id[1]);
+			break;
+		case 2: if($CTF_teamB_id[2]==0) set $CTF_teamB_id[2], party_join("leader",$CTF3_teamB_leader);
+			else party_join("party",$CTF_teamB_id[2]);
+			break;
+		}
+	}
+
+	if(@CTF_team){
+		getmapxy(@CTF_mapname$, @CTF_mapx, @CTF_mapy, 0);
+		set @CTF_away, 0; set @CTF_afk, 0; 
+		addtimer 10000, "CTF_Engine::OnDetectAfk";
+	}
+	end;
+
+}
+
+
+
+//==============================================================
+//
+// Arena Timers
+//
+//==============================================================
+
+
+//Arena 1
+//==============================================================
+
+pvp_n_1-1,0,0,4	script	CTF1_TIMER	-1,{
+end;
+
+OnTimer30000:
+	set $@CTF_times_30s[0], $@CTF_times_30s[0] + 1;
+
+	//Play for 10 minutes
+	if($@CTF_times_30s[0] < 20){
+		mapannounce "pvp_n_1-1", "Current score is: Light Team - " +$CTF_teamA_score[0]+
+			" ~ Dark Team - " +$CTF_teamB_score[0]+ " !", 0;
+		initnpctimer;
+	}else{
+		if($@CTF_times_30s[0] < 24 && $CTF_teamA_score[0]==$CTF_teamB_score[0]){
+			// sudden death: 2 more minutes
+			mapannounce "pvp_n_1-1", "This match has been going for 10 minutes. Next team to get a flag wins!", 0;
+			set $@CTF_suddendeath[0], 1;
+			initnpctimer;
+		}else{
+			// declare winner
+			mapannounce "pvp_n_1-1", "This match has been going for 10 minutes. We will now declare a winner...", 0;
+
+			if($CTF_teamA_score[0] > $CTF_teamB_score[0]){
+				// team A wins
+				donpcevent "CTF1_Check_TeamA::OnTeamWin";
+			}else if($CTF_teamA_score[0] < $CTF_teamB_score[0]){
+				// team B wins
+				donpcevent "CTF1_Check_TeamB::OnTeamWin";
+			}else{
+				// tie
+				mapannounce "pvp_n_1-1", "This match is a tie! No team is therefore qualified for a prize, sorry :(", 0;
+				set $@CTF_matchover[0], 1;
+				sleep 5000;
+				mapwarp "pvp_n_1-1","prontera",156,173;
+				sleep 10000;
+				donpcevent "CTF_Engine::OnRestart1";
+			}
+		}
+	}
+	end;
+}
+
+
+//Arena 2
+//==============================================================
+
+pvp_n_2-1,0,0,4	script	CTF2_TIMER	-1,{
+end;
+
+OnTimer30000:
+	set $@CTF_times_30s[1], $@CTF_times_30s[1] + 1;
+
+	//Play for 10 minutes
+	if($@CTF_times_30s[1] < 20){
+		mapannounce "pvp_n_2-1", "Current score is: Light Team - " +$CTF_teamA_score[1]+
+			" ~ Dark Team - " +$CTF_teamB_score[1]+ " !", 0;
+		initnpctimer;
+	}else{
+		if($@CTF_times_30s[1] < 24 && $CTF_teamA_score[1]==$CTF_teamB_score[1]){
+			// sudden death: 2 more minutes
+			mapannounce "pvp_n_2-1", "This match has been going for 10 minutes. Next team to get a flag wins!", 0;
+			set $@CTF_suddendeath[1], 1;
+			initnpctimer;
+		}else{
+			// declare winner
+			mapannounce "pvp_n_2-1", "This match has been going for 10 minutes. We will now declare a winner...", 0;
+
+			if($CTF_teamA_score[1] > $CTF_teamB_score[1]){
+				// team A wins
+				donpcevent "CTF2_Check_TeamA::OnTeamWin";
+			}else if($CTF_teamA_score[1] < $CTF_teamB_score[1]){
+				// team B wins
+				donpcevent "CTF2_Check_TeamB::OnTeamWin";
+			}else{
+				// tie
+				mapannounce "pvp_n_2-1", "This match is a tie! No team is therefore qualified for a prize, sorry :(", 0;
+				set $@CTF_matchover[1], 1;
+				sleep 5000;
+				mapwarp "pvp_n_2-1","prontera",156,173;
+				sleep 10000;
+				donpcevent "CTF_Engine::OnRestart2";
+			}
+		}
+	}
+	end;
+}
+
+
+//Arena 3
+//==============================================================
+
+pvp_n_3-1,0,0,4	script	CTF3_TIMER	-1,{
+end;
+
+OnTimer30000:
+	set $@CTF_times_30s[2], $@CTF_times_30s[2] + 1;
+
+	//Play for 10 minutes
+	if($@CTF_times_30s[2] < 20){
+		mapannounce "pvp_n_3-1", "Current score is: Light Team - " +$CTF_teamA_score[2]+
+			" ~ Dark Team - " +$CTF_teamB_score[2]+ " !", 0;
+		initnpctimer;
+	}else{
+		if($@CTF_times_30s[2] < 24 && $CTF_teamA_score[2]==$CTF_teamB_score[2]){
+			// sudden death: 2 more minutes
+			mapannounce "pvp_n_3-1", "This match has been going for 10 minutes. Next team to get a flag wins!", 0;
+			set $@CTF_suddendeath[2], 1;
+			initnpctimer;
+		}else{
+			// declare winner
+			mapannounce "pvp_n_3-1", "This match has been going for 10 minutes. We will now declare a winner...", 0;
+
+			if($CTF_teamA_score[2] > $CTF_teamB_score[2]){
+				// team A wins
+				donpcevent "CTF3_Check_TeamA::OnTeamWin";
+			}else if($CTF_teamA_score[2] < $CTF_teamB_score[2]){
+				// team B wins
+				donpcevent "CTF3_Check_TeamB::OnTeamWin";
+			}else{
+				// tie
+				mapannounce "pvp_n_3-1", "This match is a tie! No team is therefore qualified for a prize, sorry :(", 0;
+				set $@CTF_matchover[2], 1;
+				sleep 5000;
+				mapwarp "pvp_n_3-1","prontera",156,173;
+				sleep 10000;
+				donpcevent "CTF_Engine::OnRestart3";
+			}
+		}
+	}
+	end;
+}
+
+
+
+//==============================================================
+//
+// Team A's Base (Light)
+//
+//==============================================================
+
+
+//Flag 1
+//==============================================================
+
+pvp_n_1-1,87,182,4	script	Light Flag#1_1	722,1,1,{
+
+OnTouch:
+	getmapxy(.@player_mapname$,.@player_mapx,.@player_mapy,0);
+	getmapxy(.@npc_mapname$,.@npc_mapx,.@npc_mapy,1,strnpcinfo(0));
+	set .@distx, .@player_mapx - .@npc_mapx;
+	set .@disty, .@player_mapy - .@npc_mapy;
+	if(.@distx > 2 || .@distx < -2 || .@disty > 2 || .@disty < -2) end;
+
+	if(@CTF_flag!=0){
+		npctalk "You're already carrying 1 flag!";
+		end;
+	}
+
+	if(@CTF_team==1 && .@npc_mapx==87 && .@npc_mapy==182) end;
+
+	if(ctf_lockflag(@CTF_arena,1,1)==0){
+		npctalk "Someone got it first!";
+		end;
+	}
+
+	if(@CTF_team==1){
+		//same team gets it -> flag goes to base
+		//move it somewhere else first temporarily
+		movenpc strnpcinfo(0),0,0;
+		sleep2 5000;
+		//bring flag home and unlock it
+		movenpc strnpcinfo(0),87,182;
+		ctf_unlockflag(@CTF_arena,1,1);
+		initnpctimer;
+		mapannounce .@npc_mapname$, $@CTF_msgA$[1], 0;
+	}else{
+		stopnpctimer;
+		//enemy team gets it -> player carries flag
+		set @CTF_flag, 1;
+		movenpc strnpcinfo(0),0,0;
+		addtimer 1000, "CTF_Engine::OnFlagCarryEfx";
+		mapannounce .@npc_mapname$, $@CTF_msgA$[2], 0;
+		sc_end SC_ALL;
+		sc_start SC_QUAGMIRE,600000,0;
+	}
+
+	//npctalk "You got me!";
+	end;
+
+OnTimer5000:
+	//specialeffect 71;
+	initnpctimer;
+	end;
+
+OnInit:
+	movenpc strnpcinfo(0),87,182;
+	initnpctimer;
+	end;
+}
+
+
+//Flag 2
+//==============================================================
+
+pvp_n_1-1,95,182,4	script	Light Flag#1_2	722,1,1,{
+
+OnTouch:
+	getmapxy(.@player_mapname$,.@player_mapx,.@player_mapy,0);
+	getmapxy(.@npc_mapname$,.@npc_mapx,.@npc_mapy,1,strnpcinfo(0));
+	set .@distx, .@player_mapx - .@npc_mapx;
+	set .@disty, .@player_mapy - .@npc_mapy;
+	if(.@distx > 2 || .@distx < -2 || .@disty > 2 || .@disty < -2) end;
+
+	if(@CTF_flag!=0){
+		npctalk "You're already carrying 1 flag!";
+		end;
+	}
+
+	if(@CTF_team==1 && .@npc_mapx==95 && .@npc_mapy==182) end;
+
+	if(ctf_lockflag(@CTF_arena,1,2)==0){
+		npctalk "Someone got it first!";
+		end;
+	}
+
+	if(@CTF_team==1){
+		//same team gets it -> flag goes to base
+		//move it somewhere else first temporarily
+		movenpc strnpcinfo(0),0,0;
+		sleep2 5000;
+		//bring flag home and unlock it
+		movenpc strnpcinfo(0),95,182;
+		ctf_unlockflag(@CTF_arena,1,2);
+		initnpctimer;
+		mapannounce .@npc_mapname$, $@CTF_msgA$[1], 0;
+	}else{
+		stopnpctimer;
+		//enemy team gets it -> player carries flag
+		set @CTF_flag, 2;
+		movenpc strnpcinfo(0),0,0;
+		addtimer 1000, "CTF_Engine::OnFlagCarryEfx";
+		mapannounce .@npc_mapname$, $@CTF_msgA$[2], 0;
+		sc_end SC_ALL;
+		sc_start SC_QUAGMIRE,600000,0;
+	}
+
+	//npctalk "You got me!";
+	end;
+
+OnTimer5000:
+	//specialeffect 71;
+	initnpctimer;
+	end;
+
+OnInit:
+	movenpc strnpcinfo(0),95,182;
+	initnpctimer;
+	end;
+}
+
+
+//Flag 3
+//==============================================================
+
+pvp_n_1-1,102,182,4	script	Light Flag#1_3	722,1,1,{
+
+OnTouch:
+	getmapxy(.@player_mapname$,.@player_mapx,.@player_mapy,0);
+	getmapxy(.@npc_mapname$,.@npc_mapx,.@npc_mapy,1,strnpcinfo(0));
+	set .@distx, .@player_mapx - .@npc_mapx;
+	set .@disty, .@player_mapy - .@npc_mapy;
+	if(.@distx > 2 || .@distx < -2 || .@disty > 2 || .@disty < -2) end;
+
+	if(@CTF_flag!=0){
+		npctalk "You're already carrying 1 flag!";
+		end;
+	}
+
+	if(@CTF_team==1 && .@npc_mapx==102 && .@npc_mapy==182) end;
+
+	if(ctf_lockflag(@CTF_arena,1,3)==0){
+		npctalk "Someone got it first!";
+		end;
+	}
+
+	if(@CTF_team==1){
+		//same team gets it -> flag goes to base
+		//move it somewhere else first temporarily
+		movenpc strnpcinfo(0),0,0;
+		sleep2 5000;
+		//bring flag home and unlock it
+		movenpc strnpcinfo(0),102,182;
+		ctf_unlockflag(@CTF_arena,1,3);
+		initnpctimer;
+		mapannounce .@npc_mapname$, $@CTF_msgA$[1], 0;
+	}else{
+		stopnpctimer;
+		//enemy team gets it -> player carries flag
+		set @CTF_flag, 3;
+		movenpc strnpcinfo(0),0,0;
+		addtimer 1000, "CTF_Engine::OnFlagCarryEfx";
+		mapannounce .@npc_mapname$, $@CTF_msgA$[2], 0;
+		sc_end SC_ALL;
+		sc_start SC_QUAGMIRE,600000,0;
+	}
+
+	//npctalk "You got me!";
+	end;
+
+OnTimer5000:
+	//specialeffect 71;
+	initnpctimer;
+	end;
+
+OnInit:
+	movenpc strnpcinfo(0),102,182;
+	initnpctimer;
+	end;
+}
+
+
+//Checkpoint
+//==============================================================
+
+pvp_n_1-1,95,174,4	script	CheckPoint::CTF1_Check_TeamA	1002,1,1,{
+
+OnTouch:
+   if(@CTF_team==1 && $@CTF_matchover[@CTF_arena]==0){
+	getmapxy(.@player_mapname$,.@player_mapx,.@player_mapy,0);
+	getmapxy(.@npc_mapname$,.@npc_mapx,.@npc_mapy,1,strnpcinfo(3));
+	set .@distx, .@player_mapx - .@npc_mapx;
+	set .@disty, .@player_mapy - .@npc_mapy;
+	if(.@distx > 3 || .@distx < -3 || .@disty > 3 || .@disty < -3) end;
+
+	if(@CTF_flag>=4 && @CTF_flag<=6){
+		set @CTF_flag, 0;
+		set $CTF_teamA_score[@CTF_arena], $CTF_teamA_score[@CTF_arena] + 1;
+		mapannounce .@npc_mapname$, $@CTF_msgA$[3], 0;
+
+		sc_end SC_QUAGMIRE;
+		ctf_unlockflag(0,0,0); //tell src that player isnt holding flag anymore
+
+		if($CTF_teamA_score[@CTF_arena]==3 || $@CTF_suddendeath[@CTF_arena]==1){
+OnTeamWin:		// get mapname?
+			if(.@npc_mapname$=="")
+				getmapxy(.@npc_mapname$,.@npc_mapx,.@npc_mapy,1,strnpcinfo(3));
+
+			// get arena
+			if(.@npc_mapname$=="pvp_n_1-1") set .@CTF_arena, 0;
+			else if(.@npc_mapname$=="pvp_n_2-1") set .@CTF_arena, 1;
+			else if(.@npc_mapname$=="pvp_n_3-1") set .@CTF_arena, 2;
+
+			// finish game
+			mapannounce .@npc_mapname$, $@CTF_msgA$[4], 0;
+			set $@CTF_matchover[.@CTF_arena], 1;
+			stopnpctimer "CTF"+.@CTF_arena+"_TIMER";
+			sleep2 5000;
+			warpparty "lhz_cube",67,74,$CTF_teamA_id[.@CTF_arena];
+			sleep 5000;
+			mapwarp .@npc_mapname$,"prontera",156,173;
+			sleep 10000;
+			donpcevent "CTF_Engine::OnRestart"+(.@CTF_arena+1);
+			end;
+		}
+	}
+   }
+
+   end;
+
+}
+
+
+
+//==============================================================
+//
+// Team B's Base (Dark)
+//
+//==============================================================
+
+
+//Flag 4
+//==============================================================
+
+pvp_n_1-1,94,19,4	script	Dark Flag#1_1	722,1,1,{
+
+OnTouch:
+	getmapxy(.@player_mapname$,.@player_mapx,.@player_mapy,0);
+	getmapxy(.@npc_mapname$,.@npc_mapx,.@npc_mapy,1,strnpcinfo(0));
+	set .@distx, .@player_mapx - .@npc_mapx;
+	set .@disty, .@player_mapy - .@npc_mapy;
+	if(.@distx > 2 || .@distx < -2 || .@disty > 2 || .@disty < -2) end;
+
+	if(@CTF_flag!=0){
+		npctalk "You're already carrying 1 flag!";
+		end;
+	}
+
+	if(@CTF_team==2 && .@npc_mapx==94 && .@npc_mapy==19) end;
+
+	if(ctf_lockflag(@CTF_arena,2,1)==0){
+		npctalk "Someone got it first!";
+		end;
+	}
+
+	if(@CTF_team==2){
+		//same team gets it -> flag goes to base
+		//move it somewhere else first temporarily
+		movenpc strnpcinfo(0),0,0;
+		sleep2 5000;
+		//bring flag home and unlock it
+		movenpc strnpcinfo(0),94,19;
+		ctf_unlockflag(@CTF_arena,2,1);
+		initnpctimer;
+		mapannounce .@npc_mapname$, $@CTF_msgB$[1], 0;
+	}else{
+		stopnpctimer;
+		//enemy team gets it -> player carries flag
+		set @CTF_flag, 4;
+		movenpc strnpcinfo(0),0,0;
+		addtimer 1000, "CTF_Engine::OnFlagCarryEfx";
+		mapannounce .@npc_mapname$, $@CTF_msgB$[2], 0;
+		sc_end SC_ALL;
+		sc_start SC_QUAGMIRE,600000,0;
+	}
+
+	//npctalk "You got me!";
+	end;
+
+OnTimer5000:
+	//specialeffect 71;
+	initnpctimer;
+	end;
+
+OnInit:
+	movenpc strnpcinfo(0),94,19;
+	initnpctimer;
+	end;
+}
+
+
+//Flag 5
+//==============================================================
+
+pvp_n_1-1,87,19,4	script	Dark Flag#1_2	722,1,1,{
+
+OnTouch:
+	getmapxy(.@player_mapname$,.@player_mapx,.@player_mapy,0);
+	getmapxy(.@npc_mapname$,.@npc_mapx,.@npc_mapy,1,strnpcinfo(0));
+	set .@distx, .@player_mapx - .@npc_mapx;
+	set .@disty, .@player_mapy - .@npc_mapy;
+	if(.@distx > 2 || .@distx < -2 || .@disty > 2 || .@disty < -2) end;
+
+	if(@CTF_flag!=0){
+		npctalk "You're already carrying 1 flag!";
+		end;
+	}
+
+	if(@CTF_team==2 && .@npc_mapx==87 && .@npc_mapy==19) end;
+
+	if(ctf_lockflag(@CTF_arena,2,2)==0){
+		npctalk "Someone got it first!";
+		end;
+	}
+
+	if(@CTF_team==2){
+		//same team gets it -> flag goes to base
+		//move it somewhere else first temporarily
+		movenpc strnpcinfo(0),0,0;
+		sleep2 5000;
+		//bring flag home and unlock it
+		movenpc strnpcinfo(0),87,19;
+		ctf_unlockflag(@CTF_arena,2,2);
+		initnpctimer;
+		mapannounce .@npc_mapname$, $@CTF_msgB$[1], 0;
+	}else{
+		stopnpctimer;
+		//enemy team gets it -> player carries flag
+		set @CTF_flag, 5;
+		movenpc strnpcinfo(0),0,0;
+		addtimer 1000, "CTF_Engine::OnFlagCarryEfx";
+		mapannounce .@npc_mapname$, $@CTF_msgB$[2], 0;
+		sc_end SC_ALL;
+		sc_start SC_QUAGMIRE,600000,0;
+	}
+
+	//npctalk "You got me!";
+	end;
+
+OnTimer5000:
+	//specialeffect 71;
+	initnpctimer;
+	end;
+
+OnInit:
+	movenpc strnpcinfo(0),87,19;
+	initnpctimer;
+	end;
+}
+
+
+//Flag 6
+//==============================================================
+
+pvp_n_1-1,101,19,4	script	Dark Flag#1_3	722,1,1,{
+
+OnTouch:
+	getmapxy(.@player_mapname$,.@player_mapx,.@player_mapy,0);
+	getmapxy(.@npc_mapname$,.@npc_mapx,.@npc_mapy,1,strnpcinfo(0));
+	set .@distx, .@player_mapx - .@npc_mapx;
+	set .@disty, .@player_mapy - .@npc_mapy;
+	if(.@distx > 2 || .@distx < -2 || .@disty > 2 || .@disty < -2) end;
+
+	if(@CTF_flag!=0){
+		npctalk "You're already carrying 1 flag!";
+		end;
+	}
+
+	if(@CTF_team==2 && .@npc_mapx==101 && .@npc_mapy==19) end;
+
+	if(ctf_lockflag(@CTF_arena,2,3)==0){
+		npctalk "Someone got it first!";
+		end;
+	}
+
+	if(@CTF_team==2){
+		//same team gets it -> flag goes to base
+		//move it somewhere else first temporarily
+		movenpc strnpcinfo(0),0,0;
+		sleep2 5000;
+		//bring flag home and unlock it
+		movenpc strnpcinfo(0),101,19;
+		ctf_unlockflag(@CTF_arena,2,3);
+		initnpctimer;
+		mapannounce .@npc_mapname$, $@CTF_msgB$[1], 0;
+	}else{
+		stopnpctimer;
+		//enemy team gets it -> player carries flag
+		set @CTF_flag, 6;
+		movenpc strnpcinfo(0),0,0;
+		addtimer 1000, "CTF_Engine::OnFlagCarryEfx";
+		mapannounce .@npc_mapname$, $@CTF_msgB$[2], 0;
+		sc_end SC_ALL;
+		sc_start SC_QUAGMIRE,600000,0;
+	}
+
+	//npctalk "You got me!";
+	end;
+
+OnTimer5000:
+	//specialeffect 71;
+	initnpctimer;
+	end;
+
+OnInit:
+	movenpc strnpcinfo(0),101,19;
+	initnpctimer;
+	end;
+}
+
+
+//Checkpoint
+//==============================================================
+
+pvp_n_1-1,94,27,4	script	CheckPoint::CTF1_Check_TeamB	1242,1,1,{
+
+OnTouch:
+   if(@CTF_team==2 && $@CTF_matchover[@CTF_arena]==0){
+	getmapxy(.@player_mapname$,.@player_mapx,.@player_mapy,0);
+	getmapxy(.@npc_mapname$,.@npc_mapx,.@npc_mapy,1,strnpcinfo(3));
+	set .@distx, .@player_mapx - .@npc_mapx;
+	set .@disty, .@player_mapy - .@npc_mapy;
+	if(.@distx > 3 || .@distx < -3 || .@disty > 3 || .@disty < -3) end;
+
+	if(@CTF_flag>=1 && @CTF_flag<=3){
+		set @CTF_flag, 0;
+		set $CTF_teamB_score[@CTF_arena], $CTF_teamB_score[@CTF_arena] + 1;
+		mapannounce .@npc_mapname$, $@CTF_msgB$[3], 0;
+
+		sc_end SC_QUAGMIRE;
+		ctf_unlockflag(0,0,0); //tell src that player isnt holding flag anymore
+
+		if($CTF_teamB_score[@CTF_arena]==3 || $@CTF_suddendeath[@CTF_arena]==1){
+OnTeamWin:		// get mapname?
+			if(.@npc_mapname$=="")
+				getmapxy(.@npc_mapname$,.@npc_mapx,.@npc_mapy,1,strnpcinfo(3));
+
+			// get arena
+			if(.@npc_mapname$=="pvp_n_1-1") set .@CTF_arena, 0;
+			else if(.@npc_mapname$=="pvp_n_2-1") set .@CTF_arena, 1;
+			else if(.@npc_mapname$=="pvp_n_3-1") set .@CTF_arena, 2;
+
+			// finish game
+			mapannounce .@npc_mapname$, $@CTF_msgB$[4], 0;
+			set $@CTF_matchover[.@CTF_arena], 1;
+			stopnpctimer "CTF"+.@CTF_arena+"_TIMER";
+			sleep2 5000;
+			warpparty "lhz_cube",67,74,$CTF_teamB_id[.@CTF_arena];
+			sleep 5000;
+			mapwarp .@npc_mapname$,"prontera",156,173;
+			sleep 10000;
+			donpcevent "CTF_Engine::OnRestart"+(.@CTF_arena+1);
+			end;
+		}
+	}
+   }
+
+   end;
+
+}
+
+
+
+//==============================================================
+//
+// Prize Room
+//
+//==============================================================
+
+lhz_cube,67,74,3	script	winnerPrize#CTF	818,2,2,{
+
+	sc_end SC_ALL;
+
+	mes "[Winner Prize]";
+	mes "Congratulations, you're the winners of Capture the Flag! Here's your prize ~ ";
+	next;
+	getitem 22555,2;
+	percentheal 100,100;
+	if(@CTF_x) warp @CTF_city$,@CTF_x,@CTF_y;
+	else warp "prontera",156,173;
+	set @CTF_city$, 0; set @CTF_x, 0; set @CTF_y, 0;
+	end;
+}
+
+
+
+//==============================================================
+//
+// Equipment Repair
+//
+//==============================================================
+
+pvp_n_1-1,78,182,4	script	Repairman#CTF1_A	86,{
+	if(@CTF_team==2){
+		mes "[Arena Repairman]";
+		mes "Did you even think I'd betray my team?";
+		mes "I will not repair your equipment!";
+		close;
+	}else{
+		callfunc "allrepairmain";
+	}
+	end;
+}
+
+pvp_n_1-1,110,19,4	script	Repairman#CTF1_B	86,{
+	if(@CTF_team==1){
+		mes "[Arena Repairman]";
+		mes "Did you even think I'd betray my team?";
+		mes "I will not repair your equipment!";
+		close;
+	}else{
+		callfunc "allrepairmain";
+	}
+}
+
+//==============================================================
+//
+// Duplicates for Multiple rooms
+//
+//==============================================================
+
+pvp_n_2-1,87,182,4	duplicate(Light Flag#1_1)	Light Flag#2_1	722,1,1
+pvp_n_2-1,95,182,4	duplicate(Light Flag#1_2)	Light Flag#2_2	722,1,1
+pvp_n_2-1,102,182,4	duplicate(Light Flag#1_3)	Light Flag#2_3	722,1,1
+pvp_n_2-1,94,19,4	duplicate(Dark Flag#1_1)	Dark Flag#2_1	722,1,1
+pvp_n_2-1,87,19,4	duplicate(Dark Flag#1_2)	Dark Flag#2_2	722,1,1
+pvp_n_2-1,101,19,4	duplicate(Dark Flag#1_3)	Dark Flag#2_3	722,1,1
+pvp_n_2-1,95,174,4	duplicate(CTF1_Check_TeamA)	CheckPoint::CTF2_Check_TeamA	1002,1,1
+pvp_n_2-1,94,27,4	duplicate(CTF1_Check_TeamB)	CheckPoint::CTF2_Check_TeamB	1242,1,1
+pvp_n_2-1,78,182,4	duplicate(Repairman#CTF1_A)	Repairman#CTF2_A	86
+pvp_n_2-1,110,19,4	duplicate(Repairman#CTF1_B)	Repairman#CTF2_B	86
+
+pvp_n_3-1,87,182,4	duplicate(Light Flag#1_1)	Light Flag#3_1	722,1,1
+pvp_n_3-1,95,182,4	duplicate(Light Flag#1_2)	Light Flag#3_2	722,1,1
+pvp_n_3-1,102,182,4	duplicate(Light Flag#1_3)	Light Flag#3_3	722,1,1
+pvp_n_3-1,94,19,4	duplicate(Dark Flag#1_1)	Dark Flag#3_1	722,1,1
+pvp_n_3-1,87,19,4	duplicate(Dark Flag#1_2)	Dark Flag#3_2	722,1,1
+pvp_n_3-1,101,19,4	duplicate(Dark Flag#1_3)	Dark Flag#3_3	722,1,1
+pvp_n_3-1,95,174,4	duplicate(CTF1_Check_TeamA)	CheckPoint::CTF3_Check_TeamA	1002,1,1
+pvp_n_3-1,94,27,4	duplicate(CTF1_Check_TeamB)	CheckPoint::CTF3_Check_TeamB	1242,1,1
+pvp_n_3-1,78,182,4	duplicate(Repairman#CTF1_A)	Repairman#CTF3_A	86
+pvp_n_3-1,110,19,4	duplicate(Repairman#CTF1_B)	Repairman#CTF3_B	86
+

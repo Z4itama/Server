@@ -1,0 +1,243 @@
+//Scripter application XileRO Private Server
+//By Keira
+//Changelog 09/08/13
+
+payon,149,219,4	script	Wall of Death	748,{
+
+if ($@startbump == 1) goto play_bump;
+
+Bumper:
+	if (getgmlevel() >= 79) goto GMBump;
+		mes "[Bumper]";
+		mes "Go away!";
+	close;
+	
+GMBump:
+		mes "[Bumper]";
+		mes "^FF0000~Hi GM " + strcharinfo(0) + ", Wanna play today?~^000000";
+		switch(select("Start Event:Check Prize:Set Prize:Cancel")) {
+case 1:
+		if(getmapusers("force_3-2") >= 1){
+			mes "There's a game going on right now";
+			}
+		if(getmapusers("force_3-2") == 0){
+		next;
+		mes "[Bumper]";
+		mes "^FF0000Lets Roll!^000000";
+		close2;
+		goto bump_announce;
+		}
+case 2:
+		next;
+		mes "[Bumper]";
+		mes "^FF0000~The current prize is^000000 ^008000"+ $bump_item +" "+ getitemname($bump_item_id) +".^000000";
+		next;
+		goto GMBump;
+case 3:
+		next;
+		mes "[Bumper]";
+		mes "^FF0000~Input the prize!.~^000000";
+		input $bump_item_id;
+		next;
+		mes "[Bumper]";
+		mes "^FF0000~How many if this item should I give away?~^000000";
+		input $bump_item;
+		next;
+		mes "[Bumper]";
+		mes "^FF0000~The prize is^000000 ^008000"+ $bump_item +" "+ getitemname($bump_item_id) +"^000000? ^FF0000Great.~^000000";
+		next;
+		goto GMBump;
+case 4:
+		next;
+		mes "[Bumper]";
+		mes "Okay";
+		close;
+}
+
+bump_announce:
+		announce "A bumper event has started!",bc_blue;
+		hideonnpc "Bumper Master";
+		initnpctimer;
+		set $@startbump,1;
+		end;
+OnTimer10000:
+		announce "The event will begin soon! Use the Event Warper in Payon",bc_blue;
+		end;
+OnTimer30000:
+		announce "Your player can't have items, so might be easier to use a naked character!",bc_blue;
+		end;
+OnTimer40000:
+		announce "Hurry up!, Remember you should empty your inventory before entering the Arena! You may use @storeall",bc_blue;
+		end;
+OnTimer90000:
+		announce "Lets go lets go! Last call for Bumper Event! Use the Event Warper in Payon! ",bc_blue;
+		end;
+OnTimer120000:
+		announce "Lets get it on! Game!",bc_blue;
+		donpcevent "Kicker::OnPCDieEvent";
+		donpcevent "Kicker::OnPCLogoutEvent";
+		donpcevent "Bumper Master::OnEnable";
+		end;
+play_bump:
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i,.@i + 1 ){
+		if( getiteminfo( @inventorylist_id[.@i],5 ) > 0 ){
+			set .@Amount,.@Amount + 1;
+		}
+	}
+	if(.@Amount>0 && getgmlevel() <= 79){
+		mes "Remove all your items in your inventory and all your equipment to participate in the event. Use @storeall";
+		close;
+	}
+	else{
+	warp "force_3-2",175,26;
+	getitem 1161,1;////////////////////////item here
+	nude;
+	}
+}
+force_3-2,186,38,5	script	Bumper Master	715,{
+	mes "[Master Bumper]";
+	mes "Please tell me your name.";
+	next;
+	input .@name$;
+	if(.@name$ != strcharinfo(0)) {
+		mes "[Master Bumper]";
+		mes "Are you sure thats your character name?";
+		close;
+	}
+	mes "[Master Bumper]";
+	mes "Congrats. You've won!";
+	close2;
+	announce "Master Bumper: We have a winner! "+.@name$+".",0;
+	getitem $bump_item_id,$bump_item;
+	delitem 1161,1;///////////////////////////weapon here
+	atcommand "@pvpoff";
+	warp "payon",145,219;
+	hideonnpc "Bumper Master";
+	end;
+	
+	
+	OnEnable:
+	mapannounce "force_3-2","Bumper: Rules of the game: No Shields, No Armors, Just use the given weapon to you",0;
+	sleep2 5000;
+	mapannounce "force_3-2","Bumper: Check your inventory and Equip the given weapon!",0;
+	sleep2 5000;
+	mapannounce "force_3-2","Bumper: Gameplay: You just normal hit your opponent with the given weapon until he knockbacks to the wall.",0;
+	sleep2 5000;
+	mapannounce "force_3-2","Bumper: When you touch the wall you lose and get sent back to town! so stay away from the walls!",0;
+	sleep2 5000;
+	mapannounce "force_3-2","Bumper: And don't mind killing each other, you'll get ressurected anyway.",0;
+	sleep2 5000;
+	mapannounce "force_3-2","Bumper: 5.",0;
+	sleep2 1000;
+	mapannounce "force_3-2","Bumper: 4.",0;
+	sleep2 1000;
+	mapannounce "force_3-2","Bumper: 3.",0;
+	sleep2 1000;
+	mapannounce "force_3-2","Bumper: 2.",0;
+	sleep2 1000;
+	mapannounce "force_3-2","Bumper: 1.",0;
+	sleep2 1000;
+	set $@startbump,0;
+	goto L_Start;
+	end;
+	
+	L_Start:
+	if(getmapusers("force_3-2") == 0){
+	hideonnpc "Bumper Master";
+	}
+	if(getmapusers("force_3-2") == 1){
+	atcommand "@pvpoff";
+	mapannounce "force_3-2","Bump Master: Come to me and tell me your name.",0;
+	hideoffnpc "Bumper Master";
+	end;
+	}
+	if(getmapusers("force_3-2") > 1) {
+		atcommand "@pvpon";
+	end;
+	}
+	
+}
+-	script	Kicker	-1,{
+	
+	OnPCDieEvent:
+	if ( strcharinfo(3) == "force_3-2" ){
+		sleep2 1000;
+		atcommand "@raisemap";
+		}
+		end;
+	OnPCLogoutEvent:
+	delitem 1161,1;//////////////////////////////weapon here
+	end;
+}
+
+///////////////////////////////////////////North Guards//////////////////////////////////////////
+force_3-2,189,41,5	script	Referee	708,31,1,{
+	end;
+OnTouch:
+	if($@startbump == 0){
+	delitem 1161,1;/////////////////////////weapon here
+	warp "payon",145,219;
+	announce strcharinfo(0) + " Gets knocked out!",bc_blue;
+	}
+	if(getmapusers("force_3-2") == 1){
+	mapannounce "force_3-2","Bump Master: Come to me and tell me your name.",0;
+	hideoffnpc "Bumper Master";
+	}
+	close;
+	}
+///////////////////////////////////////////West Guards//////////////////////////////////////////
+force_3-2,158,41,5	script	Referee	708,1,31,{
+	end;
+OnTouch:
+	if($@startbump == 0){
+	delitem 1161,1;////////////////////////////weapon here
+	warp "payon",145,219;
+	announce strcharinfo(0) + " Gets knocked out!",bc_blue;
+	}
+	if(getmapusers("force_3-2") == 1){
+	mapannounce "force_3-2","Bump Master: Come to me and tell me your name.",0;
+	hideoffnpc "Bumper Master";
+	}
+	close;
+	}
+///////////////////////////////////////////South Guards//////////////////////////////////////////
+force_3-2,158,10,5	script	Referee	708,31,1,{
+	end;
+OnTouch:
+	if($@startbump == 0){
+	delitem 1161,1;/////////////////////weapon here
+	warp "payon",145,219;
+	announce strcharinfo(0) + " Gets knocked out!",bc_blue;
+	}
+	if(getmapusers("force_3-2") == 1){
+	mapannounce "force_3-2","Bump Master: Come to me and tell me your name.",0;
+	hideoffnpc "Bumper Master";
+	}
+	close;
+	}
+///////////////////////////////////////////East Guards//////////////////////////////////////////
+force_3-2,189,10,5	script	Referee	708,1,31,{
+	end;
+OnTouch:
+	if($@startbump == 0){
+	delitem 1161,1;////////////////////weapon here
+	warp "payon",145,219;
+	announce strcharinfo(0) + " Gets knocked out!",bc_blue;
+	}
+	if(getmapusers("force_3-2") == 1){
+	mapannounce "force_3-2","Bump Master: Come to me and tell me your name.",0;
+	hideoffnpc "Bumper Master";
+	}
+	close;
+	}
+/////////////////////////////////////////////////////////////////////////////////////////////////
+	//mapflags
+force_3-2	mapflag	nowarp
+force_3-2	mapflag	nowarpto
+force_3-2	mapflag	noteleport
+force_3-2	mapflag	nosave
+force_3-2	mapflag	nomemo
+force_3-2	mapflag	nobranch
+force_3-2	mapflag	nocommand	80
+force_3-2	mapflag	restricted	6

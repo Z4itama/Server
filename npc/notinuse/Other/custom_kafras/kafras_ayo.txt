@@ -1,0 +1,22 @@
+ayothaya,186,142,2	script	Kafra::kaf_ayothaya	117,{
+	cutin "kafra_01",2;
+	cleararray @wrpC$[0],"",getarraysize(@wrpC$);
+	setarray @wrpD$[0], "Geffen", "Prontera", "Morroc", "Al De Baran";
+	setarray @wrpP[0], 1200, 1200, 1200, 1800;
+	set @wrpC$[0], @wrpD$[0]+" -> "+@wrpP[0];
+	set @wrpC$[1], @wrpD$[1]+" -> "+@wrpP[1];
+	set @wrpC$[2], @wrpD$[2]+" -> "+@wrpP[2];
+	set @wrpC$[3], @wrpD$[3]+" -> "+@wrpP[3];
+	set @wrpC$[4], "Cancel";
+	callfunc "F_Kafra",0,0,1;
+
+	M_Save:
+		savepoint "ayothaya",174,139;
+		callfunc "F_KafEnd",0,1;
+}
+
+ayothaya,149,173,4	duplicate(Kriemhild)	Kriemhild#p1-2	722
+ayothaya,146,173,4	duplicate(Swanhild)	Swanhild#p2-2	722
+ayothaya,143,173,4	duplicate(Fadhgridh)	Fadhgridh#p3-2	722
+ayothaya,155,173,4	duplicate(Skoegul)	Skoegul#p4-2	722
+ayothaya,152,173,4	duplicate(Gondul)	Gondul#p5-2	722

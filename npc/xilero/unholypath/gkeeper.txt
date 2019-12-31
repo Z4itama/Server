@@ -1,0 +1,527 @@
+//=================eAthena Script============================
+// Written by: Kikuko
+//=================Script Name===============================
+// Gatekeeper - for XileRO
+//=================Script Defenition=========================
+// Quest NPC for Gate bosses
+//=================Version History===========================
+//1.0 - Done. Still needs to be tested.
+
+job_thief1.gat,63,330,6	script	Gatekeeper#devil::Gate1	791,{
+
+set @bossname$, "Shax"; //name of the boss
+set @bossid, 4999; //the id of the boss monster
+set @bossx, 27; //x coord where the boss will be spawned
+set @bossy, 167; //y coord where the boss will be spawned
+set @warpx, 76; //x coord where the party will be warped to
+set @warpy, 176; //y coord where the party will be warped to
+
+mes "[Gatekeeper]";
+mes "I am the keeper of a sealed gate, which holds 1 of 5 Demons who seek to destroy the world.";
+mes "The demon will not be easy to defeat.";
+next;
+mes "[Gatekeeper]";
+mes "Soon, the gate will be open. I will let all who ask, pass to face it.";
+next;
+mes "[Gatekeeper]";
+mes "This gate holds a demon that has many slaves that fight for it.";
+mes "You have fought the likes of its slaves in oder to reach me.";
+next;
+mes "[Gatekeeper]";
+mes "To defeat the demon you must control his slaves.";
+mes "Don't let them over run you, or all is lost.";
+next;
+if ($@bossnpc1used == 1) goto L_Inuse;
+if ($@boss1time < 60) goto L_Nottime;
+if (getareausers($@mapnameboss1$,0,130,90,200) > 15) goto L_mapinuse;
+mes "[Gatekeeper]";
+mes "Do you wish to enter the gate?";
+next;
+menu "Yes, I wish to enter the gate.",L_entergate,"I don't wish to risk my life this time.",L_leave;
+L_entergate:
+set $@bossnpc1used, 1;
+mes "[Gatekeeper]";
+mes "Prepear yourself, death is the only way back.";
+close2;
+if (getareausers($@mapnameboss1$,0,130,90,200) <= 0) { set $@boss1use, 0; areakillmonsters 423,0,130,90,200; }
+if ($@boss1use == 1) goto L_warp;
+set $@boss1use, 1;	
+monster $@mapnameboss1$,@bossx,@bossy,@bossname$,@bossid,1,"OnBoss1Killed::OnMobDead"; 	
+L_warp:
+warp $@mapnameboss1$,@warpx,@warpy;
+set $@bossnpc1used, 0;
+end;
+
+L_leave:
+mes "[Gatekeeper]";
+mes "Very well...away with you.";
+close;	
+L_Inuse:
+mes "[Gatekeeper]";
+mes "I am sorry but someone is currently talking to me.";
+close;
+L_Nottime:
+mes "[Gatekeeper]";
+mes "The demon must gather its engery before trying to attack this world again.";
+set @gatetime, 60 - $@boss1time;
+mes "Its power will be fully restored in " + @gatetime + " minutes.";
+mes "Please speak to me again when the time has come.";
+close;
+L_mapinuse:
+mes "[Gatekeeper]";
+mes "The gate can only hold at most 15 players at a time.";
+mes "Talk to me again later.";
+close;
+
+OnTimer30000://every 30seconds
+set $@bossnpc1used, 0;
+end;	
+OnTimer60000: //every min
+initnpctimer;
+set $@bossnpc1used, 0;
+if ($@boss1use == 1) goto L_timeskip;
+if ($@boss1time < 60) set $@boss1time, $@boss1time+1;
+if (mobcount($@mapnameboss1$,"OnBoss1Killed::OnMobDead") == 0) areawarp $@mapnameboss1$,0,130,90,200,"izlude.gat",70,180;
+L_timeskip:	
+end;	
+OnInit:
+initnpctimer;
+set $@mapnameboss1$, "sec_in02.gat"; //map where the boss and party will be spawned in
+set $@bossnpc1used, 0;
+set $@boss1use, 0;
+set $@boss1time, 0;
+end;
+}
+
+//boss script, change map name to the one where the boss is spawned to
+sec_in02.gat,0,0,0	script	OnBoss1Killed	-1,{
+
+OnMobDead:
+set $@boss1use, 0;
+set $@boss1time, 0;
+end;
+}
+
+job_thief1.gat,132,329,6	script	Gatekeeper#mime::Gate2	791,{
+
+set @bossname$, "Raum"; //name of the boss
+set @bossid, 5000; //the id of the boss monster
+set @bossx, 182; //x coord where the boss will be spawned
+set @bossy, 162; //y coord where the boss will be spawned
+set @warpx, 129; //x coord where the party will be warped to
+set @warpy, 161; //y coord where the party will be warped to
+
+mes "[Gatekeeper]";
+mes "I am the keeper of a sealed gate, which holds 1 of 5 Demons who seek to destroy the world.";
+mes "The demon will not be easy to defeat.";
+next;
+mes "[Gatekeeper]";
+mes "Soon, the gate will be open. I will let all who ask, pass to face it.";
+next;
+mes "[Gatekeeper]";
+mes "This gate holds a demon that has the most loyal slaves.";
+mes "As long as its slaves are alive, they will make sure no harm comes to their master.";
+next;
+mes "[Gatekeeper]";
+mes "To defeat the demon you must take out the slaves first.";
+mes "Time is key, take to long and you will never win.";
+next;
+if ($@bossnpc2used == 1) goto L_Inuse;
+if ($@boss2time < 60) goto L_Nottime;
+if (getareausers($@mapnameboss2$,100,120,200,200) > 15) goto L_mapinuse;
+mes "[Gatekeeper]";
+mes "Do you wish to enter the gate?";
+next;
+menu "Yes, I wish to enter the gate.",L_entergate,"I don't wish to risk my life this time.",L_leave;
+L_entergate:
+set $@bossnpc2used, 1;
+mes "[Gatekeeper]";
+mes "Prepear yourself, death is the only way back.";
+close2;
+if (getareausers($@mapnameboss2$,100,120,200,200) <= 0) { set $@boss2use, 0; areakillmonsters 423,100,120,200,200; }
+if ($@boss2use == 1) goto L_warp;
+set $@boss2use, 1;	
+monster $@mapnameboss2$,@bossx,@bossy,@bossname$,@bossid,1,"OnBoss2Killed::OnMobDead"; 	
+L_warp:
+warp $@mapnameboss2$,@warpx,@warpy;
+set $@bossnpc2used, 0;
+end;
+
+L_leave:
+mes "[Gatekeeper]";
+mes "Very well...away with you.";
+close;	
+L_Inuse:
+mes "[Gatekeeper]";
+mes "I am sorry but someone is currently talking to me.";
+close;
+L_Nottime:
+mes "[Gatekeeper]";
+mes "The demon must gather its engery before trying to attack this world again.";
+set @gatetime, 60 - $@boss2time;
+mes "Its power will be fully restored in " + @gatetime + " minutes.";
+mes "Please speak to me again when the time has come.";
+close;
+L_mapinuse:
+mes "[Gatekeeper]";
+mes "The gate can only hold at most 15 players at a time.";
+mes "Talk to me again later.";
+close;
+
+OnTimer30000://every 30seconds
+set $@bossnpc2used, 0;
+end;	
+OnTimer60000: //every min
+initnpctimer;
+set $@bossnpc2used, 0;
+if ($@boss2use == 1) goto L_timeskip;
+if ($@boss2time < 60) set $@boss2time, $@boss2time+1;
+if (mobcount($@mapnameboss2$,"OnBoss2Killed::OnMobDead") == 0) areawarp $@mapnameboss2$,100,120,200,200,"izlude.gat",70,180;
+L_timeskip:	
+end;	
+OnInit:
+initnpctimer;
+set $@mapnameboss2$, "sec_in02.gat"; //map where the boss and party will be spawned in
+set $@bossnpc2used, 0;
+set $@boss2use, 0;
+set $@boss2time, 0;
+end;
+
+}
+
+//boss script, change map name to the one where the boss is spawned to
+sec_in02.gat,1,1,0	script	OnBoss2Killed	-1,{
+
+OnMobDead:
+set $@boss2use, 0;
+set $@boss2time, 0;
+end;
+}
+
+job_thief1.gat,198,332,6	script	Gatekeeper#level::Gate3	791,{
+
+set @bossname$, "Paimon"; //name of the boss
+set @bossid, 5001; //the id of the boss monster
+set @bossx, 122; //x coord where the boss will be spawned
+set @bossy, 151; //y coord where the boss will be spawned
+set @warpx, 165; //x coord where the party will be warped to
+set @warpy, 152; //y coord where the party will be warped to
+
+mes "[Gatekeeper]";
+mes "I am the keeper of a sealed gate, which holds 1 of 5 Demons who seek to destroy the world.";
+mes "The demon will not be easy to defeat.";
+next;
+mes "[Gatekeeper]";
+mes "Soon, the gate will be open. I will let all who ask, pass to face it.";
+next;
+mes "[Gatekeeper]";
+mes "This gate holds a demon that takes the souls of the dead.";
+mes "As long as players die near the demon, it will grown in power.";
+next;
+mes "[Gatekeeper]";
+mes "To defeat the demon you must make sure death does not befall those around it.";
+mes "When it takes time to call forth its power, run far away or all my be lost.";
+next;
+if ($@bossnpc3used == 1) goto L_Inuse;
+if ($@boss3time < 60) goto L_Nottime;
+if (getmapusers($@mapnameboss3$) > 15) goto L_mapinuse;
+mes "[Gatekeeper]";
+mes "Do you wish to enter the gate?";
+next;
+menu "Yes, I wish to enter the gate.",L_entergate,"I don't wish to risk my life this time.",L_leave;
+L_entergate:
+set $@bossnpc3used, 1;
+mes "[Gatekeeper]";
+mes "Prepear yourself, death is the only way back.";
+close2;
+if (getmapusers($@mapnameboss3$) <= 0) { set $@boss3use, 0; killmonsterall $@mapnameboss3$; }
+if ($@boss3use == 1) goto L_warp;
+set $@boss3use, 1;	
+monster $@mapnameboss3$,@bossx,@bossy,@bossname$,@bossid,1,"OnBoss3Killed::OnMobDead"; 	
+L_warp:
+warp $@mapnameboss3$,@warpx,@warpy;
+set $@bossnpc3used, 0;
+end;
+
+L_leave:
+mes "[Gatekeeper]";
+mes "Very well...away with you.";
+close;	
+L_Inuse:
+mes "[Gatekeeper]";
+mes "I am sorry but someone is currently talking to me.";
+close;
+L_Nottime:
+mes "[Gatekeeper]";
+mes "The demon must gather its engery before trying to attack this world again.";
+set @gatetime, 60 - $@boss3time;
+mes "Its power will be fully restored in " + @gatetime + " minutes.";
+mes "Please speak to me again when the time has come.";
+close;
+L_mapinuse:
+mes "[Gatekeeper]";
+mes "The gate can only hold at most 15 players at a time.";
+mes "Talk to me again later.";
+close;
+
+OnTimer30000://every 30seconds
+set $@bossnpc3used, 0;
+end;	
+OnTimer60000: //every min
+initnpctimer;
+set $@bossnpc3used, 0;
+if ($@boss3use == 1) goto L_timeskip;
+if ($@boss3time < 60) set $@boss3time, $@boss3time+1;
+if (mobcount($@mapnameboss3$,"OnBoss3Killed::OnMobDead") == 0) mapwarp $@mapnameboss3$,"izlude.gat",70,180;
+L_timeskip:	
+end;	
+OnInit:
+initnpctimer;
+set $@mapnameboss3$, "job_knt.gat"; //map where the boss and party will be spawned in
+set $@bossnpc3used, 0;
+set $@boss3use, 0;
+set $@boss3time, 0;
+end;
+}
+
+//boss script, change map name to the one where the boss is spawned to
+job_knt.gat,0,0,0	script	OnBoss3Killed	-1,{
+
+OnMobDead:
+set $@boss3use, 0;
+set $@boss3time, 0;
+end;
+}
+
+job_thief1.gat,266,332,6	script	Gatekeeper#clone::Gate4	791,{
+
+set @bossname$, "Apollyon"; //name of the boss
+set @bossid, 5003; //the id of the boss monster
+set @bossx, 99; //x coord where the boss will be spawned
+set @bossy, 96; //y coord where the boss will be spawned
+set @rnd, rand(4);
+if(@rnd == 0) { set @warpx, 100; set @warpy, 60; }
+if(@rnd == 1) { set @warpx, 138; set @warpy, 100; }
+if(@rnd == 2) { set @warpx, 100; set @warpy, 138; }
+if(@rnd == 3) { set @warpx, 60; set @warpy, 100; }
+
+mes "[Gatekeeper]";
+mes "I am the keeper of a sealed gate, which holds 1 of 5 Demons who seek to destroy the world.";
+mes "The demon will not be easy to defeat.";
+next;
+mes "[Gatekeeper]";
+mes "Soon, the gate will be open. I will let all who ask, pass to face it.";
+next;
+mes "[Gatekeeper]";
+mes "This gate holds a demon that copys your soul.";
+mes "The copies it makes have more power then the orginal.";
+next;
+mes "[Gatekeeper]";
+mes "The demon has only so much power to call forth the copies.";
+mes "To defeat this demon, presistance is key.";
+next;
+if ($@bossnpc4used == 1) goto L_Inuse;
+if ($@boss4time < 60) goto L_Nottime;
+if (getmapusers($@mapnameboss4$) > 15) goto L_mapinuse;
+mes "[Gatekeeper]";
+mes "Do you wish to enter the gate?";
+next;
+menu "Yes, I wish to enter the gate.",L_entergate,"I don't wish to risk my life this time.",L_leave;
+L_entergate:
+set $@bossnpc4used, 1;
+mes "[Gatekeeper]";
+mes "Prepear yourself, death is the only way back.";
+close2;
+if (getmapusers($@mapnameboss4$) <= 0) { set $@boss4use, 0; killmonsterall $@mapnameboss4$; }
+if ($@boss4use == 1) goto L_warp;
+set $@boss4use, 1;	
+monster $@mapnameboss4$,@bossx,@bossy,@bossname$,@bossid,1,"OnBoss4Killed::OnMobDead"; 	
+L_warp:
+warp $@mapnameboss4$,@warpx,@warpy;
+set $@bossnpc4used, 0;
+end;
+
+L_leave:
+mes "[Gatekeeper]";
+mes "Very well...away with you.";
+close;	
+L_Inuse:
+mes "[Gatekeeper]";
+mes "I am sorry but someone is currently talking to me.";
+close;
+L_Nottime:
+mes "[Gatekeeper]";
+mes "The demon must gather its engery before trying to attack this world again.";
+set @gatetime, 60 - $@boss4time;
+mes "Its power will be fully restored in " + @gatetime + " minutes.";
+mes "Please speak to me again when the time has come.";
+close;
+L_mapinuse:
+mes "[Gatekeeper]";
+mes "The gate can only hold at most 15 players at a time.";
+mes "Talk to me again later.";
+close;
+
+OnTimer30000://every 30seconds
+set $@bossnpc4used, 0;
+end;	
+OnTimer60000: //every min
+initnpctimer;
+set $@bossnpc4used, 0;
+if ($@boss4use == 1) goto L_timeskip;
+if ($@boss4time < 60) set $@boss4time, $@boss4time+1;
+if (mobcount($@mapnameboss4$,"OnBoss4Killed::OnMobDead") == 0) mapwarp $@mapnameboss4$,"izlude.gat",70,180;
+L_timeskip:	
+end;	
+OnInit:
+initnpctimer;
+set $@mapnameboss4$, "wizard_1-1.gat"; //map where the boss and party will be spawned in
+set $@bossnpc4used, 0;
+set $@boss4use, 0;
+set $@boss4time, 0;
+end;
+}
+
+//boss script, change map name to the one where the boss is spawned to
+wizard_1-1.gat,0,0,0	script	OnBoss4Killed	-1,{
+
+OnMobDead:
+set $@boss4use, 0;
+set $@boss4time, 0;
+end;
+}
+
+job_thief1.gat,83,18,6	script	Gatekeeper#death::Gate5	791,{
+
+set @bossname$, "Balam"; //name of the boss
+set @bossid, 5009; //the id of the boss monster
+set @bossx, 99; //x coord where the boss will be spawned
+set @bossy, 100; //y coord where the boss will be spawned
+set @rnd, rand(4);
+if(@rnd == 0) { set @warpx, 99; set @warpy, 133; }
+if(@rnd == 1) { set @warpx, 66; set @warpy, 99; }
+if(@rnd == 2) { set @warpx, 100; set @warpy, 66; }
+if(@rnd == 3) { set @warpx, 133; set @warpy, 100; }
+
+mes "[Gatekeeper]";
+mes "I am the keeper of a sealed gate, which holds 1 of 5 Demons who seek to destroy the world.";
+mes "The demon will not be easy to defeat.";
+next;
+mes "[Gatekeeper]";
+mes "Soon, the gate will be open. I will let all who ask, pass to face it.";
+next;
+mes "[Gatekeeper]";
+mes "This gate holds a demon that can destory your soul.";
+mes "Death is the only escape when it lays its mark on you.";
+next;
+mes "[Gatekeeper]";
+mes "The demons mark can effect more then just you.";
+mes "Outcast the makred ones.";
+next;
+if ($@bossnpc5used == 1) goto L_Inuse;
+if ($@boss5time < 60) goto L_Nottime;
+if (getmapusers($@mapnameboss5$) > 15) goto L_mapinuse;
+mes "[Gatekeeper]";
+mes "Do you wish to enter the gate?";
+next;
+menu "Yes, I wish to enter the gate.",L_entergate,"I don't wish to risk my life this time.",L_leave;
+L_entergate:
+set $@bossnpc5used, 1;
+mes "[Gatekeeper]";
+mes "Prepear yourself, death is the only way back.";
+close2;
+if (getmapusers($@mapnameboss5$) <= 0) { set $@boss5use, 0; killmonsterall $@mapnameboss5$; }
+if ($@boss5use == 1) goto L_warp;
+set $@boss5use, 1;	
+monster $@mapnameboss5$,@bossx,@bossy,@bossname$,@bossid,1,"OnBoss5Killed::OnMobDead"; 	
+L_warp:
+warp $@mapnameboss5$,@warpx,@warpy;
+set $@bossnpc5used, 0;
+end;
+
+L_leave:
+mes "[Gatekeeper]";
+mes "Very well...away with you.";
+close;	
+L_Inuse:
+mes "[Gatekeeper]";
+mes "I am sorry but someone is currently talking to me.";
+close;
+L_Nottime:
+mes "[Gatekeeper]";
+mes "The demon must gather its engery before trying to attack this world again.";
+set @gatetime, 60 - $@boss5time;
+mes "Its power will be fully restored in " + @gatetime + " minutes.";
+mes "Please speak to me again when the time has come.";
+close;
+L_mapinuse:
+mes "[Gatekeeper]";
+mes "The gate can only hold at most 15 players at a time.";
+mes "Talk to me again later.";
+close;
+
+OnTimer30000://every 30seconds
+set $@bossnpc5used, 0;
+end;	
+OnTimer60000: //every min
+initnpctimer;
+set $@bossnpc5used, 0;
+if ($@boss5use == 1) goto L_timeskip;
+if ($@boss5time < 60) set $@boss5time, $@boss5time+1;
+if (mobcount($@mapnameboss5$,"OnBoss5Killed::OnMobDead") == 0) mapwarp $@mapnameboss5$,"izlude.gat",70,180;
+L_timeskip:	
+end;	
+OnInit:
+initnpctimer;
+set $@mapnameboss5$, "knight_1-1.gat"; //map where the boss and party will be spawned in
+set $@bossnpc5used, 0;
+set $@boss5use, 0;
+set $@boss5time, 0;
+end;
+}
+
+//boss script, change map name to the one where the boss is spawned to
+knight_1-1.gat,0,0,0	script	OnBoss5Killed	-1,{
+
+OnMobDead:
+set $@boss5use, 0;
+set $@boss5time, 0;
+end;
+}
+
+//Flags
+sec_in02.gat	mapflag	pvp	off
+sec_in02.gat	mapflag	noreturn
+sec_in02.gat	mapflag	nomemo
+sec_in02.gat	mapflag	nosave
+sec_in02.gat	mapflag	noteleport
+sec_in02.gat	mapflag	nowarp
+sec_in02.gat	mapflag	nowarpto
+job_thief1.gat	mapflag	pvp	off
+job_thief1.gat	mapflag	noreturn
+job_thief1.gat	mapflag	nomemo
+job_thief1.gat	mapflag	nosave
+job_thief1.gat	mapflag	noteleport
+job_thief1.gat	mapflag	nowarp
+job_thief1.gat	mapflag	nowarpto
+job_knt.gat	mapflag	pvp	off
+job_knt.gat	mapflag	noreturn
+job_knt.gat	mapflag	nomemo
+job_knt.gat	mapflag	nosave
+job_knt.gat	mapflag	noteleport
+job_knt.gat	mapflag	nowarp
+job_knt.gat	mapflag	nowarpto
+wizard_1-1.gat	mapflag	pvp	off
+wizard_1-1.gat	mapflag	noreturn
+wizard_1-1.gat	mapflag	nomemo
+wizard_1-1.gat	mapflag	nosave
+wizard_1-1.gat	mapflag	noteleport
+wizard_1-1.gat	mapflag	nowarp
+wizard_1-1.gat	mapflag	nowarpto
+knight_1-1.gat	mapflag	pvp	off
+knight_1-1.gat	mapflag	noreturn
+knight_1-1.gat	mapflag	nomemo
+knight_1-1.gat	mapflag	nosave
+knight_1-1.gat	mapflag	noteleport
+knight_1-1.gat	mapflag	nowarp
+knight_1-1.gat	mapflag	nowarpto

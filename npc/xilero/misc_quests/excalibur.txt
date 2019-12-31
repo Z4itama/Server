@@ -1,0 +1,87 @@
+//=================eAthena Script============================
+// Written by: DeathAnge11
+//=================Script Name===============================
+// Lord Excalaibur - for XileRO
+//=================Script Defenition=========================
+// Quest NPC for the one-handed sword Excalaibur
+//=================Version History===========================
+//1.0 - Done. Still needs to be tested.
+//=================Server Info===============================
+// eAthena SVN vrs. 1583, havent tested yet
+//===========================================================
+
+prt_in.gat,87,91,3	script	Lord Excalaibur	752,{
+
+mes "[Lord Excalaibur]";
+mes "So you have succeeded in finding me young one.";
+next;
+mes "[Lord Excalaibur]";
+mes "What would the likes of you want with me";
+menu "What is it that you do excactly?",Exca_Descript,"umm...nevermind, you are scary.",Exca_Done;
+
+Exca_Descript:
+mes "[Lord Excalaibur]";
+mes "I am the legendary Lord Excalaibur";
+mes "I am known by everyone far and wide as a legendary forger.";
+mes "What would you have me do";
+menu "Can you make an Excalaibur for me",Exca_Make,"What items do I need",Exca_Need,"umm...nevermind, you are wierd",Exca_Done;
+
+Exca_Done:
+mes "[Lord Excalaibur]";
+mes "How dare you speak to me that way!";
+mes "Be gone before I lose my temper";
+close;
+
+Exca_Fail:
+mes "[Lord Excalaibur]";
+mes "Hmm...to bad, you dont have what I need to complete the sword.";
+mes "I am sorry but I cant help you.";
+close;
+
+Exca_Need:
+mes "[Lord Excalaibur]";
+mes "HAHAHA";
+mes "How dare you come to me unprepared!";
+mes "I guess it cant be helped, o well.";
+next;
+mes "[Lord Excalaibur]";
+mes "In order for me to make you the best sword that I can,";
+mes "I will need :";
+next;
+mes "^FF0000Holy Water : 1^000000";
+mes "^FF0000Holy Robe : 1^000000";
+mes "^FF0000Hand of God : 10^000000";
+mes "^FF0000Tribal Solidarity : 30^000000";
+mes "^FF0000Heroic Emblems : 70^000000";
+mes "and 1000000 zeny";
+next;
+mes "[Lord Excalaibur]";
+mes "So, do you want me to make you an Excalaibur";
+menu "Yes",Exca_Make,"No...leave me alone",Exca_Done;
+
+
+Exca_Make:
+mes "[Lord Excalaibur]";
+mes "Let me see if you possess the items needed for my work.";
+next;
+// Holy Water(523) - 1, HOly Robe(2327) - 1, Hand of God(1009) : 2, Tribal Solidarity(658) : 20, Heroic Emblems(968) - 50    
+if (Zeny < 1000000) goto Exca_Fail;
+if (countitem(523) < 1) goto Exca_Fail;
+if (countitem(2327) < 1) goto Exca_Fail;
+if (countitem(1009) < 10) goto Exca_Fail;
+if (countitem(658) < 30) goto Exca_Fail;
+if (countitem(968) < 70) goto Exca_Fail;
+mes "[Lord Excalaibur]";
+mes "Hmm, you are strong young one, and this sword will make you even stronger.";
+getitem 1137,1;
+delitem 523,1;
+delitem 2327,1;
+delitem 1009,2;
+delitem 658,20;
+delitem 968,50;
+set Zeny,Zeny-1000000;
+next;
+mes "[Lord Excalaibur]";
+mes "Good Bye young one, may that sword treat you well.";
+close;
+}
